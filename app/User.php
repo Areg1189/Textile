@@ -28,6 +28,6 @@ class User extends Authenticatable
     ];
 
     public function messages(){
-        return $this->hasMany('App\Messages','from','id');
+        return $this->hasMany('App\Models\Messages','user_id','id');
     }
 }

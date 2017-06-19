@@ -17,5 +17,5 @@ return[
     'new password' => 'Նոր ծածկագիր',
     'no right' => 'ճիշտ չէ',
     'delete' => 'Ջնջել',
-
+    'send' => 'Ուղարկել',
 ];

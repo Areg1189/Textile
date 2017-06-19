@@ -41,7 +41,7 @@ class ForgotPasswordController extends Controller
         );
 
         return $response == Password::RESET_LINK_SENT
-            ? $this->sendResetLinkResponse($request, $response)
+            ? redirect('/')->with('status', __('passwords.sent'))
             : $this->sendResetLinkFailedResponse($request, $response);
     }
 

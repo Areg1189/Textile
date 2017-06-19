@@ -11,7 +11,7 @@
     <div id="app">
         <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+            <a href="{{ url('/home') }}"><b>{{config('app.name')}}</b></a>
         </div><!-- /.login-logo -->
 
         @if (session('status'))
@@ -22,7 +22,7 @@
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
-                <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
+                <strong>Whoops!</strong> {{ trans('passwords.someproblems') }}<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -32,12 +32,62 @@
         @endif
 
         <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte_lang::message.passwordreset') }}</p>
+            <p class="login-box-msg">{{ trans('passwords.resetPassword') }}</p>
 
-            <reset-password-form token="{{ $token }}">></reset-password-form>
+            <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
+                {{ csrf_field() }}
 
-            <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
+                <input type="hidden" name="token" value="{{ $token }}">
+
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="email" class="col-md-4 control-label">@lang('auth.email')</label>
+
+                    <div class="col-md-6">
+                        <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
+
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <label for="password" class="col-md-4 control-label">@lang('auth.password')</label>
+
+                    <div class="col-md-6">
+                        <input id="password" type="password" class="form-control" name="password" required>
+
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                    <label for="password-confirm" class="col-md-4 control-label">@lang('auth.password')</label>
+                    <div class="col-md-6">
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
+                        @if ($errors->has('password_confirmation'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-4">
+                        <button type="submit" class="btn btn-primary">
+                            Reset Password
+                        </button>
+                    </div>
+                </div>
+            </form>
 
         </div><!-- /.login-box-body -->
 

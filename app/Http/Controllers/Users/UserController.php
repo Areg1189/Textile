@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Message;
 
 class UserController extends Controller
 {
@@ -99,5 +100,31 @@ class UserController extends Controller
                 'delete' => true
             ]);
         }
+    }
+
+    public  function getSendAdmin(){
+
+        $messages = Message::where('user_id', Auth::user()->id)->orWhere('to_id', Auth::user()->id)->get();
+
+        return view('user.sendAdmin',[
+            'messages' => $messages,
+        ]);
+    }
+    public function getMessage(Request $request){
+        $validator = Validator::make($request->all(),[
+            'text' => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return abort(404);
+        }
+        $message = Message::create([
+            'user_id' => Auth::user()->id,
+            'to_id' => 1,
+            'text' => $request->text,
+        ]);
+        return response()->json($message);
+
+
     }
 }

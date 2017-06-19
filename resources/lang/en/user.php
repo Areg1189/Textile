@@ -17,4 +17,5 @@ return[
     'new password' => 'New Password',
     'no right' => 'no right',
     'delete' => 'Delete',
+    'send' => 'Send',
 ];

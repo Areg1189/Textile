@@ -57,6 +57,8 @@ Route::group(
 
             Route::get('message', 'Users\UserController@getSendAdmin')->name('userGetMessage');
 
+            Route::post('getMessage', 'Users\UserController@getMessage')->name('getMessage');
+
             Route::post('postMessage', 'Users\UserController@postSendAdmin')->name('userPostMessage');
 
             Route::post('editDennis', 'Users\UserController@editDennis')->name('editDennis');
