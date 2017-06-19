@@ -111,6 +111,14 @@ class UserController extends Controller
         ]);
     }
     public function getMessage(Request $request){
+        if ($request->key && $request->key == 'set'){
+            $messages = Message::where('id',  '>', $request->message)->where(function ($query){
+               $query->where('user_id', Auth::user()->id)
+                   ->orWhere('to_id',Auth::user()->id);
+            })->get();
+//            $messages->user;
+            return response()->json($messages);
+        }
         $validator = Validator::make($request->all(),[
             'text' => 'required',
         ]);
@@ -123,6 +131,7 @@ class UserController extends Controller
             'to_id' => 1,
             'text' => $request->text,
         ]);
+        $message->user;
         return response()->json($message);
 
 

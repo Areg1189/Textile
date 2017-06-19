@@ -6,45 +6,54 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <ul class="chat">
-                        @foreach($messages as $message)
-                            <li class="{{$message->user_id == Auth::user()->id ? 'left' : 'right'}} clearfix"><span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle"/>
-                        </span>
-                                <div class="chat-body clearfix">
-                                    <div class="">
-                                        <strong class="primary-font">
-                                            {{$message->user_id == Auth::user()->id ? '' : 'Admin'}}
-                                        </strong>
-                                        <small class="pull-right text-muted">
-                                            <span class="glyphicon glyphicon-time"></span>
-                                            {{$message->created_at}}
-                                        </small>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <ul class="chat">
+                            @foreach($messages as $message)
+                                <li class="{{$message->user_id == Auth::user()->id ? 'right' : 'left'}} clearfix msg" data-message="{{$message->id}}">
+                                    <div class="chat-body clearfix">
+                                        <div class="">
+                                            <strong class="{{$message->user_id == Auth::user()->id ? 'pull-right' : ''}} primary-font">
+                                                 {{$message->user->name}}
+                                            </strong>
+                                            <div class="col-sm-12">
+                                                <div class="{{$message->user_id  == Auth::user()->id ? 'pull-right' : ''}} text-muted">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                    {{$message->created_at}}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 {{$message->user_id  == Auth::user()->id ? 'col-sm-offset-6' : ''}}">
+                                                <div class="{{$message->user_id  == Auth::user()->id ? 'pull-right' : ''}}">
+                                                    <p>{{$message->text}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p>{{$message->text}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm messageText"
-                               placeholder="Type your message here..."/>
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm messageSend" id="btn-chat"
-                                    data-href="{{route('getMessage',['id' => Auth::user()->href])}}">
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <form action="{{route('getMessage',['id' => Auth::user()->href])}}" id="messageSend">
+                        <div class="panel-footer">
+                            <div class="input-group" id="messageSend">
+                                <input id="btn-input" type="text" name="text" class="form-control input-sm messageText "
+                                       placeholder="Type your message here..."/>
+                                <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm " id="btn-chat">
                                 @lang('user.send')</button>
                         </span>
-                    </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
+
 
 
 

@@ -1,39 +1,89 @@
 var token = $('meta[name="csrf-token"]').attr('content');
 
-$(".messageSend").click(function () {
+$("#messageSend").submit(function (event) {
+    event.preventDefault();
     var text = $(".messageText").val();
-    var url = $(this).data('href');
+    var url = $(this).attr('action');
+    if (!text) {
+        return false
+    } else {
+        $(".messageText").val('');
+    }
     $.ajax({
         url: url,
         type: 'post',
         data: {text: text, _token: token},
         success: function (e) {
-            message(e);
+            messge(e);
         }
     })
 });
 
-function message(e) {
-    if (e['user_id'] == 1) {
-        var message = '<li class="right clearfix">' +
+function messge(e) {
+    if (e['user_id'] != 1) {
+        var message = '' +
+            '<li class="right clearfix msg" data-message="'+e['id']+'">' +
             '<div class="chat-body clearfix">' +
             '<div class="">' +
-            '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + e['created_at'] + '</small>' +
-            '<strong class="pull-right primary-font">Admin</strong>' +
+            '<strong class="pull-right primary-font">' +
+            // e['user']['name'] +
+            '</strong>' +
+            '<div class="col-sm-12">' +
+            '<div class="pull-right text-muted">' +
+            '<span class="glyphicon glyphicon-time"></span>' + e['created_at'] +
             '</div>' +
+            '</div>' +
+            '<div class="col-sm-6 col-sm-offset-6">' +
+            '<div class="pull-right ">' +
             '<p>' + e['text'] + '</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
             '</div>' +
             '</li>'
     } else {
-        var message = '<li class="left clearfix">' +
+        var message = '' +
+            '<li class=" left clearfix msg" data-message="'+e['id']+'">' +
             '<div class="chat-body clearfix">' +
             '<div class="">' +
-            '<small class=" text-muted"><span class="glyphicon glyphicon-time"></span>' + e['created_at'] + '</small>' +
+            '<strong class=" primary-font">' +
+            // e['user']['name'] +
+            '</strong>' +
+            '<div class="col-sm-12">' +
+            '<div class=" text-muted">' +
+            '<span class="glyphicon glyphicon-time"></span>' + e['created_at'] +
             '</div>' +
+            '</div>' +
+            '<div class="col-sm-6">' +
+            '<div>' +
             '<p>' + e['text'] + '</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
             '</div>' +
             '</li>'
     }
     $('.chat').append(message);
 
 }
+
+setInterval(function () {
+    var message = $('.msg:last').data('message');
+    var url = $("#messageSend").attr('action');
+    $.ajax({
+        url:url,
+        type:'post',
+        data:{message:message, key:'set', _token:token},
+        success:function (e) {
+            if (!e[0]){
+                return false
+            }else {
+                $(e).each(function (i) {
+
+                    messge(e[i]);
+                })
+            }
+        }
+    })
+
+}, 3000);
