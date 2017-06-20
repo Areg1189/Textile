@@ -73,6 +73,7 @@ Route::group(
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
             Route::post('block', 'Admin\AdminController@blockUser')->name('blockUser');
+            Route::post('getMessageAdmin', 'Admin\AdminController@getMessageAdmin')->name('getMessageAdmin');
         });
 
     });

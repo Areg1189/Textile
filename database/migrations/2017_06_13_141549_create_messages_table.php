@@ -16,8 +16,10 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->useignet();
-            $table->integer('to_id')->useignet()->default(1);
+            $table->integer('to_id')->useignet();
             $table->text('text');
+            $table->integer('status_user')->default(0);
+            $table->integer('status_Admin')->default(0);
             $table->timestamps();
         });
     }

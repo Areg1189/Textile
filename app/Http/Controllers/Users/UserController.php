@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Message;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -64,7 +65,7 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
         if ($validator->fails()) {
-            return back()->withErrors($validator->errors())->with('password' , true);
+            return back()->withErrors($validator->errors())->with('password', true);
         }
         if (Hash::check(md5($request->oldPassword), Auth::user()->getAuthPassword())) {
             $user = User::find(Auth::user()->id);
@@ -74,56 +75,69 @@ class UserController extends Controller
                 'success' => __('user.updated'),
                 'password' => true
             ]);
-        }else{
-          return back()->with([
-              'error' => __('user.old password').' '.__('user.no right'),
-              'password' => true
-          ]);
+        } else {
+            return back()->with([
+                'error' => __('user.old password') . ' ' . __('user.no right'),
+                'password' => true
+            ]);
         }
     }
 
-    public function deleteUser(Request $request){
+    public function deleteUser(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'password' => 'required||min:6',
         ]);
         if ($validator->fails()) {
-            return back()->withErrors($validator->errors())->with('delete' , true);
+            return back()->withErrors($validator->errors())->with('delete', true);
         }
         if (Hash::check(md5($request->password), Auth::user()->getAuthPassword())) {
             $user = User::find(Auth::user()->id);
             $user->delete();
             return redirect('/');
-        }else{
+        } else {
             return back()->with([
-                'error' => __('auth.password').' '.__('user.no right'),
+                'error' => __('auth.password') . ' ' . __('user.no right'),
                 'delete' => true
             ]);
         }
     }
 
-    public  function getSendAdmin(){
+    public function getSendAdmin()
+    {
 
         $messages = Message::where('user_id', Auth::user()->id)->orWhere('to_id', Auth::user()->id)->get();
 
-        return view('user.sendAdmin',[
+        return view('user.sendAdmin', [
             'messages' => $messages,
         ]);
     }
-    public function getMessage(Request $request){
-        if ($request->key && $request->key == 'set'){
-            $messages = Message::where('id',  '>', $request->message)->where(function ($query){
-               $query->where('user_id', Auth::user()->id)
-                   ->orWhere('to_id',Auth::user()->id);
+
+    public function getMessage(Request $request)
+    {
+        if ($request->key && $request->key == 'set') {
+            $messages = Message::where('id', '>', $request->message)->where(function ($query) {
+                $query->where('user_id', Auth::user()->id)
+                    ->orWhere('to_id', Auth::user()->id);
             })->get();
-//            $messages->user;
-            return response()->json($messages);
+//            Message::where('id', '>', $request->message)->where(function ($query) {
+//                $query->where('user_id', Auth::user()->id)
+//                    ->orWhere('to_id', Auth::user()->id);
+//            })->update(['status_user' => 1]);
+            if ($messages->first()){
+              return  View::make('user.messageTemplate',[
+                  'messages' => $messages
+              ]);
+            }
+
+            return 0;
         }
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'text' => 'required',
         ]);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return abort(404);
         }
         $message = Message::create([
@@ -131,9 +145,9 @@ class UserController extends Controller
             'to_id' => 1,
             'text' => $request->text,
         ]);
-        $message->user;
-        return response()->json($message);
-
+        return  View::make('user.messageTemplate',[
+            'message' => $message
+        ]);
 
     }
 }
