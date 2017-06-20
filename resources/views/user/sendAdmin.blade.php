@@ -13,11 +13,12 @@
                     <div class="panel-body">
                         <ul class="chat">
                             @foreach($messages as $message)
-                                <li class="{{$message->user_id == Auth::user()->id ? 'right' : 'left'}} clearfix msg" data-message="{{$message->id}}">
+                                <li class="{{$message->user_id == Auth::user()->id ? 'right' : 'left'}} clearfix msg {{$message->status_user ==0 ? 'seen' : ''}}"
+                                    data-message="{{$message->id}}">
                                     <div class="chat-body clearfix">
                                         <div class="">
                                             <strong class="{{$message->user_id == Auth::user()->id ? 'pull-right' : ''}} primary-font">
-                                                 {{$message->user->name}}
+                                                {{$message->user->name}}
                                             </strong>
                                             <div class="col-sm-12">
                                                 <div class="{{$message->user_id  == Auth::user()->id ? 'pull-right' : ''}} text-muted">

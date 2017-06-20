@@ -1,18 +1,26 @@
 @extends('adminlte::layouts.app')
 
 @section('main-content')
-    <button class="a btn btn-success">
-        click
-    </button>
-
     <div class="container">
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default text-center">
+                    <div class="panel-body">
+                        <h4>
+                            <b>
+                                {{$user->name.' '.$user->last_name}}
+                            </b>
+
+                        </h4>
+                    </div>
+                </div>
                 <div class="panel panel-primary">
                     <div class="panel-body">
                         <ul class="chat">
                             @foreach($messages as $message)
-                                <li class="{{$message->user_id == Auth::user()->id ? 'right' : 'left'}} clearfix msg" data-message="{{$message->id}}">
+                                <li class="{{$message->user_id == Auth::user()->id ? 'right' : 'left'}} clearfix msg {{$message->status_admin == 0 ? 'seen' : ''}}"
+                                    data-message="{{$message->id}}">
                                     <div class="chat-body clearfix">
                                         <div class="">
                                             <strong class="{{$message->user_id == Auth::user()->id ? 'pull-right' : ''}} primary-font">
@@ -56,11 +64,5 @@
 @endsection
 @section('script')
     @parent
-    <script>
-        $('.a').click(function () {
-           b = $('.chat').css('height')
-            $('.panel-body').scrollTop(parseInt(b))
-        })
-
-    </script>
+    <script src="{{asset('js/admin/message.js')}}"></script>
 @endsection

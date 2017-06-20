@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->integer('to_id')->useignet();
             $table->text('text');
             $table->integer('status_user')->default(0);
-            $table->integer('status_Admin')->default(0);
+            $table->integer('status_admin')->default(0);
             $table->timestamps();
         });
     }

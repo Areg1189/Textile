@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\View;
-use App\Models\Message;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,9 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//        Schema::defaultStringLength(191);
-//        $messageCount = Message::where('status', 0) => get();
-//        View::share('messageCount', $messageCount);
+        Schema::defaultStringLength(191);
+
     }
 
     /**

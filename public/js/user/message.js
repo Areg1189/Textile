@@ -15,6 +15,7 @@ $("#messageSend").submit(function (event) {
         data: {text: text, _token: token},
         success: function (e) {
             $('.chat').append(e);
+            messageTop();
         }
     })
 });
@@ -31,13 +32,21 @@ setInterval(function () {
             if (e == 0) {
                 return false
             } else {
-
                 $('.chat').append(e);
+                messageTop();
             }
         }
-    })
+    });
     setTimeout(function () {
         $(".msg").removeClass('seen');
     },4000);
 }, 5000);
+
+$(document).ready(function () {
+   messageTop();
+});
+function messageTop() {
+    var b = $('.chat').css('height')
+    $('.panel-body').scrollTop(parseInt(b))
+}
 

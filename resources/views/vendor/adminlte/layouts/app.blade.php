@@ -67,7 +67,7 @@ desired effect
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="{{asset('js/admin/admin.js')}}"></script>
-    <script src="{{asset('js/admin/message.js')}}"></script>
+
 
 @show
 </html>

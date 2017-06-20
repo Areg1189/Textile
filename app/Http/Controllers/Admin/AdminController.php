@@ -1,17 +1,31 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Message;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
+
+
 
 class AdminController extends Controller
 {
+//    public function __construct()
+//    {
+//        if (Auth::user()->rol == 1){
+//            $messageCount = Message::where('to_id', Auth::user()->id)->where('status_admin', 0)->get();
+//        }else {
+//            $messageCount = Message::where('to_id', Auth::user()->id)->where('status_user', 0)->get();
+//        }
+//
+//        View::share([
+//            'messageCount' => $messageCount,
+//        ]);
+//    }
+
     public function index()
     {
 
@@ -60,10 +74,10 @@ class AdminController extends Controller
                 $query->where('user_id', $user->id)
                     ->orWhere('to_id', $user->id);
             })->get();
-//            Message::where('id', '>', $request->message)->where(function ($query) use ($user) {
-//                $query->where('user_id', $user->id)
-//                    ->orWhere('to_id', $user->id);
-//            })->update(['status_admin', 1]);
+            Message::where(function ($query) use ($user) {
+                $query->where('user_id', $user->id)
+                    ->orWhere('to_id', $user->id);
+            })->update(['status_admin' => 1]);
             if ($messages->first()) {
                 return View::make('vendor.adminlte.messageTemplate', [
                     'messages' => $messages,

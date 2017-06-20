@@ -121,10 +121,10 @@ class UserController extends Controller
                 $query->where('user_id', Auth::user()->id)
                     ->orWhere('to_id', Auth::user()->id);
             })->get();
-//            Message::where('id', '>', $request->message)->where(function ($query) {
-//                $query->where('user_id', Auth::user()->id)
-//                    ->orWhere('to_id', Auth::user()->id);
-//            })->update(['status_user' => 1]);
+            Message::where(function ($query) {
+                $query->where('user_id', Auth::user()->id)
+                    ->orWhere('to_id', Auth::user()->id);
+            })->update(['status_user' => 1]);
             if ($messages->first()){
               return  View::make('user.messageTemplate',[
                   'messages' => $messages
