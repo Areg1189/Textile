@@ -16,8 +16,7 @@ class CreateConfirmUsersTable extends Migration
         Schema::create('confirm_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('pass')->unique();
-            $table->integer('block')->default(0);
+            $table->string('pass');
             $table->string('token');
             $table->timestamps();
         });

@@ -22,6 +22,9 @@
                 </thead>
                 <tbody>
                 @foreach($users as $user)
+                    @if($user->rol == 1)
+                        @continue
+                    @endif
                     <tr>
                         <td>{{$user->name}}</td>
                         <td>{{$user->last_name}}</td>
@@ -29,18 +32,21 @@
                         <td>{{$user->email}}</td>
                         <td>{{$user->created_at}}</td>
                         <td>
-                            <a href="{{route('sendMessage', ['id' => $user->href])}}">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <span class="label label-info">
+                            <a href="{{route('sendMessage', ['id' => $user->href])}}" class="btn btn-app">
+
+                                <span class="badge bg-aqua">
                             {{ count($user->messages->where('status_admin' , 0))?
                             count($user->messages->where('status_admin' , 0)) : ''}}
                         </span>
+                                <i class="fa fa-envelope"></i>
                             </a>
+
                         </td>
                         <td>
 
                             <input type="checkbox" data-toggle="toggle" class="blockUser"
-                                   data-href="{{route('blockUser')}}" data-user="{{$user->href}}" {{$user->block ? 'checked' : "" }}>
+                                   data-href="{{route('blockUser')}}"
+                                   data-user="{{$user->href}}" {{$user->block ? 'checked' : "" }}>
                         </td>
                     </tr>
                 @endforeach

@@ -35,14 +35,14 @@
             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
                 <label for="email">@lang('auth.email')</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+                <input id="email" type="email" name="email"  required autofocus>
 
                 <label for="password">@lang('auth.password')</label>
                 <input id="password" type="password" name="password" required>
 
 
                 <label>
-                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} >
+                    <input type="checkbox" name="remember" >
                     @lang('auth.remember')
                 </label>
 
@@ -65,17 +65,13 @@
                 {{ csrf_field() }}
 
                 <label for="first_name">@lang('auth.first_name')</label>
-                <input id="first_name" type="text" name="first_name"
-                       value="{{ old('first_name') }}" required autofocus>
+                <input id="first_name" type="text" name="first_name" required autofocus>
                 <label for="last_name">@lang('auth.last_name')</label>
-                <input id="last_name" type="text" name="last_name"
-                       value="{{ old('last_name') }}">
+                <input id="last_name" type="text" name="last_name">
                 <label for="email">@lang('auth.email')</label>
-                <input id="email" type="email" name="email"
-                       value="{{ old('email') }}" required>
+                <input id="email" type="email" name="email" required>
                 <label for="address">@lang('auth.address')</label>
-                <input id="address" type="text" name="address"
-                       value="{{ old('address') }}" required>
+                <input id="address" type="text" name="address" required>
                 <label for="password">@lang('auth.password')</label>
                 <input id="password" type="password" name="password" required>
                 <label for="password-confirm">@lang('auth.confirm_password')</label>

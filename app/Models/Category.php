@@ -12,6 +12,11 @@ class Category extends Model
 
     public $translationModel = 'App\Models\CategoryTranslations';
 
-    public $translatedAttributes = ['name'];
-    protected $fillable = ['code'];
+    public $translatedAttributes = [
+        'name',
+    ];
+
+    protected $fillable = [
+        'code', 'link'
+    ];
 }

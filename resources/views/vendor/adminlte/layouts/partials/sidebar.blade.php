@@ -33,7 +33,8 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{!Request::segment(3) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i class='fa fa-home'></i>
+            <li class="{{!Request::segment(3) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i
+                            class='fa fa-home'></i>
                     <span>Home</span></a></li>
             <li><a href="#"><i class='fa fa-link'></i>
                     <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
@@ -44,8 +45,17 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li>
+                        <a href="{{route('adminCategories')}}">
+                            <i class='fa fa-book'></i>
+                            All Categories
+                        </a>
+                    </li>
+                    @foreach($categories as $category)
+                        <li>
+                            <a href="{{route('adminCategory', ['name' => $category->link])}}">{{$category->translate(session('locale'))->name}}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

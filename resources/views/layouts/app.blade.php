@@ -86,7 +86,7 @@
             </div>
         </div>
     @endif
-    @if(!empty($errors->first()))
+    @if(isset($errors) && !empty($errors->first()))
         <div class="info_modal alert">
             <div class="alert-danger alert-dismissable fade in alert_fixed">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

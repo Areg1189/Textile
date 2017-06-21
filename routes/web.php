@@ -69,10 +69,19 @@ Route::group(
         });
 
         //        =================  ADMIN  ================== //
+
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
+            Route::get('categories', 'Admin\AdminCategoryController@index')->name('adminCategories');
+            Route::get('category/{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
+
+
+
+            Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
+
             Route::post('block', 'Admin\AdminController@blockUser')->name('blockUser');
+
             Route::post('getMessageAdmin', 'Admin\AdminController@getMessageAdmin')->name('getMessageAdmin');
         });
 

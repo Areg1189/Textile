@@ -1,27 +1,37 @@
-@extends('adminlte::layouts.errors')
+@extends('layouts.app')
 
-@section('htmlheader_title')
-    {{ trans('adminlte_lang::message.pagenotfound') }}
-@endsection
+@section('content')
 
-@section('main-content')
 
-    <div class="error-page">
-        <h2 class="headline text-yellow"> 404</h2>
-        <div class="error-content">
-            <h3><i class="fa fa-warning text-yellow"></i> Oops! {{ trans('adminlte_lang::message.pagenotfound') }}.</h3>
-            <p>
-                {{ trans('adminlte_lang::message.notfindpage') }}
-                {{ trans('adminlte_lang::message.mainwhile') }} <a href='{{ url('/home') }}'>{{ trans('adminlte_lang::message.returndashboard') }}</a> {{ trans('adminlte_lang::message.usingsearch') }}
-            </p>
-            <form class='search-form'>
-                <div class='input-group'>
-                    <input type="text" name="search" class='form-control' placeholder="{{ trans('adminlte_lang::message.search') }}"/>
-                    <div class="input-group-btn">
-                        <button type="submit" name="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i></button>
-                    </div>
-                </div><!-- /.input-group -->
-            </form>
-        </div><!-- /.error-content -->
-    </div><!-- /.error-page -->
+
+    <section class="section paralbackground page-banner hidden-xs" style="background-image:url('upload/page_banner.jpg');" data-img-width="2000" data-img-height="400" data-diff="100">
+    </section><!-- end section -->
+
+    <div class="page-title lb">
+        <div class="container clearfix">
+            <div class="title-area pull-left">
+                <h2>Page Not Found<small>Get in touch, ask your questions to us!</small></h2>
+            </div><!-- /.pull-right -->
+            <div class="pull-right hidden-xs">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">404</li>
+                    </ol>
+                </div><!-- end bread -->
+            </div><!-- /.pull-right -->
+        </div>
+    </div><!-- end page-title -->
+
+    <section class="section">
+        <div class="container">
+            <div class="notfound">
+                <h2>404 <span>Error!</span></h2>
+                <p>
+                    Sorry, we can't find the page you are looking for. <br>Please go to
+                    <a href="#">Home </a> or search something from search form.
+                </p>
+            </div>
+        </div><!-- end container -->
+    </section><!-- end section -->
 @endsection

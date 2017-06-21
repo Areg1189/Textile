@@ -26,7 +26,7 @@ return [
     | colombian spanish will be saved as 'es-CO' into the database.
     |
     */
-    'locale_separator' => '_',
+    'locale_separator' => '-',
 
     /*
     |--------------------------------------------------------------------------

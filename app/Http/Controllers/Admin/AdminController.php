@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Message;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
-use App\Models\CategoryTranslations;
 
 
 class AdminController extends Controller
@@ -18,14 +17,26 @@ class AdminController extends Controller
 
     public function index()
     {
-        Category::create([
-            'code' => 'gr',
-            'hy'  => ['name' => 'Greece'],
-            'en'  => ['name' => 'Grèce'],
-            'ru'  => ['name' => 'Grèce'],
-        ]);
-//$a = Category::where('code', 'gr')->first();
+//        Category::create([
+//            'code' => 'grec',
+//            'price' => '2000',
+//            'hy' => [
+//                'name' => 'Greece',
+//                'description' => 'hayeren',
+//            ],
+//            'en' => [
+//                'name' => 'Grèce',
+//                'description' => 'angleren',
+//            ],
+//            'ru' => [
+//                'name' => 'Grèce',
+//                'description' => 'ruseren',
+//            ]
+//        ]);
+
+//$a = Category::where('code', 'grec')->first();
 //        dd($a->translate(session('locale'))->name);
+//        Category::where('code', 'grec')->delete();
 
 
         $users = User::where('status', 1)->get();
