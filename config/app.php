@@ -181,6 +181,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
+        Dimsav\Translatable\TranslatableServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

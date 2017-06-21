@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,7 +9,8 @@ use App\User;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Message;
 use Illuminate\Support\Facades\View;
-
+use App\Models\Category;
+use App\Models\CategoryTranslations;
 
 
 class AdminController extends Controller
@@ -16,10 +18,17 @@ class AdminController extends Controller
 
     public function index()
     {
+        Category::create([
+            'code' => 'gr',
+            'hy'  => ['name' => 'Greece'],
+            'en'  => ['name' => 'Grèce'],
+            'ru'  => ['name' => 'Grèce'],
+        ]);
+//$a = Category::where('code', 'gr')->first();
+//        dd($a->translate(session('locale'))->name);
+
 
         $users = User::where('status', 1)->get();
-
-//        dd($users);
 
         return view('vendor.adminlte.home', ['users' => $users]);
     }
@@ -36,7 +45,7 @@ class AdminController extends Controller
             return abort(404);
         }
         $result = User::where('href', $request->user)->update(['block' => $request->public]);
-        if ($result){
+        if ($result) {
             return 1;
         }
     }
