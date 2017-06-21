@@ -13,18 +13,6 @@ use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller
 {
-//    public function __construct()
-//    {
-//        if (Auth::user()->rol == 1){
-//            $messageCount = Message::where('to_id', Auth::user()->id)->where('status_admin', 0)->get();
-//        }else {
-//            $messageCount = Message::where('to_id', Auth::user()->id)->where('status_user', 0)->get();
-//        }
-//
-//        View::share([
-//            'messageCount' => $messageCount,
-//        ]);
-//    }
 
     public function index()
     {
@@ -47,8 +35,10 @@ class AdminController extends Controller
         if ($validate->fails()) {
             return abort(404);
         }
-
         $result = User::where('href', $request->user)->update(['block' => $request->public]);
+        if ($result){
+            return 1;
+        }
     }
 
 

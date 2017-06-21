@@ -31,6 +31,10 @@
                         <td>
                             <a href="{{route('sendMessage', ['id' => $user->href])}}">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span class="label label-info">
+                            {{ count($user->messages->where('status_admin' , 0))?
+                            count($user->messages->where('status_admin' , 0)) : ''}}
+                        </span>
                             </a>
                         </td>
                         <td>

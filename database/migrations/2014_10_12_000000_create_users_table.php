@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('href')->unique();
             $table->string('password');
+            $table->boolean('block')->default();
             $table->rememberToken();
             $table->timestamps();
         });
