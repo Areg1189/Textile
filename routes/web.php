@@ -74,6 +74,8 @@ Route::group(
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
             Route::get('messages', 'Admin\AdminController@adminMessages')->name('adminMessages');
+            Route::get('users', 'Admin\AdminController@getUsers')->name('getUsers');
+            Route::post('messageUser', 'Admin\AdminController@messageUser')->name('messageUser');
 
 
             //=========  CATEGORY  ======= //

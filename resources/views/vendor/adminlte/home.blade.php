@@ -3,60 +3,257 @@
 {{--@section('htmlheader_title')--}}
 {{--{{ trans('adminlte_lang::message.home') }}--}}
 {{--@endsection--}}
-
+@section('link')
+    <link rel="stylesheet" type="text/css" href="{{asset('style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/custom.css')}}">
+@endsection
 
 @section('main-content')
-    <div class="container-fluid spark-screen">
-        <div class="row">
-            <table class="table" id="table">
-                <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Created Date</th>
-                    <th>Message</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($users as $user)
-                    @if($user->rol == 1)
-                        @continue
-                    @endif
-                    <tr>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->last_name}}</td>
-                        <td>{{$user->address}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>{{$user->created_at}}</td>
-                        <td>
-                            <a href="{{route('sendMessage', ['id' => $user->href])}}" class="btn btn-app">
+    <div id="wrapper">
+        <div class="first-slider">
+            <div id="rev_slider_56_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
+                 data-alias="sports-hero54"
+                 style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+                <div id="rev_slider_56_1" class="rev_slider fullwidthabanner" style="display:none;"
+                     data-version="5.0.7">
+                    <ul>
+                        <li data-index="rs-214" data-transition="fade" data-slotamount="7" data-easein="default"
+                            data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off"
+                            data-title="Slide" data-description="">
+                            <img src="{{asset('upload/slider_01.jpg')}}" alt="" data-bgposition="center center"
+                                 data-bgfit="cover"
+                                 data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
 
-                                <span class="badge bg-aqua">
-                            {{ count($user->messages->where('status_admin' , 0))?
-                            count($user->messages->where('status_admin' , 0)) : ''}}
-                        </span>
-                                <i class="fa fa-envelope"></i>
-                            </a>
+                            <div class="tp-caption Sports-Display   tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-1"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']"
+                                 data-voffset="['-180','-170','-190','-140']"
+                                 data-fontsize="['120','120','120','100']"
+                                 data-lineheight="['130','130','130','100']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:2000;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="750"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-responsive_offset="on"
+                                 style="z-index: 5; white-space: nowrap;">HOME
+                            </div>
 
-                        </td>
-                        <td>
+                            <div class="tp-caption Sports-DisplayFat   tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-2"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['-48','-48','-68','-48']"
+                                 data-fontsize="['133','133','133','100']"
+                                 data-lineheight="['130','130','130','100']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;s:2000;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="1000"
+                                 data-splitin="none"
+                                 data-splitout="none"
+                                 data-responsive_offset="on"
+                                 style="z-index: 6; white-space: nowrap;">STYLE
+                            </div>
 
-                            <input type="checkbox" data-toggle="toggle" class="blockUser"
-                                   data-href="{{route('blockUser')}}"
-                                   data-user="{{$user->href}}" {{$user->block ? 'checked' : "" }}>
-                        </td>
-                    </tr>
-                @endforeach
+                            <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-4"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
+                                 data-fontsize="['30','30','30','25']"
+                                 data-lineheight="['10','30','30','25']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="1500"
+                                 data-splitin="chars"
+                                 data-splitout="none"
+                                 data-responsive_offset="on"
+                                 data-elementdelay="0.05"
+                                 style="z-index: 8; white-space: nowrap; background-color: #ffffff; margin:0; padding:20px 0 0 0; text-align:center; font-size: 30px;">
+                                STYLISH FURNITURE TEMPLATE
+                            </div>
 
 
-                </tbody>
-            </table>
+                        </li>
+                    </ul>
+                    <div class="tp-static-layers"></div>
+                    <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                </div>
+            </div><!-- END REVOLUTION SLIDER -->
         </div>
-    </div>
-    </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-title text-center clearfix">
+                    <h4>Top Categories</h4>
+                    <p>Listed below our top categories, campaings, promotions and offers for you!</p>
+                    <hr>
+                </div>
+
+                <div class="banner-masonry row">
+                    <div class="banner-item item-w1 item-h1">
+                        <a href="#"><img src="{{asset('upload/banner_01.png')}}" alt="" class="img-responsive"></a>
+                        <div class="banner-button">
+                            <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
+                        </div>
+                    </div>
+                    <div class="banner-item item-w1 item-h1">
+                        <a href="#"><img src="{{asset('upload/banner_02.png')}}" alt="" class="img-responsive"></a>
+                        <div class="banner-button button-left">
+                            <a href="#" class="button button--aylen btn">BEDROOM EDITION</a>
+                        </div>
+                    </div>
+                    <div class="banner-item item-w1 item-h2">
+                        <a href="#"><img src="{{asset('upload/banner_03.png')}}" alt="" class="img-responsive"></a>
+                        <div class="banner-button button-left">
+                            <a href="#" class="button button--aylen btn">SINGLE SET</a>
+                        </div>
+                    </div>
+                    <div class="banner-item item-w1 item-h1">
+                        <a href="#"><img src="{{asset('upload/banner_04.png')}}" alt="" class="img-responsive"></a>
+                        <div class="banner-button button-left">
+                            <a href="#" class="button button--aylen btn">SEATING GROUPS</a>
+                        </div>
+                    </div>
+                    <div class="banner-item item-w1 item-h1">
+                        <a href="#"><img src="{{asset('upload/banner_05.png')}}" alt="" class="img-responsive"></a>
+                        <div class="banner-button button-left">
+                            <a href="#" class="button button--aylen btn">HANDMADE STAND</a>
+                        </div>
+                    </div>
+                </div>
 
 
+            </div>
+        </section>
+    </div>
+
+@endsection
+@section('script')
+    @parent
+
+
+    <!-- REVOLUTION JS FILES -->
+    {{--<script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.tools.min.js')}}"></script>--}}
+    {{--<script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.revolution.min.js')}}"></script>--}}
+
+    {{--<script type="text/javascript">--}}
+    {{--(function ($) {--}}
+    {{--"use strict";--}}
+    {{--var tpj = jQuery;--}}
+    {{--var revapi56;--}}
+    {{--tpj(document).ready(function () {--}}
+    {{--if (tpj("#rev_slider_56_1").revolution == undefined) {--}}
+    {{--revslider_showDoubleJqueryError("#rev_slider_56_1");--}}
+    {{--} else {--}}
+    {{--revapi56 = tpj("#rev_slider_56_1").show().revolution({--}}
+    {{--sliderType: "hero",--}}
+    {{--jsFileLocation: "revolution/js/",--}}
+    {{--sliderLayout: "fullwidth",--}}
+    {{--dottedOverlay: "none",--}}
+    {{--delay: 9000,--}}
+    {{--navigation: {},--}}
+    {{--responsiveLevels: [1240, 1024, 778, 480],--}}
+    {{--gridwidth: [1240, 1024, 778, 480],--}}
+    {{--gridheight: [720, 640, 640, 640],--}}
+    {{--lazyType: "none",--}}
+    {{--parallax: {--}}
+    {{--type: "scroll",--}}
+    {{--origo: "enterpoint",--}}
+    {{--speed: 400,--}}
+    {{--levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],--}}
+    {{--},--}}
+    {{--shadow: 0,--}}
+    {{--spinner: "off",--}}
+    {{--autoHeight: "off",--}}
+    {{--disableProgressBar: "on",--}}
+    {{--hideThumbsOnMobile: "off",--}}
+    {{--hideSliderAtLimit: 0,--}}
+    {{--hideCaptionAtLimit: 0,--}}
+    {{--hideAllCaptionAtLilmit: 0,--}}
+    {{--debugMode: false,--}}
+    {{--fallbacks: {--}}
+    {{--simplifyAll: "off",--}}
+    {{--disableFocusListener: false,--}}
+    {{--}--}}
+    {{--});--}}
+    {{--}--}}
+    {{--});--}}
+    {{--/*ready*/--}}
+    {{--})(jQuery);--}}
+    {{--</script>--}}
+
+
+
+    {{--<script src="{{asset('js/jquery.js')}}"></script>--}}
+    {{--<script src="{{asset('js/bootstrap.min.js')}}"></script>--}}
+    {{--<script src="{{asset('js/plugins.js')}}"></script>--}}
+    {{--<script src="{{asset('js/hover.js')}}"></script>--}}
+    {{--<script src="{{asset('js/banner-grid.js')}}"></script>--}}
+
+
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
+
+
+    <script type="text/javascript">
+        (function ($) {
+            "use strict";
+            var tpj = jQuery;
+            var revapi56;
+            tpj(document).ready(function () {
+                if (tpj("#rev_slider_56_1").revolution == undefined) {
+                    revslider_showDoubleJqueryError("#rev_slider_56_1");
+                } else {
+                    revapi56 = tpj("#rev_slider_56_1").show().revolution({
+                        sliderType: "hero",
+                        jsFileLocation: "revolution/js/",
+                        sliderLayout: "fullwidth",
+                        dottedOverlay: "none",
+                        delay: 9000,
+                        navigation: {},
+                        responsiveLevels: [1240, 1024, 778, 480],
+                        gridwidth: [1240, 1024, 778, 480],
+                        gridheight: [720, 640, 640, 640],
+                        lazyType: "none",
+                        parallax: {
+                            type: "scroll",
+                            origo: "enterpoint",
+                            speed: 400,
+                            levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+                        },
+                        shadow: 0,
+                        spinner: "off",
+                        autoHeight: "off",
+                        disableProgressBar: "on",
+                        hideThumbsOnMobile: "off",
+                        hideSliderAtLimit: 0,
+                        hideCaptionAtLimit: 0,
+                        hideAllCaptionAtLilmit: 0,
+                        debugMode: false,
+                        fallbacks: {
+                            simplifyAll: "off",
+                            disableFocusListener: false,
+                        }
+                    });
+                }
+            });
+            /*ready*/
+        })(jQuery);
+    </script>
 @endsection

@@ -75,29 +75,6 @@
                             STYLISH FURNITURE TEMPLATE
                         </div>
 
-                        <div class="tp-caption rev-btn rev-bordered button button--aylen btn rev-btn-primary  rs-parallaxlevel-0"
-                             id="slide-214-layer-7"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['bottom','bottom','bottom','bottom']" data-voffset="['160','110','90','90']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:500;e:Linear.easeNone;"
-                             data-style_hover="c:rgba(255, 255, 255, 1.00);bg:rgba(0, 0, 0, 1.00);bc:rgba(0, 0, 0, 1.00);"
-                             data-transform_in="x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="x:[-100%];s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;"
-                             data-mask_in="x:0px;y:0px;s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="2500"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-actions='[{"event":"click","action":"scrollbelow","offset":"px"}]'
-                             data-responsive_offset="off"
-                             data-responsive="off"
-                             style="z-index: 11; white-space: nowrap; font-size: 17px; line-height: 17px; font-weight: 600; color: rgba(255, 255, 255, 1.00);font-family:Raleway;background-color:rgba(219, 28, 34, 1.00);padding:12px 35px 12px 35px;border-color:rgba(219, 28, 34, 0);border-style:solid;border-width:2px;letter-spacing:2px;">
-                            VISIT SHOP RIGHT NOW
-                        </div>
                     </li>
                 </ul>
                 <div class="tp-static-layers"></div>

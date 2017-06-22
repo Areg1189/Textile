@@ -1,6 +1,6 @@
 var token = $('meta[name="csrf-token"]').attr('content');
 
-$("#messageSend").submit(function (event) {
+$(document).on('submit','#messageSend', function (event) {
     event.preventDefault();
     var text = $(".messageText").val();
     var url = $(this).attr('action');
@@ -48,3 +48,17 @@ function messageTop() {
     var b = $('.chat').css('height')
     $('.panel-body').scrollTop(parseInt(b))
 }
+
+$('.message_user').click(function () {
+   var user = $(this).data('user');
+   var url = $(this).data('href');
+   $.ajax({
+       url:url,
+       type:'post',
+       data:{user:user, _token:token},
+       success:function (e) {
+           $(".message_content").html(e);
+       }
+   })
+});
+

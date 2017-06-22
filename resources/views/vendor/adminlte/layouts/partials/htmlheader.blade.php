@@ -5,10 +5,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('/css/admin/message.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/css/all.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('/css/admin/message.css') }}" rel="stylesheet" type="text/css"/>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+    @section('link')
+
+    @show
 
     <script src="//code.jquery.com/jquery-1.12.4.js"></script>
 
@@ -17,12 +20,14 @@
 
 
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
+    {{--<![endif]-->--}}
+
+
 
 
     <script>

@@ -39,9 +39,10 @@ class AdminController extends Controller
 //        Category::where('code', 'grec')->delete();
 
 
-        $users = User::where('status', 1)->get();
 
-        return view('vendor.adminlte.home', ['users' => $users]);
+
+
+        return view('vendor.adminlte.home');
     }
 
 
@@ -108,6 +109,24 @@ class AdminController extends Controller
     }
 
     public function adminMessages(){
-        
+        $users  = User::whereHas('messages')->orWhereHas('messagesSeen')->paginate(20);
+
+
+        return view('vendor.adminlte.messages', ['users' => $users]);
+    }
+
+    public function getUsers(){
+        $users = User::where('status', 1)->orderBy('id', 'desc')->get();
+
+        return view('vendor.adminlte.users', ['users' => $users]);
+    }
+
+    public function messageUser(Request $request){
+        $user = User::where('href', $request->user)->firstOrFail();
+        $messages = Message::where('user_id', $user->id)->orWhere('to_id',$user->id)->get();
+        return View::make('vendor.adminlte.messageContentExample',[
+            'messages' => $messages,
+            'user' => $user,
+        ]);
     }
 }
