@@ -17,7 +17,7 @@
 
         </div>
         <div class="row">
-            <table class="table" id="table">
+            <table class="table text-center" id="table">
                 <thead>
                 <tr>
                     <th>Հաըեռեն</th>
@@ -27,28 +27,28 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php($i = 0)
                 @foreach($categories->sortByDesc('id') as $category)
-                    <tr class="{{$category->id == session('newCat') ? 'active':''}}">
+                    <tr class="{{$category->id == session('newCat') ? 'active':''}}" data-target="cat_{{$i}}"
+                        data-href_update="{{route('updateCategory')}}" data-prod="{{$category->link}}"
+                        data-href_delete="{{route('deleteCategory')}}">
                         <td>{{$category->translate('hy')->name}}</td>
                         <td>{{$category->translate('en')->name}}</td>
                         <td>{{$category->translate('ru')->name}}</td>
                         <td>
-                            <a class="btn btn-app">
+                            <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="cat_{{$i}}"
+                                    data-target="#modalUpdate">
                                 <i class="fa fa-edit"></i>
                                 Edit
-                            </a>
-                            <div class="btn-group">
-                                <button class="btn  btn-primary">
-                                    <i class="fa fa-edit"></i>
-                                    Edit
-                                </button>
-                                <button class="btn  btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                    Delete
-                                </button>
-                            </div>
+                            </button>
+                            <button class="btn  btn-danger iconDelete" data-toggle="modal" data-status="cat_{{$i}}"
+                                    data-target="#modalDelete">
+                                <i class="fa fa-trash"></i>
+                                Delete
+                            </button>
                         </td>
                     </tr>
+                    @php($i++)
                 @endforeach
 
 

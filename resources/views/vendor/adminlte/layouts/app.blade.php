@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="{{session('locale')}}">
 
 
 @section('htmlheader')
@@ -47,11 +47,28 @@ desired effect
         <!-- Main content -->
             <section class="content">
                 <!-- Your Page Content Here -->
+                @if(isset($errors) && !empty($errors->first()))
+                    <div class="info_modal alert">
+                        <div class="alert-danger alert-dismissable fade in alert_fixed">
+                            <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>
+                                        {{$error}}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
                 @yield('main-content')
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
 
         @include('adminlte::layouts.partials.controlsidebar')
+
+        @include('vendor.adminlte.modal.modalUpdate')
+        @include('vendor.adminlte.modal.modalDelete')
 
         {{--    @include('adminlte::layouts.partials.footer')--}}
 

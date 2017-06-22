@@ -33,12 +33,12 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{!Request::segment(3) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i
+            <li class="{{!Request::segment(2) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i
                             class='fa fa-home'></i>
                     <span>Home</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i>
-                    <span>{{ trans('adminlte_lang::message.anotherlink') }}</span></a></li>
-            <li class="treeview">
+            <li class="{{Request::segment(2) == 'messages' ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i class='fa fa-envelope-o'></i>
+                    <span>Messages</span></a></li>
+            <li class="treeview {{Request::segment(2) == 'category' && Request::segment(2)  == 'categories'? 'active' : '' }}">
                 <a href="#">
                     <i class='fa fa-book'></i>
                     <span>Category</span>

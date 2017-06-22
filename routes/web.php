@@ -73,12 +73,23 @@ Route::group(
         Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
+            Route::get('messages', 'Admin\AdminController@adminMessages')->name('adminMessages');
+
+
+            //=========  CATEGORY  ======= //
+
             Route::get('categories', 'Admin\AdminCategoryController@index')->name('adminCategories');
+
             Route::get('category/{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
 
 
 
+
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
+
+            Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
+
+            Route::delete('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
 
             Route::post('block', 'Admin\AdminController@blockUser')->name('blockUser');
 
