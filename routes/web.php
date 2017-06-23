@@ -74,7 +74,13 @@ Route::group(
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
             Route::get('messages', 'Admin\AdminController@adminMessages')->name('adminMessages');
+
+            Route::get('site', 'Admin\AdminController@site')->name('site');
+
+
             Route::get('users', 'Admin\AdminController@getUsers')->name('getUsers');
+
+
             Route::post('messageUser', 'Admin\AdminController@messageUser')->name('messageUser');
 
 
@@ -86,6 +92,7 @@ Route::group(
 
 
 
+            Route::post('updateHomeImage', 'Admin\AdminController@updateHomeImage')->name('updateHomeImage');
 
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
 

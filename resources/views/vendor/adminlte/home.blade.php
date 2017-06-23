@@ -9,7 +9,7 @@
 @endsection
 
 @section('main-content')
-    <div id="wrapper">
+    <div class="container">
         <div class="first-slider">
             <div id="rev_slider_56_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
                  data-alias="sports-hero54"
@@ -95,51 +95,6 @@
                 </div>
             </div><!-- END REVOLUTION SLIDER -->
         </div>
-
-        <section class="section">
-            <div class="container">
-                <div class="section-title text-center clearfix">
-                    <h4>Top Categories</h4>
-                    <p>Listed below our top categories, campaings, promotions and offers for you!</p>
-                    <hr>
-                </div>
-
-                <div class="banner-masonry row">
-                    <div class="banner-item item-w1 item-h1">
-                        <a href="#"><img src="{{asset('upload/banner_01.png')}}" alt="" class="img-responsive"></a>
-                        <div class="banner-button">
-                            <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
-                        </div>
-                    </div>
-                    <div class="banner-item item-w1 item-h1">
-                        <a href="#"><img src="{{asset('upload/banner_02.png')}}" alt="" class="img-responsive"></a>
-                        <div class="banner-button button-left">
-                            <a href="#" class="button button--aylen btn">BEDROOM EDITION</a>
-                        </div>
-                    </div>
-                    <div class="banner-item item-w1 item-h2">
-                        <a href="#"><img src="{{asset('upload/banner_03.png')}}" alt="" class="img-responsive"></a>
-                        <div class="banner-button button-left">
-                            <a href="#" class="button button--aylen btn">SINGLE SET</a>
-                        </div>
-                    </div>
-                    <div class="banner-item item-w1 item-h1">
-                        <a href="#"><img src="{{asset('upload/banner_04.png')}}" alt="" class="img-responsive"></a>
-                        <div class="banner-button button-left">
-                            <a href="#" class="button button--aylen btn">SEATING GROUPS</a>
-                        </div>
-                    </div>
-                    <div class="banner-item item-w1 item-h1">
-                        <a href="#"><img src="{{asset('upload/banner_05.png')}}" alt="" class="img-responsive"></a>
-                        <div class="banner-button button-left">
-                            <a href="#" class="button button--aylen btn">HANDMADE STAND</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </section>
     </div>
 
 @endsection

@@ -76,7 +76,7 @@ $(document).on('click', '.iconUpdate', function () {
             }
         },
         error: function (e) {
-            ajaxError(e);
+            // ajaxError(e);
         }
     });
 });
@@ -120,5 +120,19 @@ $(document).on('click', '.modalDelete', function () {
         }
     })
 });
+$( document ).ajaxStart(function() {
+    $( ".loaderSite" ).show();
+});
+$( document ).ajaxStop(function() {
+    $( ".loaderSite" ).hide();
+});
+
+
+
+
+
+
+
+
 
 

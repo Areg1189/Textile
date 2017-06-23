@@ -207,42 +207,48 @@
                             </ul>
                         </li>
 
-                            @if (Auth::guest())
+                        @if (Auth::guest())
                             <li class="hidden-sm hidden-xs">
-                                <a data-tooltip="tooltip" data-placement="bottom" title="@lang('auth.login')" id="modal_trigger"
+                                <a data-tooltip="tooltip" data-placement="bottom" title="@lang('auth.login')"
+                                   id="modal_trigger"
                                    href="#modal">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            @else
+                        @else
                             <li class="dropdown hasmenu shopcartmenu {{request::segment(1) == 'user' ? 'active' : ''}}">
-                                <a href="#0" class="dropdown-toggle " data-toggle="dropdown" role="button"
-                                   aria-expanded="false">
+                                <a href="{{Auth::user()->rol == 1 ? route('admin') : '#0'}}"
+                                   class="{{Auth::user()->rol == 1 ? '' : 'dropdown-toggle'}}"
+                                   data-toggle="{{Auth::user()->rol == 1 ? '' : 'dropdown'}}"
+                                   role="{{Auth::user()->rol == 1 ? '' : 'button'}}">
                                     {{ Auth::user()->name }}
                                 </a>
-                                <ul class="dropdown-menu show-right">
-                                    <li >
-                                        <a href="{{route('user', ['id' => Auth::user()->href])}}">
-                                            @lang('user.profile')
-                                        </a>
-                                        <a href="{{route('userPurchases', ['id' => Auth::user()->href])}}">
-                                            @lang('user.purchases')
-                                        </a>
-                                        <a href="{{route('userSettings', ['id' => Auth::user()->href])}}">
-                                            @lang('user.settings')
-                                        </a>
-                                            <a href="{{ route('logout') }}" data-tooltip="tooltip" data-placement="bottom" title="Logout"
+                                @if(!Auth::user()->rol == 1)
+                                    <ul class="dropdown-menu show-right">
+                                        <li>
+                                            <a href="{{route('user', ['id' => Auth::user()->href])}}">
+                                                @lang('user.profile')
+                                            </a>
+                                            <a href="{{route('userPurchases', ['id' => Auth::user()->href])}}">
+                                                @lang('user.purchases')
+                                            </a>
+                                            <a href="{{route('userSettings', ['id' => Auth::user()->href])}}">
+                                                @lang('user.settings')
+                                            </a>
+                                            <a href="{{ route('logout') }}" data-tooltip="tooltip"
+                                               data-placement="bottom" title="Logout"
                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                                @lang('user.logout')  <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                                @lang('user.logout') <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                                   style="display: none;">
                                                 {{ csrf_field() }}
                                             </form>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                @endif
                             </li>
-                            @endif
+                        @endif
                     </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->

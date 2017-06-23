@@ -36,6 +36,10 @@
             <li class="{{!Request::segment(2) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i
                             class='fa fa-home'></i>
                     <span>Home</span></a></li>
+            <li class="{{Request::segment(2) ? 'site' : '' }}"><a href="{{ route('site') }}">
+                    <i class='fa fa-home'></i>
+                    <span>Site</span></a>
+            </li>
 
             <li class="{{Request::segment(2) == 'users' ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span></a></li>

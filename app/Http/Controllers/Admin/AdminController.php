@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Message;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
+use App\Models\HomeImage;
 
 
 class AdminController extends Controller
@@ -128,5 +129,58 @@ class AdminController extends Controller
             'messages' => $messages,
             'user' => $user,
         ]);
+    }
+    public function site(){
+
+//         HomeImage::create([
+//            'code' => 'home-image',
+//            'image_name' => 'slider_01.jpg',
+//
+//            'hy' => [
+//                'text_1' => 'HOME',
+//                'text_2' => 'STYLE',
+//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
+//            ],
+//            'en' => [
+//                'text_1' => 'HOME',
+//                'text_2' => 'STYLE',
+//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
+//            ],
+//            'ru' => [
+//                'text_1' => 'HOME',
+//                'text_2' => 'STYLE',
+//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
+//            ]
+//        ]);
+
+        $homeImage = HomeImage::where('code' , 'home-image')->first();
+
+        return view('vendor.adminlte.site',[
+            'homeImage' => $homeImage,
+        ]);
+    }
+
+    public function updateHomeImage(Request $request){
+//        $this->validate($request,[
+//            'prod' => 'required'
+//        ]);
+        if ($request->key && $request->key == 'one'){
+            $product = HomeImage::where('code', $request->prod)->first();
+            return View::make('vendor.adminlte.updatePage.updateHomeImage',[
+                'product' => $product,
+            ]);
+        }else{
+            $data = $_POST['image'];
+
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageName = time().'.png';
+            file_put_contents('upload/'.$imageName, $data);
+
+            return 'done';
+        }
+
     }
 }
