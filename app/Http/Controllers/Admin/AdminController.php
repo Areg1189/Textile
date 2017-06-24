@@ -132,6 +132,7 @@ class AdminController extends Controller
     }
     public function site(){
 
+
 //         HomeImage::create([
 //            'code' => 'home-image',
 //            'image_name' => 'slider_01.jpg',

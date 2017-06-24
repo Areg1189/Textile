@@ -17,8 +17,8 @@
                         <div class="row">
                             <div class="col-xs-4">
                                 <div class="form-group text-center">
-                                    <label>Հաըերեն</label>
-                                    <input type="text" name="hy_name" class="form-control" placeholder="Հաըերեն"
+                                    <label>Հայերեն</label>
+                                    <input type="text" name="hy_name" class="form-control" placeholder="Հայերեն"
                                            value="{{$product->translate('hy')->name}}" required>
                                 </div>
                             </div>

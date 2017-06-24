@@ -21,7 +21,7 @@ class CreateHomeImageTranslationsTable extends Migration
             $table->string('text_3');
             $table->string('locale')->index();
             $table->unique(['home_image_id','locale']);
-            $table->foreign('home_image_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('home_image_id')->references('id')->on('home_images')->onDelete('cascade');
             $table->timestamps();
         });
     }
