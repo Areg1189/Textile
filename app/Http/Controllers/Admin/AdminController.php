@@ -11,6 +11,7 @@ use App\Models\Message;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\HomeImage;
+use Illuminate\Support\Facades\File;
 
 
 class AdminController extends Controller
@@ -38,9 +39,6 @@ class AdminController extends Controller
 //$a = Category::where('code', 'grec')->first();
 //        dd($a->translate(session('locale'))->name);
 //        Category::where('code', 'grec')->delete();
-
-
-
 
 
         return view('vendor.adminlte.home');
@@ -109,28 +107,33 @@ class AdminController extends Controller
         }
     }
 
-    public function adminMessages(){
-        $users  = User::whereHas('messages')->orWhereHas('messagesSeen')->paginate(20);
+    public function adminMessages()
+    {
+        $users = User::whereHas('messages')->orWhereHas('messagesSeen')->paginate(20);
 
 
         return view('vendor.adminlte.messages', ['users' => $users]);
     }
 
-    public function getUsers(){
+    public function getUsers()
+    {
         $users = User::where('status', 1)->orderBy('id', 'desc')->get();
 
         return view('vendor.adminlte.users', ['users' => $users]);
     }
 
-    public function messageUser(Request $request){
+    public function messageUser(Request $request)
+    {
         $user = User::where('href', $request->user)->firstOrFail();
-        $messages = Message::where('user_id', $user->id)->orWhere('to_id',$user->id)->get();
-        return View::make('vendor.adminlte.messageContentExample',[
+        $messages = Message::where('user_id', $user->id)->orWhere('to_id', $user->id)->get();
+        return View::make('vendor.adminlte.messageContentExample', [
             'messages' => $messages,
             'user' => $user,
         ]);
     }
-    public function site(){
+
+    public function site()
+    {
 
 
 //         HomeImage::create([
@@ -154,33 +157,55 @@ class AdminController extends Controller
 //            ]
 //        ]);
 
-        $homeImage = HomeImage::where('code' , 'home-image')->first();
+        $homeImage = HomeImage::where('code', 'home-image')->first();
 
-        return view('vendor.adminlte.site',[
+        return view('vendor.adminlte.site', [
             'homeImage' => $homeImage,
         ]);
     }
 
-    public function updateHomeImage(Request $request){
+    public function updateHomeImage(Request $request)
+    {
 //        $this->validate($request,[
 //            'prod' => 'required'
 //        ]);
-        if ($request->key && $request->key == 'one'){
+        if ($request->key && $request->key == 'one') {
             $product = HomeImage::where('code', $request->prod)->first();
-            return View::make('vendor.adminlte.updatePage.updateHomeImage',[
+            return View::make('vendor.adminlte.updatePage.updateHomeImage', [
                 'product' => $product,
             ]);
-        }else{
-            $data = $_POST['image'];
+        } else {
+            $homeImage = HomeImage::where('code', 'home-image')->first();
+            if ($request->image) {
+                $data = $_POST['image'];
 
-            list($type, $data) = explode(';', $data);
-            list(, $data)      = explode(',', $data);
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
 
-            $data = base64_decode($data);
-            $imageName = time().'.png';
-            file_put_contents('upload/'.$imageName, $data);
+                $data = base64_decode($data);
+                $imageName = time() . '.jpg';
+                file_put_contents('upload/' . $imageName, $data);
+                if (file_exists(public_path() . '/upload/' . $homeImage->image_name)) {
+                    File::delete(public_path() . '/upload/'. $homeImage->image_name);
+                }
+            }else{
+                $imageName = $homeImage->image_name;
+            }
 
-            return 'done';
+            $homeImage->image_name = $imageName;
+            $homeImage->translate('hy')->text_1 = $request->hy_text_1;
+            $homeImage->translate('en')->text_1 = $request->en_text_1;
+            $homeImage->translate('ru')->text_1 = $request->ru_text_1;
+            $homeImage->translate('hy')->text_2 = $request->hy_text_2;
+            $homeImage->translate('en')->text_2 = $request->en_text_2;
+            $homeImage->translate('ru')->text_2 = $request->ru_text_2;
+            $homeImage->translate('hy')->text_3 = $request->hy_text_3;
+            $homeImage->translate('en')->text_3 = $request->en_text_3;
+            $homeImage->translate('ru')->text_3 = $request->ru_text_3;
+            $homeImage->save();
+
+
+
         }
 
     }

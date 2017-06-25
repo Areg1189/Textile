@@ -5,32 +5,43 @@
         <h3 class="box-title">Update</h3>
     </div>
     <div class="modal-body">
+        <div class="imgREsalt" style="display: none; z-index: 9999999999999999999">
+
+        </div>
         <div class="modal-body">
             <div class="box box-primary">
 
                 <div class="box-body">
-                    <form action="{{route('updateHomeImage')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('updateHomeImage')}}" method="POST" id="generalImage" enctype="multipart/form-data">
                         {{csrf_field()}}
-
-                        <div class="panel-body">
-
-                            <div class="row">
-                                <div class="col-md-4" style="padding-top:30px;">
-                                    <strong>Select Image:</strong>
-                                    <br/>
-                                    <input type="file" class="upload2">
-                                    <br/>
-                                    <button class="btn btn-success upload-result">Upload Image</button>
+                        <div class="row">
+                            <div class="col-sm-6 text-center" >
+                                <div class="col-sm-12">
+                                    <input type="file" name="image" id="file" class="input-file  upload2"
+                                           data-image="imageVarietyUpdate">
+                                    <label for="file" class="btn btn-tertiary js-labelFile">
+                                        <i class="icon fa fa-check"></i>
+                                        <span class="js-fileName">Change a Image</span>
+                                    </label>
                                 </div>
                                 <div class="col-md-12 text-center">
-                                    <div class="upload-demo2" style="width:350px"></div>
+                                    <div class="upload-demo2" style="width:350px; position: relative;">
+                                        <span class="span_reset_file"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                    </div>
                                 </div>
-
-
                             </div>
 
+                            <div class="col-sm-6">
+                                <img src="{{asset('upload/'.$product->image_name)}}" class="img-thumbnail" alt="{{config('app.name')}}" width="100%">
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="actions">
+                                    <button type="button" class="btn btn-success basic-result">Result</button>
+                                    <input type="number" class="basic-width" value="1170" placeholder="width"> x <input
+                                            type="number" class="basic-height" value="900" placeholder="height">
+                                </div>
+                            </div>
                         </div>
-
                         <div class="row text-center">
                             <div class="col-sm-4">
                                 <h3>Հաըերեն</h3>
@@ -125,49 +136,22 @@
         </div>
     </div>
 </div>
+
 <style>
-    .modal-dialog {
-        width: 80% !important;
-    }
+
 </style>
 <script>
     $uploadCrop = $(".upload-demo2").croppie({
         enableExif: true,
-        enableOrientation: true,
         viewport: {
-
+            width: 600,
+            height: 400,
         },
         boundary: {
-
+            width: 700,
+            height: 500
         }
     });
-    $(".upload2").on("change", function () {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $uploadCrop.croppie("bind", {
-                url: e.target.result
-            }).then(function(){
 
-            });
-        };
-        reader.readAsDataURL(this.files[0]);
-    });
 
-    {{--$('.upload-result').on("click", function (ev) {--}}
-        {{--$uploadCrop.croppie("result", {--}}
-            {{--type: "canvas",--}}
-            {{--size: "viewport"--}}
-        {{--}).then(function (resp) {--}}
-
-            {{--$.ajax({--}}
-                {{--url: "{{route('updateHomeImage')}}",--}}
-                {{--type: "POST",--}}
-                {{--data: {"image":resp , _token:$('meta[name="csrf-token"]').attr("content")},--}}
-                {{--success: function (data) {--}}
-                    {{--html = '<img src="' + resp + '" />';--}}
-                    {{--$(".upload-demo-i").html(html);--}}
-                {{--}--}}
-            {{--});--}}
-        {{--});--}}
-    {{--});--}}
 </script>

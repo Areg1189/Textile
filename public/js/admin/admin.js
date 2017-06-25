@@ -2,8 +2,7 @@
  * Created by Tatev on 6/13/2017.
  */
 var token = $('meta[name="csrf-token"]').attr('content');
-$(document).ready(function(){
-
+$(document).ready(function () {
 
 
     $('#table').DataTable();
@@ -14,7 +13,7 @@ $(document).ready(function(){
         var url = $(this).data('href');
         var user = $(this).data('user');
 
-        if($(this).is(':checked')){
+        if ($(this).is(':checked')) {
             public = 1;
         } else {
             public = 0;
@@ -22,9 +21,9 @@ $(document).ready(function(){
 
 
         $.ajax({
-            url:url,
-            type:'post',
-            data:{user:user,public:public, _token:token},
+            url: url,
+            type: 'post',
+            data: {user: user, public: public, _token: token},
 
         })
 
@@ -56,8 +55,8 @@ $(document).on('click', '.iconUpdate', function () {
                 }, 5000);
             }
         },
-    error: function (e) {
-        // ajaxError(e);
+        error: function (e) {
+            // ajaxError(e);
         }
     });
 });
@@ -101,15 +100,141 @@ $(document).on('click', '.modalDelete', function () {
         }
     })
 });
-$( document ).ajaxStart(function() {
-    $( ".loaderSite" ).show();
+$(document).ajaxStart(function () {
+    $(".loaderSite").show();
 });
-$( document ).ajaxStop(function() {
-    $( ".loaderSite" ).hide();
+$(document).ajaxStop(function () {
+    $(".loaderSite").hide();
+});
+
+$(document).on('click', '.spanClose', function () {
+    $('.info_modal').fadeOut().find('image_section').html('');
+});
+
+//=============================  IMAGE CROP ========================//
+
+$(document).on("change", '.upload2', function () {
+    $(".span_reset_file").fadeIn();
+    $(".cr-image").fadeIn();
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $uploadCrop.croppie("bind", {
+            url: e.target.result,
+        }).then(function () {
+            $w = $('.basic-width'),
+                $h = $('.basic-height'),
+
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result,
+                    points: [77, 469, 280, 739]
+                });
+        });
+
+    };
+    reader.readAsDataURL(this.files[0]);
+});
+
+$(document).on('click', '.basic-result', function () {
+    var w = parseInt($w.val(), 10),
+        h = parseInt($h.val(), 10), s
+    size = 'viewport';
+    if (w || h) {
+        size = {width: w, height: h};
+    }
+    $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: size
+    }).then(function (resp) {
+        popupResult({
+            src: resp
+        });
+    });
+});
+
+function popupResult(result) {
+    var html;
+    if (result.html) {
+        html = result.html;
+    }
+    if (result.src) {
+        html = '<img src="' + result.src + '" />';
+        $(".info_modal").fadeIn();
+        $('.image_section').html(html);
+
+    }
+
+}
+
+//  ==================== INPUT FILE =======================//
+// (function () {
+
+$(document).on('click', '.js-labelFile', function () {
+    $('.input-file').each(function () {
+        var $input = $(this),
+            $label = $input.next('.js-labelFile'),
+            labelVal = $label.html();
+
+        $input.on('change', function (element) {
+            var fileName = '';
+            if (element.target.value) fileName = element.target.value.split('\\').pop();
+            fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+        });
+    });
+});
+
+// })();
+$(document).on('click', ".span_reset_file", function () {
+    $(".cr-image").fadeOut();
+    $('.upload2').val('');
+    $('.js-labelFile').removeClass('has-file').find('.js-fileName').text('Change a Image');
+    $(this).fadeOut();
 });
 
 
+$(document).on('submit', "#generalImage", function (form) {
+    form.preventDefault();
+    hy_text_1 = $('input[name="hy_text_1"]').val();
+    en_text_1 = $('input[name="en_text_1"]').val();
+    ru_text_1 = $('input[name="ru_text_1"]').val();
+    hy_text_2 = $('input[name="hy_text_2"]').val();
+    en_text_2 = $('input[name="en_text_2"]').val();
+    ru_text_2 = $('input[name="ru_text_2"]').val();
+    hy_text_3 = $('input[name="hy_text_3"]').val();
+    en_text_3 = $('input[name="en_text_3"]').val();
+    ru_text_3 = $('input[name="ru_text_3"]').val();
 
+    $uploadCrop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+    }).then(function (resp) {
+        if ($('input[type="file"]').val()) {
+            resp = resp;
+        } else {
+            resp = false
+        }
+
+        $.ajax({
+            url: $("#generalImage").attr('action'),
+            type: "POST",
+            data: {
+                image:resp,
+                hy_text_1:hy_text_1,
+                en_text_1:en_text_1,
+                ru_text_1:ru_text_1,
+                hy_text_2:hy_text_2,
+                en_text_2:en_text_2,
+                ru_text_2:ru_text_2,
+                hy_text_3:hy_text_3,
+                en_text_3:en_text_3,
+                ru_text_3:ru_text_3,
+                _token:token
+            },
+            success: function (data) {
+
+            }
+        });
+    });
+});
 
 
 

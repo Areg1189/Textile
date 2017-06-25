@@ -1,0 +1,73 @@
+/* =========================================== MODAL SHOW IMAGE ======================================== */
+.info_modal {
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9999999999999999999;
+    background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.info_block {
+    background: #bd9b8c;
+
+}
+
+.spanClose {
+    position: absolute;
+    left: 95%;
+    bottom: 90%;
+    color: #fff;
+    cursor: pointer;
+}
+
+.modal-dialog {
+    width: 80% !important;
+}
+.btn-tertiary {
+    color: #555;
+    padding: 0;
+    line-height: 40px;
+    width: 300px;
+    display: block;
+    border: 2px solid #555;
+}
+.btn-tertiary:hover, .btn-tertiary:focus {
+    color: #888888;
+    border-color: #888888;
+}
+.margin_top{
+    margin-top: 30px;
+    text-align: center;
+}
+/* input file style */
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+.input-file + .js-labelFile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 10px;
+    cursor: pointer;
+}
+.input-file + .js-labelFile .icon:before {
+    content: "\f093";
+}
+.input-file + .js-labelFile.has-file .icon:before {
+    content: "\f00c";
+    color: #5AAC7B;
+}
+
+.span_reset_file{
+    left: 80%;
+    z-index: 9;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+}

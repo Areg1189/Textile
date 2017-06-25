@@ -2,8 +2,8 @@
 
 @section('head')
     @parent
-  <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/bootstrap-3.min.css">
-    <link rel="stylesheet" href="http://demo.itsolutionstuff.com/plugin/croppie.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
+    <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
 @endsection
 @section('content')
 
@@ -509,6 +509,7 @@
         </div><!-- end container -->
     </section><!-- end section -->
     @include('vendor.adminlte.modal.modalUpdate')
+    @include('vendor.adminlte.modal.modalShowImage')
 @endsection
 
 
@@ -520,6 +521,9 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
-    <script src="http://demo.itsolutionstuff.com/plugin/croppie.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.js"></script>
+    <script>
+
+    </script>
 
 @endsection
