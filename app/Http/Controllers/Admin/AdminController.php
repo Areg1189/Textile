@@ -178,7 +178,6 @@ class AdminController extends Controller
             $homeImage = HomeImage::where('code', 'home-image')->first();
             if ($request->image) {
                 $data = $_POST['image'];
-
                 list($type, $data) = explode(';', $data);
                 list(, $data) = explode(',', $data);
 
@@ -186,9 +185,9 @@ class AdminController extends Controller
                 $imageName = time() . '.jpg';
                 file_put_contents('upload/' . $imageName, $data);
                 if (file_exists(public_path() . '/upload/' . $homeImage->image_name)) {
-                    File::delete(public_path() . '/upload/'. $homeImage->image_name);
+                    File::delete(public_path() . '/upload/' . $homeImage->image_name);
                 }
-            }else{
+            } else {
                 $imageName = $homeImage->image_name;
             }
 
@@ -204,7 +203,7 @@ class AdminController extends Controller
             $homeImage->translate('ru')->text_3 = $request->ru_text_3;
             $homeImage->save();
 
-
+            return back();
 
         }
 

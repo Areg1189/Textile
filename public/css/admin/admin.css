@@ -23,7 +23,7 @@
 }
 
 .modal-dialog {
-    width: 80% !important;
+    width: 100% !important;
 }
 .btn-tertiary {
     color: #555;
@@ -36,6 +36,13 @@
 .btn-tertiary:hover, .btn-tertiary:focus {
     color: #888888;
     border-color: #888888;
+}
+#modalUpdate,.modal-dialog,.modal-body{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.croppie-container .cr-viewport {
+    border: 2px solid #333;
 }
 .margin_top{
     margin-top: 30px;
@@ -65,9 +72,12 @@
 }
 
 .span_reset_file{
-    left: 80%;
+    left: 90%;
     z-index: 9;
     position: absolute;
     display: none;
     cursor: pointer;
+}
+.upload-demo2{
+    width: 100% !important;
 }

@@ -10,17 +10,16 @@
         <div class="row">
             <div class="col-sm-2">
                 <button class="btn btn-app" title="Add Category" data-toggle="modal" data-target="#modalAddCategory">
-                    Add Category
+                    Add  Sub Category
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>
-
         </div>
         <div class="row">
             <table class="table text-center" id="table">
                 <thead>
                 <tr>
-                    <th>Հաըեռեն</th>
+                    <th>Հայերեն</th>
                     <th>English</th>
                     <th>Русский</th>
                     <th>Actions</th>

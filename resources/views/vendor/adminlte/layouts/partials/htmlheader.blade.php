@@ -9,6 +9,8 @@
     <link href="{{ asset('/css/admin/message.css') }}" rel="stylesheet" type="text/css"/>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
+    <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
     @section('link')
 
     @show

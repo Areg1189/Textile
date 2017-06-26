@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
-class AdminCategoryController extends Controller
+class AdminSubCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('vendor.adminlte.categories');
+        $cat = Category::wheer('link', $request->cet)->firstOrFail();
+        return view('vendor.adminlte.categories',[
+            'cat' => $cat,
+        ]);
     }
 
     public function create(Request $request)
@@ -21,16 +25,31 @@ class AdminCategoryController extends Controller
             'hy_name' => 'required|string',
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
+            'image' => 'required',
         ]);
         if ($validator->fails()) {
             return back()->with('error', 'add')->withErrors($validator->errors())->withInput();
         }
+
+        $cat = Category::where('link', $request->cat)->firstOrFail();
+
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
-        $newCat = Category::create([
+
+        if ($request->image) {
+            $data = $_POST['image'];
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageName = time() . '.jpg';
+            file_put_contents('images/subCategory/' . $imageName, $data);
+        }
+        $newCat = SubCategory::create([
             'code' => $request->en_name,
             'link' => $link,
-
+            'image_name' => $imageName,
+            'category_id' => $cat->id,
             'hy' => [
                 'name' => $request->hy_name,
             ],
@@ -51,10 +70,10 @@ class AdminCategoryController extends Controller
         $this->validate($request, [
             'prod' => 'required',
         ]);
-        $cat = Category::where('link', $request->prod)->firstOrFail();
+        $cat = SubCategory::where('link', $request->prod)->firstOrFail();
 
         if ($request->key && $request->key == 'one') {
-            return View::make('vendor.adminlte.updatePage.updateCat', [
+            return View::make('vendor.adminlte.updatePage.updateSubCat', [
                 'product' => $cat
             ]);
         }
@@ -82,23 +101,23 @@ class AdminCategoryController extends Controller
             ]);
         }
     }
-
-    public function show(Request $request)
-    {
-        $category = Category::where('link', $request->name)->firstOrFail();
-
-        return view('vendor.adminlte.subCategories',[
-            'category' => $category,
-        ]);
-    }
-
-    public function delete(Request $request)
-    {
-        $cat = Category::where('link', $request->prod)->firstOrFail();
-//        $cat->roles()->detach();
-        $cat->deleteTranslations();
-        $cat->delete();
-        return 1;
-
-    }
+//
+//    public function show(Request $request)
+//    {
+//        $category = Category::where('link', $request->name)->firstOrFail();
+//
+//        return view('vendor.adminlte.subCategories',[
+//            'category' => $category,
+//        ]);
+//    }
+//
+//    public function delete(Request $request)
+//    {
+//        $cat = Category::where('link', $request->prod)->firstOrFail();
+////        $cat->roles()->detach();
+//        $cat->deleteTranslations();
+//        $cat->delete();
+//        return 1;
+//
+//    }
 }

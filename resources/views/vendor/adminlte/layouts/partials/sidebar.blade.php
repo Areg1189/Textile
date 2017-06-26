@@ -41,12 +41,19 @@
                     <span>Site</span></a>
             </li>
 
-            <li class="{{Request::segment(2) == 'users' ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i class="fa fa-users" aria-hidden="true"></i>
+            <li class="{{Request::segment(2) == 'users' ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
+                            class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span></a></li>
 
-            <li class="{{Request::segment(2) == 'messages' ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i class='fa fa-envelope-o'></i>
+            <li class="{{Request::segment(2) == 'messages' ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
+                            class='fa fa-envelope-o'></i>
                     <span>Messages</span></a></li>
-            <li class="treeview {{Request::segment(2) == 'category' && Request::segment(2)  == 'categories'? 'active' : '' }}">
+            <li class="treeview
+                        {{Request::segment(2) == 'category'
+                        || Request::segment(2)  == 'categories'
+                        || Request::segment(3) == 'category'
+                        || Request::segment(3)  == 'categories'
+                        ? 'active' : '' }}">
                 <a href="#">
                     <i class='fa fa-book'></i>
                     <span>Category</span>
@@ -60,8 +67,35 @@
                         </a>
                     </li>
                     @foreach($categories as $category)
-                        <li>
-                            <a href="{{route('adminCategory', ['name' => $category->link])}}">{{$category->translate(session('locale'))->name}}</a>
+                        <li class="treeview
+                                {{Request::segment(3) == $category->link
+                                || Request::segment(4) == $category->link
+                                ? 'active' : ''}}">
+                            <a href="#0">
+                                {{$category->translate(session('locale'))->name}}
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li class="treeview
+                                    {{Request::segment(3) == $category->link
+                                    || Request::segment(4) == $category->link ?
+                                    'active' : ''}}">
+                                    <a href="{{route('adminCategory', ['name' => $category->link])}}">
+                                        All Sub Categories
+                                    </a>
+                                </li>
+                                @foreach($category->subCategories as $subCategory)
+                                   <li>
+                                       <a href="{{route('adminSubCategory', [
+                                       'cat' => $category->link,
+                                       'name' => $subCategory->link
+                                       ])}}">
+                                           {{$subCategory->translate(session('locale'))->name}}
+                                       </a>
+                                   </li>
+                                @endforeach
+
+                            </ul>
                         </li>
                     @endforeach
                 </ul>

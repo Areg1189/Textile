@@ -87,21 +87,27 @@ Route::group(
             //=========  CATEGORY  ======= //
 
             Route::get('categories', 'Admin\AdminCategoryController@index')->name('adminCategories');
-
             Route::get('category/{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
+            Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
+            Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
+            Route::delete('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
+
+            //=========  SUB CATEGORY  ======= //
+
+            Route::get('subCategories/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
+            Route::get('{cat}/subCategory/{name}', 'Admin\AdminSubCategoryController@show')->name('adminSubCategory');
+            Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
+            Route::post('updateSubCategory', 'Admin\AdminSubCategoryController@update')->name('updateSubCategory');
+            Route::delete('deleteSubCategory', 'Admin\AdminSubCategoryController@delete')->name('deleteSubCategory');
+
+
+
+
 
 
 
             Route::post('updateHomeImage', 'Admin\AdminController@updateHomeImage')->name('updateHomeImage');
-
-            Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
-
-            Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
-
-            Route::delete('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
-
             Route::post('block', 'Admin\AdminController@blockUser')->name('blockUser');
-
             Route::post('getMessageAdmin', 'Admin\AdminController@getMessageAdmin')->name('getMessageAdmin');
         });
 
