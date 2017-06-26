@@ -15,7 +15,7 @@
 
                     <div class="box-body">
 
-                        <form action="{{route('addSubCategory')}}" id="addSubCategory" method="post">
+                        <form action="{{route('addSubCategory')}}" class="formImage" method="post">
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-sm-6">

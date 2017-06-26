@@ -1,3 +1,13 @@
+<style>
+    #modalUpdate,.modal-dialog,.modal-body{
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .modal-dialog {
+        width: 100% !important;
+    }
+</style>
+
 <div class="modal-content">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -12,7 +22,7 @@
             <div class="box box-primary">
 
                 <div class="box-body">
-                    <form action="{{route('updateHomeImage')}}" method="POST" id="generalImage" enctype="multipart/form-data">
+                    <form action="{{route('updateHomeImage')}}" method="POST" class="formImage" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="">
                             <div class=" text-center" >

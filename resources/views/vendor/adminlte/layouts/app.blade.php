@@ -47,7 +47,7 @@ desired effect
         <!-- Main content -->
             <section class="content">
                 <!-- Your Page Content Here -->
-                @if(isset($errors) && !empty($errors->first()))
+                @if(isset($errors) )
                     <div class="info_modal alert">
                         <div class="alert-danger alert-dismissable fade in alert_fixed">
                             <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -84,6 +84,7 @@ desired effect
     <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <script src="{{asset('js/admin/admin.js')}}"></script>
 @show
 </html>

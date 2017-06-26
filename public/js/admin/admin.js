@@ -73,7 +73,6 @@ $(document).on('click', '.iconDelete', function () {
     if (parent && url && prod && data) {
         $('#modalDelete').modal('sow', true);
     }
-    alert(prod)
 });
 
 $(document).on('click', '.modalDelete', function () {
@@ -94,9 +93,6 @@ $(document).on('click', '.modalDelete', function () {
                     $(".msj-success").html('<ul></ul>');
                 }, 5000);
             }
-        },
-        error: function (e) {
-            ajaxError(e);
         }
     })
 });
@@ -170,6 +166,7 @@ $(document).on('click', ".span_reset_file", function () {
 //
 // }
 
+
 $(document).on("change", '.upload2', function () {
     $(".span_reset_file").fadeIn();
     $(".cr-image").fadeIn();
@@ -186,35 +183,35 @@ $(document).on("change", '.upload2', function () {
 
                 });
         });
-
     };
     reader.readAsDataURL(this.files[0]);
 });
 
 
-
-$(document).on('submit', "#generalImage", function (form) {
+$(document).on('submit', ".formImage", function (form) {
+    form = form;
     $uploadCrop.croppie('result', {
         type: 'canvas',
         size: 'viewport'
     }).then(function (resp) {
         if ($('input[type="file"]').val()) {
             resp = resp;
+
             $('input[name="image"]').val(resp);
         }
     });
 });
 
-$(document).on('submit', "#addSubCategory", function (form) {
-    $uploadCrop.croppie('result', {
-        type: 'canvas',
-        size: 'viewport'
-    }).then(function (resp) {
-        if ($('input[type="file"]').val()) {
-            $('input[name="image"]').val(resp);
-        }
-    });
-});
+// $(document).on('submit', "#addSubCategory", function (form) {
+//     $uploadCrop.croppie('result', {
+//         type: 'canvas',
+//         size: 'viewport'
+//     }).then(function (resp) {
+//         if ($('input[type="file"]').val()) {
+//             $('input[name="image"]').val(resp);
+//         }
+//     });
+// });
 
 
 

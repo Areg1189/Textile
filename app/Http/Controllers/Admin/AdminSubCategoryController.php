@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\File;
 
 class AdminSubCategoryController extends Controller
 {
@@ -77,8 +78,23 @@ class AdminSubCategoryController extends Controller
                 'product' => $cat
             ]);
         }
+
+        if ($request->image) {
+            $data = $_POST['image'];
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageName = time() . '.jpg';
+            file_put_contents('images/subCategory/' . $imageName, $data);
+            if (file_exists(public_path() . '/upload/' . $cat->image_name)) {
+                File::delete(public_path() . '/upload/' . $cat->image_name);
+            }
+        } else {
+            $imageName = $cat->image_name;
+        }
         $validator = Validator::make($request->all(), [
-            'hy_name' => 'required|string|email',
+            'hy_name' => 'required|string',
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
         ]);
@@ -90,6 +106,7 @@ class AdminSubCategoryController extends Controller
         $link = str_replace(' ', '-', $link);
         $cat->code = $request->en_name;
         $cat->link = $link;
+        $cat->image_name = $imageName;
         $cat->translate('hy')->name = $request->hy_name;
         $cat->translate('en')->name = $request->en_name;
         $cat->translate('ru')->name = $request->ru_name;
@@ -100,24 +117,27 @@ class AdminSubCategoryController extends Controller
                 'newCat' => $cat->id,
             ]);
         }
+
+
     }
-//
-//    public function show(Request $request)
-//    {
-//        $category = Category::where('link', $request->name)->firstOrFail();
-//
-//        return view('vendor.adminlte.subCategories',[
-//            'category' => $category,
-//        ]);
-//    }
-//
-//    public function delete(Request $request)
-//    {
-//        $cat = Category::where('link', $request->prod)->firstOrFail();
-////        $cat->roles()->detach();
+
+    public function show(Request $request)
+    {
+        $category = Category::where('link', $request->name)->firstOrFail();
+
+        return view('vendor.adminlte.subCategories',[
+            'category' => $category,
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+
+        $cat = SubCategory::where('link', $request->prod)->firstOrFail();
+//        $cat->roles()->detach();
 //        $cat->deleteTranslations();
-//        $cat->delete();
-//        return 1;
-//
-//    }
+        $cat->delete();
+        return 1;
+
+    }
 }

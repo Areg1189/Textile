@@ -12,13 +12,13 @@
             <div class="box box-primary">
 
                 <div class="box-body">
-                    <form action="{{route('addSubCategory')}}" method="POST" id="updateSubCat" enctype="multipart/form-data">
+                    <form action="{{route('updateSubCategory')}}" method="POST" class="formImage" enctype="multipart/form-data">
                         {{csrf_field()}}
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="upload-demo3" style="width:350px; position: relative;">
-                                    <input type="file" name="" id="file" class="input-file  upload2"
+                                    <input type="file"  id="file" class="input-file  upload2"
                                            data-image="imageVarietyUpdate">
                                     <label for="file" class="btn btn-tertiary js-labelFile">
                                         <i class="icon fa fa-check"></i>
@@ -27,6 +27,10 @@
                                     <span class="span_reset_file"><i class="fa fa-times"
                                                                      aria-hidden="true"></i></span>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <h3>Old Image</h3>
+                                <img src="{{asset('images/subCategory/'.$product->image_name)}}" class="img-rounded" alt="Cinque Terre" width="100%">
                             </div>
                         </div>
                         <div class="row">
@@ -60,6 +64,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="prod" value="{{$product->link}}">
+                        <input type="hidden" name="image">
                     </form>
                 </div>
             </div>

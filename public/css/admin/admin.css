@@ -23,7 +23,7 @@
 }
 
 .modal-dialog {
-    width: 100% !important;
+    width: 80% !important;
 }
 .btn-tertiary {
     color: #555;
@@ -37,10 +37,7 @@
     color: #888888;
     border-color: #888888;
 }
-#modalUpdate,.modal-dialog,.modal-body{
-    padding: 0 !important;
-    margin: 0 !important;
-}
+
 .croppie-container .cr-viewport {
     border: 2px solid #333;
 }
