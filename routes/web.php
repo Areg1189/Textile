@@ -96,9 +96,14 @@ Route::group(
 
             Route::get('subCategories/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
             Route::get('{cat}/subCategory/{name}', 'Admin\AdminSubCategoryController@show')->name('adminSubCategory');
+
+            Route::post('addTopCategory', 'Admin\AdminSubCategoryController@addTopCategory')->name('addTopCategory');
+
             Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
             Route::post('updateSubCategory', 'Admin\AdminSubCategoryController@update')->name('updateSubCategory');
             Route::delete('deleteSubCategory', 'Admin\AdminSubCategoryController@delete')->name('deleteSubCategory');
+
+
 
 
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\HomeImage;
 use Illuminate\Support\Facades\File;
+use App\Models\SubCategory;
 
 
 class AdminController extends Controller
@@ -135,32 +136,13 @@ class AdminController extends Controller
     public function site()
     {
 
-
-//         HomeImage::create([
-//            'code' => 'home-image',
-//            'image_name' => 'slider_01.jpg',
-//
-//            'hy' => [
-//                'text_1' => 'HOME',
-//                'text_2' => 'STYLE',
-//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
-//            ],
-//            'en' => [
-//                'text_1' => 'HOME',
-//                'text_2' => 'STYLE',
-//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
-//            ],
-//            'ru' => [
-//                'text_1' => 'HOME',
-//                'text_2' => 'STYLE',
-//                'text_3' => 'STYLISH FURNITURE TEMPLATE',
-//            ]
-//        ]);
-
         $homeImage = HomeImage::where('code', 'home-image')->first();
-
+        $topCategories = SubCategory::where('top', '>', 0)->get();
+        $subCategories = SubCategory::where('top', '=', 0)->get();
         return view('vendor.adminlte.site', [
             'homeImage' => $homeImage,
+            'topCategories' => $topCategories,
+            'subCategories' => $subCategories,
         ]);
     }
 

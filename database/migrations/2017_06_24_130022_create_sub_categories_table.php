@@ -18,6 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('code');
             $table->string('image_name');
             $table->string('link');
+            $table->integer('top')->nullable()->default(0);
             $table->integer('category_id')->usignet();
             $table->timestamps();
         });

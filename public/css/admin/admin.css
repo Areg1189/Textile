@@ -78,3 +78,9 @@
 .upload-demo2{
     width: 100% !important;
 }
+.add_top_div{
+    display: none;
+}
+.add_top_icon{
+    cursor: pointer;
+}

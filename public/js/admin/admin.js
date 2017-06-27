@@ -196,7 +196,6 @@ $(document).on('submit', ".formImage", function (form) {
     }).then(function (resp) {
         if ($('input[type="file"]').val()) {
             resp = resp;
-
             $('input[name="image"]').val(resp);
         }
     });
@@ -214,6 +213,28 @@ $(document).on('submit', ".formImage", function (form) {
 // });
 
 
+$(document).on('click', ".add_top_icon", function () {
+   $(".add_top_div").fadeIn();
+});
+
+$(document).on('click', '.add_top_save', function () {
+   if ($(".add_top_select").val()){
+       var cat = $(".add_top_select").val();
+       var url = $(".add_top_select").data('href');
+       $.ajax({
+           url:url,
+           type:'post',
+           data:{cat:cat, _token:token},
+           success:function (e) {
+                // $(".top_content").html(e);
+                location.reload()
+
+           }
+       })
+   }else{
+       alert(2);
+   }
+});
 
 
 
