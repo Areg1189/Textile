@@ -214,26 +214,50 @@ $(document).on('submit', ".formImage", function (form) {
 
 
 $(document).on('click', ".add_top_icon", function () {
-   $(".add_top_div").fadeIn();
+    $(".add_top_div").toggle();
 });
 
 $(document).on('click', '.add_top_save', function () {
-   if ($(".add_top_select").val()){
-       var cat = $(".add_top_select").val();
-       var url = $(".add_top_select").data('href');
-       $.ajax({
-           url:url,
-           type:'post',
-           data:{cat:cat, _token:token},
-           success:function (e) {
-                // $(".top_content").html(e);
-                location.reload()
+    if ($(".add_top_select").val()) {
+        var cat = $(".add_top_select").val();
+        var url = $(".add_top_select").data('href');
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {cat: cat, key: 'add', _token: token},
+            success: function (e) {
+                if (e == 1) {
+                    location.reload();
+                }
+            }
+        })
+    }
+});
 
-           }
-       })
-   }else{
-       alert(2);
-   }
+$(document).on('click', ".edit_top_icon", function () {
+    top_cat = $(this).data('parent');
+    $('.edit_top_div[data-status="' + top_cat + '"]').toggle();
+});
+
+$(document).on('click', '.edit_top_save', function () {
+    $("#loader").toggle();
+    if ($('.edit_top_select[data-select="' + top_cat + '"]').val()) {
+        var newCat = $('.edit_top_select[data-select="' + top_cat + '"]').val();
+        var oldCat = $('[data-old_cat="' + top_cat + '"]').data('cat_old');
+        var number = $('[data-old_cat="' + top_cat + '"]').data('number');
+        var url = $(".add_top_select").data('href');
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {newCat: newCat, oldCat: oldCat, number: number, key: 'edit', _token: token},
+            success: function (e) {
+                if (e == 1) {
+                    location.reload();
+                    $("#loader").toggle();
+                }
+            }
+        });
+    }
 });
 
 

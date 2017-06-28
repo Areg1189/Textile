@@ -109,19 +109,13 @@
     <div class="top_content">
         <section class="section">
             <div class="container">
-                <div class="section-title text-center clearfix">
-                    <h4>Top Categories</h4>
-                    <p>Listed below our top categories, campaings, promotions and offers for you!</p>
-                    <hr>
-                </div><!-- end title -->
-
 
                 @if(count($topCategories) <= 6)
                     <div class="row">
                         <div class="col-sm-4">
-                        <span class="add_top_icon" title="Add Top Category">
+                        <button class="btn btn-primary add_top_icon" title="Add Top Category">
                             <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-                        </span>
+                        </button>
                             <div class="add_top_div">
                                 <div class="btn-group">
                                     <select id="disabledSelect sub_categories" class="form-control add_top_select"
@@ -136,25 +130,47 @@
                                 </div>
                                 <button type="button" class="btn btn-primary add_top_save">Save</button>
                             </div>
-
                         </div>
                     </div>
                 @endif
 
+
+                <div class="section-title text-center clearfix">
+                    <h4>Top Categories</h4>
+                    <p>Listed below our top categories, campaings, promotions and offers for you!</p>
+                    <hr>
+                </div><!-- end title -->
+
                 <div class="banner-masonry row">
+                    @php($i = 1)
                     @foreach($topCategories->sortBy('top') as $topCategory)
-                        <div class="banner-item item-w1 item-h1">
+                        <div class="banner-item item-w1 item-h1" data-old_cat="top_{{$i}}" data-number="{{$topCategory->top}}" data-cat_old="{{$topCategory->id}}">
+                            <button class="btn btn-primary edit_top_icon" data-parent="top_{{$i}}">
+                                <i class="fa fa-edit fa-2x"></i>
+                            </button>
+                            <div class="edit_top_div" data-status="top_{{$i}}" >
+                                <div class="btn-group">
+                                    <select  data-select="top_{{$i}}" class=" disabledSelect sub_categories form-control edit_top_select"  data-href="{{route('addTopCategory')}}">
+                                        <option value="">Choose Category</option>
+                                        @foreach($subCategories as $subCategory)
+                                            <option value="{{$subCategory->id}}">
+                                                {{$subCategory->translate(session('locale'))->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary edit_top_save">Save</button>
+                            </div>
                             <a href="#"><img src="{{asset('images/subCategory/'.$topCategory->image_name)}}" alt="" class="img-responsive"></a>
                             <div class="banner-button">
                                 <a href="#" class="button button--aylen btn">
-                                    {{$topCategory->translate(session('locale')->name)}}
+                                    {{$topCategory->translate(session('locale'))->name}}
                                 </a>
                             </div>
                         </div><!-- end banner-item -->
+                        @php($i++)
                     @endforeach
                 </div>
-
-
             </div><!-- end container -->
         </section><!-- end section -->
     </div><!-- end banner -->

@@ -142,15 +142,24 @@ class AdminSubCategoryController extends Controller
     }
 
     public function addTopCategory(Request $request){
-        $res = SubCategory::where('top', '>', 0)->count();
-        $cat = SubCategory::where('id', $request->cat)->update([
-            'top' => $res + 1,
-        ]);
-        $topCategories = SubCategory::where('top', '>', 0)->get();
-        $subCategories = SubCategory::where('top', '=', 0)->get();
-        return View::make('vendor.adminlte.topCategory',[
-            'topCategories' => $topCategories,
-            'subCategories' => $subCategories,
-        ]);
+        if ($request->key == 'add'){
+            $res = SubCategory::where('top', '>', 0)->count();
+            $cat = SubCategory::where('id', $request->cat)->update([
+                'top' => $res + 1,
+            ]);
+            if ($cat){
+                return 1;
+            }
+        }elseif ($request->key == 'edit'){
+            $oldCAt = SubCategory::where('id', $request->oldCat)->update([
+                    'top' => 0,
+            ]);
+            $new = SubCategory::where('id', $request->newCat)->update([
+                'top' => $request->number,
+            ]);
+            if ($new){
+                return 1;
+            }
+        }
     }
 }

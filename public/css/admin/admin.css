@@ -81,6 +81,6 @@
 .add_top_div{
     display: none;
 }
-.add_top_icon{
-    cursor: pointer;
+.edit_top_div{
+    display: none;
 }
