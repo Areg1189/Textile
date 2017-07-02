@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
+use App\Models\FilterCategory;
 
 class AdminCategoryController extends Controller
 {
@@ -28,7 +29,7 @@ class AdminCategoryController extends Controller
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
         $newCat = Category::create([
-            'code' => $request->en_name,
+            'code' => $request->en_name.$link,
             'link' => $link,
 
             'hy' => [
@@ -87,8 +88,10 @@ class AdminCategoryController extends Controller
     {
         $category = Category::where('link', $request->name)->firstOrFail();
 
+        $filters = FilterCategory::get();
         return view('vendor.adminlte.subCategories',[
             'category' => $category,
+            'filters' => $filters,
         ]);
     }
 

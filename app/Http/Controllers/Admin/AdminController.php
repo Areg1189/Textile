@@ -138,7 +138,7 @@ class AdminController extends Controller
 
         $homeImage = HomeImage::where('code', 'home-image')->first();
         $topCategories = SubCategory::where('top', '>', 0)->get();
-        $subCategories = SubCategory::where('top', '=', 0)->get();
+        $subCategories = SubCategory::get();
         return view('vendor.adminlte.site', [
             'homeImage' => $homeImage,
             'topCategories' => $topCategories,

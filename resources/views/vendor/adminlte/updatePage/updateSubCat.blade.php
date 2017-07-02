@@ -58,6 +58,30 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                                <b>Filter</b>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach($filters as $filter)
+                                <div class="col-sm-4">
+                                    <div class="border_radius text-center">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="filter[]"  value="{{$filter->id}}"
+                                                       @foreach($filter->filters as $f)
+                                                        {{$f->cat->id == $product->id ? 'checked' : ''}}
+                                                        @endforeach
+                                                >
+                                                {{$filter->name}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-primary">Save</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

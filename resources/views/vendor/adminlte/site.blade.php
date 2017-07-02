@@ -3,6 +3,7 @@
 @section('head')
     @parent
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
 @endsection
 @section('content')
@@ -109,21 +110,28 @@
     <div class="top_content">
         <section class="section">
             <div class="container">
-
                 @if(count($topCategories) <= 6)
                     <div class="row">
                         <div class="col-sm-4">
-                        <button class="btn btn-primary add_top_icon" title="Add Top Category">
-                            <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
-                        </button>
+                            <button class="btn btn-primary add_top_icon" title="Add Top Category">
+                                <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+                            </button>
                             <div class="add_top_div">
                                 <div class="btn-group">
-                                    <select id="disabledSelect sub_categories" class="form-control add_top_select"
-                                            data-href="{{route('addTopCategory')}}">
+                                    <select class=" sub_categories form-control add_top_select selectpicker"
+                                            data-href="{{route('addTopCategory')}}"
+                                            data-show-subtext="true" data-live-search="true">
                                         <option value="">Choose Category</option>
                                         @foreach($subCategories as $subCategory)
-                                            <option value="{{$subCategory->id}}">
+                                            <option
+                                                    data-subtext="{{$subCategory
+                                                    ->category
+                                                    ->translate(session('locale'))
+                                                    ->name}}"
+                                                    value="{{$subCategory->id}}"
+                                                    {{$subCategory->top > 0 ? 'disabled' : ''}}>
                                                 {{$subCategory->translate(session('locale'))->name}}
+
                                             </option>
                                         @endforeach
                                     </select>
@@ -144,16 +152,26 @@
                 <div class="banner-masonry row">
                     @php($i = 1)
                     @foreach($topCategories->sortBy('top') as $topCategory)
-                        <div class="banner-item item-w1 item-h1" data-old_cat="top_{{$i}}" data-number="{{$topCategory->top}}" data-cat_old="{{$topCategory->id}}">
+                        <div class="banner-item item-w1 item-h1" data-old_cat="top_{{$i}}"
+                             data-number="{{$topCategory->top}}" data-cat_old="{{$topCategory->id}}">
                             <button class="btn btn-primary edit_top_icon" data-parent="top_{{$i}}">
                                 <i class="fa fa-edit fa-2x"></i>
                             </button>
-                            <div class="edit_top_div" data-status="top_{{$i}}" >
+                            <div class="edit_top_div" data-status="top_{{$i}}">
                                 <div class="btn-group">
-                                    <select  data-select="top_{{$i}}" class=" disabledSelect sub_categories form-control edit_top_select"  data-href="{{route('addTopCategory')}}">
+                                    <select data-select="top_{{$i}}"
+                                            class=" disabledSelect sub_categories form-control edit_top_select selectpicker"
+                                            data-href="{{route('addTopCategory')}}"
+                                            data-show-subtext="true"
+                                            data-live-search="true">
                                         <option value="">Choose Category</option>
                                         @foreach($subCategories as $subCategory)
-                                            <option value="{{$subCategory->id}}">
+                                            <option value="{{$subCategory->id}}"
+                                                    {{$subCategory->top > 0 ? 'disabled' : ''}}
+                                                    data-subtext="{{$subCategory
+                                                    ->category
+                                                    ->translate(session('locale'))
+                                                    ->name}}">
                                                 {{$subCategory->translate(session('locale'))->name}}
                                             </option>
                                         @endforeach
@@ -161,7 +179,8 @@
                                 </div>
                                 <button type="button" class="btn btn-primary edit_top_save">Save</button>
                             </div>
-                            <a href="#"><img src="{{asset('images/subCategory/'.$topCategory->image_name)}}" alt="" class="img-responsive"></a>
+                            <a href="#"><img src="{{asset('images/subCategory/'.$topCategory->image_name)}}" alt=""
+                                             class="img-responsive"></a>
                             <div class="banner-button">
                                 <a href="#" class="button button--aylen btn">
                                     {{$topCategory->translate(session('locale'))->name}}
@@ -543,6 +562,7 @@
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
 
     <script>

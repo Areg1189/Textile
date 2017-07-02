@@ -104,7 +104,16 @@ Route::group(
             Route::delete('deleteSubCategory', 'Admin\AdminSubCategoryController@delete')->name('deleteSubCategory');
 
 
+            //=========  FILTERS ======= //
 
+            Route::get('filters', 'Admin\AdminFilterController@index')->name('getFilter');
+//            Route::get('{cat}/subCategory/{name}', 'Admin\AdminSubCategoryController@show')->name('adminSubCategory');
+//
+            Route::post('addFilter', 'Admin\AdminFilterController@create')->name('addFilter');
+//
+//            Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
+//            Route::post('updateSubCategory', 'Admin\AdminSubCategoryController@update')->name('updateSubCategory');
+            Route::delete('deleteFilter', 'Admin\AdminFilterController@delete')->name('deleteFilter');
 
 
 

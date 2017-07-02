@@ -100,6 +100,9 @@
                     @endforeach
                 </ul>
             </li>
+            <li class="{{Request::segment(2) == 'filters' ? 'active' : ''}}"><a href="{{route('getFilter')}}">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
+                    <span>Filters</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

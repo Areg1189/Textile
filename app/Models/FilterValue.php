@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class FilterValue extends Model
+{
+    use \Dimsav\Translatable\Translatable;
+    public $translationModel = 'App\Models\FilterValueTranslations';
+
+    public $translatedAttributes = [
+        'name',
+    ];
+
+    protected $fillable = [
+        'code', 'parent_id',
+    ];
+
+    public function parent(){
+        return $this->belongsTo('App\Models\SubCategory', 'parent_id', 'id');
+    }
+
+}

@@ -34,7 +34,7 @@ return [
     'contactFacebook' => 'Միացեք գործել Facebook',
     'contactGoogle' => 'Միացեք Google- ի հետ',
     'register' => 'գրանցվել',
-    'login' => 'ԼՕԳԻՆ',
+    'login' => 'ԼՈԳԻՆ',
     'back' => 'Ետ',
 
 ];

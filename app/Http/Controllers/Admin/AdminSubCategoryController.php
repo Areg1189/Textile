@@ -9,6 +9,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
+use App\Models\CatFilter;
+use App\Models\FilterCategory;
 
 class AdminSubCategoryController extends Controller
 {
@@ -26,8 +28,9 @@ class AdminSubCategoryController extends Controller
             'hy_name' => 'required|string',
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,JPEG,png,JPG,gif,svg|max:2048',
         ]);
+
         if ($validator->fails()) {
             return back()->with('error', 'add')->withErrors($validator->errors())->withInput();
         }
@@ -47,7 +50,7 @@ class AdminSubCategoryController extends Controller
             file_put_contents('images/subCategory/' . $imageName, $data);
         }
         $newCat = SubCategory::create([
-            'code' => $request->en_name,
+            'code' => $request->en_name.$cat->id,
             'link' => $link,
             'image_name' => $imageName,
             'category_id' => $cat->id,
@@ -61,6 +64,16 @@ class AdminSubCategoryController extends Controller
                 'name' => $request->ru_name,
             ]
         ]);
+
+        if ($request->filter[0]){
+            foreach ($request->filter as $filter){
+                CatFilter::create([
+                   'cat_id' => $newCat->id,
+                   'filter_id' => $filter,
+                ]);
+            }
+        }
+
         if ($newCat) {
             return back()->with('newCat', $newCat->id);
         }
@@ -71,11 +84,13 @@ class AdminSubCategoryController extends Controller
         $this->validate($request, [
             'prod' => 'required',
         ]);
+        $filters = FilterCategory::get();
         $cat = SubCategory::where('link', $request->prod)->firstOrFail();
 
         if ($request->key && $request->key == 'one') {
             return View::make('vendor.adminlte.updatePage.updateSubCat', [
-                'product' => $cat
+                'product' => $cat,
+                'filters' => $filters,
             ]);
         }
 
@@ -117,8 +132,6 @@ class AdminSubCategoryController extends Controller
                 'newCat' => $cat->id,
             ]);
         }
-
-
     }
 
     public function show(Request $request)

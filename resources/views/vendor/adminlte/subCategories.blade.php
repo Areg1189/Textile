@@ -1,6 +1,8 @@
 @extends('adminlte::layouts.app')
 
-
+@section('link')
+    <link rel="stylesheet" href="{{asset('css/admin/subCategory.css')}}">
+@endsection
 
 @section('main-content')
 
@@ -21,6 +23,7 @@
             <th>Հայերեն</th>
             <th>English</th>
             <th>Русский</th>
+            <th>Filters</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -31,12 +34,19 @@
                 data-href_update="{{route('updateSubCategory')}}" data-prod="{{$cat->link}}"
                 data-href_delete="{{route('deleteSubCategory')}}">
                 <td>
-                    <img src="{{asset('images/subCategory/'.$cat->image_name)}}" class="img-rounded"
-                         alt="{{$cat->translate('en')->name}}" width="100%">
+                    <div class="col-sm-4">
+                        <img src="{{asset('images/subCategory/'.$cat->image_name)}}" class="img-rounded"
+                             alt="{{$cat->translate('en')->name}}" width="100%">
+                    </div>
                 </td>
                 <td>{{$cat->translate('hy')->name}}</td>
                 <td>{{$cat->translate('en')->name}}</td>
                 <td>{{$cat->translate('ru')->name}}</td>
+                <td>
+                    @foreach($cat->filters as $filter)
+                        <div><i class="fa fa-filter"></i> {{$filter->filter->name}}</div>
+                    @endforeach
+                </td>
                 <td>
                     <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="cat_{{$i}}"
                             data-target="#modalUpdate">
@@ -74,7 +84,7 @@
         });
         @if(session('error') == 'add')
             $('#modalAddSubCategory').modal();
-            @endif
+        @endif
     </script>
 @endsection
 

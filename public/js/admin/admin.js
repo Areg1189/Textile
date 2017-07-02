@@ -240,7 +240,6 @@ $(document).on('click', ".edit_top_icon", function () {
 });
 
 $(document).on('click', '.edit_top_save', function () {
-    $("#loader").toggle();
     if ($('.edit_top_select[data-select="' + top_cat + '"]').val()) {
         var newCat = $('.edit_top_select[data-select="' + top_cat + '"]').val();
         var oldCat = $('[data-old_cat="' + top_cat + '"]').data('cat_old');
@@ -253,13 +252,110 @@ $(document).on('click', '.edit_top_save', function () {
             success: function (e) {
                 if (e == 1) {
                     location.reload();
-                    $("#loader").toggle();
                 }
             }
         });
     }
 });
 
+
+// =================================== FILTER =========================================//
+var number = 0;
+$(document).on('click', '.add_sub_filter', function () {
+    $('.sub_filter_content').fadeIn();
+    $('.sub_filter_content').append('' +
+        '<div  data-name="number'+number+'">' +
+        '<div class="row" >' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Հայերեն</label>' +
+        '<input type="text" name="hy_name_sub[]" class="form-control" placeholder="Հայերեն">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>English</label>' +
+        '<input type="text" name="en_name_sub[]" class="form-control" placeholder="English">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Русский</label>' +
+        '<input type="text" name="ru_name_sub[]" class="form-control" placeholder="Русский">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<label>Русский</label>' +
+        '<button data-target="number'+number+'" type="button" class="btn btn-info add_filter_value"><i class="fa fa-plus"></i></button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '');
+    number++
+});
+
+$(document).on('click', '.add_filter_value', function () {
+    var data  = $(this).data('target');
+    $('[data-name="'+data+'"]').append('' +
+        '<div class="row">' +
+        '<div class="col-xs-3">' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Հայերեն</label>' +
+        '<input type="text" name="hy_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="Հայերեն">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>English</label>' +
+        '<input type="text" name="en_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="English">' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Русский</label>' +
+        '<input type="text" name="ru_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="Русский">' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '');
+});
+
+//
+// $(document).on('change', '.filter_checked', function () {
+//     var data = $(this).data('status');
+//     var parent = $('[data-target="' + data + '"]');
+//     if ($(this).is(':checked')) {
+//         parent.append('' +
+//             ' <div class="col-sm-12 add_filter_value">' +
+//             '<div class="col-xs-4">' +
+//             '<div class="form-group text-center">' +
+//             '<label>Հայերեն</label>' +
+//             '<input type="text" name="hy_name_filter_value[]"' +
+//             'class="form-control" placeholder="Հայերեն" required>' +
+//             '</div>' +
+//             '</div>' +
+//             '<div class="col-xs-4">' +
+//             '<div class="form-group text-center">' +
+//             '<label>English</label>' +
+//             '<input type="text" name="en_name_filter_value[]"' +
+//             'class="form-control" placeholder="English" required>' +
+//             '</div>' +
+//             '</div>' +
+//             '<div class="col-xs-4">' +
+//             '<div class="form-group text-center">' +
+//             '<label>Русский</label>' +
+//             '<input type="text" name="ru_name_filter_value[]"' +
+//             'class="form-control" placeholder="Русский"   required>' +
+//             '</div>' +
+//             '</div>' +
+//             '</div>' +
+//             '')
+//     } else {
+// $(".add_filter_value").fadeOut().remove();
+//     }
+// });
 
 
 

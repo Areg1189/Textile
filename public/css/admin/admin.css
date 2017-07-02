@@ -81,6 +81,12 @@
 .add_top_div{
     display: none;
 }
-.edit_top_div{
+.edit_top_div , .sub_filter_content{
     display: none;
+}
+.border_radius{
+    border: 1px solid #bd9b8c;
+}
+.cursor_pointer{
+    cursor: pointer;
 }
