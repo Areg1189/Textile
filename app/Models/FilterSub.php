@@ -21,4 +21,8 @@ class FilterSub extends Model
     public function values(){
         return $this->hasMany('App\Models\FilterValue', 'parent_id', 'id');
     }
+
+    public function catFilter(){
+        return $this->hasMany('App\Models\CatFilter', 'sub_id', 'id');
+    }
 }

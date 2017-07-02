@@ -16,7 +16,8 @@ class CreateCatFiltersTable extends Migration
         Schema::create('cat_filters', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cat_id');
-            $table->integer('filter_id');
+            $table->integer('sub_id')->nullable();
+            $table->integer('val_id')->nullable();
             $table->timestamps();
         });
     }

@@ -44,6 +44,7 @@ $(document).on('click', '.iconUpdate', function () {
         success: function (data) {
             if (data != 0) {
                 $('.updateForm').html(data);
+                $('.collapse').collapse()
 
             }
             else {
@@ -322,40 +323,8 @@ $(document).on('click', '.add_filter_value', function () {
         '');
 });
 
-//
-// $(document).on('change', '.filter_checked', function () {
-//     var data = $(this).data('status');
-//     var parent = $('[data-target="' + data + '"]');
-//     if ($(this).is(':checked')) {
-//         parent.append('' +
-//             ' <div class="col-sm-12 add_filter_value">' +
-//             '<div class="col-xs-4">' +
-//             '<div class="form-group text-center">' +
-//             '<label>Հայերեն</label>' +
-//             '<input type="text" name="hy_name_filter_value[]"' +
-//             'class="form-control" placeholder="Հայերեն" required>' +
-//             '</div>' +
-//             '</div>' +
-//             '<div class="col-xs-4">' +
-//             '<div class="form-group text-center">' +
-//             '<label>English</label>' +
-//             '<input type="text" name="en_name_filter_value[]"' +
-//             'class="form-control" placeholder="English" required>' +
-//             '</div>' +
-//             '</div>' +
-//             '<div class="col-xs-4">' +
-//             '<div class="form-group text-center">' +
-//             '<label>Русский</label>' +
-//             '<input type="text" name="ru_name_filter_value[]"' +
-//             'class="form-control" placeholder="Русский"   required>' +
-//             '</div>' +
-//             '</div>' +
-//             '</div>' +
-//             '')
-//     } else {
-// $(".add_filter_value").fadeOut().remove();
-//     }
-// });
+
+
 
 
 

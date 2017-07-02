@@ -75,139 +75,70 @@
                                 </div>
                             </div>
 
-
-                            <ul class="menu">
-                                @php($i = 0)
-                                @foreach($filters as $filter)
-                                    <li>
-                                        <input type="checkbox" id="item1"/>
-                                        <label for="item1">
-                                            <div class="toggleIcon">
-                                                {{$filter->translate(session('locale'))->name}}
-
-                                            </div>
-                                        </label>
-                                        <div class="options">
-                                            <ul>
+                            @php($i = 0)
+                            @foreach($filters as $filter)
+                                <div class="panel-group accordion"  data-target="{{$i}}">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$i}}">
+                                                <h4 class="panel-title text-center">
+                                                    {{$filter->translate(session('locale'))->name}}
+                                                </h4>
+                                            </a>
+                                        </div>
+                                        <div id="collapse_{{$i}}" class="panel-collapse collapse">
+                                            <div class="panel-body">
                                                 @foreach($filter->subs as  $sub)
                                                     @if(count($sub->values) < 1)
-                                                        <li>
-                                                            <a href="">
-                                                                <div class="col-sm-11 col-sm-offset-1">
-                                                                    <input type="checkbox">
+                                                        <div class="col-sm-11 col-sm-offset-1">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <div class="btn-group btn-group-vertical" data-toggle="buttons">
+                                                                        <label class="btn ">
+                                                                            <input type="checkbox" name="subFilter[]" value="{{$sub->id}}">
+                                                                            <i class="fa fa-square-o fa-2x"></i>
+                                                                            <i class="fa fa-check-square-o fa-2x"></i>
+                                                                            <span> {{$sub->translate(session('locale'))->name}}</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-sm-11 col-sm-offset-1">
+                                                            <div class="panel panel-success">
+                                                                <div class="panel-heading">
                                                                     {{$sub->translate(session('locale'))->name}}
                                                                 </div>
-                                                            </a>
-
-                                                        </li>
-                                                    @else
-                                                        <li>
-                                                            <a href="">
-                                                                <div class="col-sm-11 col-sm-offset-1 border_radius">
-                                                                    {{$sub->translate(session('locale'))->name}}
-
-
+                                                                <div class="panel-body">
                                                                     @foreach($sub->values as $value)
                                                                         <div class="col-sm-10 col-sm-offset-2">
-                                                                            <input type="checkbox">
-                                                                            {{$value->translate(session('locale'))->name}}
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-body">
+                                                                                    <div class="btn-group btn-group-vertical" data-toggle="buttons">
+                                                                                        <label class="btn ">
+                                                                                            <input type="checkbox" name="valFilter[]" value="{{$value->id}}">
+                                                                                            <i class="fa fa-square-o fa-2x"></i>
+                                                                                            <i class="fa fa-check-square-o fa-2x"></i>
+                                                                                            <span> {{$value->translate(session('locale'))->name}}</span>
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     @endforeach
                                                                 </div>
-                                                            </a>
-
-                                                        </li>
-
+                                                            </div>
+                                                        </div>
                                                     @endif
                                                 @endforeach
-
-                                                <li>Videos</li>
-                                                <li>Photos</li>
-                                                <li>About</li>
-                                                <li>More</li>
-                                            </ul>
+                                            </div>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="item2"/>
-                                        <label for="item2">
-                                            <div class="toggleIcon"></div>
-                                            Sneaky snake
-                                        </label>
-                                        <div class="options">
-                                            <ul>
-                                                <li>Item 1</li>
-                                                <li>Item 2</li>
-                                                <li>Item 3</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="item3"/>
-                                        <label for="item3">
-                                            <div class="toggleIcon"></div>
-                                            Girafe`s anger
-                                        </label>
-                                        <div class="options">
-                                            <ul>
-                                                <li>Videos</li>
-                                                <li>Photos</li>
-                                                <li>Other Animals</li>
-                                                <li>Humans</li>
-                                                <li>Pets</li>
-                                                <li>More</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <input type="checkbox" id="item4"/>
-                                        <label for="item4">
-                                            <div class="toggleIcon"></div>
-                                            The lion
-                                        </label>
-                                        <div class="options">
-                                            <ul>
-                                                <li>Videos</li>
-                                                <li>Photos</li>
-                                                <li>About</li>
-                                                <li>More</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    @php($i++)
-                                @endforeach
-                            </ul>
-
-
-                            @php($i = 0)
-                            @foreach($filters as $filter)
-                                <div class="row" data-target="{{$i}}">
-                                    <div class="col-sm-12 border_radius">
-                                        {{$filter->translate(session('locale'))->name}}
-
-                                        @foreach($filter->subs as  $sub)
-                                            @if(count($sub->values) < 1)
-                                                <div class="col-sm-11 col-sm-offset-1">
-                                                    <input type="checkbox">{{$sub->translate(session('locale'))->name}}
-                                                </div>
-                                            @else
-                                                <div class="col-sm-11 col-sm-offset-1 border_radius">
-                                                    {{$sub->translate(session('locale'))->name}}
-
-
-                                                    @foreach($sub->values as $value)
-                                                        <div class="col-sm-10 col-sm-offset-2">
-                                                            <input type="checkbox">
-                                                            {{$value->translate(session('locale'))->name}}
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        @endforeach
                                     </div>
                                 </div>
                                 @php($i++)
                             @endforeach
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Save</button>

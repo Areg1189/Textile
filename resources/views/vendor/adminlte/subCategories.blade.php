@@ -1,8 +1,5 @@
 @extends('adminlte::layouts.app')
 
-@section('link')
-    <link rel="stylesheet" href="{{asset('css/admin/subCategory.css')}}">
-@endsection
 
 @section('main-content')
 
@@ -43,9 +40,9 @@
                 <td>{{$cat->translate('en')->name}}</td>
                 <td>{{$cat->translate('ru')->name}}</td>
                 <td>
-                    @foreach($cat->filters as $filter)
-                        <div><i class="fa fa-filter"></i> {{$filter->filter->name}}</div>
-                    @endforeach
+                    {{--@foreach($cat->filters as $filter)--}}
+                        {{--<div><i class="fa fa-filter"></i> {{$filter->filter->name}}</div>--}}
+                    {{--@endforeach--}}
                 </td>
                 <td>
                     <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="cat_{{$i}}"

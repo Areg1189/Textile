@@ -28,7 +28,7 @@ class AdminSubCategoryController extends Controller
             'hy_name' => 'required|string',
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,JPEG,png,JPG,gif,svg|max:2048',
+            'image' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -36,7 +36,6 @@ class AdminSubCategoryController extends Controller
         }
 
         $cat = Category::where('link', $request->cat)->firstOrFail();
-
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
 
@@ -49,6 +48,7 @@ class AdminSubCategoryController extends Controller
             $imageName = time() . '.jpg';
             file_put_contents('images/subCategory/' . $imageName, $data);
         }
+
         $newCat = SubCategory::create([
             'code' => $request->en_name.$cat->id,
             'link' => $link,
@@ -65,11 +65,21 @@ class AdminSubCategoryController extends Controller
             ]
         ]);
 
-        if ($request->filter[0]){
-            foreach ($request->filter as $filter){
+
+        if (isset($request->subFilter[0])){
+            foreach ($request->subFilter as $sub){
                 CatFilter::create([
-                   'cat_id' => $newCat->id,
-                   'filter_id' => $filter,
+                    'cat_id' => $newCat->id,
+                    'sub_id' => $sub,
+                ]);
+            }
+        }
+
+        if (isset($request->valFilter[0])){
+            foreach ($request->valFilter as $val){
+                CatFilter::create([
+                    'cat_id' => $newCat->id,
+                    'val_id' => $val,
                 ]);
             }
         }

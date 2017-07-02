@@ -20,7 +20,7 @@ class FilterCategory extends Model
     public function subs(){
         return $this->hasMany('App\Models\FilterSub', 'filter_id', 'id');
     }
-    public function filters(){
-        return $this->hasMany('App\Models\CatFilter', 'filter_id', 'id');
-    }
+//    public function filters(){
+//        return $this->hasMany('App\Models\CatFilter', 'filter_id', 'id');
+//    }
 }
