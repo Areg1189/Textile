@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-2">
             <button class="btn btn-app" title="Add Category" data-toggle="modal" data-target="#modalAddSubCategory">
-                Add Category
+                Add
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
         </div>
@@ -75,10 +75,12 @@
                 height: 300
             },
             boundary: {
-                width: 370,
-                height: 300
+                width: 470,
+                height: 400
             }
         });
+        w = 370 ;
+        h = 300;
         @if(session('error') == 'add')
             $('#modalAddSubCategory').modal();
         @endif

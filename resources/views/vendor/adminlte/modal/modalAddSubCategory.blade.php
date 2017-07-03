@@ -77,7 +77,7 @@
 
                             @php($i = 0)
                             @foreach($filters as $filter)
-                                <div class="panel-group accordion"  data-target="{{$i}}">
+                                <div class="panel-group accordion" data-target="{{$i}}">
                                     <div class="panel panel-danger">
                                         <div class="panel-heading">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$i}}">
@@ -93,9 +93,11 @@
                                                         <div class="col-sm-11 col-sm-offset-1">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
-                                                                    <div class="btn-group btn-group-vertical" data-toggle="buttons">
-                                                                        <label class="btn ">
-                                                                            <input type="checkbox" name="subFilter[]" value="{{$sub->id}}">
+                                                                    <div class="btn-group btn-group-vertical"
+                                                                         data-toggle="buttons">
+                                                                        <label class="btn">
+                                                                            <input type="checkbox" name="subFilter[]"
+                                                                                   value="{{$sub->id}}">
                                                                             <i class="fa fa-square-o fa-2x"></i>
                                                                             <i class="fa fa-check-square-o fa-2x"></i>
                                                                             <span> {{$sub->translate(session('locale'))->name}}</span>
@@ -108,21 +110,23 @@
                                                         <div class="col-sm-11 col-sm-offset-1">
                                                             <div class="panel panel-success">
                                                                 <div class="panel-heading">
-                                                                    {{$sub->translate(session('locale'))->name}}
+                                                                    <div class="btn-group btn-group-vertical"
+                                                                         data-toggle="buttons">
+                                                                        <label class="btn">
+                                                                            <input type="checkbox" name="subFilter[]"
+                                                                                   value="{{$sub->id}}">
+                                                                            <i class="fa fa-square-o fa-2x"></i>
+                                                                            <i class="fa fa-check-square-o fa-2x"></i>
+                                                                            <span> {{$sub->translate(session('locale'))->name}}</span>
+                                                                        </label>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     @foreach($sub->values as $value)
                                                                         <div class="col-sm-10 col-sm-offset-2">
                                                                             <div class="panel panel-default">
                                                                                 <div class="panel-body">
-                                                                                    <div class="btn-group btn-group-vertical" data-toggle="buttons">
-                                                                                        <label class="btn ">
-                                                                                            <input type="checkbox" name="valFilter[]" value="{{$value->id}}">
-                                                                                            <i class="fa fa-square-o fa-2x"></i>
-                                                                                            <i class="fa fa-check-square-o fa-2x"></i>
-                                                                                            <span> {{$value->translate(session('locale'))->name}}</span>
-                                                                                        </label>
-                                                                                    </div>
+                                                                                    <span> {{$value->translate(session('locale'))->name}}</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -138,7 +142,6 @@
                                 </div>
                                 @php($i++)
                             @endforeach
-
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Save</button>

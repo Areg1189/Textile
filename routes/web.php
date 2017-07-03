@@ -94,9 +94,8 @@ Route::group(
 
             //=========  SUB CATEGORY  ======= //
 
-            Route::get('subCategories/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
-            Route::get('{cat}/subCategory/{name}', 'Admin\AdminSubCategoryController@show')->name('adminSubCategory');
 
+            Route::get('subCategories/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
             Route::post('addTopCategory', 'Admin\AdminSubCategoryController@addTopCategory')->name('addTopCategory');
 
             Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
@@ -116,6 +115,8 @@ Route::group(
             Route::delete('deleteFilter', 'Admin\AdminFilterController@delete')->name('deleteFilter');
 
 
+        //========= PRODUCT  ======= //
+            Route::get('{cat}/subCategory/{name}', 'Admin\AdminProductController@show')->name('adminProduct');
 
 
 

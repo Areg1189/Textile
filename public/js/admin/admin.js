@@ -44,7 +44,7 @@ $(document).on('click', '.iconUpdate', function () {
         success: function (data) {
             if (data != 0) {
                 $('.updateForm').html(data);
-                $('.collapse').collapse()
+                // $('.collapse').collapse()
 
             }
             else {
@@ -192,8 +192,12 @@ $(document).on("change", '.upload2', function () {
 $(document).on('submit', ".formImage", function (form) {
     form = form;
     $uploadCrop.croppie('result', {
+
         type: 'canvas',
-        size: 'viewport'
+        size: {
+            width: w,
+            height: h
+        },
     }).then(function (resp) {
         if ($('input[type="file"]').val()) {
             resp = resp;
@@ -322,6 +326,7 @@ $(document).on('click', '.add_filter_value', function () {
         '</div>' +
         '');
 });
+
 
 
 

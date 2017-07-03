@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatFiltersTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCatFiltersTable extends Migration
      */
     public function up()
     {
-        Schema::create('cat_filters', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cat_id');
-            $table->integer('sub_id');
+            $table->string('code');
+            $table->integer('parent_id');
+            $table->integer('price')->nullable();
+            $table->integer('sale')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateCatFiltersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_filters');
+        Schema::dropIfExists('products');
     }
 }

@@ -67,7 +67,7 @@
                         </div>
                         @php($i = 0)
                         @foreach($filters as $filter)
-                            <div class="panel-group collapse" id="accordion" data-target="{{$i}}">
+                            <div class="panel-group accordion" data-target="{{$i}}">
                                 <div class="panel panel-danger">
                                     <div class="panel-heading">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$i}}">
@@ -78,7 +78,6 @@
                                     </div>
                                     <div id="collapse_{{$i}}" class="panel-collapse collapse">
                                         <div class="panel-body">
-
                                             @foreach($filter->subs as  $sub)
                                                 @if(count($sub->values) < 1)
                                                     <div class="col-sm-11 col-sm-offset-1">
@@ -87,14 +86,17 @@
                                                                 <div class="btn-group btn-group-vertical"
                                                                      data-toggle="buttons">
                                                                     <label class="btn
-                                                                    @foreach($sub->catFilter as$catFilter )
+                                                                     @foreach($sub->catFilter as $catFilter )
                                                                         {{$catFilter->cat_id == $product->id ? 'active' : ''}}
-                                                                    @endforeach">
+                                                                    @endforeach"
+                                                                    @foreach($sub->catFilter as $catFilter )
+                                                                        {{$catFilter->cat_id == $product->id ? 'disabled ' : ''}}
+                                                                    @endforeach>
                                                                         <input type="checkbox" name="subFilter[]"
                                                                                value="{{$sub->id}}"
-                                                                        @foreach($sub->catFilter as$catFilter )
-                                                                            {{$catFilter->cat_id == $product->id ? 'checked' : ''}}
-                                                                                @endforeach>
+                                                                        @foreach($sub->catFilter as $catFilter )
+                                                                            {{$catFilter->cat_id == $product->id ? 'checked disabled' : ''}}
+                                                                        @endforeach>
                                                                         <i class="fa fa-square-o fa-2x"></i>
                                                                         <i class="fa fa-check-square-o fa-2x"></i>
                                                                         <span> {{$sub->translate(session('locale'))->name}}</span>
@@ -107,30 +109,33 @@
                                                     <div class="col-sm-11 col-sm-offset-1">
                                                         <div class="panel panel-success">
                                                             <div class="panel-heading">
-                                                                {{$sub->translate(session('locale'))->name}}
+                                                                <div class="btn-group btn-group-vertical"
+                                                                     data-toggle="buttons">
+                                                                    <label class="btn
+                                                                         @foreach($sub->catFilter as $catFilter )
+                                                                            {{$catFilter->cat_id == $product->id ? 'active' : ''}}
+                                                                         @endforeach"
+
+                                                                         @foreach($sub->catFilter as $catFilter )
+                                                                            {{$catFilter->cat_id == $product->id ? 'disabled ' : ''}}
+                                                                         @endforeach>
+                                                                        <input type="checkbox" name="subFilter[]"
+                                                                               value="{{$sub->id}}"
+                                                                        @foreach($sub->catFilter as $catFilter )
+                                                                            {{$catFilter->cat_id == $product->id ? 'checked disabled' : ''}}
+                                                                        @endforeach>
+                                                                        <i class="fa fa-square-o fa-2x"></i>
+                                                                        <i class="fa fa-check-square-o fa-2x"></i>
+                                                                        <span> {{$sub->translate(session('locale'))->name}}</span>
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                             <div class="panel-body">
                                                                 @foreach($sub->values as $value)
                                                                     <div class="col-sm-10 col-sm-offset-2">
                                                                         <div class="panel panel-default">
                                                                             <div class="panel-body">
-                                                                                <div class="btn-group btn-group-vertical"
-                                                                                     data-toggle="buttons">
-                                                                                    <label class="btn
-                                                                                    @foreach($value->catFilter as $catFilter )
-                                                                                    {{$catFilter->cat_id == $product->id ? 'active' : ''}}
-                                                                                    @endforeach">
-                                                                                        <input type="checkbox"
-                                                                                               name="valFilter[]"
-                                                                                               value="{{$value->id}}"
-                                                                                        @foreach($value->catFilter as $catFilter )
-                                                                                            {{$catFilter->cat_id == $product->id ? 'checked' : ''}}
-                                                                                                @endforeach>
-                                                                                        <i class="fa fa-square-o fa-2x"></i>
-                                                                                        <i class="fa fa-check-square-o fa-2x"></i>
-                                                                                        <span> {{$value->translate(session('locale'))->name}}</span>
-                                                                                    </label>
-                                                                                </div>
+                                                                                <span> {{$value->translate(session('locale'))->name}}</span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -173,4 +178,6 @@
             height: 300
         }
     });
+    w = 370 ;
+    h = 300;
 </script>

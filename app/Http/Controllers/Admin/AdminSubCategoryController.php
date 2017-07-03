@@ -75,15 +75,6 @@ class AdminSubCategoryController extends Controller
             }
         }
 
-        if (isset($request->valFilter[0])){
-            foreach ($request->valFilter as $val){
-                CatFilter::create([
-                    'cat_id' => $newCat->id,
-                    'val_id' => $val,
-                ]);
-            }
-        }
-
         if ($newCat) {
             return back()->with('newCat', $newCat->id);
         }
@@ -91,6 +82,7 @@ class AdminSubCategoryController extends Controller
 
     public function update(Request $request)
     {
+
         $this->validate($request, [
             'prod' => 'required',
         ]);
@@ -103,7 +95,7 @@ class AdminSubCategoryController extends Controller
                 'filters' => $filters,
             ]);
         }
-
+        dd($request->all());
         if ($request->image) {
             $data = $_POST['image'];
             list($type, $data) = explode(';', $data);
@@ -146,7 +138,8 @@ class AdminSubCategoryController extends Controller
 
     public function show(Request $request)
     {
-        $category = Category::where('link', $request->name)->firstOrFail();
+        $category = Category::where('link', $request->cat)->firstOrFail();
+
 
         return view('vendor.adminlte.subCategories',[
             'category' => $category,

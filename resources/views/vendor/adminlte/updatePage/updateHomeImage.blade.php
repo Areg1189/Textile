@@ -154,18 +154,18 @@
 
 </style>
 <script>
-    width = $('#modalUpdate .modal-dialog').width()
     $uploadCrop = $(".upload-demo2").croppie({
         enableExif: true,
         viewport: {
-            width: width,
-            height: 700
+            width: 1000,
+            height: 534
         },
         boundary: {
-            width: width,
-            height: 700
+            width: 1100,
+            height: 634
         }
     });
 
-
+    w = 1349 ;
+    h = 720;
 </script>
