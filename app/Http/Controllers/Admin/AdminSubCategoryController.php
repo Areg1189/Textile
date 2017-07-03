@@ -136,15 +136,6 @@ class AdminSubCategoryController extends Controller
         }
     }
 
-    public function show(Request $request)
-    {
-        $category = Category::where('link', $request->cat)->firstOrFail();
-
-
-        return view('vendor.adminlte.subCategories',[
-            'category' => $category,
-        ]);
-    }
 
     public function delete(Request $request)
     {

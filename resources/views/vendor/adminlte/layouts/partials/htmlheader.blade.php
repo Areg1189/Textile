@@ -11,6 +11,8 @@
     <link href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/admin/adminImage.css')}}">
     <link rel="stylesheet" href="{{asset('css/admin/checkbox.css')}}">
     @section('link')
 

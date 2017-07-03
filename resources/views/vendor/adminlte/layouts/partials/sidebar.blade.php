@@ -87,7 +87,7 @@
                                 </li>
                                 @foreach($category->subCategories as $subCategory)
                                    <li>
-                                       <a href="{{route('adminSubCategory', [
+                                       <a href="{{route('adminProduct', [
                                        'cat' => $category->link,
                                        'name' => $subCategory->link
                                        ])}}">
