@@ -1,5 +1,8 @@
 @extends('adminlte::layouts.app')
 
+@section('link')
+    <link href="{{ asset('/css/admin/message.css') }}" rel="stylesheet" type="text/css"/>
+@endsection
 @section('main-content')
 
 

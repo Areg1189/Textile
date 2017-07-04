@@ -34,31 +34,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="text-center">
-                                        <h3>
-                                            Color
-                                            <button type="button"
-                                                    class="btn btn-primary add_color"
-                                                    title="Add"
-                                                    data-color="add">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="color_container" data-color_container="add">
-                                    <div class="col-sm-1">
-                                        <input type="color" name="color[]">
-                                    </div>
-                                </div>
-                            </div>
+
+
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <div class="form-group text-center {{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="form-group text-center {{ $errors->has('hy_name') ? ' has-error' : '' }}">
                                         <label>Հայերեն</label>
                                         <input type="text" name="hy_name" class="form-control" placeholder="Հայերեն"
                                                value="{{old('hy_name')}}" required>
@@ -70,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <div class="form-group text-center {{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="form-group text-center {{ $errors->has('en_name') ? ' has-error' : '' }}">
                                         <label>English</label>
                                         <input type="text" name="en_name" class="form-control" placeholder="English"
                                                value="{{old('en_name')}}" required>
@@ -82,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
-                                    <div class="form-group text-center {{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <div class="form-group text-center {{ $errors->has('ru_name') ? ' has-error' : '' }}">
                                         <label>Русский</label>
                                         <input type="text" name="ru_name" class="form-control" placeholder="Русский"
                                                value="{{old('ru_name')}}" required>
@@ -93,56 +73,97 @@
                                         @endif
                                     </div>
                                 </div>
-
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-danger">
+                                        <div class="text-center">
+                                            <h3>
+                                                Color
+                                                <button type="button"
+                                                        class="btn btn-primary add_color"
+                                                        title="Add"
+                                                        data-color="add">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="color_container" data-color_container="add">
+                                                <div class="col-sm-1">
+                                                    <input type="color" name="color[]">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h3 class="text-center"><i class="fa fa-filter"></i> Filters</h3>
                                 </div>
                             </div>
 
-                            @foreach($filters->chunk(3) as $chunk)
-                                <div class="row text-center">
-                                    @foreach($chunk as $filter)
-                                        <div class="col-sm-4">
-
-                                            <div class="">
-                                                <label for="sel1">{{$filter->translate(session('locale'))->name}}</label>
-                                            </div>
-
-                                            @foreach($sub->filters as $catFilter)
-
-                                                @if($catFilter->subs->filter->id == $filter->id)
-                                                    @if(count($catFilter->subs->values) > 0)
-
-                                                        <div class="">
-                                                            <label>
-                                                                {{$catFilter->subs->translate(session('locale'))->name}}
-                                                            </label>
-                                                        </div>
-
-                                                        @foreach($catFilter->subs->values  as $value)
-                                                            <div class="form-group">
-                                                                <input type="checkbox"
-                                                                       value="{{$value->translate('en')->name}}">
-                                                                {{$value->translate(session('locale'))->name}}
-                                                            </div>
-                                                        @endforeach
-
-                                                    @endif
-                                                    <div class="form-group ">
-                                                        <input type="checkbox"
-                                                               value="{{$catFilter->subs->translate('en')->name}}">
-                                                        {{$catFilter->subs->translate(session('locale'))->name}}
+                            {{--                            @foreach($filters->chunk(3) as $chunk)--}}
+                            <div class="row">
+                                @foreach($filters as $filter)
+                                    @foreach($filter->subs as $s)
+                                        @if($sub->filters->where('sub_id',$s->id)->first())
+                                            <div class="col-sm-4">
+                                                <div class="panel panel-danger">
+                                                    <div class="text-center">
+                                                        <h4>
+                                                            {{$filter->translate(session('locale'))->name}}
+                                                        </h4>
                                                     </div>
-                                                @endif
+                                                    <div class="panel-body">
+                                                        @foreach($sub->filters as $catFilter)
+                                                            @if($catFilter->subs->filter->id == $filter->id)
+                                                                @if(count($catFilter->subs->values) > 0)
 
-                                            @endforeach
+                                                                    <div>
+                                                                        <label class="red">{{$catFilter->subs->translate(session('locale'))->name}}</label>
+                                                                    </div>
+                                                                    <div class="panel-body">
+                                                                        @foreach($catFilter->subs->values  as $value)
+                                                                            <div class="col-sm-11 col-sm-offset-1">
+                                                                                <div class="form-group">
+                                                                                    <input type="checkbox"
+                                                                                           value="{{$value->translate('en')->name}}">
+                                                                                    {{$value->translate(session('locale'))->name}}
+                                                                                    <div class=""><input type="number"
+                                                                                                         class="form-control"
+                                                                                                         name="price[]"
+                                                                                                         placeholder="Price">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    </div>
 
-                                        </div>
+                                                                @endif
+                                                                <div class="form-group ">
+                                                                    <input type="checkbox"
+                                                                           value="{{$catFilter->subs->translate('en')->name}}">
+                                                                    {{$catFilter->subs->translate(session('locale'))->name}}
+                                                                    <div class=""><input type="number"
+                                                                                         class="form-control"
+                                                                                         name="price[]"
+                                                                                         placeholder="Price">
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endforeach
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
+                            {{--@endforeach--}}
 
                             <div class="row">
                                 <div class="col-sm-12">

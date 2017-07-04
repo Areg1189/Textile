@@ -43,9 +43,9 @@ class AdminFilterController extends Controller
             ]
         ]);
 
-
+        $i = 0;
         if ($request->hy_name_sub[0]) {
-            $i = 0;
+
             foreach ($request->hy_name_sub as $filterSub) {
 
                 $sub = FilterSub::create([
