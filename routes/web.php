@@ -118,6 +118,7 @@ Route::group(
         //========= PRODUCT  ======= //
 
             Route::get('{cat}/subCategory/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
+            Route::post('addProduct', 'Admin\AdminProductController@create')->name('addProduct');
 
 
 

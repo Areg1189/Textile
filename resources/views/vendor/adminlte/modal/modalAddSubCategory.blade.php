@@ -80,13 +80,13 @@
                                 <div class="panel-group accordion" data-target="{{$i}}">
                                     <div class="panel panel-danger">
                                         <div class="panel-heading">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{$i}}">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1_{{$i}}">
                                                 <h4 class="panel-title text-center">
                                                     {{$filter->translate(session('locale'))->name}}
                                                 </h4>
                                             </a>
                                         </div>
-                                        <div id="collapse_{{$i}}" class="panel-collapse collapse">
+                                        <div id="collapse1_{{$i}}" class="panel-collapse collapse">
                                             <div class="panel-body">
                                                 @foreach($filter->subs as  $sub)
                                                     @if(count($sub->values) < 1)

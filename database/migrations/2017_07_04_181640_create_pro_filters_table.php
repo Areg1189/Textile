@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilterValuesTable extends Migration
+class CreateProFiltersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateFilterValuesTable extends Migration
      */
     public function up()
     {
-        Schema::create('filter_values', function (Blueprint $table) {
+        Schema::create('pro_filters', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id');
-            $table->string('code');
+            $table->string('filter_value');
+            $table->integer('prod_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateFilterValuesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filter_values');
+        Schema::dropIfExists('pro_filters');
     }
 }

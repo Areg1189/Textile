@@ -1,5 +1,3 @@
-
-
 <div id="modalAddProduct" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -11,13 +9,12 @@
             </div>
             <div class="modal-body">
                 <div class="box-header with-border text-center">
-                    <h3 class="box-title">Add Category</h3>
+                    <h3 class="box-title">Add Product</h3>
                 </div>
                 <div class="box box-primary">
 
                     <div class="box-body">
-
-                        <form action="{{route('addCategory')}}" method="post">
+                        <form action="{{route('addProduct')}}" method="post">
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-md-12">
@@ -38,15 +35,26 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label>Հայերեն Նկարագրություն</label>
-                                <textarea  name="editor1" rows="10" cols="80"></textarea>
+                                <div class="col-sm-12">
+                                    <div class="text-center">
+                                        <h3>
+                                            Color
+                                            <button type="button"
+                                                    class="btn btn-primary add_color"
+                                                    title="Add"
+                                                    data-color="add">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </h3>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
-                                <textarea  name="editor2" rows="10" cols="80"></textarea>
-
-                            </div>
-                            <div class="row">
-                                <textarea  name="editor3" rows="10" cols="80"></textarea>
+                                <div class="color_container" data-color_container="add">
+                                    <div class="col-sm-1">
+                                        <input type="color" name="color[]">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
@@ -87,6 +95,80 @@
                                 </div>
 
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h3 class="text-center"><i class="fa fa-filter"></i> Filters</h3>
+                                </div>
+                            </div>
+
+                            @foreach($filters->chunk(3) as $chunk)
+                                <div class="row text-center">
+                                    @foreach($chunk as $filter)
+                                        <div class="col-sm-4">
+
+                                            <div class="">
+                                                <label for="sel1">{{$filter->translate(session('locale'))->name}}</label>
+                                            </div>
+
+                                            @foreach($sub->filters as $catFilter)
+
+                                                @if($catFilter->subs->filter->id == $filter->id)
+                                                    @if(count($catFilter->subs->values) > 0)
+
+                                                        <div class="">
+                                                            <label>
+                                                                {{$catFilter->subs->translate(session('locale'))->name}}
+                                                            </label>
+                                                        </div>
+
+                                                        @foreach($catFilter->subs->values  as $value)
+                                                            <div class="form-group">
+                                                                <input type="checkbox"
+                                                                       value="{{$value->translate('en')->name}}">
+                                                                {{$value->translate(session('locale'))->name}}
+                                                            </div>
+                                                        @endforeach
+
+                                                    @endif
+                                                    <div class="form-group ">
+                                                        <input type="checkbox"
+                                                               value="{{$catFilter->subs->translate('en')->name}}">
+                                                        {{$catFilter->subs->translate(session('locale'))->name}}
+                                                    </div>
+                                                @endif
+
+                                            @endforeach
+
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endforeach
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="hy_description">Նկարագրություն</label>
+                                        <textarea name="hy_description" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="en_description">Description</label>
+                                        <textarea name="en_description" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="ru_description">Описание</label>
+                                        <textarea name="ru_description" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Save</button>

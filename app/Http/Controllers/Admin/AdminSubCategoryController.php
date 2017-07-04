@@ -95,7 +95,7 @@ class AdminSubCategoryController extends Controller
                 'filters' => $filters,
             ]);
         }
-        dd($request->all());
+
         if ($request->image) {
             $data = $_POST['image'];
             list($type, $data) = explode(';', $data);
@@ -128,10 +128,19 @@ class AdminSubCategoryController extends Controller
         $cat->translate('en')->name = $request->en_name;
         $cat->translate('ru')->name = $request->ru_name;
         $cat->save();
+
+        if (isset($request->subFilter[0])){
+            foreach ($request->subFilter as $sub){
+                CatFilter::create([
+                    'cat_id' => $cat->id,
+                    'sub_id' => $sub,
+                ]);
+            }
+        }
         if ($cat) {
             return back()->with([
                 'success' => 'Category Updated',
-                'newCat' => $cat->id,
+                    'newCat' => $cat->id,
             ]);
         }
     }

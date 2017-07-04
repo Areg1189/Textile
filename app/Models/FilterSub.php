@@ -18,6 +18,10 @@ class FilterSub extends Model
         'code', 'filter_id',
     ];
 
+    public function filter(){
+        return $this->belongsTo('App\Models\FilterCategory', 'filter_id', 'id');
+    }
+
     public function values(){
         return $this->hasMany('App\Models\FilterValue', 'parent_id', 'id');
     }

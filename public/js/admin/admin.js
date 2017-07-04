@@ -41,7 +41,6 @@ $(document).on('click', '.iconUpdate', function () {
                 $('.updateForm').html(data);
                 $('.sort, #sortable').sortable();
                 // $('.collapse').collapse()
-
             }
             else {
                 $(".msj-success").html(data);
@@ -367,9 +366,13 @@ $(document).on('click', '.add_filter_value', function () {
 });
 
 
+//=================================  COLOR  ===========================//
 
-
-
-
-
-
+$(document).on('click', ".add_color", function () {
+    var data = $(this).data('color');
+    $('div[data-color_container="'+data+'"]').append('' +
+        '<div class="col-sm-1">' +
+        '<input type="color" name="color[]">' +
+        '</div>' +
+        '');
+});
