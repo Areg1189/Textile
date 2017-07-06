@@ -51,7 +51,7 @@ class AdminSubCategoryController extends Controller
 
         $newCat = SubCategory::create([
             'code' => $request->en_name.$cat->id,
-            'link' => $link,
+            'link' => time().$link,
             'image_name' => $imageName,
             'category_id' => $cat->id,
             'hy' => [
@@ -121,7 +121,6 @@ class AdminSubCategoryController extends Controller
 
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
-        $cat->code = $request->en_name;
         $cat->link = $link;
         $cat->image_name = $imageName;
         $cat->translate('hy')->name = $request->hy_name;

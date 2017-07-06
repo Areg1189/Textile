@@ -16,6 +16,7 @@ class CreateProFiltersTable extends Migration
         Schema::create('pro_filters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('filter_value');
+            $table->integer('price');
             $table->integer('prod_id');
             $table->timestamps();
         });

@@ -1,12 +1,10 @@
 /* =========================================== MODAL SHOW IMAGE ======================================== */
 .info_modal {
-    display: none;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
     z-index: 9999999999999999999;
-    background: rgba(0, 0, 0, 0.8) !important;
 }
 
 .info_block {
@@ -92,4 +90,7 @@
 }
 .red{
     color: red;
+}
+.green{
+    color: green;
 }

@@ -25,8 +25,8 @@
         <thead>
         <tr>
             <th>Image</th>
-            <th>Հայերեն</th>
-            <th>English</th>
+            <th>Name</th>
+            <th>Colors</th>
             <th>Русский</th>
             <th>Filters</th>
             <th>Actions</th>
@@ -34,19 +34,47 @@
         </thead>
         <tbody>
         @php($i = 0)
-        @foreach($sub->products->sortByDesc('id') as $product)
+        @foreach($products->sortByDesc('id') as $product)
             <tr class="{{$product->id == session('newCat') ? 'active':''}}" data-target="cat_{{$i}}"
                 data-href_update="{{route('updateSubCategory')}}" data-prod="{{$product->link}}"
                 data-href_delete="{{route('deleteSubCategory')}}">
                 <td>
                     <div class="col-sm-4">
-                        <img src="{{asset('images/subCategory/'.$cat->image_name)}}" class="img-rounded"
-                             alt="{{$cat->translate('en')->name}}" width="100%">
+                        <img src="{{asset('image/product/'.$product->images->sortBy('id')->first()['image_name'])}}"
+                             class="img-rounded"
+                             alt="{{$product->translate('en')->name}}"
+                             width="100%">
                     </div>
                 </td>
-                <td>{{$product->translate('hy')->name}}</td>
-                <td>{{$product->translate('en')->name}}</td>
-                <td>{{$product->translate('ru')->name}}</td>
+                <td>
+                    <div class="">
+                        Հաըերեն ։ {{$product->translate('hy')->name}}
+                    </div>
+                    <div class="">
+                        English : {{$product->translate('en')->name}}
+                    </div>
+                    <div class="">
+                        Русский : {{$product->translate('ru')->name}}
+                    </div>
+                </td>
+                <td>
+                    <ul class="fc-color-picker" id="color-chooser">
+                        <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
+                        <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
+                    </ul>
+                </td>
+                <td></td>
                 <td>
 
                 </td>
@@ -99,7 +127,7 @@
             CKEDITOR.replace('en_description');
             CKEDITOR.replace('ru_description');
             //bootstrap WYSIHTML5 - text editor
-            $(".textarea").wysihtml5();
+//            $(".textarea").wysihtml5();
         });
     </script>
 @endsection

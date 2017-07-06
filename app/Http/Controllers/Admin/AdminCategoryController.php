@@ -29,17 +29,20 @@ class AdminCategoryController extends Controller
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
         $newCat = Category::create([
-            'code' => $request->en_name.$link,
+            'code' => time().$link,
             'link' => $link,
 
             'hy' => [
                 'name' => $request->hy_name,
+                'description' => $request->hy_description,
             ],
             'en' => [
                 'name' => $request->en_name,
+                'description' => $request->en_description,
             ],
             'ru' => [
                 'name' => $request->ru_name,
+                'description' => $request->ru_description,
             ]
         ]);
         if ($newCat) {

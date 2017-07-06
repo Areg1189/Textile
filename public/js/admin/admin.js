@@ -307,72 +307,110 @@ var number = 0;
 $(document).on('click', '.add_sub_filter', function () {
     $('.sub_filter_content').fadeIn();
     $('.sub_filter_content').append('' +
-        '<div  data-name="number'+number+'">' +
+        '<div  data-name="number' + number + '" data-status="delete'+number+'">' +
         '<div class="row" >' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_name_sub[]" class="form-control" placeholder="Հայերեն">' +
+        '<input type="text" name="hy_name_sub[]" class="form-control" placeholder="Հայերեն" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>English</label>' +
-        '<input type="text" name="en_name_sub[]" class="form-control" placeholder="English">' +
+        '<input type="text" name="en_name_sub[]" class="form-control" placeholder="English" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Русский</label>' +
-        '<input type="text" name="ru_name_sub[]" class="form-control" placeholder="Русский">' +
+        '<input type="text" name="ru_name_sub[]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
-        '<div class="col-xs-3">' +
-        '<label>Русский</label>' +
-        '<button data-target="number'+number+'" type="button" class="btn btn-info add_filter_value"><i class="fa fa-plus"></i></button>' +
-        '</div>' +
+        '<button data-target="number' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
+        '<i class="fa fa-plus"></i>' +
+        '</button>' +
+        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</button>' +
         '</div>' +
         '</div>' +
         '');
     number++
 });
-
+var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
-    var data  = $(this).data('target');
-    $('[data-name="'+data+'"]').append('' +
-        '<div class="row">' +
-        '<div class="col-xs-3">' +
+    var data = $(this).data('target');
+    $('[data-name="' + data + '"]').append('' +
+        '<div class="row" data-status="delete'+number+'" data-dell="delete'+number+dell+'">' +
+        '<div class="col-xs-1">' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="Հայերեն">' +
+        '<input type="text" name="hy_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="Հայերեն" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>English</label>' +
-        '<input type="text" name="en_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="English">' +
+        '<input type="text" name="en_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="English" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Русский</label>' +
-        '<input type="text" name="ru_sub['+ parseInt(number - 1 )+'][]" class="form-control" placeholder="Русский">' +
+        '<input type="text" name="ru_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
+        '<div class="col-xs-2">' +
+        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete'+number+dell+'" title="Delete">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</button>' +
+        '</div>' +
+
         '</div>' +
         '');
+    dell ++;
+});
+
+$(document).on('click', '.delete_filter', function () {
+ var data = $(this).data('target') ;
+    $('[data-status="'+data+'"]').fadeOut().remove();
+});
+$(document).on('click', '.delete_filter_find', function () {
+ var data = $(this).data('dell_button') ;
+    $('[data-dell="'+data+'"]').fadeOut().remove();
 });
 
 
 //=================================  COLOR  ===========================//
-
+var color = 2;
 $(document).on('click', ".add_color", function () {
     var data = $(this).data('color');
-    $('div[data-color_container="'+data+'"]').append('' +
-        '<div class="col-sm-1">' +
-        '<input type="color" name="color[]">' +
+    $('div[data-color_container="' + data + '"]').append('' +
+        '<div class="col-sm-1"  data-status="color_' + color + '">' +
+        '<span class=" delete_color cursor_pointer" data-target="color_' + color + '">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</span>' +
+        '<input type="color" name="color[]" >' +
         '</div>' +
         '');
+    color++;
+});
+
+$(document).on('click', '.delete_color', function () {
+    var data = $(this).data('target');
+    $('[data-status="' + data + '"]').fadeOut().remove();
+});
+
+// ================================ FILTER CHECKBOX =======================//
+
+$(document).on('change', '.filter_checkbox', function () {
+    var data = $(this).data('target');
+    if ($(this).is(':checked')) {
+        $('[data-status="' + data + '"]').attr('required', true).focus();
+    } else {
+        $('[data-status="' + data + '"]').attr('required', false);
+    }
 });

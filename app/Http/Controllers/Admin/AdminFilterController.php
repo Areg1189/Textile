@@ -31,7 +31,7 @@ class AdminFilterController extends Controller
         }
 
         $res = FilterCategory::create([
-            'code' => $request->en_name,
+            'code' => time().$request->en_name,
             'hy' => [
                 'name' => $request->hy_name,
             ],
@@ -49,7 +49,7 @@ class AdminFilterController extends Controller
             foreach ($request->hy_name_sub as $filterSub) {
 
                 $sub = FilterSub::create([
-                    'code' => $request->en_name_sub[$i] . $res->id,
+                    'code' => time().$request->en_name_sub[$i] . $res->id,
                     'filter_id' => $res->id,
                     'hy' => [
                         'name' => $filterSub,
@@ -66,7 +66,7 @@ class AdminFilterController extends Controller
                     $j = 0;
                     foreach ($request->hy_sub[$i] as $value) {
                         FilterValue::create([
-                            'code' => $request->en_sub[$i][$j],
+                            'code' => time().$request->en_sub[$i][$j],
                             'parent_id' => $sub->id,
                             'hy' => [
                                 'name' => $value,
