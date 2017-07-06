@@ -6,6 +6,12 @@
 
 
 @section('main-content')
+    <section class="content-header text-center">
+        <h1>
+            Users
+            <small> All</small>
+        </h1>
+    </section>
     <div class="container-fluid spark-screen">
         <div class="row">
             <table class="table" id="table">

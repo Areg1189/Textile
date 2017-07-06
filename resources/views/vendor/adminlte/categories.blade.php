@@ -6,11 +6,17 @@
 
 
 @section('main-content')
+    <section class="content-header text-center">
+        <h1>
+            Categories
+            <small> All</small>
+        </h1>
+    </section>
     <div class="container-fluid spark-screen">
         <div class="row">
             <div class="col-sm-2">
                 <button class="btn btn-app" title="Add Category" data-toggle="modal" data-target="#modalAddCategory">
-                    Add  Sub Category
+                    Add
                     <i class="fa fa-plus" aria-hidden="true"></i>
                 </button>
             </div>

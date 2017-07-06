@@ -47,7 +47,7 @@ desired effect
         <!-- Main content -->
             <section class="content">
                 <!-- Your Page Content Here -->
-                @if(isset($errors) )
+                @if(isset($errors) && count($errors) > 0 )
                     <div class="info_modal alert">
                         <div class="alert-danger alert-dismissable fade in alert_fixed">
                             <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>

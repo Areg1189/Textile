@@ -4,8 +4,13 @@
     <link href="{{ asset('/css/admin/message.css') }}" rel="stylesheet" type="text/css"/>
     @endsection
 @section('main-content')
+    <section class="content-header text-center">
+        <h1>
+            Messages
+            <small> {{$user->name}}</small>
+        </h1>
+    </section>
     <div class="container">
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default text-center">

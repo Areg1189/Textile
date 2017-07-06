@@ -2,24 +2,23 @@
 
 
 @section('main-content')
-    <section class="content-header">
+    <section class="content-header text-center">
         <h1>
-            {{$sub->name}}
+            {{$sub->translate(session('locale'))->name}}
             <small>Products</small>
         </h1>
     </section>
 
 
 
-
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-2">
-            <button class="btn btn-app" title="Add" data-toggle="modal" data-target="#modalAddProduct">
+            <button class="btn btn-app" title="Add Product" data-toggle="modal" data-target="#modalAddProduct">
                 Add
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
         </div>
-
     </div>
     <table id="table" class="table table-bordered">
         <thead>
@@ -27,17 +26,16 @@
             <th>Image</th>
             <th>Name</th>
             <th>Colors</th>
-            <th>Русский</th>
-            <th>Filters</th>
+            <th>filter Price</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         @php($i = 0)
         @foreach($products->sortByDesc('id') as $product)
-            <tr class="{{$product->id == session('newCat') ? 'active':''}}" data-target="cat_{{$i}}"
-                data-href_update="{{route('updateSubCategory')}}" data-prod="{{$product->link}}"
-                data-href_delete="{{route('deleteSubCategory')}}">
+            <tr class="{{$product->id == session('newCat') ? 'active':''}}" data-target="prod_{{$i}}"
+                data-href_update="{{route('updateProduct')}}" data-prod="{{$product->link}}"
+                data-href_delete="{{route('deleteProduct')}}">
                 <td>
                     <div class="col-sm-4">
                         <img src="{{asset('image/product/'.$product->images->sortBy('id')->first()['image_name'])}}"
@@ -47,48 +45,50 @@
                     </div>
                 </td>
                 <td>
-                    <div class="">
-                        Հաըերեն ։ {{$product->translate('hy')->name}}
+                    <div class="col-sm-12">
+                        <b>Հաըերեն</b>: {{$product->translate('hy')->name}}
                     </div>
-                    <div class="">
-                        English : {{$product->translate('en')->name}}
+                    <div class="col-sm-12">
+                        <b>English</b> : {{$product->translate('en')->name}}
                     </div>
-                    <div class="">
-                        Русский : {{$product->translate('ru')->name}}
+                    <div class="col-sm-12">
+                        <b>Русский</b> : {{$product->translate('ru')->name}}
                     </div>
                 </td>
                 <td>
-                    <ul class="fc-color-picker" id="color-chooser">
-                        <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
-                        <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
-                    </ul>
+                    @foreach($product->colors->sortBy('id')->chunk(3) as $chunk)
+                        <div class="col-sm-12">
+                            <ul class="fc-color-picker">
+                                @foreach($chunk as $color)
+                                    <li><span style="color: {{$color->color}}"><i class="fa fa-square"></i></span></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
                 </td>
-                <td></td>
                 <td>
+                    @foreach($product->filters as $filter)
+                        <div class="col-sm-12">
+                            <b>{{$filter->filter_value}}</b> : <b>{{$filter->price}} AMD</b>
+                        </div>
 
+                    @endforeach
                 </td>
                 <td>
-                    <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="cat_{{$i}}"
-                            data-target="#modalUpdate">
-                        <i class="fa fa-edit"></i>
-                        Edit
-                    </button>
-                    <button class="btn  btn-danger iconDelete" data-toggle="modal" data-status="cat_{{$i}}"
-                            data-target="#modalDelete">
-                        <i class="fa fa-trash"></i>
-                        Delete
-                    </button>
+                    <div class="btn-group">
+                        <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="prod_{{$i}}"
+                                data-target="#modalUpdate">
+                            <i class="fa fa-edit"></i>
+                            Edit
+                        </button>
+
+                        <button class="btn  btn-danger iconDelete" data-toggle="modal" data-status="prod_{{$i}}"
+                                data-target="#modalDelete">
+                            <i class="fa fa-trash"></i>
+                            Delete
+                        </button>
+                    </div>
+
                 </td>
             </tr>
             @php($i++)
@@ -97,6 +97,8 @@
 
         </tbody>
     </table>
+</div>
+
     @include('vendor.adminlte.modal.modalAddProduct')
 @endsection
 @section('script')

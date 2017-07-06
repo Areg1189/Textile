@@ -5,6 +5,12 @@
 @endsection
 @section('main-content')
 
+    <section class="content-header text-center">
+        <h1>
+            Messages
+            <small> All</small>
+        </h1>
+    </section>
 
     <div class="container">
         <div class="row">

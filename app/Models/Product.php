@@ -24,7 +24,7 @@ class Product extends Model
         return $this->hasMany('App\Models\Image', 'product_id', 'id');
     }
     public function filters(){
-        return $this->hasMany('App\Models\ProdFilter', 'prod_id', 'id');
+        return $this->hasMany('App\Models\ProFilter', 'prod_id', 'id');
     }
 }
 

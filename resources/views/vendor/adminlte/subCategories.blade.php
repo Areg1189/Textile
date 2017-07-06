@@ -2,8 +2,13 @@
 
 
 @section('main-content')
+    <section class="content-header text-center">
+        <h1>
+            {{$category->translate(session('locale'))->name}}
 
-    <h2 class="text-center">{{$category->translate(session('locale'))->name}}</h2>
+            <small> Category</small>
+        </h1>
+    </section>
     <div class="row">
         <div class="col-sm-2">
             <button class="btn btn-app" title="Add Category" data-toggle="modal" data-target="#modalAddSubCategory">
