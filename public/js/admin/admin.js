@@ -25,7 +25,9 @@ $(document).ready(function () {
         })
     })
 });
+
 //=============================  UPDATE ========================//
+
 $(document).on('click', '.iconUpdate', function () {
     $('.updateForm').html('');
     parent = $(this).data('status');
@@ -92,9 +94,11 @@ $(document).on('click', '.modalDelete', function () {
         }
     })
 });
+
 $(document).ajaxStart(function () {
     $(".loaderSite").show();
 });
+
 $(document).ajaxStop(function () {
     $(".loaderSite").hide();
 });
@@ -105,31 +109,55 @@ $(document).on('click', '.spanClose', function () {
 
 
 //  ==================== INPUT FILE =======================//
+
 $(function () {
     $(document).on('change', '.image', function (e) {
         this_file = $(this).data('name');
         var files = e.target.files;
-        for (var i = 0; i <= files.length; i++) {
-
+        for ( i = 0; i <= files.length; i++) {
             // when i == files.length reorder and break
             if (i == files.length) {
+
                 // need timeout to reorder beacuse prepend is not done
                 setTimeout(function () {
                     reorderImages();
                 }, 100);
                 break;
             }
+
             var file = files[i];
             var reader = new FileReader();
             $('.sort').html('');
             reader.onload = (function (file) {
+
                 return function (event) {
-                    $('.sort[data-xname="' + this_file + '"]').prepend('<li class="ui-state-default" data-order=0 data-id="' + file.lastModified + '"><img src="' + event.target.result + '" style="width:100%;" /> <div class="order-number"></div></li>');
+                    $('.sort[data-xname="' + this_file + '"]').prepend('' +
+                        '<li class="ui-state-default demo"  data-order=0 data-id="' + file.lastModified + '">' +
+                        // '<div class="demo col-sm-3">' +
+                        // '<img class="my-image" src="' + event.target.result + '" style="width:100%;" /> ' +
+                        // '</div>' +
+                        '<div class="order-number">' +
+                        '</div>' +
+                        '</li>' +
+                        '');
+                    var basic = $('.demo').croppie({
+                        url: event.target.result,
+                        viewport: {
+                            width: 100,
+                            height: 100
+                        },
+                        boundary: {
+                            width: 200,
+                            height: 200
+                        }
+                    });
+
                 };
             })(file);
             reader.readAsDataURL(file);
         }// end for;
     });
+
 
     $('.sort, #sortable').disableSelection();
     $('.sort, #sortable').on('sortbeforestop', function (event) {
@@ -307,7 +335,7 @@ var number = 0;
 $(document).on('click', '.add_sub_filter', function () {
     $('.sub_filter_content').fadeIn();
     $('.sub_filter_content').append('' +
-        '<div  data-name="number' + number + '" data-status="delete'+number+'">' +
+        '<div  data-name="number' + number + '" data-status="delete' + number + '">' +
         '<div class="row" >' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
@@ -342,7 +370,7 @@ var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
     var data = $(this).data('target');
     $('[data-name="' + data + '"]').append('' +
-        '<div class="row" data-status="delete'+number+'" data-dell="delete'+number+dell+'">' +
+        '<div class="row" data-status="delete' + number + '" data-dell="delete' + number + dell + '">' +
         '<div class="col-xs-1">' +
         '</div>' +
         '<div class="col-xs-3">' +
@@ -364,23 +392,25 @@ $(document).on('click', '.add_filter_value', function () {
         '</div>' +
         '</div>' +
         '<div class="col-xs-2">' +
-        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete'+number+dell+'" title="Delete">' +
+        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' + number + dell + '" title="Delete">' +
         '<i class="fa fa-times" aria-hidden="true"></i>' +
         '</button>' +
         '</div>' +
 
         '</div>' +
         '');
-    dell ++;
+    dell++;
 });
 
 $(document).on('click', '.delete_filter', function () {
- var data = $(this).data('target') ;
-    $('[data-status="'+data+'"]').fadeOut().remove();
+    var data = $(this).data('target');
+    $('[data-status="' + data + '"]').fadeOut().remove();
 });
+
+
 $(document).on('click', '.delete_filter_find', function () {
- var data = $(this).data('dell_button') ;
-    $('[data-dell="'+data+'"]').fadeOut().remove();
+    var data = $(this).data('dell_button');
+    $('[data-dell="' + data + '"]').fadeOut().remove();
 });
 
 
@@ -409,8 +439,15 @@ $(document).on('click', '.delete_color', function () {
 $(document).on('change', '.filter_checkbox', function () {
     var data = $(this).data('target');
     if ($(this).is(':checked')) {
-        $('[data-status="' + data + '"]').attr('required', true).focus();
+        $('[data-status="' + data + '"]').attr({
+            'required': true,
+            'disabled': false
+        }).focus();
     } else {
-        $('[data-status="' + data + '"]').attr('required', false);
+        $('[data-status="' + data + '"]')
+            .val('').attr({
+            'required': false,
+            'disabled': true
+        });
     }
 });

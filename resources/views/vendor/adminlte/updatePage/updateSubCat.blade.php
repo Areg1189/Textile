@@ -18,7 +18,7 @@
 
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="upload-demo3" style="width:350px; position: relative;">
+                                <div class="~upload-demo3" style="width:350px; position: relative;">
                                     <input type="file" id="file" class="input-file  upload2"
                                            data-image="imageVarietyUpdate">
                                     <label for="file" class="btn btn-tertiary js-labelFile">

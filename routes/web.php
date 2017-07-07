@@ -119,7 +119,7 @@ Route::group(
 
             Route::get('{cat}/subCategory/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
-            Route::post('updateProduct', 'Admin\AdminProductController@update')->name('updateProduct');
+            Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::delete('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');
 
 

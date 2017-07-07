@@ -26,6 +26,9 @@ class Product extends Model
     public function filters(){
         return $this->hasMany('App\Models\ProFilter', 'prod_id', 'id');
     }
+    public function parent(){
+        return $this->belongsTo('App\Models\SubCategory', 'parent_id', 'id');
+    }
 }
 
 

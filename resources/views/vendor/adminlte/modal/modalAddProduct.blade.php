@@ -154,14 +154,13 @@
                                                                                                          class="form-control"
                                                                                                          name="price[]"
                                                                                                          placeholder="Price"
-                                                                                               data-status="filter_{{$i}}">
+                                                                                               data-status="filter_{{$i}}" disabled>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                             @php($i++)
                                                                         @endforeach
                                                                     </div>
-
                                                                 @endif
                                                                 <div class="form-group ">
                                                                     <hr>
@@ -176,7 +175,7 @@
                                                                                          class="form-control"
                                                                                          name="price[]"
                                                                                          placeholder="Price"
-                                                                               data-status="filter_{{$i}}">
+                                                                               data-status="filter_{{$i}}" disabled>
                                                                     </div>
                                                                 </div>
                                                             @endif

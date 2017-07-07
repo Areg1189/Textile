@@ -42,7 +42,6 @@ class AdminProductController extends Controller
             'image.*' => 'image|mimes:jpeg,JPEG,png,PNG,jpg,JPG,gif,svg'
         ]);
         if ($validator->fails()) {
-            dd($validator->errors());
             return back()->withErrors($validator->errors())->withInput();
         }
         if ($request->hy_description || $request->en_description || $request->ru_description) {
@@ -92,23 +91,23 @@ class AdminProductController extends Controller
             if (file_exists(public_path() . $folderName . '/' . $names[$i])) {
                 $names[$i] = time() . $names[$i];
             }
-            $files[$i]->move(public_path() . $folderName , $names[$i]);
+            $files[$i]->move(public_path() . $folderName, $names[$i]);
             Image::create([
                 'image_name' => $names[$i],
                 'product_id' => $product->id,
             ]);
         }
-        if ($request->filter_checkbox[0]){
-            for ($i = 0; $i < count($request->filter_checkbox); $i++){
+        if ($request->filter_checkbox[0]) {
+            for ($i = 0; $i < count($request->filter_checkbox); $i++) {
 
                 ProFilter::create([
-                   'filter_value' => $request->filter_checkbox[$i],
-                   'price' => $request->price[$i],
-                   'prod_id' => $product->id,
+                    'filter_value' => $request->filter_checkbox[$i],
+                    'price' => $request->price[$i],
+                    'prod_id' => $product->id,
                 ]);
             }
         }
-        if ($product){
+        if ($product) {
             return back()->with('newCat', $product->id);
         }
 
@@ -116,16 +115,13 @@ class AdminProductController extends Controller
 
     public function update(Request $request)
     {
-
-        $this->validate($request, [
-            'prod' => 'required',
-        ]);
+        if (!$request->prod) {
+            return abort(404);
+        }
         $filters = FilterCategory::get();
-        $sub = SubCategory::where('link', $request->prod)->firstOrFail();
         $product = Product::where('link', $request->prod)->firstOrFail();
-
+        $sub = SubCategory::where('id', $product->parent->id)->firstOrFail();
         if ($request->key && $request->key == 'one') {
-            dd(1);
             return View::make('vendor.adminlte.updatePage.updateProduct', [
                 'product' => $product,
                 'filters' => $filters,
@@ -133,51 +129,107 @@ class AdminProductController extends Controller
             ]);
         }
 
-        if ($request->image) {
-            $data = $_POST['image'];
-            list($type, $data) = explode(';', $data);
-            list(, $data) = explode(',', $data);
-
-            $data = base64_decode($data);
-            $imageName = time() . '.jpg';
-            file_put_contents('images/subCategory/' . $imageName, $data);
-            if (file_exists(public_path() . '/upload/' . $cat->image_name)) {
-                File::delete(public_path() . '/upload/' . $cat->image_name);
-            }
-        } else {
-            $imageName = $cat->image_name;
-        }
         $validator = Validator::make($request->all(), [
             'hy_name' => 'required|string',
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
+            'color.*' => 'min:6|max:8',
         ]);
+
         if ($validator->fails()) {
-            return back()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors())->withInput();
         }
+
+        if ($request->hy_description1 || $request->en_description1 || $request->ru_description1) {
+            $validator = Validator::make($request->all(), [
+                'hy_description1' => 'required',
+                'en_description1' => 'required',
+                'ru_description1' => 'required',
+            ]);
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors())->withInput();
+            }
+        }
+
+        if (!$request->image_name || $files = $request->file('image')) {
+            $validImage = Validator::make($request->all(), [
+                'image' => 'required',
+                'image.*' => 'image|mimes:jpeg,JPEG,png,jpg,JPG,gif,svg|max:2048'
+            ]);
+            if ($validImage->fails()) {
+                return redirect()->back()->withErrors($validImage->errors())->withInput();
+            }
+        }
+
 
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
-        $cat->link = $link;
-        $cat->image_name = $imageName;
-        $cat->translate('hy')->name = $request->hy_name;
-        $cat->translate('en')->name = $request->en_name;
-        $cat->translate('ru')->name = $request->ru_name;
-        $cat->save();
+        $product->link = $link;
+        $product->sale = $request->sale;
+        $product->translate('hy')->name = $request->hy_name;
+        $product->translate('en')->name = $request->en_name;
+        $product->translate('ru')->name = $request->ru_name;
+        $product->translate('hy')->description = $request->hy_description1;
+        $product->translate('en')->description = $request->en_description1;
+        $product->translate('ru')->description = $request->ru_description1;
+        $product->save();
 
-        if (isset($request->subFilter[0])){
-            foreach ($request->subFilter as $sub){
-                CatFilter::create([
-                    'cat_id' => $cat->id,
-                    'sub_id' => $sub,
+
+        Color::where('product_id', $product->id)->delete();
+        if ($request->color[0]) {
+            foreach ($request->color as $color) {
+                Color::create([
+                    'product_id' => $product->id,
+                    'color' => $color,
                 ]);
             }
         }
-        if ($cat) {
-            return back()->with([
-                'success' => 'Category Updated',
-                'newCat' => $cat->id,
-            ]);
+        if ($request->file('image')) {
+            $files = $request->file('image');
+            $folderName = '/image/product';
+            $names = [];
+            $count = count($files);
+            for ($i = $count - 1; $i > -1; $i--) {
+                $names[$i] = $files[$i]->getClientOriginalName();
+                if (file_exists(public_path() . $folderName . '/' . $names[$i])) {
+                    $names[$i] = time() . $names[$i];
+                }
+                $files[$i]->move(public_path() . $folderName, $names[$i]);
+                Image::create([
+                    'image_name' => $names[$i],
+                    'product_id' => $product->id,
+                ]);
+            }
+        }
+
+        if ($request->image_name) {
+            $image_name = $request->image_name;
+
+            Image::where(['product_id' => $product->id])->chunk(count($image_name), function ($images) use ($image_name) {
+                $j = 0;
+                foreach ($images as $image) {
+                    Image::where('id', $image->id)->update(['image_name' => $image_name[$j]]);
+                    $j++;
+                }
+            });
+
+        }
+
+        ProFilter::where('prod_id', $product->id)->delete();
+
+        if ($request->filter_checkbox[0]){
+
+            for ($i = 0; $i < count($request->filter_checkbox); $i++) {
+
+                ProFilter::create([
+                    'filter_value' => $request->filter_checkbox[$i],
+                    'price' => $request->price[$i],
+                    'prod_id' => $product->id,
+                ]);
+            }
+        }
+        if ($product) {
+            return back()->with('newCat', $product->id);
         }
     }
 

@@ -37,7 +37,7 @@
                 data-href_update="{{route('updateProduct')}}" data-prod="{{$product->link}}"
                 data-href_delete="{{route('deleteProduct')}}">
                 <td>
-                    <div class="col-sm-4">
+                    <div class="col-sm-12">
                         <img src="{{asset('image/product/'.$product->images->sortBy('id')->first()['image_name'])}}"
                              class="img-rounded"
                              alt="{{$product->translate('en')->name}}"
@@ -76,19 +76,18 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="prod_{{$i}}"
+                        <button class="btn  btn-primary iconUpdate" type="button" data-toggle="modal" data-status="prod_{{$i}}"
                                 data-target="#modalUpdate">
                             <i class="fa fa-edit"></i>
                             Edit
                         </button>
 
-                        <button class="btn  btn-danger iconDelete" data-toggle="modal" data-status="prod_{{$i}}"
+                        <button class="btn  btn-danger iconDelete"  type="button" data-toggle="modal" data-status="prod_{{$i}}"
                                 data-target="#modalDelete">
                             <i class="fa fa-trash"></i>
                             Delete
                         </button>
-                    </div>
-
+</div>
                 </td>
             </tr>
             @php($i++)
