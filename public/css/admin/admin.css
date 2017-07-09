@@ -88,9 +88,19 @@
 .cursor_pointer{
     cursor: pointer;
 }
-.red{
-    color: red;
+.red, .error{
+    color: red !important;
 }
 .green{
     color: green;
+}
+.delete_update_image {
+    cursor: pointer;
+}
+.modal_delete_image{
+    position: absolute;
+    width: 100%;
+    top:0;
+
+
 }

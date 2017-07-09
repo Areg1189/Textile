@@ -39,7 +39,7 @@ class AdminProductController extends Controller
             'ru_name' => 'required|string',
             'color.*' => 'min:6|max:8',
             'image' => 'required',
-            'image.*' => 'image|mimes:jpeg,JPEG,png,PNG,jpg,JPG,gif,svg'
+            'image.*' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->withInput();
@@ -82,21 +82,27 @@ class AdminProductController extends Controller
             }
         }
 
-        $files = $request->file('image');
-        $folderName = '/image/product';
-        $names = [];
-        $count = count($files);
-        for ($i = $count - 1; $i > -1; $i--) {
-            $names[$i] = $files[$i]->getClientOriginalName();
-            if (file_exists(public_path() . $folderName . '/' . $names[$i])) {
-                $names[$i] = time() . $names[$i];
+        if ($request->image[0]) {
+            $img = 0;
+            foreach ($request->image as $image) {
+
+                $data = $image;
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+
+                $data = base64_decode($data);
+                $imageName = $img.time() . '.jpg';
+                file_put_contents('images/products/' . $imageName, $data);
+
+                Image::create([
+                    'image_name' => $imageName  ,
+                    'product_id' => $product->id,
+                ]);
+                $img++;
             }
-            $files[$i]->move(public_path() . $folderName, $names[$i]);
-            Image::create([
-                'image_name' => $names[$i],
-                'product_id' => $product->id,
-            ]);
-        }
+
+        };
+
         if ($request->filter_checkbox[0]) {
             for ($i = 0; $i < count($request->filter_checkbox); $i++) {
 
@@ -151,10 +157,9 @@ class AdminProductController extends Controller
             }
         }
 
-        if (!$request->image_name || $files = $request->file('image')) {
+        if (!$request->image_name ||  $request->image) {
             $validImage = Validator::make($request->all(), [
                 'image' => 'required',
-                'image.*' => 'image|mimes:jpeg,JPEG,png,jpg,JPG,gif,svg|max:2048'
             ]);
             if ($validImage->fails()) {
                 return redirect()->back()->withErrors($validImage->errors())->withInput();
@@ -184,24 +189,6 @@ class AdminProductController extends Controller
                 ]);
             }
         }
-        if ($request->file('image')) {
-            $files = $request->file('image');
-            $folderName = '/image/product';
-            $names = [];
-            $count = count($files);
-            for ($i = $count - 1; $i > -1; $i--) {
-                $names[$i] = $files[$i]->getClientOriginalName();
-                if (file_exists(public_path() . $folderName . '/' . $names[$i])) {
-                    $names[$i] = time() . $names[$i];
-                }
-                $files[$i]->move(public_path() . $folderName, $names[$i]);
-                Image::create([
-                    'image_name' => $names[$i],
-                    'product_id' => $product->id,
-                ]);
-            }
-        }
-
         if ($request->image_name) {
             $image_name = $request->image_name;
 
@@ -214,6 +201,30 @@ class AdminProductController extends Controller
             });
 
         }
+
+
+        if ($request->image[0]) {
+            $img = 0;
+            foreach ($request->image as $image) {
+
+                $data = $image;
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+
+                $data = base64_decode($data);
+                $imageName = $img. time() . '.jpg';
+                file_put_contents('images/products/' . $imageName, $data);
+
+                Image::create([
+                    'image_name' => $imageName  ,
+                    'product_id' => $product->id,
+                ]);
+                $img++;
+            }
+
+        };
+
+
 
         ProFilter::where('prod_id', $product->id)->delete();
 

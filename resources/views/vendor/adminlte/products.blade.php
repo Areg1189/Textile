@@ -38,7 +38,7 @@
                 data-href_delete="{{route('deleteProduct')}}">
                 <td>
                     <div class="col-sm-12">
-                        <img src="{{asset('image/product/'.$product->images->sortBy('id')->first()['image_name'])}}"
+                        <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
                              class="img-rounded"
                              alt="{{$product->translate('en')->name}}"
                              width="100%">

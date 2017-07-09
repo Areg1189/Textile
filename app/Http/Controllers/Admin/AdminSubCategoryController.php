@@ -17,7 +17,7 @@ class AdminSubCategoryController extends Controller
     public function index(Request $request)
     {
         $cat = Category::wheer('link', $request->cet)->firstOrFail();
-        return view('vendor.adminlte.categories',[
+        return view('vendor.adminlte.categories', [
             'cat' => $cat,
         ]);
     }
@@ -50,8 +50,8 @@ class AdminSubCategoryController extends Controller
         }
 
         $newCat = SubCategory::create([
-            'code' => $request->en_name.$cat->id,
-            'link' => time().$link,
+            'code' => time() . $request->en_name,
+            'link' => $link,
             'image_name' => $imageName,
             'category_id' => $cat->id,
             'hy' => [
@@ -66,8 +66,8 @@ class AdminSubCategoryController extends Controller
         ]);
 
 
-        if (isset($request->subFilter[0])){
-            foreach ($request->subFilter as $sub){
+        if (isset($request->subFilter[0])) {
+            foreach ($request->subFilter as $sub) {
                 CatFilter::create([
                     'cat_id' => $newCat->id,
                     'sub_id' => $sub,
@@ -128,8 +128,8 @@ class AdminSubCategoryController extends Controller
         $cat->translate('ru')->name = $request->ru_name;
         $cat->save();
 
-        if (isset($request->subFilter[0])){
-            foreach ($request->subFilter as $sub){
+        if (isset($request->subFilter[0])) {
+            foreach ($request->subFilter as $sub) {
                 CatFilter::create([
                     'cat_id' => $cat->id,
                     'sub_id' => $sub,
@@ -139,7 +139,7 @@ class AdminSubCategoryController extends Controller
         if ($cat) {
             return back()->with([
                 'success' => 'Category Updated',
-                    'newCat' => $cat->id,
+                'newCat' => $cat->id,
             ]);
         }
     }
@@ -156,23 +156,24 @@ class AdminSubCategoryController extends Controller
 
     }
 
-    public function addTopCategory(Request $request){
-        if ($request->key == 'add'){
+    public function addTopCategory(Request $request)
+    {
+        if ($request->key == 'add') {
             $res = SubCategory::where('top', '>', 0)->count();
             $cat = SubCategory::where('id', $request->cat)->update([
                 'top' => $res + 1,
             ]);
-            if ($cat){
+            if ($cat) {
                 return 1;
             }
-        }elseif ($request->key == 'edit'){
+        } elseif ($request->key == 'edit') {
             $oldCAt = SubCategory::where('id', $request->oldCat)->update([
-                    'top' => 0,
+                'top' => 0,
             ]);
             $new = SubCategory::where('id', $request->newCat)->update([
                 'top' => $request->number,
             ]);
-            if ($new){
+            if ($new) {
                 return 1;
             }
         }

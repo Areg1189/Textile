@@ -42,7 +42,6 @@ $(document).on('click', '.iconUpdate', function () {
             if (data != 0) {
                 $('.updateForm').html(data);
                 $('.sort, #sortable').sortable();
-                // $('.collapse').collapse()
             }
             else {
                 $(".msj-success").html(data);
@@ -111,10 +110,18 @@ $(document).on('click', '.spanClose', function () {
 //  ==================== INPUT FILE =======================//
 
 $(function () {
+
+    $(document).on('click', '.image', function (e) {
+        $('[data-xname="' + $(this).data('name') + '"]').html('');
+
+    });
+
+    basic = [];
     $(document).on('change', '.image', function (e) {
+        basic = [];
         this_file = $(this).data('name');
         var files = e.target.files;
-        for ( i = 0; i <= files.length; i++) {
+        for (i = 0; i <= files.length; i++) {
             // when i == files.length reorder and break
             if (i == files.length) {
 
@@ -127,29 +134,37 @@ $(function () {
 
             var file = files[i];
             var reader = new FileReader();
-            $('.sort').html('');
+            // $('.sort').html('');
             reader.onload = (function (file) {
 
                 return function (event) {
-                    $('.sort[data-xname="' + this_file + '"]').prepend('' +
-                        '<li class="ui-state-default demo"  data-order=0 data-id="' + file.lastModified + '">' +
+                    $('[data-xname="' + this_file + '"]').prepend('' +
+                        '<div class="col-sm-3">' +
+                        '<div class=" demo"   data-id="' + file.lastModified + '">' +
                         // '<div class="demo col-sm-3">' +
                         // '<img class="my-image" src="' + event.target.result + '" style="width:100%;" /> ' +
                         // '</div>' +
-                        '<div class="order-number">' +
                         '</div>' +
-                        '</li>' +
+                        '</div>' +
                         '');
-                    var basic = $('.demo').croppie({
-                        url: event.target.result,
-                        viewport: {
-                            width: 100,
-                            height: 100
-                        },
-                        boundary: {
-                            width: 200,
-                            height: 200
+                    $('.demo').each(function (i) {
+                        if ($(this).data('crop') != 1) {
+
+                            basic.push($(this).croppie({
+
+                                url: event.target.result,
+                                viewport: {
+                                    width: 250,
+                                    height: 250
+                                },
+                                boundary: {
+                                    width: 300,
+                                    height: 300
+                                }
+                            }));
                         }
+                        $(this).data('crop', 1);
+
                     });
 
                 };
@@ -176,6 +191,37 @@ $(function () {
             }// end if;
         }// end for;
     }
+});
+
+// $(document).on('validate', '.productMulty',{
+//     rules: {
+//         "image.*": {
+//             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
+//         }
+//
+//     },
+//     // range:
+//     submitHandler: function(form) {
+//         console.log(basic)
+//
+//     }
+// });
+
+$(document).on('submit', '.productMulty', function (form) {
+    f = $(this);
+    $(basic).each(function (index) {
+        basic[index].croppie('result', {
+            type: 'canvas',
+            size: {
+                width: prodImageW,
+                height: prodImageH
+            },
+        }).then(function (resp) {
+            f.find('.imageContainer').append('' +
+                '<input type="hidden" name="image[]" value="' + resp + '"/>' +
+                '');
+        });
+    });
 });
 
 $(document).on('click', '.js-labelFile', function () {
@@ -450,4 +496,22 @@ $(document).on('change', '.filter_checkbox', function () {
             'disabled': true
         });
     }
+});
+
+$(document).on('click', '.delete_update_image', function () {
+
+    $(this).parent().append(
+        '<div class="modal_delete_image">' +
+        '<div class="box box-danger">' +
+        '<div class="box-body">' +
+        '<div class="row">' +
+        '<ul class="pager">' +
+        '<li><a href="#">delete</a></li>' +
+        '<li><a href="#">Next</a></li>' +
+        '</ul>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>'
+    )
 });
