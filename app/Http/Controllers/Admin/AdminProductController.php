@@ -23,7 +23,7 @@ class AdminProductController extends Controller
         Category::where('link', $request->cat)->firstOrFail();
         $sub = SubCategory::where('link', $request->name)->firstOrFail();
         $filters = FilterCategory::get();
-        $products = Product::get();
+        $products = Product::where('parent_id', $sub->id)->get();
         return view('vendor.adminlte.products', [
             'sub' => $sub,
             'filters' => $filters,

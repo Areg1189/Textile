@@ -15,9 +15,8 @@
 
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown hasmenu {{!Request::segment(1) ?'active':''}}">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Home </a>
+                        <li class="{{Request::url() == route('home') ?'active':''}}">
+                            <a href="{{route('home')}}">Home </a>
                         </li>
                         <li><a href="about.html">About</a></li>
                         <li class="dropdown yamm-fw">
@@ -28,104 +27,28 @@
                                 <li>
                                     <div class="yamm-content container">
                                         <div class="row">
+                                            @foreach($categories as $category)
+                                                <div class="col-md-3">
+                                                    <div class="widget">
+                                                        <div class="widget-title">
+                                                            <h4>{{$category->translate(session('locale'))->name}}</h4>
+                                                            <hr>
+                                                        </div><!-- end widget-title -->
 
-                                            <div class="col-md-3">
-                                                <div class="widget">
-                                                    <div class="widget-title">
-                                                        <h4>Project Pages</h4>
-                                                        <hr>
-                                                    </div><!-- end widget-title -->
-                                                    <ul class="dropdown-mega">
-                                                        <li><a href="shop-sidebar.html">Project Masonry Style</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Grid 3 Col</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Grid 4 Col</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Grid 5 Col</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Desc 3 Col</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Desc 4 Col</a></li>
-                                                        <li><a href="shop-sidebar.html">Project Single</a></li>
-                                                    </ul>
+                                                        <ul class="dropdown-mega">
+                                                            @foreach($category->subCategories as $subCategory)
+                                                                <li>
+                                                                    <a href="{{route('getCategory', ['cat' => $subCategory->link])}}">
+                                                                        {{$subCategory->translate(session('locale'))->name}}
+                                                                        <span> ({{count($subCategory->products)}})</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endforeach
 
-                                            <div class="col-md-3">
-                                                <div class="widget">
-                                                    <div class="widget-title">
-                                                        <h4>Custom Pages</h4>
-                                                        <hr>
-                                                    </div><!-- end widget-title -->
-                                                    <ul class="dropdown-mega">
-                                                        <li><a href="shop-sidebar.html">Page Sidebar</a></li>
-                                                        <li><a href="shop-sidebar.html">Page Fullwidth</a></li>
-                                                        <li><a href="shop-sidebar.html">404 Not Found</a></li>
-                                                        <li><a href="shop-sidebar.html">Blog Fullwidth</a></li>
-                                                        <li><a href="shop-sidebar.html">Blog Standard</a></li>
-                                                        <li><a href="shop-sidebar.html">Blog Single</a></li>
-                                                        <li><a href="shop-sidebar.html">Single Fullwidth</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="widget">
-                                                    <div class="widget-title">
-                                                        <h4>Categories</h4>
-                                                        <hr>
-                                                    </div><!-- end widget-title -->
-                                                    <ul class="dropdown-mega">
-                                                        <li><a href="shop-sidebar.html">Home Decoration
-                                                                <span>(21)</span></a></li>
-                                                        <li><a href="shop-sidebar.html">Home Furniture <span>(12)</span></a>
-                                                        </li>
-                                                        <li><a href="shop-sidebar.html">Home
-                                                                Supplies<span>(55)</span></a></li>
-                                                        <li><a href="shop-sidebar.html">Editor Collections
-                                                                <span>(32)</span></a></li>
-                                                        <li><a href="shop-sidebar.html">Find Professionals
-                                                                <span>(22)</span></a></li>
-                                                        <li><a href="shop-sidebar.html">Living <span>(124)</span></a>
-                                                        </li>
-                                                        <li><a href="shop-sidebar.html">Out Door<span>(66)</span></a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="widget">
-                                                    <div class="widget-title">
-                                                        <h4>From the Gallery</h4>
-                                                        <hr>
-                                                    </div><!-- end widget-title -->
-                                                    <div class="carousel-widget">
-                                                        <div id="myCarousel" class="carousel slide"
-                                                             data-ride="carousel">
-                                                            <div class="carousel-inner" role="listbox">
-                                                                <div class="item active">
-                                                                    <img src="{{asset('upload/widget_01.jpg')}}" alt=""
-                                                                         class="img-responsive">
-                                                                </div>
-                                                                <div class="item">
-                                                                    <img src="{{asset('upload/widget_02.jpg')}}" alt=""
-                                                                         class="img-responsive">
-                                                                </div>
-                                                            </div>
-
-                                                            <a class="left carousel-control" href="#myCarousel"
-                                                               role="button" data-slide="prev">
-                                                                <span class="fa fa-angle-left"
-                                                                      aria-hidden="true"></span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                            <a class="right carousel-control" href="#myCarousel"
-                                                               role="button" data-slide="next">
-                                                                <span class="fa fa-angle-right"
-                                                                      aria-hidden="true"></span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </div>
-                                                    </div><!-- end blog-image -->
-                                                </div>
-                                            </div>
                                         </div>
                                     </div><!-- end ttmenu-content -->
                                 </li>
@@ -144,17 +67,12 @@
                                 <li><a href="shop-compare.html">Shop Compare</a></li>
                                 <li><a href="shop-.html">Shop </a></li>
                             </ul>
-
                         </li>
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right searchandbag">
-                        <li class="hidden-sm hidden-xs">
-                            <a href="shop-.html" data-tooltip="tooltip" data-placement="bottom" title="">
-                                <i class="fa fa-heart-o"></i>
-                            </a>
-                        </li>
+
                         <li class="hidden-sm hidden-xs"><a href="shop-.html" data-tooltip="tooltip"
                                                            data-placement="bottom" title="FOLLOW"><i
                                         class="fa fa-instagram"></i></a></li>

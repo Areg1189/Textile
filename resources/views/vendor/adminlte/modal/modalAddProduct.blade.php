@@ -103,6 +103,11 @@
                                 </div>
                                 <div id="colorFilter" class="tab-pane fade">
                                     <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h3>Color and Image</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="panel panel-danger">
                                                 <div class="text-center">
@@ -212,6 +217,11 @@
                                 </div>
                                 <div id="description" class="tab-pane fade">
                                     <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h3>Description</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group text-center">
                                                 <label for="hy_description">Նկարագրություն</label>
@@ -262,7 +272,7 @@
 </div>
 
 <script>
-    prodImageW = 500;
-    prodImageH = 500;
+    prodImageW = 1000;
+    prodImageH = 650;
 
 </script>

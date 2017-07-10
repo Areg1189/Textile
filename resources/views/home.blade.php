@@ -6,12 +6,18 @@
              data-alias="sports-hero54"
              style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
             <div id="rev_slider_56_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.0.7">
-                <ul>
+                <ul data-target="home_image"
+                    data-prod="{{$homeImage->code}}"
+                    data-href_update="{{route('updateHomeImage')}}">
+
                     <li data-index="rs-214" data-transition="fade" data-slotamount="7" data-easein="default"
                         data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off"
                         data-title="Slide" data-description="">
-                        <img src="{{asset('upload/slider_01.jpg')}}" alt="" data-bgposition="center center" data-bgfit="cover"
+
+                        <img src="{{asset('upload/'.$homeImage->image_name)}}" alt="" data-bgposition="center center"
+                             data-bgfit="cover"
                              data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+
 
                         <div class="tp-caption Sports-Display   tp-resizeme rs-parallaxlevel-0"
                              id="slide-214-layer-1"
@@ -30,7 +36,7 @@
                              data-splitin="none"
                              data-splitout="none"
                              data-responsive_offset="on"
-                             style="z-index: 5; white-space: nowrap;">HOME
+                             style="z-index: 5; white-space: nowrap;">{{$homeImage->translate(session('locale'))->text_1}}
                         </div>
 
                         <div class="tp-caption Sports-DisplayFat   tp-resizeme rs-parallaxlevel-0"
@@ -50,7 +56,7 @@
                              data-splitin="none"
                              data-splitout="none"
                              data-responsive_offset="on"
-                             style="z-index: 6; white-space: nowrap;">STYLE
+                             style="z-index: 6; white-space: nowrap;">{{$homeImage->translate(session('locale'))->text_2}}
                         </div>
 
                         <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
@@ -72,7 +78,7 @@
                              data-responsive_offset="on"
                              data-elementdelay="0.05"
                              style="z-index: 8; white-space: nowrap; background-color: #ffffff; margin:0; padding:20px 0 0 0; text-align:center; font-size: 30px;">
-                            STYLISH FURNITURE TEMPLATE
+                            {{$homeImage->translate(session('locale'))->text_3}}
                         </div>
 
                     </li>
@@ -83,50 +89,33 @@
         </div><!-- END REVOLUTION SLIDER -->
     </div><!-- end first slider -->
 
-    <section class="section">
-        <div class="container">
-            <div class="section-title text-center clearfix">
-                <h4>Top Categories</h4>
-                <p>Listed below our top categories, campaings, promotions and offers for you!</p>
-                <hr>
-            </div><!-- end title -->
+    <div class="top_content">
+        <section class="section">
+            <div class="container">
+                <div class="section-title text-center clearfix">
+                    <h4>Top Categories</h4>
+                    <p>Listed below our top categories, campaings, promotions and offers for you!</p>
+                    <hr>
+                </div><!-- end title -->
 
-            <div class="banner-masonry row">
-                <div class="banner-item item-w1 item-h1">
-                    <a href="#"><img src="{{asset('upload/banner_01.png')}}" alt="" class="img-responsive"></a>
-                    <div class="banner-button">
-                        <a href="#" class="button button--aylen btn">GARDEN SUPPLIES</a>
-                    </div>
-                </div><!-- end banner-item -->
-                <div class="banner-item item-w1 item-h1">
-                    <a href="#"><img src="{{asset('upload/banner_02.png')}}" alt="" class="img-responsive"></a>
-                    <div class="banner-button button-left">
-                        <a href="#" class="button button--aylen btn">BEDROOM EDITION</a>
-                    </div>
-                </div><!-- end banner-item -->
-                <div class="banner-item item-w1 item-h2">
-                    <a href="#"><img src="{{asset('upload/banner_03.png')}}" alt="" class="img-responsive"></a>
-                    <div class="banner-button button-left">
-                        <a href="#" class="button button--aylen btn">SINGLE SET</a>
-                    </div>
-                </div><!-- end banner-item -->
-                <div class="banner-item item-w1 item-h1">
-                    <a href="#"><img src="{{asset('upload/banner_04.png')}}" alt="" class="img-responsive"></a>
-                    <div class="banner-button button-left">
-                        <a href="#" class="button button--aylen btn">SEATING GROUPS</a>
-                    </div>
-                </div><!-- end banner-item -->
-                <div class="banner-item item-w1 item-h1">
-                    <a href="#"><img src="{{asset('upload/banner_05.png')}}" alt="" class="img-responsive"></a>
-                    <div class="banner-button button-left">
-                        <a href="#" class="button button--aylen btn">HANDMADE STAND</a>
-                    </div>
-                </div><!-- end banner-item -->
-            </div><!-- end banner -->
-
-
-        </div><!-- end container -->
-    </section><!-- end section -->
+                <div class="banner-masonry row">
+                    @php($i = 1)
+                    @foreach($topCategories->sortBy('top') as $topCategory)
+                        <div class="banner-item item-w1 item-h1">
+                            <a href="#"><img src="{{asset('images/subCategory/'.$topCategory->image_name)}}" alt=""
+                                             class="img-responsive"></a>
+                            <div class="banner-button">
+                                <a href="#" class="button button--aylen btn">
+                                    {{$topCategory->translate(session('locale'))->name}}
+                                </a>
+                            </div>
+                        </div><!-- end banner-item -->
+                        @php($i++)
+                    @endforeach
+                </div>
+            </div><!-- end container -->
+        </section><!-- end section -->
+    </div><!-- end banner -->
 
     <section class="section lb nopadbot">
         <div class="container-fluid">
@@ -140,71 +129,40 @@
                 <div class="col-md-12">
                     <nav class="portfolio-filter text-center">
                         <ul class="list-inline">
-                            <li><a class="button button--aylen btn" href="#" data-filter="*">All</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat1">Furniture Sets</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat2">Pillows</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat3">Combinations</a></li>
+                            <li>
+                                <a class="button button--aylen btn" href="#" data-filter="*">
+                                    All
+                                </a>
+                            </li>
+
+                            @foreach($categories as $category)
+                                <li>
+                                    <a class="button button--aylen btn" href="#" data-filter=".{{$category->link}}">
+                                        {{$category->translate(session('locale'))->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </nav>
                 </div>
             </div>
 
             <div id="da-thumbs" class="da-thumbs">
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_01.jpg')}}" alt="" class="img-responsive">
-                        <div><span>green sofa set</span></div>
-                    </a>
-                </div>
+                @foreach($categories as $category)
+                    @foreach($category->subCategories->random(count($category->subCategories) >= 2 ? 2 : 1) as $subCategory)
+                        @foreach($subCategory->products->random(count($subCategory->products) >= 2 ? 2 : 1) as $product)
+                            <div class="pentry item-w1 item-h1 {{$category->link}}">
+                                <a href="single-project.html" title="">
+                                    <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}" alt="" class="img-responsive">
+                                    <div><span>More</span></div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endforeach
+                @endforeach
 
-                <div class="pentry item-w1 item-h1 cat1 cat2">
-                    <a href="'single-project.html" title="">
-                        <img src="{{asset('upload/project_02.jpg')}}" alt="" class="img-responsive">
-                        <div><span>four pillow set</span></div>
-                    </a>
-                </div>
 
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_03.jpg')}}" alt="" class="img-responsive">
-                        <div><span>combination of sofa sets</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat1 cat2">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_04.jpg')}}" alt="" class="img-responsive">
-                        <div><span>corner seat</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat1">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_05.jpg')}}" alt="" class="img-responsive">
-                        <div><span>sofa and coffee table lamp</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat2">
-                    <a href="single-project.htm" title="">
-                        <img src="{{asset('upload/project_06.jpg')}}" alt="" class="img-responsive">
-                        <div><span>desk lamp</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_07.jpg')}}" alt="" class="img-responsive">
-                        <div><span>yellow sofa set</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_08.jpg')}}" alt="" class="img-responsive">
-                        <div><span>bed and armchair</span></div>
-                    </a>
-                </div>
             </div><!-- end div -->
         </div><!-- end container-fluid -->
     </section><!-- end section -->

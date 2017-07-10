@@ -25,7 +25,11 @@
                         <div class="tab-content">
                             <div id="imageNameOld" class="tab-pane fade in active">
 
-
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3>Name and Images</h3>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-3">
                                         <div class="form-group text-center">
@@ -115,6 +119,11 @@
                             </div>
 
                             <div id="colorFilterOld" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3>Color and Image</h3>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel panel-danger">
@@ -253,6 +262,11 @@
 
                             <div id="descriptionOld" class="tab-pane fade">
                                 <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h3>Description</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group text-center">
                                             <label for="hy_description">Նկարագրություն</label>
@@ -302,8 +316,8 @@
     </div>
 </div>
 <script>
-    prodImageW = 500;
-    prodImageH = 500;
+    prodImageW = 1000;
+    prodImageH = 650;
     $(function () {
         CKEDITOR.replace('hy_description1');
         CKEDITOR.replace('en_description1');

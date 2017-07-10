@@ -211,83 +211,35 @@
                                     All
                                 </a>
                             </li>
-                            <li>
 
-                                <a class="button button--aylen btn" href="#" data-filter=".cat1">
-                                    Furniture Sets
-                                </a>
-                            </li>
-                            <li>
-                                <a class="button button--aylen btn" href="#" data-filter=".cat2">
-                                    Pillows
-                                </a>
-                            </li>
-                            <li>
-                                <a class="button button--aylen btn" href="#" data-filter=".cat3">
-                                    Combinations
-                                </a>
-                            </li>
+                            @foreach($categories as $category)
+                                <li>
+                                    <a class="button button--aylen btn" href="#" data-filter=".{{$category->link}}">
+                                        {{$category->translate(session('locale'))->name}}
+                                    </a>
+                                </li>
+                            @endforeach
+
                         </ul>
                     </nav>
                 </div>
             </div>
 
             <div id="da-thumbs" class="da-thumbs">
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_01.jpg')}}" alt="" class="img-responsive">
-                        <div><span>green sofa set</span></div>
-                    </a>
-                </div>
+                @foreach($categories as $category)
+                    @foreach($category->subCategories->random(count($category->subCategories) >= 2 ? 2 : 1) as $subCategory)
+                        @foreach($subCategory->products->random(count($subCategory->products) >= 2 ? 2 : 1) as $product)
+                            <div class="pentry item-w1 item-h1 {{$category->link}}">
+                                <a href="single-project.html" title="">
+                                    <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}" alt="" class="img-responsive">
+                                    <div><span>More</span></div>
+                                </a>
+                            </div>
+                        @endforeach
+                    @endforeach
+                @endforeach
 
-                <div class="pentry item-w1 item-h1 cat1 cat2">
-                    <a href="'single-project.html" title="">
-                        <img src="{{asset('upload/project_02.jpg')}}" alt="" class="img-responsive">
-                        <div><span>four pillow set</span></div>
-                    </a>
-                </div>
 
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_03.jpg')}}" alt="" class="img-responsive">
-                        <div><span>combination of sofa sets</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat1 cat2">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_04.jpg')}}" alt="" class="img-responsive">
-                        <div><span>corner seat</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat1">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_05.jpg')}}" alt="" class="img-responsive">
-                        <div><span>sofa and coffee table lamp</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat2">
-                    <a href="single-project.htm" title="">
-                        <img src="{{asset('upload/project_06.jpg')}}" alt="" class="img-responsive">
-                        <div><span>desk lamp</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_07.jpg')}}" alt="" class="img-responsive">
-                        <div><span>yellow sofa set</span></div>
-                    </a>
-                </div>
-
-                <div class="pentry item-w1 item-h1 cat3">
-                    <a href="single-project.html" title="">
-                        <img src="{{asset('upload/project_08.jpg')}}" alt="" class="img-responsive">
-                        <div><span>bed and armchair</span></div>
-                    </a>
-                </div>
             </div><!-- end div -->
         </div><!-- end container-fluid -->
     </section><!-- end section -->

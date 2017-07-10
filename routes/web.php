@@ -35,16 +35,20 @@ Route::group(
         Auth::routes();
         Route::get('home', 'HomeController@index')->name('home');
         Route::get('', 'HomeController@index')->name('home');
+        Route::get('{cat}', 'HomeController@getCategory')->name('getCategory');
+
+
+
 
 
         Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
         Route::get('repeat_confirm', 'Auth\AdvancedReg@getRepeat')->name('getRepeat');
-
         Route::post('login', 'Auth\MyAuthController@login')->name('login');
-
         Route::post('register', 'Auth\AdvancedReg@register')->name('register');
         Route::post('repeat_confirm', 'Auth\AdvancedReg@postRepeat');
         Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('passwordEmail');
+
+
 
 //        =================  USER  ================== //
         Route::group(['middleware' => 'user', 'prefix' => 'user/{id}'], function () {
@@ -86,8 +90,8 @@ Route::group(
 
             //=========  CATEGORY  ======= //
 
-            Route::get('categories', 'Admin\AdminCategoryController@index')->name('adminCategories');
-            Route::get('category/{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
+            Route::get('category', 'Admin\AdminCategoryController@index')->name('adminCategories');
+            Route::get('{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
             Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
             Route::post('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
@@ -95,7 +99,7 @@ Route::group(
             //=========  SUB CATEGORY  ======= //
 
 
-            Route::get('subCategories/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
+//            Route::get('{name}/{cat}', 'Admin\AdminSubCategoryController@index')->name('adminSubCategories');
             Route::post('addTopCategory', 'Admin\AdminSubCategoryController@addTopCategory')->name('addTopCategory');
 
             Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
@@ -117,7 +121,7 @@ Route::group(
 
         //========= PRODUCT  ======= //
 
-            Route::get('{cat}/subCategory/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
+            Route::get('{cat}/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');

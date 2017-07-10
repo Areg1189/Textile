@@ -45,3 +45,41 @@ $(document).on('click', '.edit_top_save', function () {
         });
     }
 });
+
+$(document).on("change", '.upload2', function () {
+    $(".span_reset_file").fadeIn();
+    $(".cr-image").fadeIn();
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $uploadCrop.croppie("bind", {
+            url: e.target.result,
+        }).then(function () {
+            $w = $('.basic-width'),
+                $h = $('.basic-height'),
+
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result,
+
+                });
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+});
+
+
+$(document).on('submit', ".formImage", function (form) {
+    form = form;
+    $uploadCrop.croppie('result', {
+
+        type: 'canvas',
+        size: {
+            width: w,
+            height: h
+        },
+    }).then(function (resp) {
+        if ($('input[type="file"]').val()) {
+            resp = resp;
+            $('input[name="image"]').val(resp);
+        }
+    });
+});

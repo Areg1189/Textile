@@ -64,7 +64,7 @@ $(document).on('click', '.iconDelete', function () {
     url = $('[data-target="' + parent + '"]').data('href_delete');
     prod = $('[data-target="' + parent + '"]').data('prod');
     key = $('[data-target="' + parent + '"]').data('key');
-    data = { prod: prod, key: key, _token: token};
+    data = {prod: prod, key: key, _token: token};
 
 });
 
@@ -151,11 +151,11 @@ $(function () {
                                 url: event.target.result,
                                 viewport: {
                                     width: 250,
-                                    height: 250
+                                    height: 162.5
                                 },
                                 boundary: {
                                     width: 300,
-                                    height: 300
+                                    height: 200
                                 }
                             }));
                         }
@@ -334,7 +334,6 @@ $(document).on('submit', ".formImage", function (form) {
 // });
 
 
-
 // =================================== FILTER =========================================//
 var number = 0;
 $(document).on('click', '.add_sub_filter', function () {
@@ -458,7 +457,7 @@ $(document).on('change', '.filter_checkbox', function () {
 });
 
 $(document).on('click', '.delete_update_image', function () {
-
+    $('.modal_delete_image').remove();
     $(this).parent().append(
         '<div class="modal_delete_image">' +
         '<div class="box box-danger">' +
@@ -476,4 +475,12 @@ $(document).on('click', '.delete_update_image', function () {
         '</div>' +
         '</div>'
     )
+});
+
+$(document).on('click', '.closeDell', function (e) {
+    $('.modal_delete_image').remove();
+});
+
+$(document).on('click', '.dellImage', function (e) {
+    e.stopPropagation();
 });
