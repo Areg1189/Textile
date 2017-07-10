@@ -69,16 +69,18 @@
                                         <div id="multiple-file-preview">
 
                                             <div class="clear-both">
-                                                <ul id="sortable1" class="sort">
+                                                <ul id="sortable1" class="sort text-center">
                                                     @php($img = 0)
                                                     @foreach($product->images->sortBy('id') as $image)
                                                         <li class="ui-state-default" data-order="0"
-                                                            data-target="tur_image_{{$img}}">
+                                                            data-target="image{{$img}}"
+                                                            data-prod="{{$image->id}}"
+                                                            data-key="image"
+                                                        data-href_delete="{{route('deleteProduct')}}">
                                                             <img src="{{asset('images/products/'.$image->image_name)}}"
                                                                  style="width:100%;"/>
-                                                            <span class="delete_update_image cursor"
-                                                                  data-status="tur_image_{{$img}}"
-                                                                  data-tur="{{$image->image_name}}">
+                                                            <span class="delete_update_image iconDelete"
+                                                                  data-status="image{{$img}}">
                                                                 <i class="fa fa-trash fa-2x"></i>
                                                             </span>
                                                             <input type="hidden" name="image_name[]"
@@ -93,23 +95,23 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
-                                    <div class="col-md-12">
-                                        <div class="block text-center">
-                                            <label class="button" for="imagesUp">Upload Images</label>
-                                            <input type="file" name="images[]" id="imagesUp" data-name="updateImage"
+                                    <div class="col-sm-12">
+                                        <div class="block">
+                                            <input type="file" name="img"   data-name="updateImage"
                                                    class="image"
                                                    multiple="multiple" />
-
-
-                                            <div class="image_container" data-xname="updateImage">
-
-                                            </div>
-
 
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="image_container" data-xname="updateImage">
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div id="colorFilterOld" class="tab-pane fade">

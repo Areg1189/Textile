@@ -36,7 +36,7 @@ label.button:hover{
     transition: all 200ms linear;
 }
 
-input#images, input#imagesUp {display: none;}
+input#images, input#imagesUp, input#img {display: none;}
 
 
 #multiple-file-preview{border-top: 1px solid rgba(0, 0, 0, 0.11); margin-top: 10px; padding: 10px;}
@@ -51,7 +51,7 @@ input#images, input#imagesUp {display: none;}
 #sortable li,#sortable1 li,  .sort li {
     margin: 3px 3px 3px 0;
     float: left;
-    width: 100px;
+    width: 250px;
     text-align: center;
     position: relative;
     background-color: #FFFFFF;

@@ -28,6 +28,11 @@
                             {{csrf_field()}}
                             <div class="tab-content">
                                 <div id="imageName" class="tab-pane fade in active">
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h3>Name and Images</h3>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-xs-3">
@@ -79,23 +84,22 @@
                                         </div>
                                     </div>
                                     <div class="row">
-
-                                        <div class="col-md-12">
-                                            <div class="block text-center">
-                                                <label class="button" for="images">Upload Images *</label>
-                                                <input type="file" name="images[]" id="images" data-name="addImage"
+                                        <div class="col-sm-12">
+                                            <div class="block">
+                                                <input type="file" name="img" data-name="addImage"
                                                        class="image"
                                                        multiple="multiple" required/>
-
-
-                                                <div class="image_container" data-xname="addImage">
-
-                                                </div>
-
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="image_container" data-xname="addImage">
 
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div id="colorFilter" class="tab-pane fade">
                                     <div class="row">
@@ -243,10 +247,8 @@
                             <div class="imageContainer">
 
                             </div>
-                            <script>
-                                prodImageW = 500;
-                                prodImageH = 500;
-                            </script>
+
+
                         </form>
                     </div>
 
@@ -258,3 +260,9 @@
 
     </div>
 </div>
+
+<script>
+    prodImageW = 500;
+    prodImageH = 500;
+
+</script>

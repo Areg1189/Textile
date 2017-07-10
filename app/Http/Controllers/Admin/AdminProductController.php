@@ -91,11 +91,11 @@ class AdminProductController extends Controller
                 list(, $data) = explode(',', $data);
 
                 $data = base64_decode($data);
-                $imageName = $img.time() . '.jpg';
+                $imageName = $img . time() . '.jpg';
                 file_put_contents('images/products/' . $imageName, $data);
 
                 Image::create([
-                    'image_name' => $imageName  ,
+                    'image_name' => $imageName,
                     'product_id' => $product->id,
                 ]);
                 $img++;
@@ -157,7 +157,7 @@ class AdminProductController extends Controller
             }
         }
 
-        if (!$request->image_name ||  $request->image) {
+        if (!$request->image_name || $request->image) {
             $validImage = Validator::make($request->all(), [
                 'image' => 'required',
             ]);
@@ -212,11 +212,11 @@ class AdminProductController extends Controller
                 list(, $data) = explode(',', $data);
 
                 $data = base64_decode($data);
-                $imageName = $img. time() . '.jpg';
+                $imageName = $img . time() . '.jpg';
                 file_put_contents('images/products/' . $imageName, $data);
 
                 Image::create([
-                    'image_name' => $imageName  ,
+                    'image_name' => $imageName,
                     'product_id' => $product->id,
                 ]);
                 $img++;
@@ -225,10 +225,9 @@ class AdminProductController extends Controller
         };
 
 
-
         ProFilter::where('prod_id', $product->id)->delete();
 
-        if ($request->filter_checkbox[0]){
+        if ($request->filter_checkbox[0]) {
 
             for ($i = 0; $i < count($request->filter_checkbox); $i++) {
 
@@ -247,6 +246,15 @@ class AdminProductController extends Controller
 
     public function delete(Request $request)
     {
+        if ($request->key && $request->key == 'image') {
+            $res = Image::where('id', $request->prod)->firstOrFail();
+            if (file_exists(public_path() . '/images/products/' . $res->image_name)) {
+                $delete = File::delete(public_path() . '/images/products/' . $res->image_name);
+                $res->delete();
+                return 1;
+
+            }
+        }
 
         $cat = SubCategory::where('link', $request->prod)->firstOrFail();
 //        $cat->roles()->detach();

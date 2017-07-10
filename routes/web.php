@@ -90,7 +90,7 @@ Route::group(
             Route::get('category/{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
             Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
-            Route::delete('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
+            Route::post('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
 
             //=========  SUB CATEGORY  ======= //
 
@@ -100,7 +100,7 @@ Route::group(
 
             Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
             Route::post('updateSubCategory', 'Admin\AdminSubCategoryController@update')->name('updateSubCategory');
-            Route::delete('deleteSubCategory', 'Admin\AdminSubCategoryController@delete')->name('deleteSubCategory');
+            Route::post('deleteSubCategory', 'Admin\AdminSubCategoryController@delete')->name('deleteSubCategory');
 
 
             //=========  FILTERS ======= //
@@ -112,7 +112,7 @@ Route::group(
 //
 //            Route::post('addSubCategory', 'Admin\AdminSubCategoryController@create')->name('addSubCategory');
 //            Route::post('updateSubCategory', 'Admin\AdminSubCategoryController@update')->name('updateSubCategory');
-            Route::delete('deleteFilter', 'Admin\AdminFilterController@delete')->name('deleteFilter');
+            Route::post('deleteFilter', 'Admin\AdminFilterController@delete')->name('deleteFilter');
 
 
         //========= PRODUCT  ======= //
@@ -120,7 +120,7 @@ Route::group(
             Route::get('{cat}/subCategory/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
-            Route::delete('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');
+            Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');
 
 
 

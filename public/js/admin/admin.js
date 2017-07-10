@@ -60,22 +60,18 @@ $(document).on('click', '.iconUpdate', function () {
 //=============================  DELETE ========================//
 
 $(document).on('click', '.iconDelete', function () {
-    alert
     parent = $(this).data('status');
     url = $('[data-target="' + parent + '"]').data('href_delete');
     prod = $('[data-target="' + parent + '"]').data('prod');
     key = $('[data-target="' + parent + '"]').data('key');
-    cat = $('[data-target="' + parent + '"]').data('category');
-    data = {folder: cat, prod: prod, key: key, _token: token};
-    if (parent && url && prod && data) {
-        $('#modalDelete').modal('sow', true);
-    }
+    data = { prod: prod, key: key, _token: token};
+
 });
 
 $(document).on('click', '.modalDelete', function () {
     $.ajax({
         url: url,
-        type: 'delete',
+        type: 'post',
         data: data,
         success: function (data) {
             if (data == 1) {
@@ -139,7 +135,7 @@ $(function () {
 
                 return function (event) {
                     $('[data-xname="' + this_file + '"]').prepend('' +
-                        '<div class="col-sm-3">' +
+                        '<div class="col-sm-4">' +
                         '<div class=" demo"   data-id="' + file.lastModified + '">' +
                         // '<div class="demo col-sm-3">' +
                         // '<img class="my-image" src="' + event.target.result + '" style="width:100%;" /> ' +
@@ -166,7 +162,7 @@ $(function () {
                         $(this).data('crop', 1);
 
                     });
-
+                    $(".cr-slider").remove();
                 };
             })(file);
             reader.readAsDataURL(file);
@@ -190,6 +186,14 @@ $(function () {
                 nrOrder++;
             }// end if;
         }// end for;
+    }
+});
+$(".productMulty").validate({
+    rules: {
+        img: {
+            required: true,
+            accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
+        }
     }
 });
 
@@ -330,51 +334,6 @@ $(document).on('submit', ".formImage", function (form) {
 // });
 
 
-$(document).on('click', ".add_top_icon", function () {
-    $(".add_top_div").toggle();
-});
-
-$(document).on('click', '.add_top_save', function () {
-    if ($(".add_top_select").val()) {
-        var cat = $(".add_top_select").val();
-        var url = $(".add_top_select").data('href');
-        $.ajax({
-            url: url,
-            type: 'post',
-            data: {cat: cat, key: 'add', _token: token},
-            success: function (e) {
-                if (e == 1) {
-                    location.reload();
-                }
-            }
-        })
-    }
-});
-
-$(document).on('click', ".edit_top_icon", function () {
-    top_cat = $(this).data('parent');
-    $('.edit_top_div[data-status="' + top_cat + '"]').toggle();
-});
-
-$(document).on('click', '.edit_top_save', function () {
-    if ($('.edit_top_select[data-select="' + top_cat + '"]').val()) {
-        var newCat = $('.edit_top_select[data-select="' + top_cat + '"]').val();
-        var oldCat = $('[data-old_cat="' + top_cat + '"]').data('cat_old');
-        var number = $('[data-old_cat="' + top_cat + '"]').data('number');
-        var url = $(".add_top_select").data('href');
-        $.ajax({
-            url: url,
-            type: 'post',
-            data: {newCat: newCat, oldCat: oldCat, number: number, key: 'edit', _token: token},
-            success: function (e) {
-                if (e == 1) {
-                    location.reload();
-                }
-            }
-        });
-    }
-});
-
 
 // =================================== FILTER =========================================//
 var number = 0;
@@ -505,10 +464,13 @@ $(document).on('click', '.delete_update_image', function () {
         '<div class="box box-danger">' +
         '<div class="box-body">' +
         '<div class="row">' +
-        '<ul class="pager">' +
-        '<li><a href="#">delete</a></li>' +
-        '<li><a href="#">Next</a></li>' +
-        '</ul>' +
+        '<div class="col-sm-12">' +
+        '<p>Do you really want to delete</p>' +
+        '</div>' +
+        '<div class="btn-group">' +
+        '<button type="button" class="btn btn-danger modalDelete dellImage">delete</button>' +
+        '<button type="button" class="btn btn-default closeDell">Close</button>' +
+        '</div>' +
         '</div>' +
         '</div>' +
         '</div>' +

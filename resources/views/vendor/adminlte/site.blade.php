@@ -206,10 +206,27 @@
                 <div class="col-md-12">
                     <nav class="portfolio-filter text-center">
                         <ul class="list-inline">
-                            <li><a class="button button--aylen btn" href="#" data-filter="*">All</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat1">Furniture Sets</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat2">Pillows</a></li>
-                            <li><a class="button button--aylen btn" href="#" data-filter=".cat3">Combinations</a></li>
+                            <li>
+                                <a class="button button--aylen btn" href="#" data-filter="*">
+                                    All
+                                </a>
+                            </li>
+                            <li>
+
+                                <a class="button button--aylen btn" href="#" data-filter=".cat1">
+                                    Furniture Sets
+                                </a>
+                            </li>
+                            <li>
+                                <a class="button button--aylen btn" href="#" data-filter=".cat2">
+                                    Pillows
+                                </a>
+                            </li>
+                            <li>
+                                <a class="button button--aylen btn" href="#" data-filter=".cat3">
+                                    Combinations
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -563,7 +580,7 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/croppie.min.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/admin/admin.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/admin/site.js')}}"></script>
 
     <script>
 
