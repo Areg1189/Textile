@@ -38,7 +38,10 @@
                                                         <ul class="dropdown-mega">
                                                             @foreach($category->subCategories as $subCategory)
                                                                 <li>
-                                                                    <a href="{{route('getCategory', ['cat' => $subCategory->link])}}">
+                                                                    <a href="{{route('getCategory', [
+                                                                    'cat' => $subCategory->link,
+                                                                    'name' => $category->link
+                                                                    ])}}">
                                                                         {{$subCategory->translate(session('locale'))->name}}
                                                                         <span> ({{count($subCategory->products)}})</span>
                                                                     </a>

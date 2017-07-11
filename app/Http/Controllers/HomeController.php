@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\HomeImage;
 use App\Models\SubCategory;
@@ -19,21 +20,22 @@ class HomeController extends Controller
         $homeImage = HomeImage::where('code', 'home-image')->first();
         $topCategories = SubCategory::where('top', '>', 0)->get();
         $subCategories = SubCategory::get();
-        return view('home',[
+        return view('home', [
             'homeImage' => $homeImage,
             'topCategories' => $topCategories,
             'subCategories' => $subCategories
         ]);
     }
 
-    public function getCategory(Request $request){
-        if (!$request->cat){
+    public function getCategory(Request $request)
+    {
+        if (!$request->cat || !$request->name) {
             return abort(404);
         }
+        Category::where('link', $request->name)->firstOrFail();
+        $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
 
-        $subCategory = SubCategory::where('link', $request->link)->firstOrFail();
-
-        return view('products',[
+        return view('products', [
             'subCategory' => $subCategory
         ]);
     }
