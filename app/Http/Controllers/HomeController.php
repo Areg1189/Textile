@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\HomeImage;
 use App\Models\SubCategory;
@@ -27,16 +28,41 @@ class HomeController extends Controller
         ]);
     }
 
+
+    public function about(){
+        return view('about');
+    }
+
+
     public function getCategory(Request $request)
     {
         if (!$request->cat || !$request->name) {
             return abort(404);
         }
-        Category::where('link', $request->name)->firstOrFail();
+
+        $category = Category::where('link', $request->name)->firstOrFail();
         $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
 
+        if(count($subCategory->products) < 5)  {
+            $releated_products = $subCategory->products;
+        } else {
+            $releated_products = $subCategory->products->random(4);
+        }
+
+
         return view('products', [
-            'subCategory' => $subCategory
+            'subCategory' => $subCategory,
+            'category' => $category,
+            'releated_products' => $releated_products
         ]);
+    }
+
+
+    public function getProduct(Request $request){
+//        if (!$request->prod || !$request->name) {
+//            return abort(404);
+//        }
+
+        return view('product');
     }
 }
