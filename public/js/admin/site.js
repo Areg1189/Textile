@@ -83,3 +83,23 @@ $(document).on('submit', ".formImage", function (form) {
         }
     });
 });
+//=============================  UPDATE ========================//
+
+$(document).on('click', '.iconUpdate', function () {
+    $('.updateForm').html('');
+    parent = $(this).data('status');
+    url = $('[data-target="' + parent + '"]').data('href_update');
+    prod = $('[data-target="' + parent + '"]').data('prod');
+    data = {prod: prod, key: 'one', _token: token};
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        success: function (data) {
+            if (data != 0) {
+                $('.updateForm').html(data);
+            }
+        },
+
+    });
+});

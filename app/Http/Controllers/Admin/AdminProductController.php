@@ -61,7 +61,8 @@ class AdminProductController extends Controller
         $product = Product::create([
             'code' => time() . $request->en_name,
             'link' => $link,
-            'sale' => $request->sale,
+            'sale' => $request->firstSale,
+            'price' => $request->firstFirst,
             'parent_id' => $request->cat,
             'hy' => [
                 'name' => $request->hy_name,
@@ -109,6 +110,7 @@ class AdminProductController extends Controller
                 ProFilter::create([
                     'filter_value' => $request->filter_checkbox[$i],
                     'price' => $request->price[$i],
+                    'sale' => $request->sale[$i],
                     'prod_id' => $product->id,
                 ]);
             }
@@ -170,7 +172,8 @@ class AdminProductController extends Controller
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
         $product->link = $link;
-        $product->sale = $request->sale;
+        $product->sale = $request->firstSale;
+        $product->price = $request->firstFirst;
         $product->translate('hy')->name = $request->hy_name;
         $product->translate('en')->name = $request->en_name;
         $product->translate('ru')->name = $request->ru_name;
@@ -234,6 +237,7 @@ class AdminProductController extends Controller
                 ProFilter::create([
                     'filter_value' => $request->filter_checkbox[$i],
                     'price' => $request->price[$i],
+                    'sale' => $request->sale[$i],
                     'prod_id' => $product->id,
                 ]);
             }

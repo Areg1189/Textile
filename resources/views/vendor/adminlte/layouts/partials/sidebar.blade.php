@@ -18,7 +18,7 @@
                     </a>
                 </div>
             </div>
-    @endif
+        @endif
 
     <!-- search form (Optional) -->
     {{--<form action="#" method="get" class="sidebar-form">--}}
@@ -34,27 +34,27 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{!Request::segment(2) ? 'active' : '' }}"><a href="{{ route('admin') }}"><i
+            <li class="{{!Request::url() == route('admin')? 'active' : '' }}"><a href="{{ route('admin') }}"><i
                             class='fa fa-home'></i>
                     <span>Home</span></a></li>
-            <li class="{{Request::segment(2) ? 'site' : '' }}"><a href="{{ route('site') }}">
+            <li><a href="{{ route('site') }}">
                     <i class='fa fa-home'></i>
                     <span>Site</span></a>
             </li>
 
-            <li class="{{Request::segment(2) == 'users' ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
+            <li class="{{Request::url() == route('getUsers') ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span></a></li>
 
-            <li class="{{Request::segment(2) == 'messages' ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
+            <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
                             class='fa fa-envelope-o'></i>
                     <span>Messages</span></a></li>
             <li class="treeview
-                        {{Request::segment(2) == 'category'
-                        || Request::segment(2)  == 'categories'
-                        || Request::segment(3) == 'category'
-                        || Request::segment(3)  == 'categories'
-                        ? 'active' : '' }}">
+                        {{Request::url() == route('adminCategories')
+                        || Request::url()  == route('adminCategory')
+                        || Request::url() == route('adminProduct')
+                        ? 'active' : '' }}"
+            >
                 <a href="#">
                     <i class='fa fa-book'></i>
                     <span>Category</span>
@@ -67,7 +67,7 @@
                             All Categories
                         </a>
                     </li>
-                    @foreach($categories as $category)
+                    @foreach($categories->sortBydesc('id') as $category)
                         <li class="treeview
                                 {{Request::segment(3) == $category->link
                                 || Request::segment(4) == $category->link
@@ -85,15 +85,15 @@
                                         All Sub Categories
                                     </a>
                                 </li>
-                                @foreach($category->subCategories as $subCategory)
-                                   <li>
-                                       <a href="{{route('adminProduct', [
+                                @foreach($category->subCategories->sortBydesc('id') as $subCategory)
+                                    <li>
+                                        <a href="{{route('adminProduct', [
                                        'cat' => $category->link,
                                        'name' => $subCategory->link
                                        ])}}">
-                                           {{$subCategory->translate(session('locale'))->name}}
-                                       </a>
-                                   </li>
+                                            {{$subCategory->translate(session('locale'))->name}}
+                                        </a>
+                                    </li>
                                 @endforeach
 
                             </ul>

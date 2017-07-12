@@ -213,6 +213,21 @@ $(".productMulty").validate({
 
 $(document).on('submit', '.productMulty', function (form) {
     f = $(this);
+    var flag = false;
+    $(".filter_checkbox").each(function (i) {
+        if ($(this).is(":checked")){
+            flag = true;
+        }
+        if (flag){
+            $(f).find('[name="firstPrice"]').prop('required',false);
+        }else {
+            $(f).find('[name="firstPrice"]').prop('required',true);
+            if ($(".filter_checkbox").length == i){
+                form.preventDefault();
+                return false;
+            }
+        }
+    });
     $(basic).each(function (index) {
         basic[index].croppie('result', {
             type: 'canvas',
@@ -226,6 +241,7 @@ $(document).on('submit', '.productMulty', function (form) {
                 '');
         });
     });
+
 });
 
 $(document).on('click', '.js-labelFile', function () {

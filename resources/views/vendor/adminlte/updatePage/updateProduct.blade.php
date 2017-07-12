@@ -17,7 +17,7 @@
                           enctype="multipart/form-data">
                         {{csrf_field()}}
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#imageNameOld">Image end Name</a></li>
+                            <li class="active"><a data-toggle="tab" href="#imageNameOld">Image and Name</a></li>
                             <li><a data-toggle="tab" href="#colorFilterOld">Color and Filter</a></li>
                             <li><a data-toggle="tab" href="#descriptionOld">Description</a></li>
                         </ul>
@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <div class="form-group text-center">
                                             <label>Հայերեն *</label>
                                             <input type="text" name="hy_name" class="form-control"
@@ -40,7 +40,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <div class="form-group text-center">
                                             <label>English *</label>
                                             <input type="text" name="en_name" class="form-control"
@@ -48,23 +48,12 @@
                                                    value="{{$product->translate('en')->name}}" required>
                                         </div>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-xs-4">
                                         <div class="form-group text-center">
                                             <label>Русский *</label>
                                             <input type="text" name="ru_name" class="form-control"
                                                    placeholder="Русский *"
                                                    value="{{$product->translate('hy')->name}}" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <div class="form-group text-center">
-                                            <label>Sale</label>
-                                            <input type="number"
-                                                   name="sale"
-                                                   class="form-control"
-                                                   value="{{$product->sale}}"
-                                                   placeholder="Sale">
-
                                         </div>
                                     </div>
                                 </div>
@@ -156,11 +145,46 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <h3 class="text-center"><i class="fa fa-filter"></i> Filters</h3>
                                     </div>
                                 </div>
+
+
+
+                                {{--Price Sale--}}
+
+
+                                <div class="row">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-body">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <div class="col-sm-12">
+                                                    <h4 class="text-center">
+                                                        Please choose filter or enter a price
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group text-center">
+                                                        <label>Price</label>
+                                                        <input type="number" name="firstPrice" class="form-control"
+                                                               placeholder="Price"
+                                                        value="{{$product->price}}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group text-center">
+                                                        <label>Sale</label>
+                                                        <input type="number" name="firstSale" class="form-control"
+                                                               placeholder="Sale"
+                                                               value="{{$product->sale}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                 <div class="row">
                                     @php($i = 0)
                                     @foreach($filters as $filter)
@@ -222,7 +246,7 @@
                                                                                                        name="sale[]"
                                                                                                        placeholder="Sale"
                                                                                                        data-status_sale="filterUpdate_{{$i}}"
-                                                                                                        {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                                       {{isset($res->filter_value) ? 'required' : 'disabled'}}
                                                                                                        value="{{isset($res->filter_value) ? $res->sale : null}}">
                                                                                             </div>
                                                                                         </div>

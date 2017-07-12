@@ -93,7 +93,7 @@ Route::group(
             //=========  CATEGORY  ======= //
 
             Route::get('category', 'Admin\AdminCategoryController@index')->name('adminCategories');
-            Route::get('{name}', 'Admin\AdminCategoryController@show')->name('adminCategory');
+            Route::get('category{name?}', 'Admin\AdminCategoryController@show')->name('adminCategory');
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
             Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
             Route::post('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');
@@ -123,7 +123,7 @@ Route::group(
 
         //========= PRODUCT  ======= //
 
-            Route::get('{cat}/{name}', 'Admin\AdminProductController@index')->name('adminProduct');
+            Route::get('{cat?}/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');

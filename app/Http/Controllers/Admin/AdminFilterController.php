@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\CatFilter;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\FilterCategory;
 use Illuminate\Support\Facades\Validator;
 use App\Models\FilterSub;
 use App\Models\FilterValue;
+use App\Models\ProFilter;
 
 class AdminFilterController extends Controller
 {
@@ -31,7 +34,7 @@ class AdminFilterController extends Controller
         }
 
         $res = FilterCategory::create([
-            'code' => time().$request->en_name,
+            'code' => time() . $request->en_name,
             'hy' => [
                 'name' => $request->hy_name,
             ],
@@ -49,7 +52,7 @@ class AdminFilterController extends Controller
             foreach ($request->hy_name_sub as $filterSub) {
 
                 $sub = FilterSub::create([
-                    'code' => time().$request->en_name_sub[$i] . $res->id,
+                    'code' => time() . $request->en_name_sub[$i] . $res->id,
                     'filter_id' => $res->id,
                     'hy' => [
                         'name' => $filterSub,
@@ -66,7 +69,7 @@ class AdminFilterController extends Controller
                     $j = 0;
                     foreach ($request->hy_sub[$i] as $value) {
                         FilterValue::create([
-                            'code' => time().$request->en_sub[$i][$j],
+                            'code' => time() . $request->en_sub[$i][$j],
                             'parent_id' => $sub->id,
                             'hy' => [
                                 'name' => $value,
@@ -92,7 +95,22 @@ class AdminFilterController extends Controller
 
     public function delete(Request $request)
     {
-        $res = FilterCategory::find($request->prod)->delete();
+        $filter = FilterCategory::find($request->prod);
+        $subs = FilterSub::where('filter_id', $filter->id)->get();
+        foreach ($subs as $sub) {
+            foreach ($sub->values as $value) {
+                $value->deleteTranslations();
+                ProFilter::where('filter_value', $value->code)->delete();
+                $value->delete();
+            }
+            $sub->deleteTranslations();
+            CatFilter::where('sub_id', $sub->id)->delete();
+            $sub->delete();
+        }
+        $filter->deleteTranslations();
+        $filter->delete();
+
+
         return 1;
     }
 }
