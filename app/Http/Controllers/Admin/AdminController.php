@@ -151,6 +151,7 @@ class AdminController extends Controller
 //        $this->validate($request,[
 //            'prod' => 'required'
 //        ]);
+
         if ($request->key && $request->key == 'one') {
             $product = HomeImage::where('code', $request->prod)->first();
             return View::make('vendor.adminlte.updatePage.updateHomeImage', [
