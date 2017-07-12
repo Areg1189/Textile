@@ -101,9 +101,20 @@
                     @endforeach
                 </ul>
             </li>
+
             <li class="{{Request::segment(2) == 'filters' ? 'active' : ''}}"><a href="{{route('getFilter')}}">
                     <i class="fa fa-filter" aria-hidden="true"></i>
                     <span>Filters</span></a></li>
+
+
+            <li class="{{Request::segment(2) == 'about' ? 'active' : ''}}"><a href="{{route('aboutus')}}"><i
+                            class="fa fa-users" aria-hidden="true"></i>
+                    <span>About Us Page</span></a></li>
+
+            <li class="{{Request::segment(2) == 'icons' ? 'active' : ''}}"><a href="{{route('icons')}}"><i
+                            class="fa fa-users" aria-hidden="true"></i>
+                    <span>Social Icons</span></a></li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

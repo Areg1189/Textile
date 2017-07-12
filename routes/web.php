@@ -35,11 +35,11 @@ Route::group(
         Auth::routes();
         Route::get('home', 'HomeController@index')->name('home');
         Route::get('about', 'HomeController@about')->name('about');
+        Route::get('contactus', 'HomeController@contactus')->name('contactus');
         Route::get('', 'HomeController@index')->name('home');
         Route::get('category/{cat}', 'HomeController@getCategory')->name('getCategory');
 //        Route::get('category/{prod}', 'HomeController@getProduct')->name('getProduct');
-
-
+        Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
 
 
@@ -83,11 +83,15 @@ Route::group(
 
             Route::get('site', 'Admin\AdminController@site')->name('site');
 
+            Route::get('aboutus', 'Admin\AdminController@aboutus')->name('aboutus');
+            Route::get('icons', 'Admin\AdminController@icons')->name('icons');
+
 
             Route::get('users', 'Admin\AdminController@getUsers')->name('getUsers');
 
 
             Route::post('messageUser', 'Admin\AdminController@messageUser')->name('messageUser');
+            Route::post('change_icons', 'Admin\AdminController@change_icons')->name('change_icons');
 
 
             //=========  CATEGORY  ======= //

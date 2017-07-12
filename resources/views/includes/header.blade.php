@@ -18,7 +18,7 @@
                         <li class="{{Request::url() == route('home') ?'active':''}}">
                             <a href="{{route('home')}}">Home </a>
                         </li>
-                        <li><a href="about.html">About</a></li>
+                        <li><a href="{{route('about')}}">About</a></li>
                         <li class="dropdown yamm-fw">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Shop <span
@@ -70,7 +70,7 @@
                             </ul>
                         </li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{route('contactus')}}">Contact</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right searchandbag">
 

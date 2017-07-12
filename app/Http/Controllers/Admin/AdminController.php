@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\HomeImage;
 use Illuminate\Support\Facades\File;
 use App\Models\SubCategory;
+use App\Models\Social_icons;
 
 
 class AdminController extends Controller
@@ -146,12 +147,39 @@ class AdminController extends Controller
         ]);
     }
 
+
+    public function aboutus(){
+        return view('vendor.adminlte.aboutus');
+    }
+
+    public function icons(){
+        $icons = Social_icons::get();
+
+        return view('vendor.adminlte.icons',[
+            'icons' => $icons,
+        ]);
+    }
+
+    public function change_icons(Request $request){
+
+        $icons = Social_icons::get();
+
+        foreach ($icons as $icon){
+
+        }
+
+
+        ////->update([
+//
+ //       ]);
+
+        return back();
+    }
+
+
+
     public function updateHomeImage(Request $request)
     {
-//        $this->validate($request,[
-//            'prod' => 'required'
-//        ]);
-
         if ($request->key && $request->key == 'one') {
             $product = HomeImage::where('code', $request->prod)->first();
             return View::make('vendor.adminlte.updatePage.updateHomeImage', [

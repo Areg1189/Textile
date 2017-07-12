@@ -85,6 +85,9 @@ $(document).on('submit', ".formImage", function (form) {
 });
 //=============================  UPDATE ========================//
 
+
+//=============================  UPDATE ========================//
+
 $(document).on('click', '.iconUpdate', function () {
     $('.updateForm').html('');
     parent = $(this).data('status');
@@ -99,7 +102,7 @@ $(document).on('click', '.iconUpdate', function () {
             if (data != 0) {
                 $('.updateForm').html(data);
             }
-        },
+        }
 
     });
 });
