@@ -148,6 +148,14 @@
                 </div>
             </div>
 
+
+
+
+
+
+            edasdasd
+            asdad
+            asdasd
             <div id="da-thumbs" class="da-thumbs">
                 {{--@foreach($categories as $category)--}}
                     {{--@foreach($category->subCategories->random(count($category->subCategories) >= 2 ? 2 : '') as $subCategory)--}}
