@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="shop-desc">
                                             <h3><a
-                                                        href="{{route('prod',['link'=>$subCategory->products('link')])}}"
+{{--                                                        href="{{route('prod',['link'=>$subCategory->products('link')])}}"--}}
                                                 >
                                                     {{$product->translate(session('locale'))->name}}
                                                 </a>
