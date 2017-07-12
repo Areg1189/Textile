@@ -104,7 +104,7 @@
                                 <div id="colorFilter" class="tab-pane fade">
                                     <div class="row">
                                         <div class="col-md-12 text-center">
-                                            <h3>Color and Image</h3>
+                                            <h3>Color and Filters</h3>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -172,12 +172,22 @@
                                                                                                    data-target="filter_{{$i}}">
                                                                                             {{$value->translate(session('locale'))->name}}
                                                                                             <div class="">
-                                                                                                <input type="number"
-                                                                                                       class="form-control"
-                                                                                                       name="price[]"
-                                                                                                       placeholder="Price"
-                                                                                                       data-status="filter_{{$i}}"
-                                                                                                       disabled>
+                                                                                                <div class="col-sm-6">
+                                                                                                    <input type="number"
+                                                                                                           class="form-control"
+                                                                                                           name="price[]"
+                                                                                                           placeholder="Price *"
+                                                                                                           data-status="filter_{{$i}}"
+                                                                                                           disabled>
+                                                                                                </div>
+                                                                                                <div class="col-sm-6">
+                                                                                                    <input type="number"
+                                                                                                           class="form-control"
+                                                                                                           name="sale[]"
+                                                                                                           placeholder="Sale"
+                                                                                                           data-status_sale="filter_{{$i}}"
+                                                                                                           disabled>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -194,12 +204,22 @@
                                                                                    data-target="filter_{{$i}}">
                                                                             {{$catFilter->subs->translate(session('locale'))->name}}
                                                                             <div class="">
-                                                                                <input type="number"
-                                                                                       class="form-control"
-                                                                                       name="price[]"
-                                                                                       placeholder="Price"
-                                                                                       data-status="filter_{{$i}}"
-                                                                                       disabled>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control"
+                                                                                           name="price[]"
+                                                                                           placeholder="Price"
+                                                                                           data-status="filter_{{$i}}"
+                                                                                           disabled>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control"
+                                                                                           name="sale[]"
+                                                                                           placeholder="Sale"
+                                                                                           data-status_sale="filter_{{$i}}"
+                                                                                           disabled>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     @endif

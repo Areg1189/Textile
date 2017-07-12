@@ -14,7 +14,7 @@ class Product extends Model
     ];
 
     protected $fillable = [
-        'code', 'parent_id', 'sale', 'link',
+        'code', 'parent_id', 'sale', 'link','price',
     ];
 
     public function colors(){

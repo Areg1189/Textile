@@ -447,10 +447,16 @@ $(document).on('change', '.filter_checkbox', function () {
             'required': true,
             'disabled': false
         }).focus();
+        $('[data-status_sale="' + data + '"]').attr({
+            'disabled': false
+        });
     } else {
         $('[data-status="' + data + '"]')
             .val('').attr({
             'required': false,
+            'disabled': true
+        });
+        $('[data-status_sale="' + data + '"]').attr({
             'disabled': true
         });
     }

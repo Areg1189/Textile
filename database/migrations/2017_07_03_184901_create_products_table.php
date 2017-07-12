@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('code');
             $table->integer('parent_id');
             $table->string('link');
+            $table->integer('price')->nullable();
             $table->integer('sale')->nullable();
             $table->timestamps();
         });

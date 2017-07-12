@@ -148,58 +148,27 @@
                 </div>
             </div>
 
+
+
+
+
+
+            edasdasd
+            asdad
+            asdasd
             <div id="da-thumbs" class="da-thumbs">
-                @foreach($categories as $category)
-                    @if(count($category->subCategories) >= 2)
-                        @foreach($category->subCategories->random(2) as $subCategory)
-                            @if(count($subCategory->products) >= 2)
-                                @foreach($subCategory->products->random(2) as $product)
-                                    <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
-                                            <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @else
-                                @foreach($subCategory->products as $product)
-                                    <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
-                                            <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @endif
-                        @endforeach
-                    @else
-                        @foreach($category->subCategories as $subCategory)
-                            @if(count($subCategory->products) >= 2)
-                                @foreach($subCategory->products->random(2) as $product)
-                                    <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
-                                            <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @else
-                                @foreach($subCategory->products as $product)
-                                    <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
-                                            <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            @endif
-                        @endforeach
-                    @endif
-                @endforeach
+                {{--@foreach($categories as $category)--}}
+                    {{--@foreach($category->subCategories->random(count($category->subCategories) >= 2 ? 2 : '') as $subCategory)--}}
+                        {{--@foreach($subCategory->products->random(count($subCategory->products) >= 2 ? 2 : '') as $product)--}}
+                            {{--<div class="pentry item-w1 item-h1 {{$category->link}}">--}}
+                                {{--<a href="single-project.html" title="">--}}
+                                    {{--<img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}" alt="" class="img-responsive">--}}
+                                    {{--<div><span>More</span></div>--}}
+                                {{--</a>--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--@endforeach--}}
+                {{--@endforeach--}}
 
 
             </div><!-- end div -->
