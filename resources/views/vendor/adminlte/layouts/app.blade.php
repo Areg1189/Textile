@@ -65,7 +65,7 @@ desired effect
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
 
-        @include('adminlte::layouts.partials.controlsidebar')
+{{--        @include('adminlte::layouts.partials.controlsidebar')--}}
 
         @include('vendor.adminlte.modal.modalUpdate')
         @include('vendor.adminlte.modal.modalDelete')

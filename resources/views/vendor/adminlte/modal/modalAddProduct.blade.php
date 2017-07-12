@@ -18,21 +18,10 @@
                               method="post"
                               enctype="multipart/form-data"
                               class="productMulty">
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#imageName">Image and Name</a></li>
-                                <li><a data-toggle="tab" href="#colorFilter">Color and Filter</a></li>
-                                <li><a data-toggle="tab" href="#description">Description</a></li>
-                            </ul>
 
 
                             {{csrf_field()}}
-                            <div class="tab-content">
-                                <div id="imageName" class="tab-pane fade in active">
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <h3>Name and Images</h3>
-                                        </div>
-                                    </div>
+
 
                                     <div class="row">
                                         <div class="col-xs-4">
@@ -92,13 +81,6 @@
                                         </div>
                                     </div>
 
-                                </div>
-                                <div id="colorFilter" class="tab-pane fade">
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <h3>Color and Filters</h3>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="panel panel-danger">
@@ -148,14 +130,19 @@
                                                     <div class="col-sm-6">
                                                         <div class="form-group text-center">
                                                             <label>Price</label>
-                                                            <input type="number" name="firstPrice" class="form-control"
-                                                                   placeholder="Price">
+                                                            <input type="number"
+                                                                   name="firstPrice"
+                                                                   class="form-control"
+                                                                   placeholder="Price"
+                                                                   required>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group text-center">
                                                             <label>Sale</label>
-                                                            <input type="number" name="firstSale" class="form-control"
+                                                            <input type="number"
+                                                                   name="firstSale"
+                                                                   class="form-control"
                                                                    placeholder="Sale">
                                                         </div>
                                                     </div>
@@ -258,8 +245,7 @@
                                         @endforeach
                                     </div>
 
-                                </div>
-                                <div id="description" class="tab-pane fade">
+
                                     <div class="row">
                                         <div class="col-md-12 text-center">
                                             <h3>Description</h3>
@@ -289,7 +275,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary">Save</button>
@@ -297,7 +283,7 @@
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+
                             <div class="imageContainer">
 
                             </div>

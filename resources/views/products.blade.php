@@ -175,6 +175,7 @@
                                                      alt="">
                                             </a>
                                             <a href="#" class="link_img link_text ">
+                                                @if($product)
                                                 <div class="related_name">
                                                         <span>
                                                             {{$product->translate(session('locale'))->name}}
@@ -190,7 +191,6 @@
                                                 </div>
                                             </a>
                                         </div>
-
                                     </li>
                                 @endforeach
                             </ul>

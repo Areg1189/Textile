@@ -137,7 +137,7 @@
                                 <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
                                 <p>
                                     {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
+
                                 </p>
                             </li>
                             <!-- Menu Body -->

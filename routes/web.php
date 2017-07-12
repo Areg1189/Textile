@@ -127,7 +127,7 @@ Route::group(
 
         //========= PRODUCT  ======= //
 
-            Route::get('{cat?}/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
+            Route::get('{cat?}/product/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');

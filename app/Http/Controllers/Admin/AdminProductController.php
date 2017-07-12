@@ -62,7 +62,7 @@ class AdminProductController extends Controller
             'code' => time() . $request->en_name,
             'link' => $link,
             'sale' => $request->firstSale,
-            'price' => $request->firstFirst,
+            'price' => $request->firstPrice,
             'parent_id' => $request->cat,
             'hy' => [
                 'name' => $request->hy_name,
@@ -173,7 +173,7 @@ class AdminProductController extends Controller
         $link = str_replace(' ', '-', $link);
         $product->link = $link;
         $product->sale = $request->firstSale;
-        $product->price = $request->firstFirst;
+        $product->price = $request->firstPrice;
         $product->translate('hy')->name = $request->hy_name;
         $product->translate('en')->name = $request->en_name;
         $product->translate('ru')->name = $request->ru_name;

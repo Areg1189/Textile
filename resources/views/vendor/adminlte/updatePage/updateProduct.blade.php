@@ -16,20 +16,10 @@
                           class="productMulty"
                           enctype="multipart/form-data">
                         {{csrf_field()}}
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#imageNameOld">Image and Name</a></li>
-                            <li><a data-toggle="tab" href="#colorFilterOld">Color and Filter</a></li>
-                            <li><a data-toggle="tab" href="#descriptionOld">Description</a></li>
-                        </ul>
 
-                        <div class="tab-content">
-                            <div id="imageNameOld" class="tab-pane fade in active">
 
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h3>Name and Images</h3>
-                                    </div>
-                                </div>
+
+
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="form-group text-center">
@@ -105,14 +95,10 @@
                                     </div>
                                 </div>
 
-                            </div>
 
-                            <div id="colorFilterOld" class="tab-pane fade">
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h3>Color and Filters</h3>
-                                    </div>
-                                </div>
+
+
+
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="panel panel-danger">
@@ -153,7 +139,6 @@
                                 </div>
 
 
-
                                 {{--Price Sale--}}
 
 
@@ -171,7 +156,7 @@
                                                         <label>Price</label>
                                                         <input type="number" name="firstPrice" class="form-control"
                                                                placeholder="Price"
-                                                        value="{{$product->price}}">
+                                                               value="{{$product->price}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -183,8 +168,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     @php($i = 0)
                                     @foreach($filters as $filter)
@@ -246,7 +232,7 @@
                                                                                                        name="sale[]"
                                                                                                        placeholder="Sale"
                                                                                                        data-status_sale="filterUpdate_{{$i}}"
-                                                                                                       {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                                       {{isset($res->filter_value) ? '' : 'disabled'}}
                                                                                                        value="{{isset($res->filter_value) ? $res->sale : null}}">
                                                                                             </div>
                                                                                         </div>
@@ -287,7 +273,7 @@
                                                                                            name="sale[]"
                                                                                            placeholder="Sale"
                                                                                            data-status_sale="filterUpdate_{{$i}}"
-                                                                                           {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                           {{isset($res->filter_value) ? '' : 'disabled'}}
                                                                                            value="{{isset($res->filter_value) ? $res->sale : null}}">
                                                                                 </div>
                                                                             </div>
@@ -304,9 +290,9 @@
                                         @endforeach
                                     @endforeach
                                 </div>
-                            </div>
 
-                            <div id="descriptionOld" class="tab-pane fade">
+
+
                                 <div class="row">
                                     <div class="col-md-12 text-center">
                                         <h3>Description</h3>
@@ -342,18 +328,20 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
 
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                    </button>
                                 </div>
                             </div>
-                        </div>
+
                         <div class="imageContainer">
 
                         </div>
+
                     </form>
                 </div>
             </div>
