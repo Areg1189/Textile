@@ -39,9 +39,7 @@
                                                             @foreach($category->subCategories as $subCategory)
                                                                 <li>
                                                                     <a href="{{route('getCategory', [
-                                                                    'cat' => $subCategory->link,
-                                                                    'name' => $category->link
-                                                                    ])}}">
+                                                                    'cat' => $subCategory->link])}}">
                                                                         {{$subCategory->translate(session('locale'))->name}}
                                                                         <span> ({{count($subCategory->products)}})</span>
                                                                     </a>

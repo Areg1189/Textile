@@ -34,8 +34,10 @@ Route::group(
 
         Auth::routes();
         Route::get('home', 'HomeController@index')->name('home');
+        Route::get('about', 'HomeController@about')->name('about');
         Route::get('', 'HomeController@index')->name('home');
-        Route::get('{name}/{cat}', 'HomeController@getCategory')->name('getCategory');
+        Route::get('category/{cat}', 'HomeController@getCategory')->name('getCategory');
+//        Route::get('category/{prod}', 'HomeController@getProduct')->name('getProduct');
 
 
 

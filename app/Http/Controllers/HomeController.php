@@ -36,12 +36,13 @@ class HomeController extends Controller
 
     public function getCategory(Request $request)
     {
-        if (!$request->cat || !$request->name) {
+        if (!$request->cat) {
             return abort(404);
         }
 
-        $category = Category::where('link', $request->name)->firstOrFail();
         $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
+        $category = $subCategory->category;
+
 
         if(count($subCategory->products) < 5)  {
             $releated_products = $subCategory->products;
