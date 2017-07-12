@@ -17,6 +17,7 @@ class CreateProFiltersTable extends Migration
             $table->increments('id');
             $table->string('filter_value');
             $table->integer('price');
+            $table->integer('sale')->nullable();
             $table->integer('prod_id');
             $table->timestamps();
         });

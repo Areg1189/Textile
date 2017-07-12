@@ -80,7 +80,7 @@
                                                             data-target="image{{$img}}"
                                                             data-prod="{{$image->id}}"
                                                             data-key="image"
-                                                        data-href_delete="{{route('deleteProduct')}}">
+                                                            data-href_delete="{{route('deleteProduct')}}">
                                                             <img src="{{asset('images/products/'.$image->image_name)}}"
                                                                  style="width:100%;"/>
                                                             <span class="delete_update_image iconDelete"
@@ -101,9 +101,9 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="block">
-                                            <input type="file" name="img"   data-name="updateImage"
+                                            <input type="file" name="img" data-name="updateImage"
                                                    class="image"
-                                                   multiple="multiple" />
+                                                   multiple="multiple"/>
 
                                         </div>
                                     </div>
@@ -121,7 +121,7 @@
                             <div id="colorFilterOld" class="tab-pane fade">
                                 <div class="row">
                                     <div class="col-md-12 text-center">
-                                        <h3>Color and Image</h3>
+                                        <h3>Color and Filters</h3>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -199,7 +199,7 @@
                                                                                                class="filter_checkbox"
                                                                                                name="filter_checkbox[]"
                                                                                                value="{{$value->htt}}"
-                                                                                               data-target="filter_{{$i}}"
+                                                                                               data-target="filterUpdate_{{$i}}"
                                                                                                 {{ isset($res->filter_value)? 'checked' : ''}}>
 
                                                                                         {{
@@ -207,13 +207,24 @@
                                                                                         ->translate(session('locale'))
                                                                                         ->name}}
                                                                                         <div class="">
-                                                                                            <input type="number"
-                                                                                                   class="form-control"
-                                                                                                   name="price[]"
-                                                                                                   placeholder="Price"
-                                                                                                   data-status="filter_{{$i}}"
-                                                                                                   {{isset($res->filter_value) ? 'required' : 'disabled'}}
-                                                                                                   value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                                            <div class="col-sm-6">
+                                                                                                <input type="number"
+                                                                                                       class="form-control"
+                                                                                                       name="price[]"
+                                                                                                       placeholder="Price"
+                                                                                                       data-status="filterUpdate_{{$i}}"
+                                                                                                       {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                                       value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <input type="number"
+                                                                                                       class="form-control"
+                                                                                                       name="sale[]"
+                                                                                                       placeholder="Sale"
+                                                                                                       data-status_sale="filterUpdate_{{$i}}"
+                                                                                                        {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                                       value="{{isset($res->filter_value) ? $res->sale : null}}">
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -237,13 +248,24 @@
                                                                                     {{isset($res->filter_value) ? 'checked' : ''}}>
                                                                             {{$catFilter->subs->translate(session('locale'))->name}}
                                                                             <div class="">
-                                                                                <input type="number"
-                                                                                       class="form-control"
-                                                                                       name="price[]"
-                                                                                       placeholder="Price"
-                                                                                       data-status="filter_{{$i}}"
-                                                                                       {{isset($res->filter_value) ? 'required' : 'disabled'}}
-                                                                                       value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control"
+                                                                                           name="price[]"
+                                                                                           placeholder="Price"
+                                                                                           data-status="filterUpdate_{{$i}}"
+                                                                                           {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                           value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control"
+                                                                                           name="sale[]"
+                                                                                           placeholder="Sale"
+                                                                                           data-status_sale="filterUpdate_{{$i}}"
+                                                                                           {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                           value="{{isset($res->filter_value) ? $res->sale : null}}">
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     @endif
