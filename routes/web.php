@@ -94,6 +94,12 @@ Route::group(
             Route::post('change_icons', 'Admin\AdminController@change_icons')->name('change_icons');
 
 
+            //=========  EMPLOYEE  ======= //
+
+            Route::post('addEmployee', 'Admin\AdminController@addEmployee')->name('addEmployee');
+            Route::post('editEmployee/{id}', 'Admin\AdminController@editEmployee')->name('editEmployee');
+
+
             //=========  CATEGORY  ======= //
 
             Route::get('category', 'Admin\AdminCategoryController@index')->name('adminCategories');

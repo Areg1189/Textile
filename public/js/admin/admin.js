@@ -198,7 +198,7 @@ $(".productMulty").validate({
 
 });
 
-$(document).on('validate', '.productMulty',{
+$(document).on('validate', '.productMulty', {
     rules: {
         "image.*": {
             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
@@ -206,7 +206,7 @@ $(document).on('validate', '.productMulty',{
 
     },
     // range:
-    submitHandler: function(form) {
+    submitHandler: function (form) {
         console.log(basic)
 
     }
@@ -458,15 +458,15 @@ $(document).on('change', '.filter_checkbox', function () {
     } else {
         var flag = false;
         $('.filter_checkbox').each(function () {
-            if($(this).is(':checked')){
+            if ($(this).is(':checked')) {
                 flag = true;
             }
         });
-        if (flag){
+        if (flag) {
             $('[name="firstPrice"]').prop({
                 'required': false
             });
-        }else{
+        } else {
             $('[name="firstPrice"]').prop({
                 'required': true
             });
@@ -511,3 +511,7 @@ $(document).on('click', '.closeDell', function (e) {
 $(document).on('click', '.dellImage', function (e) {
     e.stopPropagation();
 });
+
+
+
+

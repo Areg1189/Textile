@@ -47,7 +47,6 @@ $(document).on('click', '.edit_top_save', function () {
 });
 
 $(document).on("change", '.upload2', function () {
-    $(".span_reset_file").fadeIn();
     $(".cr-image").fadeIn();
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -69,6 +68,7 @@ $(document).on("change", '.upload2', function () {
 
 $(document).on('submit', ".formImage", function (form) {
     form = form;
+    f = $(this);
     $uploadCrop.croppie('result', {
 
         type: 'canvas',
@@ -77,15 +77,14 @@ $(document).on('submit', ".formImage", function (form) {
             height: h
         },
     }).then(function (resp) {
-        if ($('input[type="file"]').val()) {
+        if ($(f).find('input[type="file"]').val()) {
             resp = resp;
-            $('input[name="image"]').val(resp);
+            $(f).find('input[name="image"]').val(resp);
         }
     });
 });
 //=============================  UPDATE ========================//
 
-mndtjks
 //=============================  UPDATE ========================//
 
 $(document).on('click', '.iconUpdate', function () {
@@ -106,3 +105,19 @@ $(document).on('click', '.iconUpdate', function () {
 
     });
 });
+
+
+/*UPDATE EMPLOYEE*/
+
+$(document).on('click', '.update_employee', (function (e) {
+        $('.modal-content').html('');
+        $.ajax({
+            type: 'post',
+            url: $(this).data('href'),
+            data: {href: href, _token: token},
+            success: function (e) {
+                $('.modal-content').html(e);
+            }
+        })
+    })
+)

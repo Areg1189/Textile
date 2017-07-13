@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Employee_site;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,6 +15,8 @@ use App\Models\HomeImage;
 use Illuminate\Support\Facades\File;
 use App\Models\SubCategory;
 use App\Models\Social_icons;
+use App\Models\Employee;
+use App\Models\Employee_block;
 
 
 class AdminController extends Controller
@@ -148,26 +151,149 @@ class AdminController extends Controller
     }
 
 
-    public function aboutus(){
-        return view('vendor.adminlte.aboutus');
+    public function aboutus()
+    {
+        $show = Employee_block::get(); //for hide block
+        $employees = Employee::get();
+        return view('vendor.adminlte.aboutus',[
+            'employees' => $employees,
+        ]);
     }
 
-    public function icons(){
+    public function icons()
+    {
         $icons = Social_icons::get();
 
-        return view('vendor.adminlte.icons',[
+        return view('vendor.adminlte.icons', [
             'icons' => $icons,
         ]);
     }
 
-    public function change_icons(Request $request){
+    public function change_icons(Request $request)
+    {
 
-        for($i = 1 ; $i <= count($request->icons); $i++){
+        for ($i = 1; $i <= count($request->icons); $i++) {
             Social_icons::where('id', $i)->update([
-                'link' => $request->icons[$i-1]
+                'link' => $request->icons[$i - 1]
             ]);
         }
         return back();
+    }
+
+
+    public function addEmployee(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'hy_name' => 'required|string',
+            'en_name' => 'required|string',
+            'ru_name' => 'required|string',
+        ]);
+        if ($validator->fails()) {
+            return back()->with('error', 'add')->withErrors($validator->errors())->withInput();
+        }
+
+        if ($request->image) {
+            $data = $_POST['image'];
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageName = time() . '.jpg';
+            file_put_contents('images/employee/' . $imageName, $data);
+        }
+
+        $empl = Employee::create([
+            'code' => time() . $imageName,
+            'image' => $imageName,
+            'hy' => [
+                'name' => $request->hy_name,
+                'position' => $request->hy_position,
+                'text' => $request->hy_text
+            ],
+            'en' => [
+                'name' => $request->en_name,
+                'position' => $request->en_position,
+                'text' => $request->en_text
+            ],
+            'ru' => [
+                'name' => $request->ru_name,
+                'position' => $request->ru_position,
+                'text' => $request->ru_text
+            ],
+
+        ]);
+
+        $empl_social = Employee_site::create([
+            'employee_id' => $empl->id,
+            'facebook' => $request->facebook,
+            'google' => $request->google,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'pinterest' => $request->pinterest,
+            'skype' => $request->skype,
+            'vimeo' => $request->vimeo,
+            'youtube' => $request->youtube,
+            'instagram' => $request->instagram,
+        ]);
+
+        return back();
+
+    }
+
+
+
+    public function editEmployee(Request $request){
+
+        if ($request->key && $request->key == 'one') {
+            $product = Employee::where('id', $request->prod)->first();
+            return View::make('vendor.adminlte.updatePage.updateEmployee', [
+                'product' => $product,
+            ]);
+        } else{
+            $image = Employee::where('id', $request->id)->first();
+            if ($request->image) {
+                $data = $_POST['image'];
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+
+                $data = base64_decode($data);
+                $imageName = time() . '.jpg';
+                file_put_contents('images/employee/' . $imageName, $data);
+                if (file_exists(public_path() . '/images/employee/' . $image->image)) {
+                    File::delete(public_path() . '/images/employee/' . $image->image);
+                }
+            } else {
+                $imageName = $image->image;
+            }
+
+            $image->image = $imageName;
+
+            $image->translate('hy')->name = $request->hy_name;
+            $image->translate('en')->name = $request->en_name;
+            $image->translate('ru')->name = $request->ru_name;
+            $image->translate('hy')->position = $request->hy_position;
+            $image->translate('en')->position = $request->en_position;
+            $image->translate('ru')->position = $request->ru_position;
+            $image->translate('hy')->text = $request->hy_text;
+            $image->translate('en')->text = $request->en_text;
+            $image->translate('ru')->text = $request->ru_text;
+
+            Employee_site::where('employee_id', $request->id)->update([
+                'facebook' => $request->facebook,
+                'google' => $request->google,
+                'twitter' => $request->twitter,
+                'linkedin' => $request->linkedin,
+                'pinterest' => $request->pinterest,
+                'skype' => $request->skype,
+                'vimeo' => $request->vimeo,
+                'youtube' => $request->youtube,
+                'instagram' => $request->instagram,
+            ]);
+
+            $image->save();
+            return back();
+        }
+
     }
 
 

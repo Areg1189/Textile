@@ -9,7 +9,6 @@
 @section('content')
 
 
-
     <div class="first-slider">
 
         <div id="rev_slider_56_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
