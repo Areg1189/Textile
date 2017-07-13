@@ -19,15 +19,29 @@
                             {{csrf_field()}}
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="upload-demo4" style="width:350px; position: relative;">
-                                        <input type="file" name="" id="file" class="input-file  upload2"
-                                               data-image="imageVarietyUpdate">
-                                        <label for="file" class="btn btn-tertiary js-labelFile">
-                                            <i class="icon fa fa-check"></i>
-                                            <span class="js-fileName">Change a Image</span>
-                                        </label>
-                                        <span class="span_reset_file"><i class="fa fa-times"
-                                                                         aria-hidden="true"></i></span>
+                                    <div class="upload-demo3">
+                                        <div class="form-group">
+                                            <label for="file">Choose Cover Image</label>
+                                            <input type="file" name="" id="file" class="upload3 form-control">
+                                        </div>
+
+                                        <span class="span_reset_file">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-6">
+                                    <div class="upload-demo4">
+                                        <div class="form-group">
+                                            <label for="file">Choose Image</label>
+                                            <input type="file" name="" id="file" class="upload2 form-control">
+                                        </div>
+
+                                        <span class="span_reset_file">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -151,6 +165,7 @@
 
                             <input type="hidden" name="cat" value="{{$category->link}}">
                             <input type="hidden" name="image">
+                            <input type="hidden" name="imageGeneral">
                         </form>
                     </div>
                     <!-- /.box-body -->

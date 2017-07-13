@@ -38,6 +38,9 @@ class AdminSubCategoryController extends Controller
         $cat = Category::where('link', $request->cat)->firstOrFail();
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
+        $imageName = null;
+        $imageNamegeneral = null;
+
 
         if ($request->image) {
             $data = $_POST['image'];
@@ -49,10 +52,22 @@ class AdminSubCategoryController extends Controller
             file_put_contents('images/subCategory/' . $imageName, $data);
         }
 
+
+        if ($request->imageGeneral) {
+            $data = $_POST['imageGeneral'];
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageNamegeneral = '1'.time() . '.jpg';
+            file_put_contents('images/subCategory/' . $imageNamegeneral, $data);
+        }
+
         $newCat = SubCategory::create([
             'code' => time() . $request->en_name,
             'link' => $link,
             'image_name' => $imageName,
+            'general_image' => $imageNamegeneral,
             'category_id' => $cat->id,
             'hy' => [
                 'name' => $request->hy_name,
@@ -104,11 +119,26 @@ class AdminSubCategoryController extends Controller
             $data = base64_decode($data);
             $imageName = time() . '.jpg';
             file_put_contents('images/subCategory/' . $imageName, $data);
-            if (file_exists(public_path() . '/upload/' . $cat->image_name)) {
-                File::delete(public_path() . '/upload/' . $cat->image_name);
+            if (file_exists(public_path() . '/images/subCategory/' . $cat->image_name)) {
+                File::delete(public_path() . '/images/subCategory/' . $cat->image_name);
             }
         } else {
             $imageName = $cat->image_name;
+        }
+
+        if ($request->imageGeneral) {
+            $data = $_POST['imageGeneral'];
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $data = base64_decode($data);
+            $imageNamegeneral = '1'.time() . '.jpg';
+            file_put_contents('images/subCategory/' . $imageNamegeneral, $data);
+            if (file_exists(public_path() . '/images/subCategory/' . $cat->general_image)) {
+                File::delete(public_path() . '/images/subCategory/' . $cat->general_image);
+            }
+        } else {
+            $imageNamegeneral = $cat->general_image;
         }
         $validator = Validator::make($request->all(), [
             'hy_name' => 'required|string',
@@ -123,6 +153,7 @@ class AdminSubCategoryController extends Controller
         $link = str_replace(' ', '-', $link);
         $cat->link = $link;
         $cat->image_name = $imageName;
+        $cat->general_image = $imageNamegeneral;
         $cat->translate('hy')->name = $request->hy_name;
         $cat->translate('en')->name = $request->en_name;
         $cat->translate('ru')->name = $request->ru_name;
@@ -179,3 +210,4 @@ class AdminSubCategoryController extends Controller
         }
     }
 }
+

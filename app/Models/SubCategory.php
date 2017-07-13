@@ -14,7 +14,7 @@ class SubCategory extends Model
     ];
 
     protected $fillable = [
-        'code', 'link', 'image_name', 'category_id', 'top',
+        'code', 'link', 'image_name', 'category_id', 'top', 'general_image',
     ];
 
     public function category(){

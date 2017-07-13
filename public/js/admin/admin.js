@@ -287,14 +287,32 @@ $(document).on('click', ".span_reset_file", function () {
 
 
 $(document).on("change", '.upload2', function () {
-    $(".span_reset_file").fadeIn();
+
+    $(".cr-image").fadeIn();
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $uploadCrop1.croppie("bind", {
+            url: e.target.result,
+        }).then(function () {
+            $w1 = $('.basic-width'),
+                $h1 = $('.basic-height'),
+
+                $uploadCrop1.croppie('bind', {
+                    url: e.target.result,
+
+                });
+        });
+    };
+    reader.readAsDataURL(this.files[0]);
+});
+$(document).on("change", '.upload3', function () {
     $(".cr-image").fadeIn();
     var reader = new FileReader();
     reader.onload = function (e) {
         $uploadCrop.croppie("bind", {
             url: e.target.result,
         }).then(function () {
-            $w = $('.basic-width'),
+            $w = $('.basic-'),
                 $h = $('.basic-height'),
 
                 $uploadCrop.croppie('bind', {
@@ -309,20 +327,31 @@ $(document).on("change", '.upload2', function () {
 
 $(document).on('submit', ".formImage", function (form) {
     form = form;
+    f = $(this);
+    $uploadCrop1.croppie('result', {
+        type: 'canvas',
+        size: {
+            width: w1,
+            height: h1
+        },
+    }).then(function (resp) {
+        if ($(f).find('input[type="file"]').val()) {
+            $(f).find('input[name="image"]').val(resp);
+        }
+    });
     $uploadCrop.croppie('result', {
-
         type: 'canvas',
         size: {
             width: w,
             height: h
         },
     }).then(function (resp) {
-        if ($('input[type="file"]').val()) {
-            resp = resp;
-            $('input[name="image"]').val(resp);
+        if ($(f).find('input[type="file"]').val()) {
+            $(f).find('input[name="imageGeneral"]').val(resp);
         }
     });
 });
+
 
 // $(document).on('submit', "#addSubCategory", function (form) {
 //     $uploadCrop.croppie('result', {
@@ -446,15 +475,14 @@ $(document).on('change', '.filter_checkbox', function () {
     var data = $(this).data('target');
     if ($(this).is(':checked')) {
         $('[data-status="' + data + '"]').attr({
-            'required': true,
             'disabled': false
         }).focus();
         $('[data-status_sale="' + data + '"]').attr({
             'disabled': false
         });
-        $('[name="firstPrice"]').prop({
-            'required': false
-        })
+        // $('[name="firstPrice"]').prop({
+        //     'required': false
+        // })
     } else {
         var flag = false;
         $('.filter_checkbox').each(function () {
@@ -480,6 +508,11 @@ $(document).on('change', '.filter_checkbox', function () {
             'disabled': true
         });
 
+    }
+});
+$(document).on('keyup', '.filter_price', function () {
+    if ($(this).val()){
+        $('.firstPrice').prop('required',false);
     }
 });
 

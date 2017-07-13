@@ -17,21 +17,44 @@
                         {{csrf_field()}}
 
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="~upload-demo3" style="width:350px; position: relative;">
-                                    <input type="file" id="file" class="input-file  upload2"
-                                           data-image="imageVarietyUpdate">
-                                    <label for="file" class="btn btn-tertiary js-labelFile">
-                                        <i class="icon fa fa-check"></i>
-                                        <span class="js-fileName">Change a Image</span>
-                                    </label>
-                                    <span class="span_reset_file"><i class="fa fa-times"
-                                                                     aria-hidden="true"></i></span>
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="upload-demo5">
+                                        <div class="form-group">
+                                            <label for="file">Choose Cover Image</label>
+                                            <input type="file" name="" id="file" class="upload3 form-control">
+                                        </div>
+
+                                        <span class="span_reset_file">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12">
+                                    <div class="upload-demo6">
+                                        <div class="form-group">
+                                            <label for="file">Choose Image</label>
+                                            <input type="file" name="" id="file" class="upload2 form-control">
+                                        </div>
+
+                                        <span class="span_reset_file">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-6">
                                 <h3>Old Image</h3>
                                 <img src="{{asset('images/subCategory/'.$product->image_name)}}" class="img-rounded"
+                                     alt="Cinque Terre" width="100%">
+                            </div>
+                            <div class="col-sm-6">
+                                <h3>Old Image</h3>
+                                <img src="{{asset('images/subCategory/'.$product->general_image)}}" class="img-rounded"
                                      alt="Cinque Terre" width="100%">
                             </div>
                         </div>
@@ -159,6 +182,7 @@
                         </div>
                         <input type="hidden" name="prod" value="{{$product->link}}">
                         <input type="hidden" name="image">
+                        <input type="hidden" name="imageGeneral">
                     </form>
                 </div>
             </div>
@@ -167,17 +191,35 @@
     </div>
 </div>
 <script>
-    $uploadCrop = $(".upload-demo3").croppie({
+    $uploadCrop1 = $(".upload-demo6").croppie({
         enableExif: true,
         viewport: {
             width: 370,
             height: 300
         },
         boundary: {
-            width: 370,
-            height: 300
+            width: 470,
+            height: 400
         }
     });
-    w = 370 ;
-    h = 300;
+
+    w1 = 370;
+    h1 = 300;
+
+
+    $uploadCrop = $(".upload-demo5").croppie({
+        enableExif: true,
+        viewport: {
+            width: 500,
+            height: 50
+        },
+        boundary: {
+            width: 600,
+            height: 60
+        }
+    });
+
+    w = 2000;
+    h = 400;
+
 </script>

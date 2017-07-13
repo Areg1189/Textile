@@ -66,36 +66,8 @@ class HomeController extends Controller
     }
 
 
-    public function getCategory(Request $request)
-    {
-        if (!$request->cat) {
-            return abort(404);
-        }
-
-        $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
-        $category = $subCategory->category;
 
 
-        if(count($subCategory->products) < 5)  {
-            $releated_products = $subCategory->products;
-        } else {
-            $releated_products = $subCategory->products->random(4);
-        }
 
 
-        return view('products', [
-            'subCategory' => $subCategory,
-            'category' => $category,
-            'releated_products' => $releated_products
-        ]);
-    }
-
-
-    public function getProduct(Request $request){
-//        if (!$request->prod || !$request->name) {
-//            return abort(404);
-//        }
-
-        return view('product');
-    }
 }

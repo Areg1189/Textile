@@ -130,9 +130,9 @@
                                                     <div class="col-sm-6">
                                                         <div class="form-group text-center">
                                                             <label>Price</label>
-                                                            <input type="number"
+                                                            <input type="number "
                                                                    name="firstPrice"
-                                                                   class="form-control"
+                                                                   class="form-control firstPrice"
                                                                    placeholder="Price"
                                                                    required>
                                                         </div>
@@ -185,7 +185,7 @@
                                                                                             <div class="">
                                                                                                 <div class="col-sm-6">
                                                                                                     <input type="number"
-                                                                                                           class="form-control"
+                                                                                                           class="form-control filter_price"
                                                                                                            name="price[]"
                                                                                                            placeholder="Price *"
                                                                                                            data-status="filter_{{$i}}"
@@ -217,7 +217,7 @@
                                                                             <div class="">
                                                                                 <div class="col-sm-6">
                                                                                     <input type="number"
-                                                                                           class="form-control"
+                                                                                           class="form-control filter_price"
                                                                                            name="price[]"
                                                                                            placeholder="Price"
                                                                                            data-status="filter_{{$i}}"

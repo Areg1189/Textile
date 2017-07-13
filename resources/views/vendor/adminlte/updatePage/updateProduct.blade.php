@@ -154,7 +154,7 @@
                                                 <div class="col-sm-6">
                                                     <div class="form-group text-center">
                                                         <label>Price</label>
-                                                        <input type="number" name="firstPrice" class="form-control"
+                                                        <input type="number" name="firstPrice" class="form-control firstPrice"
                                                                placeholder="Price"
                                                                value="{{$product->price}}">
                                                     </div>
@@ -208,7 +208,7 @@
                                                                                         <input type="checkbox"
                                                                                                class="filter_checkbox"
                                                                                                name="filter_checkbox[]"
-                                                                                               value="{{$value->htt}}"
+                                                                                               value="{{$value->code}}"
                                                                                                data-target="filterUpdate_{{$i}}"
                                                                                                 {{ isset($res->filter_value)? 'checked' : ''}}>
 
@@ -219,11 +219,11 @@
                                                                                         <div class="">
                                                                                             <div class="col-sm-6">
                                                                                                 <input type="number"
-                                                                                                       class="form-control"
+                                                                                                       class="form-control filter_price"
                                                                                                        name="price[]"
                                                                                                        placeholder="Price"
                                                                                                        data-status="filterUpdate_{{$i}}"
-                                                                                                       {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                                       {{isset($res->filter_value) ? '' : 'disabled'}}
                                                                                                        value="{{isset($res->filter_value) ? $res->price : null}}">
                                                                                             </div>
                                                                                             <div class="col-sm-6">
@@ -260,11 +260,11 @@
                                                                             <div class="">
                                                                                 <div class="col-sm-6">
                                                                                     <input type="number"
-                                                                                           class="form-control"
+                                                                                           class="form-control filter_price"
                                                                                            name="price[]"
                                                                                            placeholder="Price"
                                                                                            data-status="filterUpdate_{{$i}}"
-                                                                                           {{isset($res->filter_value) ? 'required' : 'disabled'}}
+                                                                                           {{isset($res->filter_value) ? '' : 'disabled'}}
                                                                                            value="{{isset($res->filter_value) ? $res->price : null}}">
                                                                                 </div>
                                                                                 <div class="col-sm-6">

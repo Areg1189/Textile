@@ -4,7 +4,7 @@
 
 
     <section class="section paralbackground page-banner hidden-xs"
-             style="background-image:url('upload/page_banner_shop.jpg');" data-img-width="2000" data-img-height="400"
+             style="background-image:url({{asset('images/subCategory/'.$subCategory->general_image)}});" data-img-width="2000" data-img-height="400"
              data-diff="100">
     </section>
     <!-- end section -->
@@ -19,8 +19,8 @@
             <div class="pull-right hidden-xs">
                 <div class="bread">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Shop</li>
+                        <li><a href="{{route('home')}}">@lang('header.home')</a></li>
+                        <li class="active">{{$subCategory->translate(session('locale'))->name}}</li>
                     </ol>
                 </div><!-- end bread -->
             </div><!-- /.pull-right -->
@@ -32,24 +32,22 @@
             <div class="row">
                 <div id="content" class="col-md-9 col-sm-12 single-blog">
                     <div class=" shop-list">
-
-
                         <div class="row">
-
-
-                            @foreach($subCategory->products->sortByDesc('id') as $product)
-
+                            @foreach($products as $product)
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="shop-item text-center">
                                         <div class="shop-thumbnail">
 
-                                            <img class="img-responsive" src="{{asset(
-                                                         "images/products/".$product->images->sortBy('id')->first()['image_name'])}}"/>
+                                            <img class="img-responsive"
+                                                 src="{{asset(
+                                                         "images/products/".$product
+                                                         ->images
+                                                         ->sortBy('id')
+                                                         ->first()['image_name'])}}"/>
                                         </div>
                                         <div class="shop-desc">
-                                            <h3><a
-{{--                                                        href="{{route('prod',['link'=>$subCategory->products('link')])}}"--}}
-                                                >
+                                            <h3>
+                                                <a href="#0">
                                                     {{$product->translate(session('locale'))->name}}
                                                 </a>
                                             </h3>
@@ -175,7 +173,7 @@
                                                      alt="">
                                             </a>
                                             <a href="#" class="link_img link_text ">
-                                                @if($product)
+                                                {{--@if($product)--}}
                                                 <div class="related_name">
                                                         <span>
                                                             {{$product->translate(session('locale'))->name}}

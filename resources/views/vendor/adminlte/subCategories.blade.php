@@ -73,7 +73,7 @@
 @section('script')
     @parent
     <script>
-        $uploadCrop = $(".upload-demo4").croppie({
+        $uploadCrop1 = $(".upload-demo4").croppie({
             enableExif: true,
             viewport: {
                 width: 370,
@@ -84,8 +84,27 @@
                 height: 400
             }
         });
-        w = 370 ;
-        h = 300;
+
+        w1 = 370;
+        h1 = 300;
+
+
+        $uploadCrop = $(".upload-demo3").croppie({
+            enableExif: true,
+            viewport: {
+                width: 500,
+                height: 50
+            },
+            boundary: {
+                width: 600,
+                height: 60
+            }
+        });
+
+        w = 2000;
+        h = 400;
+
+
         @if(session('error') == 'add')
             $('#modalAddSubCategory').modal();
         @endif
