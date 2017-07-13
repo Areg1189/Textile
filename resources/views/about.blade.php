@@ -260,49 +260,6 @@
         </div><!-- end container -->
     </section><!-- end section -->
 
-    {{--<section class="section paralbackground parallax content-light" style="background-image:url('upload/parallax_01.jpg');" data-img-width="2000" data-img-height="2000" data-diff="10">--}}
-    {{--<div class="container">--}}
-    {{--<div class="section-title text-center clearfix">--}}
-    {{--<h4>Company Statics</h4>--}}
-    {{--<p>Donec vitae sapien ut libero venenatis faucibus.</p>--}}
-    {{--<hr>--}}
-    {{--</div><!-- end title -->--}}
-
-    {{--<div class="row services-list text-center">--}}
-    {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
-    {{--<div class="box">--}}
-    {{--<img src="upload/icon_01.png" alt="" class="img-responsive">--}}
-    {{--<h3>Furniture Sets</h3>--}}
-    {{--<p class="stat-count">34551</p>--}}
-    {{--</div><!-- end box -->--}}
-    {{--</div>--}}
-
-    {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
-    {{--<div class="box">--}}
-    {{--<img src="upload/icon_02.png" alt="" class="img-responsive">--}}
-    {{--<h3>Chair Varieties</h3>--}}
-    {{--<p class="stat-count">12560</p>--}}
-    {{--</div><!-- end box -->--}}
-    {{--</div>--}}
-
-    {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
-    {{--<div class="box">--}}
-    {{--<img src="upload/icon_03.png" alt="" class="img-responsive">--}}
-    {{--<h3>Gardolap Varieties</h3>--}}
-    {{--<p class="stat-count">2214</p>--}}
-    {{--</div><!-- end box -->--}}
-    {{--</div>--}}
-
-    {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
-    {{--<div class="box">--}}
-    {{--<img src="upload/icon_04.png" alt="" class="img-responsive">--}}
-    {{--<h3>Bureaux</h3>--}}
-    {{--<p class="stat-count">16000</p>--}}
-    {{--</div><!-- end box -->--}}
-    {{--</div><!-- end col -->--}}
-    {{--</div>--}}
-    {{--</div><!-- end container -->--}}
-    {{--</section><!-- end section -->--}}
 
     <section class="section">
         <div class="container">
@@ -312,131 +269,132 @@
                 <hr>
             </div><!-- end title -->
 
-            <div class="row module-wrapper text-center">
-                <div class="col-md-3 col-sm-3 team-member">
-                    <div class="about-widget">
-                        <div class="post-media">
-                            <img src="upload/team_01.png" alt="" class="img-responsive">
-                        </div>
-                        <div class="social-icons">
-                            <ul class="list-inline">
-                                <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                        href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                      href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                       href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                        href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                         href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                class="fa fa-skype"></i></a></li>
-                            </ul>
-                        </div><!-- end social icons -->
 
-                        <div class="about-desc">
-                            <h4>John MARTIN</h4>
-                            <small>CEO / Founder</small>
-                            <p>My name is John. I create handcraft web design and graphic sources for beginners like
-                                me.</p>
-                        </div>
-                    </div>
-                </div><!-- end team_member -->
+                <div class="row module-wrapper text-center">
+                    <div class="col-md-3 col-sm-3 team-member">
+                        <div class="about-widget">
+                            <div class="post-media">
+                                <img src="upload/team_01.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="social-icons">
+                                <ul class="list-inline">
+                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
+                                                            href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
+                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
+                                                           href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
+                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
+                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
+                                                    class="fa fa-skype"></i></a></li>
+                                </ul>
+                            </div><!-- end social icons -->
 
-                <div class="col-md-3 col-sm-3 team-member">
-                    <div class="about-widget">
-                        <div class="post-media">
-                            <img src="upload/team_02.png" alt="" class="img-responsive">
+                            <div class="about-desc">
+                                <h4>John MARTIN</h4>
+                                <small>CEO / Founder</small>
+                                <p>My name is John. I create handcraft web design and graphic sources for beginners like
+                                    me.</p>
+                            </div>
                         </div>
-                        <div class="social-icons">
-                            <ul class="list-inline">
-                                <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                        href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                      href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                       href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                        href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                         href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                class="fa fa-skype"></i></a></li>
-                            </ul>
-                        </div><!-- end social icons -->
+                    </div><!-- end team_member -->
 
-                        <div class="about-desc">
-                            <h4>Amanda BOBSON</h4>
-                            <small>Senior Designer</small>
-                            <p>My name is Amanda. I create handcraft web design and graphic sources for beginners like
-                                me.</p>
-                        </div>
-                    </div>
-                </div><!-- end team_member -->
+                    <div class="col-md-3 col-sm-3 team-member">
+                        <div class="about-widget">
+                            <div class="post-media">
+                                <img src="upload/team_02.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="social-icons">
+                                <ul class="list-inline">
+                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
+                                                            href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
+                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
+                                                           href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
+                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
+                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
+                                                    class="fa fa-skype"></i></a></li>
+                                </ul>
+                            </div><!-- end social icons -->
 
-                <div class="col-md-3 col-sm-3 team-member">
-                    <div class="about-widget">
-                        <div class="post-media">
-                            <img src="upload/team_03.png" alt="" class="img-responsive">
+                            <div class="about-desc">
+                                <h4>Amanda BOBSON</h4>
+                                <small>Senior Designer</small>
+                                <p>My name is Amanda. I create handcraft web design and graphic sources for beginners like
+                                    me.</p>
+                            </div>
                         </div>
-                        <div class="social-icons">
-                            <ul class="list-inline">
-                                <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                        href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                      href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                       href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                        href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                         href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                class="fa fa-skype"></i></a></li>
-                            </ul>
-                        </div><!-- end social icons -->
+                    </div><!-- end team_member -->
 
-                        <div class="about-desc">
-                            <h4>Adam DOE</h4>
-                            <small>Junior Designer</small>
-                            <p>My name is Adam. I create handcraft web design and graphic sources for beginners like
-                                me.</p>
-                        </div>
-                    </div>
-                </div><!-- end team_member -->
+                    <div class="col-md-3 col-sm-3 team-member">
+                        <div class="about-widget">
+                            <div class="post-media">
+                                <img src="upload/team_03.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="social-icons">
+                                <ul class="list-inline">
+                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
+                                                            href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
+                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
+                                                           href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
+                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
+                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
+                                                    class="fa fa-skype"></i></a></li>
+                                </ul>
+                            </div><!-- end social icons -->
 
-                <div class="col-md-3 col-sm-3 team-member">
-                    <div class="about-widget">
-                        <div class="post-media">
-                            <img src="upload/team_04.png" alt="" class="img-responsive">
+                            <div class="about-desc">
+                                <h4>Adam DOE</h4>
+                                <small>Junior Designer</small>
+                                <p>My name is Adam. I create handcraft web design and graphic sources for beginners like
+                                    me.</p>
+                            </div>
                         </div>
-                        <div class="social-icons">
-                            <ul class="list-inline">
-                                <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                        href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                      href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                       href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                        href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                         href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                class="fa fa-skype"></i></a></li>
-                            </ul>
-                        </div><!-- end social icons -->
+                    </div><!-- end team_member -->
 
-                        <div class="about-desc">
-                            <h4>John BRITTO</h4>
-                            <small>Junior Designer</small>
-                            <p>My name is John. I create handcraft web design and graphic sources for beginners like
-                                me.</p>
+                    <div class="col-md-3 col-sm-3 team-member">
+                        <div class="about-widget">
+                            <div class="post-media">
+                                <img src="upload/team_04.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="social-icons">
+                                <ul class="list-inline">
+                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
+                                                            href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
+                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
+                                                           href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
+                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
+                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
+                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
+                                                    class="fa fa-skype"></i></a></li>
+                                </ul>
+                            </div><!-- end social icons -->
+
+                            <div class="about-desc">
+                                <h4>John BRITTO</h4>
+                                <small>Junior Designer</small>
+                                <p>My name is John. I create handcraft web design and graphic sources for beginners like
+                                    me.</p>
+                            </div>
                         </div>
-                    </div>
-                </div><!-- end team_member -->
-            </div><!-- row -->
+                    </div><!-- end team_member -->
+                </div><!-- row -->
 
         </div><!-- end container -->
     </section><!-- end section -->
