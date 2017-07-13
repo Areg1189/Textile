@@ -254,7 +254,7 @@
                                                                                    class="filter_checkbox"
                                                                                    name="filter_checkbox[]"
                                                                                    value="{{$catFilter->subs->code}}"
-                                                                                   data-target="filter_{{$i}}"
+                                                                                   data-target="filterUpdate_{{$i}}"
                                                                                     {{isset($res->filter_value) ? 'checked' : ''}}>
                                                                             {{$catFilter->subs->translate(session('locale'))->name}}
                                                                             <div class="">

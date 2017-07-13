@@ -69,7 +69,7 @@
                                 <li><a href="shop-.html">Shop </a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
+                        {{--<li><a href="blog.html">Blog</a></li>--}}
                         <li><a href="{{route('contactus')}}">Contact</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right searchandbag">

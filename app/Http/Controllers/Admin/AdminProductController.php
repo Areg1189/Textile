@@ -38,8 +38,8 @@ class AdminProductController extends Controller
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
             'color.*' => 'min:6|max:8',
-            'image' => 'required',
-            'image.*' => 'required'
+//            'image' => 'required',
+//            'image.*' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->withInput();

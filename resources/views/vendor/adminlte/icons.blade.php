@@ -15,7 +15,7 @@
     <form class="form-horizontal icons_form" method="post" action="{{route('change_icons')}}">
 
 
-        @foreach($icons as $icon)
+        @foreach($icons->sortBy('id') as $icon)
             <div class="form-group">
                 <label class="col-sm-1">
                     <a data-tooltip="tooltip" data-placement="top" href="#">
@@ -24,7 +24,7 @@
                 </label>
 
                 <div class="col-sm-7">
-                    <input type="text" name="{{$icon->icon_code}}" class="form-control" id="href" value="{{$icon->link}}">
+                    <input type="text" name="icons[]" class="form-control" id="href" value="{{$icon->link}}">
                 </div>
             </div>
         @endforeach

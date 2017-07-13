@@ -131,10 +131,27 @@
         </div><!-- end container -->
     </section><!-- end section -->
 
+
     <section class="section">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-12 col-sm-12">
+                    <div class="section-title text-left clearfix">
+                        <h4>About Us</h4>
+                        <p>
+                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+s
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
                     <div class="section-title text-left clearfix">
                         <h4>WHY HomeStyles?</h4>
                         <p>Donec vitae sapien ut libero venenatis faucibus.</p>
@@ -193,87 +210,87 @@
                     </div><!-- end content-widget -->
                 </div><!-- end col -->
 
-                <div class="col-md-6 col-sm-12">
-                    <div class="section-title text-left clearfix">
-                        <h4>In The Press</h4>
-                        <p>Donec vitae sapien ut libero venenatis faucibus.</p>
-                        <hr>
-                    </div><!-- end title -->
+                {{--<div class="col-md-6 col-sm-12">--}}
+                    {{--<div class="section-title text-left clearfix">--}}
+                        {{--<h4>In The Press</h4>--}}
+                        {{--<p>Donec vitae sapien ut libero venenatis faucibus.</p>--}}
+                        {{--<hr>--}}
+                    {{--</div><!-- end title -->--}}
 
-                    <div class="related-posts">
-                        <div class="entry">
-                            <p><a href="single.html" title=""> Best Furniture Company in India</a></p>
-                            <small>Forbess</small>
-                        </div><!-- end entry -->
+                    {{--<div class="related-posts">--}}
+                        {{--<div class="entry">--}}
+                            {{--<p><a href="single.html" title=""> Best Furniture Company in India</a></p>--}}
+                            {{--<small>Forbess</small>--}}
+                        {{--</div><!-- end entry -->--}}
 
-                        <div class="entry">
-                            <p><a href="single.html" title="">Who Did $100.000 per Months from Handcratfs</a></p>
-                            <small>Smashing Magazine</small>
-                        </div><!-- end entry -->
+                        {{--<div class="entry">--}}
+                            {{--<p><a href="single.html" title="">Who Did $100.000 per Months from Handcratfs</a></p>--}}
+                            {{--<small>Smashing Magazine</small>--}}
+                        {{--</div><!-- end entry -->--}}
 
-                        <div class="entry">
-                            <p><a href="single.html" title="">HomeStyle Make Awesome Materials for Decorations</a></p>
-                            <small>Furniture News</small>
-                        </div><!-- end entry -->
+                        {{--<div class="entry">--}}
+                            {{--<p><a href="single.html" title="">HomeStyle Make Awesome Materials for Decorations</a></p>--}}
+                            {{--<small>Furniture News</small>--}}
+                        {{--</div><!-- end entry -->--}}
 
-                        <div class="entry">
-                            <p><a href="single.html" title="">Thanks HomeStyle Making Awesomeness!.</a></p>
-                            <small>Braking News</small>
-                        </div><!-- end entry -->
+                        {{--<div class="entry">--}}
+                            {{--<p><a href="single.html" title="">Thanks HomeStyle Making Awesomeness!.</a></p>--}}
+                            {{--<small>Braking News</small>--}}
+                        {{--</div><!-- end entry -->--}}
 
-                        <div class="entry">
-                            <p><a href="single.html" title="">Looking For Best Furnitures? Check HomeStyle INC.</a></p>
-                            <small>NY Times</small>
-                        </div><!-- end entry -->
-                    </div><!-- end related -->
-                </div><!-- end col -->
+                        {{--<div class="entry">--}}
+                            {{--<p><a href="single.html" title="">Looking For Best Furnitures? Check HomeStyle INC.</a></p>--}}
+                            {{--<small>NY Times</small>--}}
+                        {{--</div><!-- end entry -->--}}
+                    {{--</div><!-- end related -->--}}
+                {{--</div><!-- end col -->--}}
             </div><!-- end row -->
         </div><!-- end container -->
     </section><!-- end section -->
 
-    <section class="section paralbackground parallax content-light" style="background-image:url('upload/parallax_01.jpg');" data-img-width="2000" data-img-height="2000" data-diff="10">
-        <div class="container">
-            <div class="section-title text-center clearfix">
-                <h4>Company Statics</h4>
-                <p>Donec vitae sapien ut libero venenatis faucibus.</p>
-                <hr>
-            </div><!-- end title -->
+    {{--<section class="section paralbackground parallax content-light" style="background-image:url('upload/parallax_01.jpg');" data-img-width="2000" data-img-height="2000" data-diff="10">--}}
+        {{--<div class="container">--}}
+            {{--<div class="section-title text-center clearfix">--}}
+                {{--<h4>Company Statics</h4>--}}
+                {{--<p>Donec vitae sapien ut libero venenatis faucibus.</p>--}}
+                {{--<hr>--}}
+            {{--</div><!-- end title -->--}}
 
-            <div class="row services-list text-center">
-                <div class="col-md-3 col-sm-6 GrayScale">
-                    <div class="box">
-                        <img src="upload/icon_01.png" alt="" class="img-responsive">
-                        <h3>Furniture Sets</h3>
-                        <p class="stat-count">34551</p>
-                    </div><!-- end box -->
-                </div>
+            {{--<div class="row services-list text-center">--}}
+                {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
+                    {{--<div class="box">--}}
+                        {{--<img src="upload/icon_01.png" alt="" class="img-responsive">--}}
+                        {{--<h3>Furniture Sets</h3>--}}
+                        {{--<p class="stat-count">34551</p>--}}
+                    {{--</div><!-- end box -->--}}
+                {{--</div>--}}
 
-                <div class="col-md-3 col-sm-6 GrayScale">
-                    <div class="box">
-                        <img src="upload/icon_02.png" alt="" class="img-responsive">
-                        <h3>Chair Varieties</h3>
-                        <p class="stat-count">12560</p>
-                    </div><!-- end box -->
-                </div>
+                {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
+                    {{--<div class="box">--}}
+                        {{--<img src="upload/icon_02.png" alt="" class="img-responsive">--}}
+                        {{--<h3>Chair Varieties</h3>--}}
+                        {{--<p class="stat-count">12560</p>--}}
+                    {{--</div><!-- end box -->--}}
+                {{--</div>--}}
 
-                <div class="col-md-3 col-sm-6 GrayScale">
-                    <div class="box">
-                        <img src="upload/icon_03.png" alt="" class="img-responsive">
-                        <h3>Gardolap Varieties</h3>
-                        <p class="stat-count">2214</p>
-                    </div><!-- end box -->
-                </div>
+                {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
+                    {{--<div class="box">--}}
+                        {{--<img src="upload/icon_03.png" alt="" class="img-responsive">--}}
+                        {{--<h3>Gardolap Varieties</h3>--}}
+                        {{--<p class="stat-count">2214</p>--}}
+                    {{--</div><!-- end box -->--}}
+                {{--</div>--}}
 
-                <div class="col-md-3 col-sm-6 GrayScale">
-                    <div class="box">
-                        <img src="upload/icon_04.png" alt="" class="img-responsive">
-                        <h3>Bureaux</h3>
-                        <p class="stat-count">16000</p>
-                    </div><!-- end box -->
-                </div><!-- end col -->
-            </div>
-        </div><!-- end container -->
-    </section><!-- end section -->
+                {{--<div class="col-md-3 col-sm-6 GrayScale">--}}
+                    {{--<div class="box">--}}
+                        {{--<img src="upload/icon_04.png" alt="" class="img-responsive">--}}
+                        {{--<h3>Bureaux</h3>--}}
+                        {{--<p class="stat-count">16000</p>--}}
+                    {{--</div><!-- end box -->--}}
+                {{--</div><!-- end col -->--}}
+            {{--</div>--}}
+        {{--</div><!-- end container -->--}}
+    {{--</section><!-- end section -->--}}
 
     <section class="section">
         <div class="container">

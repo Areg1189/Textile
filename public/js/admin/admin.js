@@ -195,57 +195,40 @@ $(".productMulty").validate({
             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
         }
     },
-    submitHandler:function (form) {
-        f = $(this);
-        $(basic).each(function (index) {
-            basic[index].croppie('result', {
-                type: 'canvas',
-                size: {
-                    width: prodImageW,
-                    height: prodImageH
-                },
-            }).then(function (resp) {
-                f.find('.imageContainer').append('' +
-                    '<input type="hidden" name="image[]" value="' + resp + '"/>' +
-                    '');
-            });
-        });
 
-        $(".productMulty").submit(form);
+});
+
+$(document).on('validate', '.productMulty',{
+    rules: {
+        "image.*": {
+            accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
+        }
+
+    },
+    // range:
+    submitHandler: function(form) {
+        console.log(basic)
+
     }
 });
 
-// $(document).on('validate', '.productMulty',{
-//     rules: {
-//         "image.*": {
-//             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
-//         }
-//
-//     },
-//     // range:
-//     submitHandler: function(form) {
-//         console.log(basic)
-//
-//     }
-// });
-//
-// $(document).on('submit', '.productMulty', function (form) {
-//     f = $(this);
-//     $(basic).each(function (index) {
-//         basic[index].croppie('result', {
-//             type: 'canvas',
-//             size: {
-//                 width: prodImageW,
-//                 height: prodImageH
-//             },
-//         }).then(function (resp) {
-//             f.find('.imageContainer').append('' +
-//                 '<input type="hidden" name="image[]" value="' + resp + '"/>' +
-//                 '');
-//         });
-//     });
-//
-// });
+$(document).on('submit', '.productMulty', function (form) {
+    f = $(this);
+    $(basic).each(function (index) {
+        basic[index].croppie('result', {
+            type: 'canvas',
+            size: {
+                width: prodImageW,
+                height: prodImageH
+            },
+        }).then(function (resp) {
+            f.find('.imageContainer').append('' +
+                '<input type="hidden" name="image[]" value="' + resp + '"/>' +
+                '');
+        });
+    });
+
+});
 
 $(document).on('click', '.js-labelFile', function () {
     $('.input-file').each(function () {

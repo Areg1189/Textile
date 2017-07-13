@@ -162,17 +162,11 @@ class AdminController extends Controller
 
     public function change_icons(Request $request){
 
-        $icons = Social_icons::get();
-
-        foreach ($icons as $icon){
-
+        for($i = 1 ; $i <= count($request->icons); $i++){
+            Social_icons::where('id', $i)->update([
+                'link' => $request->icons[$i-1]
+            ]);
         }
-
-
-        ////->update([
-//
- //       ]);
-
         return back();
     }
 
