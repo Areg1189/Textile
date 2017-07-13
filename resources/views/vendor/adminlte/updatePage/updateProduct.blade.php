@@ -17,10 +17,16 @@
                           enctype="multipart/form-data">
                         {{csrf_field()}}
 
+                        {{--=======================================  Name  =======================================--}}
 
-
-
-                                <div class="row">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="text-center">Name</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-danger">
+                                <div class="panel panel-body">
                                     <div class="col-xs-4">
                                         <div class="form-group text-center">
                                             <label>Հայերեն *</label>
@@ -47,37 +53,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="multiple-file-preview">
+                            </div>
+                        </div>
 
-                                            <div class="clear-both">
-                                                <ul id="sortable1" class="sort text-center">
-                                                    @php($img = 0)
-                                                    @foreach($product->images->sortBy('id') as $image)
-                                                        <li class="ui-state-default" data-order="0"
-                                                            data-target="image{{$img}}"
-                                                            data-prod="{{$image->id}}"
-                                                            data-key="image"
-                                                            data-href_delete="{{route('deleteProduct')}}">
-                                                            <img src="{{asset('images/products/'.$image->image_name)}}"
-                                                                 style="width:100%;"/>
-                                                            <span class="delete_update_image iconDelete"
-                                                                  data-status="image{{$img}}">
+                        {{--=======================================  Image  =======================================--}}
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="text-center"><i class="fa fa-picture-o" aria-hidden="true"></i> Images
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4 class="text-center">Old Images</h4>
+                            <div class="col-md-12">
+                                <div id="multiple-file-preview">
+
+                                    <div class="clear-both">
+                                        <ul id="sortable1" class="sort text-center">
+                                            @php($img = 0)
+                                            @foreach($product->images->sortBy('id') as $image)
+                                                <li class="ui-state-default" data-order="0"
+                                                    data-target="image{{$img}}"
+                                                    data-prod="{{$image->id}}"
+                                                    data-key="image"
+                                                    data-href_delete="{{route('deleteProduct')}}">
+                                                    <img src="{{asset('images/products/'.$image->image_name)}}"
+                                                         style="width:100%;"/>
+                                                    <span class="delete_update_image iconDelete"
+                                                          data-status="image{{$img}}">
                                                                 <i class="fa fa-trash fa-2x"></i>
                                                             </span>
-                                                            <input type="hidden" name="image_name[]"
-                                                                   value="{{$image->image_name}}">
-                                                        </li>
-                                                        @php($img ++)
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-
-                                        </div>
+                                                    <input type="hidden" name="image_name[]"
+                                                           value="{{$image->image_name}}">
+                                                </li>
+                                                @php($img ++)
+                                            @endforeach
+                                        </ul>
                                     </div>
+
                                 </div>
-                                <div class="row">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="panel panel-danger">
+                                <div class="panel panel-body">
+                                    <h4 class="text-center">Choose New Images</h4>
+
                                     <div class="col-sm-12">
                                         <div class="block">
                                             <input type="file" name="img" data-name="updateImage"
@@ -86,257 +109,286 @@
 
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12">
                                         <div class="image_container" data-xname="updateImage">
 
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
 
+                        {{--=======================================  COLOR  =======================================--}}
+                        <div class="row">
+                            <div class="text-center">
+                                <h3>
+                                    Color
+                                    <button type="button"
+                                            class="btn btn-primary add_color"
+                                            title="Add"
+                                            data-color="add">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </h3>
+                            </div>
+                        </div>
 
 
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="panel panel-danger">
-                                            <div class="text-center">
-                                                <h3>
-                                                    Color
-                                                    <button type="button"
-                                                            class="btn btn-primary add_color"
-                                                            title="Add"
-                                                            data-color="add">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
-                                                </h3>
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="color_container" data-color_container="add">
-                                                    @php($j = 1)
-                                                    @foreach($product->colors as $color)
-                                                        <div class="col-sm-1" data-status="oldColor_{{$j}}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="panel panel-danger">
+                                    <div class="panel-body">
+                                        <div class="color_container" data-color_container="add">
+                                            @php($j = 1)
+                                            @foreach($product->colors as $color)
+                                                <div class="col-sm-1" data-status="oldColor_{{$j}}">
                                                     <span class="delete_color cursor_pointer"
                                                           data-target="oldColor_{{$j}}">
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </span>
-                                                            <input type="color" name="color[]">
-                                                        </div>
-                                                        @php($j++)
+                                                    <input type="color" name="color[]">
+                                                </div>
+                                                @php($j++)
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{--=======================================  Silder  ================================--}}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="text-center"> Sliders
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-danger">
+                                <div class="panel panel-body">
+                                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>New</label>
+                                                <input type="checkbox" name="new" value="new" {{$product->slider_new ? 'checked' : ''}}>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Sale</label>
+                                                <input type="checkbox" name="saleSlider" value="sale" {{$product->slider_sale ? 'checked' : ''}}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {{--=======================================  Filters  =======================================--}}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3 class="text-center"><i class="fa fa-filter"></i> Filters</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="panel panel-danger">
+                                <div class="panel-body">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <div class="col-sm-12">
+                                            <h4 class="text-center">
+                                                Please choose filter or enter a price
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group text-center">
+                                                <label>Price</label>
+                                                <input type="number" name="firstPrice"
+                                                       class="form-control firstPrice"
+                                                       placeholder="Price"
+                                                       value="{{$product->price}}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group text-center">
+                                                <label>Sale</label>
+                                                <input type="number" name="firstSale" class="form-control"
+                                                       placeholder="Sale"
+                                                       value="{{$product->sale}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @php($i = 0)
+                            @foreach($filters as $filter)
+                                @foreach($filter->subs as $s)
+                                    @if($sub->filters->where('sub_id',$s->id)->first())
+                                        <div class="col-sm-4">
+                                            <div class="panel panel-danger">
+                                                <div class="text-center">
+                                                    <h4 class="red">
+                                                        {{$filter->translate(session('locale'))->name}}
+                                                    </h4>
+                                                </div>
+                                                <div class="panel-body">
+                                                    @foreach($sub->filters as $catFilter)
+                                                        @if($catFilter->subs->filter->id == $filter->id)
+                                                            @if(count($catFilter->subs->values) > 0)
+                                                                <hr>
+                                                                <div>
+                                                                    <label class="green">
+                                                                        {{$catFilter
+                                                                        ->subs
+                                                                        ->translate(session('locale'))
+                                                                        ->name}}
+                                                                    </label>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    @foreach($catFilter->subs->values  as $value)
+                                                                        @php
+                                                                            $res = $product
+                                                                            ->filters->where('filter_value', $value->code)
+                                                                            ->first();
+                                                                        @endphp
+                                                                        <div class="col-sm-11 col-sm-offset-1">
+                                                                            <div class="form-group">
+                                                                                <input type="checkbox"
+                                                                                       class="filter_checkbox"
+                                                                                       name="filter_checkbox[]"
+                                                                                       value="{{$value->code}}"
+                                                                                       data-target="filterUpdate_{{$i}}"
+                                                                                        {{ isset($res->filter_value)? 'checked' : ''}}>
+
+                                                                                {{
+                                                                                $value
+                                                                                ->translate(session('locale'))
+                                                                                ->name}}
+                                                                                <div class="">
+                                                                                    <div class="col-sm-6">
+                                                                                        <input type="number"
+                                                                                               class="form-control filter_price"
+                                                                                               name="price[]"
+                                                                                               placeholder="Price"
+                                                                                               data-status="filterUpdate_{{$i}}"
+                                                                                               {{isset($res->filter_value) ? '' : 'disabled'}}
+                                                                                               value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <input type="number"
+                                                                                               class="form-control"
+                                                                                               name="sale[]"
+                                                                                               placeholder="Sale"
+                                                                                               data-status_sale="filterUpdate_{{$i}}"
+                                                                                               {{isset($res->filter_value) ? '' : 'disabled'}}
+                                                                                               value="{{isset($res->filter_value) ? $res->sale : null}}">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        @php($i++)
+                                                                    @endforeach
+                                                                </div>
+                                                            @else
+                                                                @php
+                                                                    $res = $product
+                                                                    ->filters
+                                                                    ->where('filter_value', $catFilter->subs->code)
+                                                                    ->first();
+                                                                @endphp
+                                                                <div class="form-group ">
+                                                                    <hr>
+                                                                    <input type="checkbox"
+                                                                           class="filter_checkbox"
+                                                                           name="filter_checkbox[]"
+                                                                           value="{{$catFilter->subs->code}}"
+                                                                           data-target="filterUpdate_{{$i}}"
+                                                                            {{isset($res->filter_value) ? 'checked' : ''}}>
+                                                                    {{$catFilter->subs->translate(session('locale'))->name}}
+                                                                    <div class="">
+                                                                        <div class="col-sm-6">
+                                                                            <input type="number"
+                                                                                   class="form-control filter_price"
+                                                                                   name="price[]"
+                                                                                   placeholder="Price"
+                                                                                   data-status="filterUpdate_{{$i}}"
+                                                                                   {{isset($res->filter_value) ? '' : 'disabled'}}
+                                                                                   value="{{isset($res->filter_value) ? $res->price : null}}">
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <input type="number"
+                                                                                   class="form-control"
+                                                                                   name="sale[]"
+                                                                                   placeholder="Sale"
+                                                                                   data-status_sale="filterUpdate_{{$i}}"
+                                                                                   {{isset($res->filter_value) ? '' : 'disabled'}}
+                                                                                   value="{{isset($res->filter_value) ? $res->sale : null}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endif
+                                                        @php($i++)
                                                     @endforeach
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h3 class="text-center"><i class="fa fa-filter"></i> Filters</h3>
-                                    </div>
-                                </div>
+                                        @break
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        </div>
 
 
-                                {{--Price Sale--}}
+                        {{--=======================================  Desctiption  =======================================--}}
 
-
-                                <div class="row">
-                                    <div class="panel panel-danger">
-                                        <div class="panel-body">
-                                            <div class="col-sm-6 col-sm-offset-3">
-                                                <div class="col-sm-12">
-                                                    <h4 class="text-center">
-                                                        Please choose filter or enter a price
-                                                    </h4>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group text-center">
-                                                        <label>Price</label>
-                                                        <input type="number" name="firstPrice" class="form-control firstPrice"
-                                                               placeholder="Price"
-                                                               value="{{$product->price}}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group text-center">
-                                                        <label>Sale</label>
-                                                        <input type="number" name="firstSale" class="form-control"
-                                                               placeholder="Sale"
-                                                               value="{{$product->sale}}">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    @php($i = 0)
-                                    @foreach($filters as $filter)
-                                        @foreach($filter->subs as $s)
-                                            @if($sub->filters->where('sub_id',$s->id)->first())
-                                                <div class="col-sm-4">
-                                                    <div class="panel panel-danger">
-                                                        <div class="text-center">
-                                                            <h4 class="red">
-                                                                {{$filter->translate(session('locale'))->name}}
-                                                            </h4>
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            @foreach($sub->filters as $catFilter)
-                                                                @if($catFilter->subs->filter->id == $filter->id)
-                                                                    @if(count($catFilter->subs->values) > 0)
-                                                                        <hr>
-                                                                        <div>
-                                                                            <label class="green">
-                                                                                {{$catFilter
-                                                                                ->subs
-                                                                                ->translate(session('locale'))
-                                                                                ->name}}
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="panel-body">
-                                                                            @foreach($catFilter->subs->values  as $value)
-                                                                                @php
-                                                                                    $res = $product
-                                                                                    ->filters->where('filter_value', $value->code)
-                                                                                    ->first();
-                                                                                @endphp
-                                                                                <div class="col-sm-11 col-sm-offset-1">
-                                                                                    <div class="form-group">
-                                                                                        <input type="checkbox"
-                                                                                               class="filter_checkbox"
-                                                                                               name="filter_checkbox[]"
-                                                                                               value="{{$value->code}}"
-                                                                                               data-target="filterUpdate_{{$i}}"
-                                                                                                {{ isset($res->filter_value)? 'checked' : ''}}>
-
-                                                                                        {{
-                                                                                        $value
-                                                                                        ->translate(session('locale'))
-                                                                                        ->name}}
-                                                                                        <div class="">
-                                                                                            <div class="col-sm-6">
-                                                                                                <input type="number"
-                                                                                                       class="form-control filter_price"
-                                                                                                       name="price[]"
-                                                                                                       placeholder="Price"
-                                                                                                       data-status="filterUpdate_{{$i}}"
-                                                                                                       {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                                       value="{{isset($res->filter_value) ? $res->price : null}}">
-                                                                                            </div>
-                                                                                            <div class="col-sm-6">
-                                                                                                <input type="number"
-                                                                                                       class="form-control"
-                                                                                                       name="sale[]"
-                                                                                                       placeholder="Sale"
-                                                                                                       data-status_sale="filterUpdate_{{$i}}"
-                                                                                                       {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                                       value="{{isset($res->filter_value) ? $res->sale : null}}">
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                @php($i++)
-                                                                            @endforeach
-                                                                        </div>
-                                                                    @else
-                                                                        @php
-                                                                            $res = $product
-                                                                            ->filters
-                                                                            ->where('filter_value', $catFilter->subs->code)
-                                                                            ->first();
-                                                                        @endphp
-                                                                        <div class="form-group ">
-                                                                            <hr>
-                                                                            <input type="checkbox"
-                                                                                   class="filter_checkbox"
-                                                                                   name="filter_checkbox[]"
-                                                                                   value="{{$catFilter->subs->code}}"
-                                                                                   data-target="filterUpdate_{{$i}}"
-                                                                                    {{isset($res->filter_value) ? 'checked' : ''}}>
-                                                                            {{$catFilter->subs->translate(session('locale'))->name}}
-                                                                            <div class="">
-                                                                                <div class="col-sm-6">
-                                                                                    <input type="number"
-                                                                                           class="form-control filter_price"
-                                                                                           name="price[]"
-                                                                                           placeholder="Price"
-                                                                                           data-status="filterUpdate_{{$i}}"
-                                                                                           {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                           value="{{isset($res->filter_value) ? $res->price : null}}">
-                                                                                </div>
-                                                                                <div class="col-sm-6">
-                                                                                    <input type="number"
-                                                                                           class="form-control"
-                                                                                           name="sale[]"
-                                                                                           placeholder="Sale"
-                                                                                           data-status_sale="filterUpdate_{{$i}}"
-                                                                                           {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                           value="{{isset($res->filter_value) ? $res->sale : null}}">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endif
-                                                                @endif
-                                                                @php($i++)
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @break
-                                            @endif
-                                        @endforeach
-                                    @endforeach
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-12 text-center">
-                                        <h3>Description</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group text-center">
-                                            <label for="hy_description">Նկարագրություն</label>
-                                            <textarea name="hy_description1" rows="10" cols="80">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h3>Description</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group text-center">
+                                    <label for="hy_description">Նկարագրություն</label>
+                                    <textarea name="hy_description1" rows="10" cols="80">
                                         {{$product->translate('hy')->description}}
                                     </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group text-center">
-                                            <label for="en_description">Description</label>
-                                            <textarea name="en_description1" rows="10" cols="80">
-                                        {{$product->translate('en')->description}}
-                                    </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group text-center">
-                                            <label for="ru_description">Описание</label>
-                                            <textarea name="ru_description1" rows="10" cols="80">
-                                       {{$product->translate('ru')->description}}
-                                    </textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                    </button>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group text-center">
+                                    <label for="en_description">Description</label>
+                                    <textarea name="en_description1" rows="10" cols="80">
+                                        {{$product->translate('en')->description}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group text-center">
+                                    <label for="ru_description">Описание</label>
+                                    <textarea name="ru_description1" rows="10" cols="80">
+                                       {{$product->translate('ru')->description}}
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </div>
 
                         <div class="imageContainer">
 

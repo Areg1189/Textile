@@ -16,7 +16,7 @@ class ProductController extends Controller
 
         $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
         $category = $subCategory->category;
-        $products = Product::where('id', $subCategory->id)->orderBy('id', 'desc')->paginate(20);
+        $products = Product::where('parent_id', $subCategory->id)->orderBy('id', 'desc')->paginate(9);
 
 
         if(count($subCategory->products) < 5)  {

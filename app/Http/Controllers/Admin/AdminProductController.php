@@ -38,8 +38,8 @@ class AdminProductController extends Controller
             'en_name' => 'required|string',
             'ru_name' => 'required|string',
             'color.*' => 'min:6|max:8',
-//            'image' => 'required',
-//            'image.*' => 'required'
+            'image' => 'required',
+            'image.*' => 'required'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator->errors())->withInput();
@@ -64,6 +64,8 @@ class AdminProductController extends Controller
             'sale' => $request->firstSale,
             'price' => $request->firstPrice,
             'parent_id' => $request->cat,
+            'slider_new' => $request->new,
+            'slider_sale' => $request->saleSlider,
             'hy' => [
                 'name' => $request->hy_name,
             ],
@@ -174,6 +176,8 @@ class AdminProductController extends Controller
         $product->link = $link;
         $product->sale = $request->firstSale;
         $product->price = $request->firstPrice;
+        $product->slider_new = $request->new;
+        $product->slider_sale = $request->saleSlider;
         $product->translate('hy')->name = $request->hy_name;
         $product->translate('en')->name = $request->en_name;
         $product->translate('ru')->name = $request->ru_name;

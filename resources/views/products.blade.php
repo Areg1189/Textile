@@ -4,7 +4,8 @@
 
 
     <section class="section paralbackground page-banner hidden-xs"
-             style="background-image:url({{asset('images/subCategory/'.$subCategory->general_image)}});" data-img-width="2000" data-img-height="400"
+             style="background-image:url({{asset('images/subCategory/'.$subCategory->general_image)}});"
+             data-img-width="2000" data-img-height="400"
              data-diff="100">
     </section>
     <!-- end section -->
@@ -39,8 +40,7 @@
                                         <div class="shop-thumbnail">
 
                                             <img class="img-responsive"
-                                                 src="{{asset(
-                                                         "images/products/".$product
+                                                 src="{{asset('images/products/'.$product
                                                          ->images
                                                          ->sortBy('id')
                                                          ->first()['image_name'])}}"/>
@@ -52,30 +52,23 @@
                                                 </a>
                                             </h3>
                                             <div>
-
-
-                                                <del class="regular">
-                                                    3800
-                                                </del>
-
-                                                <small class="regular">98 000 AMD</small>
-
+                                                @include('includes.pricing',['prod' => $product])
                                             </div>
 
                                         </div>
 
                                         <div class="shop-meta clearfix">
-                                        <ul class="">
-                                        <li><a href="shop-single.html" class='heart'><i
-                                        class="fa fa-shopping-bag"></i> ADD TO CART</a></li>
-                                        <li><a href="shop-.html" class='heart'><i class="fa fa-heart-o"></i> </a>
-                                        </li>
-                                        </ul><!-- end list -->
+                                            <ul class="">
+                                                <li>
+                                                    <a href="shop-single.html" class='heart'>
+                                                        <i class="fa fa-shopping-bag"></i>
+                                                        @lang('product.add_cart')
+                                                    </a>
+                                                </li>
+                                            </ul><!-- end list -->
                                         </div><!-- end shop-meta -->
                                     </div><!-- end shop-item -->
                                 </div>
-
-
                             @endforeach
                         </div>
 
@@ -85,18 +78,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <nav class="text-center">
-                                <ul class="pagination">
-                                    <li><a class="active" href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">...</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                {{$products->links()}}
                             </nav>
                         </div>
                     </div>
@@ -180,12 +162,7 @@
                                                         </span>
                                                 </div>
                                                 <div class="related_price">
-                                                    <div>
-                                                        <small>
-                                                            <del>200 000 AMD</del>
-                                                        </small>
-                                                    </div>
-                                                    <small>170 000 AMD</small>
+                                                    @include('includes.pricing',['prod' => $product])
                                                 </div>
                                             </a>
                                         </div>

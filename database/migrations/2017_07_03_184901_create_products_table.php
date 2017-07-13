@@ -18,7 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('code');
             $table->integer('parent_id');
             $table->string('link');
-            $table->string('slider')->nullable();
+            $table->string('slider_new')->nullable();
+            $table->string('slider_sale')->nullable();
             $table->integer('price')->nullable();
             $table->integer('sale')->nullable();
             $table->timestamps();

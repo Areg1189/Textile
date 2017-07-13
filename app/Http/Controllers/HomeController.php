@@ -22,10 +22,12 @@ class HomeController extends Controller
         $homeImage = HomeImage::where('code', 'home-image')->first();
         $topCategories = SubCategory::where('top', '>', 0)->get();
         $subCategories = SubCategory::get();
+        $sliders = Product::where('slider_new', 'new')->orWhere('slider_sale', 'sale')->get();
         return view('home', [
             'homeImage' => $homeImage,
             'topCategories' => $topCategories,
-            'subCategories' => $subCategories
+            'subCategories' => $subCategories,
+            'sliders' => $sliders,
         ]);
     }
 

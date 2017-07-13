@@ -102,10 +102,13 @@
                     @php($i = 1)
                     @foreach($topCategories->sortBy('top') as $topCategory)
                         <div class="banner-item item-w1 item-h1">
-                            <a href="#"><img src="{{asset('images/subCategory/'.$topCategory->image_name)}}" alt=""
-                                             class="img-responsive"></a>
+                            <a href="{{route('getCategory', ['cat' => $topCategory->link])}}">
+                                <img src="{{asset('images/subCategory/'.$topCategory->image_name)}}"
+                                     alt="{{$topCategory->translate('en')->name}}"
+                                     class="img-responsive"></a>
                             <div class="banner-button">
-                                <a href="#" class="button button--aylen btn">
+                                <a href="{{route('getCategory', ['cat' => $topCategory->link])}}"
+                                   class="button button--aylen btn">
                                     {{$topCategory->translate(session('locale'))->name}}
                                 </a>
                             </div>
@@ -216,112 +219,38 @@
             </div><!-- end title -->
 
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="shop-item ">
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_01.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
+                @foreach($sliders->where('slider_sale', 'sale') as $prod)
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="shop-item ">
+                            <div class="shop-thumbnail">
+                                <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}"
+                                     alt="" class="img-responsive">
+                            </div><!-- end shop-thumbnail -->
+                            <div class="shop-desc">
+                                <h3><a href="shop-single.html"
+                                       title="">{{$prod->translate(session('locale'))->name}}</a>
+                                </h3>
+                                <div>
+                                    @include('includes.pricing', ['prod' => $prod])
 
-                            </div>
+                                </div>
 
-                        </div><!-- end shop-desc -->
+                            </div><!-- end shop-desc -->
 
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li>
-                                    <a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"> </i>
-                                        add to cart
-                                    </a>
-                                </li>
-                                <li><a href="shop-.html" class="wish"><i class="fa fa-heart-o"></i> </a></li>
+                            <div class="shop-meta clearfix">
+                                <ul class="">
+                                    <li>
+                                        <a href="shop-single.html"><i class="fa fa-shopping-bag"
+                                                                      aria-hidden="true"> </i>
+                                            @lang('product.add_cart')
+                                        </a>
+                                    </li>
+                                </ul><!-- end list -->
+                            </div><!-- end shop-meta -->
+                        </div><!-- end shop-item -->
+                    </div><!-- end col -->
+                @endforeach
 
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="shop-item ">
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_02.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="shop-item ">
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_03.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="shop-item ">
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_04.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
             </div><!-- end row -->
         </div><!-- end container -->
     </section><!-- end section -->
@@ -336,117 +265,38 @@
             </div><!-- end title -->
 
             <div class="row module-wrapper text-center">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <span class="new_styker">new</span>
-                    <div class="shop-item ">
+                @foreach($sliders->where('slider_new', 'new') as $prod)
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <span class="new_styker">@lang('product.new')</span>
+                        <div class="shop-item ">
 
 
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_04.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
+                            <div class="shop-thumbnail">
+                                <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}" alt="" class="img-responsive">
+                            </div><!-- end shop-thumbnail -->
+                            <div class="shop-desc">
+                                <h3><a href="shop-single.html" title="">{{$prod->translate(session('locale'))->name}}</a></h3>
+                                <div>
+                                    @include('includes.pricing', ['prod' => $prod])
+                                </div>
 
-                            </div>
+                            </div><!-- end shop-desc -->
 
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <span class="new_styker">new</span>
-                    <div class="shop-item ">
+                            <div class="shop-meta clearfix">
+                                <ul class="">
+                                    <li>
+                                        <a href="shop-single.html">
+                                            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                                            @lang('product.add_cart')
+                                        </a>
+                                    </li>
 
 
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_04.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <span class="new_styker">new</span>
-                    <div class="shop-item ">
-
-
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_04.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <span class="new_styker">new</span>
-                    <div class="shop-item ">
-
-                        <div class="shop-thumbnail">
-                            <img src="{{asset('upload/shop_04.jpg')}}" alt="" class="img-responsive">
-                        </div><!-- end shop-thumbnail -->
-                        <div class="shop-desc">
-                            <h3><a href="shop-single.html" title="">Oldschool Armchair</a></h3>
-                            <div>
-                                <del class="regular">100 000 AMD</del>
-                                <small class="regular">98 000 AMD</small>
-
-                            </div>
-
-                        </div><!-- end shop-desc -->
-
-                        <div class="shop-meta clearfix">
-                            <ul class="">
-                                <li><a href="shop-single.html"><i class="fa fa-shopping-bag" aria-hidden="true"></i> ADD
-                                        TO CART</a></li>
-                                <li><a href="shop-.html"><i class="fa fa-heart-o"></i> </a></li>
-
-                            </ul><!-- end list -->
-                        </div><!-- end shop-meta -->
-                    </div><!-- end shop-item -->
-                </div><!-- end col -->
+                                </ul><!-- end list -->
+                            </div><!-- end shop-meta -->
+                        </div><!-- end shop-item -->
+                    </div><!-- end col -->
+                @endforeach
             </div><!-- row -->
 
         </div><!-- end container -->
