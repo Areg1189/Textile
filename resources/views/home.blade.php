@@ -14,7 +14,7 @@
                         data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off"
                         data-title="Slide" data-description="">
 
-                        <img src="{{asset('upload/'.$homeImage->image_name)}}" alt="" data-bgposition="center center"
+                        <img src="{{asset('upload/'.$homeImage->image_name)}}" alt="{{config('app.name')}}" data-bgposition="center center"
                              data-bgfit="cover"
                              data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
 
@@ -159,20 +159,28 @@
                             @if(count($subCategory->products) >= 2)
                                 @foreach($subCategory->products->random(2) as $product)
                                     <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" title=$product">
                                             <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
+                                                 alt={{$product->translate('en')->name}}"" class="img-responsive">
+                                            <div>
+                                                <span>@lang('product.more')</span>
+                                            </div>
                                         </a>
                                     </div>
                                 @endforeach
                             @else
                                 @foreach($subCategory->products as $product)
                                     <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" title="">
                                             <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
+                                                 alt="{{$product->translate('en')->name}}" class="img-responsive">
+                                            <div><span>@lang('product.more')</span></div>
                                         </a>
                                     </div>
                                 @endforeach
@@ -183,20 +191,26 @@
                             @if(count($subCategory->products) >= 2)
                                 @foreach($subCategory->products->random(2) as $product)
                                     <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" title="">
                                             <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
+                                                 alt="{{$product->translate('en')->name}}" class="img-responsive">
+                                            <div><span>@lang('product.more')</span></div>
                                         </a>
                                     </div>
                                 @endforeach
                             @else
                                 @foreach($subCategory->products as $product)
                                     <div class="pentry item-w1 item-h1 {{$category->link}}">
-                                        <a href="single-project.html" title="">
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" title="">
                                             <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
-                                                 alt="" class="img-responsive">
-                                            <div><span>More</span></div>
+                                                 alt="{{$product->translate('en')->name}}" class="img-responsive">
+                                            <div><span>@lang('product.more')</span></div>
                                         </a>
                                     </div>
                                 @endforeach
@@ -223,12 +237,22 @@
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="shop-item ">
                             <div class="shop-thumbnail">
-                                <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}"
-                                     alt="" class="img-responsive">
+                                <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}" class="link_img">
+                                    <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}"
+                                         alt="{{$prod->translate('en')->name}}" class="img-responsive">
+                                </a>
                             </div><!-- end shop-thumbnail -->
                             <div class="shop-desc">
-                                <h3><a href="shop-single.html"
-                                       title="">{{$prod->translate(session('locale'))->name}}</a>
+                                <h3>
+                                    <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}"
+                                       title="">{{$prod->translate(session('locale'))->name}}
+                                    </a>
                                 </h3>
                                 <div>
                                     @include('includes.pricing', ['prod' => $prod])
@@ -240,8 +264,11 @@
                             <div class="shop-meta clearfix">
                                 <ul class="">
                                     <li>
-                                        <a href="shop-single.html"><i class="fa fa-shopping-bag"
-                                                                      aria-hidden="true"> </i>
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}"><i class="fa fa-shopping-bag"
+                                                         aria-hidden="true"> </i>
                                             @lang('product.add_cart')
                                         </a>
                                     </li>
@@ -272,10 +299,23 @@
 
 
                             <div class="shop-thumbnail">
-                                <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}" alt="" class="img-responsive">
+                                <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}" class="link_img">
+                                    <img src="{{asset('images/products/'.$prod->images->sortBy('id')->first()['image_name'])}}"
+                                         alt="{{$prod->translate('en')->name}}" class="img-responsive">
+                                </a>
                             </div><!-- end shop-thumbnail -->
                             <div class="shop-desc">
-                                <h3><a href="shop-single.html" title="">{{$prod->translate(session('locale'))->name}}</a></h3>
+                                <h3>
+                                    <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}" title="">
+                                        {{$prod->translate(session('locale'))->name}}
+                                    </a>
+                                </h3>
                                 <div>
                                     @include('includes.pricing', ['prod' => $prod])
                                 </div>
@@ -285,7 +325,10 @@
                             <div class="shop-meta clearfix">
                                 <ul class="">
                                     <li>
-                                        <a href="shop-single.html">
+                                        <a href="{{route('getProduct',[
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
+                                                ])}}">
                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                             @lang('product.add_cart')
                                         </a>

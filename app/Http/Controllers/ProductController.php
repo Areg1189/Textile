@@ -18,19 +18,31 @@ class ProductController extends Controller
         $category = $subCategory->category;
         $products = Product::where('parent_id', $subCategory->id)->orderBy('id', 'desc')->paginate(9);
 
+            $other_products = Product::where('parent_id', '!=', $subCategory->id)->inRandomOrder()->limit(4)->get();
 
-        if(count($subCategory->products) < 5)  {
-            $releated_products = $subCategory->products;
-        } else {
-            $releated_products = $subCategory->products->random(4);
-        }
 
 
         return view('products', [
             'subCategory' => $subCategory,
             'category' => $category,
-            'releated_products' => $releated_products,
+            'other_products' => $other_products,
             'products' => $products,
+        ]);
+    }
+
+    public function getProduct(Request $request){
+       if (!$request->cat || !$request->prod){
+           return abort(404);
+       }
+
+       $subCat = SubCategory::where('link', $request->cat)->firstOrFail();
+        $product = Product::where('link', $request->prod)->firstOrFail();
+        $other_products = Product::where('parent_id', '!=', $subCat->id)->inRandomOrder()->limit(4)->get();
+        return view('singleProduct',[
+            'subCat' => $subCat,
+            'product' => $product,
+            'other_products' => $other_products,
+
         ]);
     }
 }

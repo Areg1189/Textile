@@ -37,8 +37,10 @@ Route::group(
         Route::get('about', 'HomeController@about')->name('about');
         Route::get('contactus', 'HomeController@contactus')->name('contactus');
         Route::get('', 'HomeController@index')->name('home');
+
         Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
-//        Route::get('category/{prod}', 'HomeController@getProduct')->name('getProduct');
+        Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
+
         Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
 
@@ -103,7 +105,7 @@ Route::group(
             //=========  CATEGORY  ======= //
 
             Route::get('category', 'Admin\AdminCategoryController@index')->name('adminCategories');
-            Route::get('category{name?}', 'Admin\AdminCategoryController@show')->name('adminCategory');
+            Route::get('category/{name?}', 'Admin\AdminCategoryController@show')->name('adminCategory');
             Route::post('addCategory', 'Admin\AdminCategoryController@create')->name('addCategory');
             Route::post('updateCategory', 'Admin\AdminCategoryController@update')->name('updateCategory');
             Route::post('deleteCategory', 'Admin\AdminCategoryController@delete')->name('deleteCategory');

@@ -38,16 +38,24 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="shop-item text-center">
                                         <div class="shop-thumbnail">
-
-                                            <img class="img-responsive"
-                                                 src="{{asset('images/products/'.$product
+                                            <a href="{{route('getProduct',[
+                                                'cat' => $subCategory->link,
+                                                'prod' => $product->link
+                                                ])}}" class="link_img">
+                                                <img class="img-responsive"
+                                                     src="{{asset('images/products/'.$product
                                                          ->images
                                                          ->sortBy('id')
                                                          ->first()['image_name'])}}"/>
+                                            </a>
+
                                         </div>
                                         <div class="shop-desc">
                                             <h3>
-                                                <a href="#0">
+                                                <a href="{{route('getProduct',[
+                                                'cat' => $subCategory->link,
+                                                'prod' => $product->link
+                                                ])}}">
                                                     {{$product->translate(session('locale'))->name}}
                                                 </a>
                                             </h3>
@@ -60,7 +68,10 @@
                                         <div class="shop-meta clearfix">
                                             <ul class="">
                                                 <li>
-                                                    <a href="shop-single.html" class='heart'>
+                                                    <a href="{{route('getProduct',[
+                                                'cat' => $subCategory->link,
+                                                'prod' => $product->link
+                                                ])}}" class='heart'>
                                                         <i class="fa fa-shopping-bag"></i>
                                                         @lang('product.add_cart')
                                                     </a>
@@ -71,8 +82,6 @@
                                 </div>
                             @endforeach
                         </div>
-
-
                     </div><!-- end row -->
 
                     <div class="row">
@@ -114,47 +123,53 @@
                     </div>
                     <!-- end widget -->
 
-                    <div class="widget clearfix">
-                        <div class="about-widget">
-                            <a href="shop-single.html" class='heart'>
-                                <div class="post-media">
-                                    <img src="upload/shop_01.jpg" alt="" class="img-responsive">
-                                </div>
+                {{--<div class="widget clearfix">--}}
+                {{--<div class="about-widget">--}}
+                {{--<a href="shop-single.html" class='heart'>--}}
+                {{--<div class="post-media">--}}
+                {{--<img src="upload/shop_01.jpg" alt="" class="img-responsive">--}}
+                {{--</div>--}}
 
 
-                                <div class="about-desc">
-                                    <h4>
-                                        {{--{{$product->translate(session('locale'))->name}}--}}
-                                    </h4>
-                                    <del>100 000 AMD</del>
-                                    <small>80 000 AMD</small>
-                                </div>
-                            </a>
+                {{--<div class="about-desc">--}}
+                {{--<h4>--}}
+                {{--{{$product->translate(session('locale'))->name}}--}}
+                {{--</h4>--}}
+                {{--<del>100 000 AMD</del>--}}
+                {{--<small>80 000 AMD</small>--}}
+                {{--</div>--}}
+                {{--</a>--}}
 
-                        </div>
-                        <!-- end about-widget -->
-                    </div>
-                    <!-- end widget -->
+                {{--</div>--}}
+                {{--<!-- end about-widget -->--}}
+                {{--</div>--}}
+                <!-- end widget -->
 
 
                     <div class="widget clearfix">
                         <div class="widget-title">
-                            <h4>Related products</h4>
+                            <h4>@lang('product.other_prod')</h4>
                             <hr>
                         </div>
                         <div class="menu-widget menu-widget-new">
                             <ul class="related">
 
                                 <!-- Releted products-->
-                                @foreach($releated_products as $product)
+                                @foreach($other_products as $product)
                                     <li>
                                         <div>
-                                            <a href="#" class="link_img">
+                                            <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" class="link_img">
                                                 <img src="{{asset(
                                                          "images/products/".$product->images->sortBy('id')->first()['image_name'])}}"
                                                      alt="">
                                             </a>
-                                            <a href="#" class="link_img link_text ">
+                                            <a href="{{route('getProduct',[
+                                                'cat' => $product->parent->link,
+                                                'prod' => $product->link
+                                                ])}}" class="link_img link_text ">
                                                 {{--@if($product)--}}
                                                 <div class="related_name">
                                                         <span>
