@@ -217,7 +217,7 @@
 
                                                 </div><!-- end postpager -->
                                                 <div class="contact_form blog-desc">
-                                                @if(!Auth::guest())
+                                                    @if(!Auth::guest())
 
                                                         <div class="widget-title">
                                                             <h4>@lang('product.feedback')</h4>
@@ -225,7 +225,9 @@
                                                         </div>
 
                                                         <div class="contact_form">
-                                                            <form class="row">
+                                                            <form class="row comment_form"
+                                                                  action="{{route('getComment', ['prod' => $product->link])}}"
+                                                                  method="POST">
                                                                 {{csrf_field()}}
                                                                 <div class="col-md-12 col-sm-12">
                                                                     <label>
@@ -233,7 +235,9 @@
                                                                         <span class="required">*</span>
                                                                     </label>
                                                                     <textarea class="form-control"
-                                                                              placeholder=""></textarea>
+                                                                              placeholder="" name="comment" required>
+
+                                                                    </textarea>
                                                                 </div>
                                                                 <div class="col-md-12 col-sm-12">
                                                                     <input type="submit" value="Send Comment"
@@ -241,13 +245,12 @@
                                                                 </div>
                                                             </form>
                                                         </div><!-- end commentform -->
-
-                                                @else
+                                                    @else
                                                         <div class="widget-title">
                                                             <h4>@lang('product.register_reviews')</h4>
                                                             <hr>
                                                         </div>
-                                                @endif
+                                                    @endif
                                                 </div><!-- end postpager -->
                                             </div><!-- end content -->
                                         </div>
@@ -449,4 +452,11 @@
         </div><!-- end container -->
     </section><!-- end section -->
 
+@endsection
+
+@section('script')
+@parent
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script type="text/javascript"
+        src="{{asset('js/single_page.js')}}"></script>
 @endsection

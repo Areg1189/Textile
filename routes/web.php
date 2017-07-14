@@ -37,9 +37,12 @@ Route::group(
         Route::get('about', 'HomeController@about')->name('about');
         Route::get('contactus', 'HomeController@contactus')->name('contactus');
         Route::get('', 'HomeController@index')->name('home');
-
+//        =================  Product  ================== //
         Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
         Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
+
+        //        =================  Comment  ================== //
+        Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 
         Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
