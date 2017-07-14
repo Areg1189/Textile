@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{asset('css/prettyPhoto.css')}}">
+@endsection
 @section('content')
 
     <div class="page-title lb">
@@ -455,8 +459,9 @@
 @endsection
 
 @section('script')
-@parent
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script type="text/javascript"
-        src="{{asset('js/single_page.js')}}"></script>
+    @parent
+    <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript"
+            src="{{asset('js/single_page.js')}}"></script>
 @endsection
