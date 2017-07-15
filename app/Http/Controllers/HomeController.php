@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\About_text;
 use App\Models\About_cover;
 use App\Models\About_faq;
+use App\Models\About_sld;
 use App\Models\Employee_block;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -38,13 +39,15 @@ class HomeController extends Controller
         $cover = About_cover::first();
         $show = Employee_block::first();
         $about_faq = About_faq::get();
+        $about_slider = About_sld::get();
 
         return view('about',[
             'employees' => $employees,
             'about_text' => $about_text,
             'cover' => $cover,
             'show' => $show,
-            'about_faq' => $about_faq
+            'about_faq' => $about_faq,
+            'about_slider' => $about_slider,
         ]);
     }
 

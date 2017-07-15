@@ -2,12 +2,19 @@
 
 @section('head')
     @parent
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
+    <!-- REVOLUTION NAVIGATION STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 @endsection
-@section('content')
 
+@section('content')
 
     <section class="section paralbackground page-banner hidden-xs"
              style="background-image:url('{{asset('/images/covers/'.$cover->image)}}');"
@@ -53,8 +60,7 @@
     <section class="section lb"
              data-target="about_slide"
              data-prod="{{$slide}}"
-             data-href_update="{{route('change_slider')}}"
-    >
+             data-href_update="{{route('change_slider')}}">
         <button class="btn btn-info pull-right iconUpdate"
                 title="Edite Cover"
                 data-toggle="modal"
@@ -64,59 +70,42 @@
         </button>
 
         <div class="container">
-
-
             <!-- START REVOLUTION SLIDER 5.0 auto mode -->
             <div id="rev_slider" class="rev_slider" data-version="5.0">
                 <!-- SLIDE  -->
                 <ul>
-
                     @foreach($about_slider as $slide)
-
                         <li data-transition="fade">
                             <!-- MAIN IMAGE -->
-                            <img src="{{asset('upload/about_slider/'.$slide->image)}}" alt="" width="1250" height="600">
+                            <img src="{{asset('upload/about_slider/'.$slide->image)}}" width="1250" height="600">
                             <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
                                  id="slide-214-layer-1"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
-                                 data-width="none"
-                                 data-height="none"
-                                 data-whitespace="nowrap"
-                                 data-transform_idle="o:1;"
+                                 data-width="none"  data-height="none"
+                                 data-whitespace="nowrap"  data-transform_idle="o:1;"
                                  data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
                                  data-transform_out="y:[100%];s:1000;s:1000;"
                                  data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-start="550"
-                                 data-responsive_offset="on"
-                                 style="z-index: 2000000;">
-                                <img src="{{asset('upload/about_slider/'.$slide->image)}}" alt="" width="500"
-                                     height="45"
-                                     data-ww="['500px','500px','500px','420px']" data-hh="45px"
-                                     data-no-retina>
+                                 data-start="550" data-responsive_offset="on"
+                                  >
                             </div>
-
-                            <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
+                            <div class="tp-caption Sports-Subline tp-resizeme rs-parallaxlevel-0"
                                  id="slide-214-layer-1"
                                  data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                  data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
                                  data-fontsize="['30','30','30','25']"
-                                 data-width="none"
-                                 data-height="none"
-                                 data-whitespace="nowrap"
-                                 data-transform_idle="o:1;"
+                                 data-width="none"  data-height="none"
+                                 data-whitespace="nowrap" data-transform_idle="o:1;"
                                  data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
                                  data-transform_out="y:[100%];s:1000;s:1000;"
                                  data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                                 data-start="550"
-                                 data-splitin="chars"
-                                 data-splitout="none"
-                                 data-responsive_offset="on"
+                                 data-start="550" data-splitin="chars"
+                                 data-splitout="none"  data-responsive_offset="on"
                                  data-elementdelay="0.05"
-                                 style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">{{$slide->text}}
+                                 style=" white-space: nowrap; font-size: 30px; line-height: 30px;">{{$slide->text}}
                             </div>
                         </li>
-
                     @endforeach
                 </ul>
             </div><!-- END REVOLUTION SLIDER -->
@@ -152,8 +141,7 @@
     <section class="section"
              data-target="questions_text"
              {{--data-prod="{{$questions}}"--}}
-             data-href_update="{{route('add_question')}}"
-    >
+             data-href_update="{{route('add_question')}}">
         <button class="btn btn-info iconUpdate  pull-right" title="Edit"
                 data-toggle="modal" data-target="#modalUpdate"
                 data-status="questions_text">
@@ -179,10 +167,9 @@
 
                                         @foreach($about_faq as $faq)
                                             <div class="col-md-11 col-sm-1"
-                                                 data-target="edit_questions"
+                                                 data-target="edit_questions_{{$faq->id}}"
                                                  data-prod="{{$faq->id}}"
                                                  data-href_update="{{route('edit_questions',['id' => $faq->id])}}">
-
 
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
@@ -196,26 +183,21 @@
                                                     <div id="collapseFour_{{$faq->id}}" class="panel-collapse collapse">
                                                         <div class="panel-body">
                                                             <p>
-                                                                {{$faq->description}}
+                                                                {!! $faq->description !!}
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 col-sm-1"
-
-                                            >
-
+                                            <div class="col-md-1 col-sm-1">
                                                 <button class="btn btn-info iconUpdate  pull-right" title="Edit"
                                                         data-toggle="modal" data-target="#modalUpdate"
-                                                        data-status="edit_questions">
-                                                    <i class="fa fa-edit"></i> Edit Questions
+                                                        data-status="edit_questions_{{$faq->id}}">
+                                                    <i class="fa fa-edit"></i> Edit
                                                 </button>
-
                                             </div>
+
                                             @endforeach
-
-
 
                                     </div>
 
@@ -405,6 +387,37 @@
         w = 500;
         h = 500;
     </script>
+    <script src="{{asset('js/plugins.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.actions.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.carousel.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.kenburn.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.migration.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.navigation.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.parallax.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/extensions/revolution.extension.video.min.js')}}"></script>
+
+    <script>
+        var revapi;
+        jQuery(document).ready(function() {
+            revapi = jQuery("#rev_slider").revolution({
+                sliderType:"standard",
+                sliderLayout:"auto",
+                delay:9000,
+                navigation: {
+                    arrows:{enable:true}
+                },
+                gridwidth:1230,
+                gridheight:720
+            });
+        }); /*ready*/
+    </script>
+
+
     <script type="text/javascript" src="{{asset('js/admin/site.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/admin/jquery-ui.js')}}"></script>
 

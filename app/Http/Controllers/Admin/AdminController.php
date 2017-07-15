@@ -53,7 +53,6 @@ class AdminController extends Controller
         return view('vendor.adminlte.home');
     }
 
-
     public function blockUser(Request $request)
     {
         $validate = Validator::make($request->all(), [
@@ -69,7 +68,6 @@ class AdminController extends Controller
             return 1;
         }
     }
-
 
     public function sendMessage(Request $request)
     {
@@ -186,7 +184,6 @@ class AdminController extends Controller
         }
     }
 
-
     public function change_about_text(Request $request)
     {
         if ($request->key && $request->key == 'one') {
@@ -227,7 +224,6 @@ class AdminController extends Controller
             return back();
         }
     }
-
 
     public function editEmployee(Request $request)
     {
@@ -284,7 +280,6 @@ class AdminController extends Controller
 
     }
 
-
     public function change_slider(Request $request)
     {
         if ($request->key && $request->key == 'one') {
@@ -293,8 +288,6 @@ class AdminController extends Controller
                 'product' => $product,
             ]);
         } else {
-
-
             if ($request->image[0]) {
                 $img = 0;
                 foreach ($request->image as $image) {
@@ -307,17 +300,18 @@ class AdminController extends Controller
                     $imageName = $img . time() . '.jpg';
                     file_put_contents('upload/about_slider/' . $imageName, $data);
 
+                    foreach()
                     About_sld::create([
                         'image' => $imageName,
                         'code' => time() . $request->text_en[$img],
                         'hy' => [
-                            'text' => $request->text_hy[$img],
+                            'text' => $request->text_hy,
                         ],
                         'en' => [
-                            'text' => $request->text_en[$img],
+                            'text' => $request->text_en,
                         ],
                         'ru' => [
-                            'text' => $request->text_ru[$img],
+                            'text' => $request->text_ru,
                         ]
                     ]);
                     $img++;
@@ -325,11 +319,24 @@ class AdminController extends Controller
 
             };
 
-
             return back();
         }
 
 
+    }
+
+
+    public function deleteSlideImg(Request $request)
+    {
+        if ($request->key && $request->key == 'image') {
+            $res = About_sld::where('id', $request->prod)->firstOrFail();
+            if (file_exists(public_path() . '/upload/about_slider/' . $res->image)) {
+                File::delete(public_path() . '/upload/about_slider/' . $res->image);
+                $res->delete();
+                return 1;
+
+            }
+        }
     }
 
     public function add_question(Request $request)
@@ -369,26 +376,25 @@ class AdminController extends Controller
 
     }
 
-
     public function edit_questions(Request $request)
     {
-        if ($request->key && $request->key == 'one') {
+        $product = About_faq::where('id', $request->prod)->first();
 
-            $product = About_faq::where('id', $request->prod)->first();
-//            dd($product);
+        if ($request->key && $request->key == 'one') {
             return View::make('vendor.adminlte.updatePage.updateAboutQuestions', [
                 'product' => $product,
             ]);
         } else {
-            $faq = About_faq::where('id', $request->prod)->first();
-            $faq->translate('hy')->header = $request->hy_name;
-            $faq->translate('en')->header = $request->en_name;
-            $faq->translate('ru')->header = $request->ru_name;
-            $faq->translate('hy')->description = $request->hy_description1;
-            $faq->translate('en')->description = $request->en_description1;
-            $faq->translate('ru')->description = $request->ru_description1;
+            $product->code = time();
+            $product->translate('hy')->header = $request->hy_name;
+            $product->translate('en')->header = $request->en_name;
+            $product->translate('ru')->header = $request->ru_name;
+            $product->translate('hy')->description = $request->hy_description1;
+            $product->translate('en')->description = $request->en_description1;
+            $product->translate('ru')->description = $request->ru_description1;
 
-            $faq->save();
+            $product->save();
+
             return back();
         }
     }
@@ -509,7 +515,6 @@ class AdminController extends Controller
 
     }
 
-
     public function updateHomeImage(Request $request)
     {
         if ($request->key && $request->key == 'one') {
@@ -551,4 +556,5 @@ class AdminController extends Controller
         }
 
     }
+
 }

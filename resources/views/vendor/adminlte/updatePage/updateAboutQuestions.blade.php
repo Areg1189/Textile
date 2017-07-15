@@ -78,6 +78,7 @@
                         </div>
                     </div>
 
+                    <input type="hidden" name="prod" value="{{$product->id}}">
 
                     <div class="row">
                         <div class="col-sm-12">

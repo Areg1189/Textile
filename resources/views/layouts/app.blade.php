@@ -30,12 +30,12 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{{asset('images/apple-touch-icon-144x144.png')}}">
         <link rel="apple-touch-icon" sizes="152x152" href="{{asset('images/apple-touch-icon-152x152.png')}}">
 
-        <!-- REVOLUTION STYLE SHEETS -->
-        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
-        <!-- REVOLUTION LAYERS STYLES -->
-        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
-        <!-- REVOLUTION NAVIGATION STYLES -->
-        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
+        {{--<!-- REVOLUTION STYLE SHEETS -->--}}
+        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">--}}
+        {{--<!-- REVOLUTION LAYERS STYLES -->--}}
+        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">--}}
+        {{--<!-- REVOLUTION NAVIGATION STYLES -->--}}
+        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">--}}
 
         <!-- BOOTSTRAP STYLES -->
         <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">
@@ -149,24 +149,24 @@
     <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.tools.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
     <!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.actions.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.carousel.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.kenburn.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.migration.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.navigation.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.parallax.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
-    <script type="text/javascript"
-            src="{{asset('revolution/js/extensions/revolution.extension.video.min.js')}}"></script>
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.actions.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.carousel.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.kenburn.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.migration.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.navigation.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.parallax.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.slideanims.min.js')}}"></script>--}}
+    {{--<script type="text/javascript"--}}
+            {{--src="{{asset('revolution/js/extensions/revolution.extension.video.min.js')}}"></script>--}}
     <script type="text/javascript"
             src="{{asset('js/jquery.leanModal.min.js')}}"></script>
     <script type="text/javascript"
