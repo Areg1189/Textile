@@ -10,15 +10,20 @@
     <div class="page-title lb">
         <div class="container clearfix">
             <div class="title-area pull-left">
-                <h2>Contact us
+                <h2>
+                    @lang('contacts.contact_us')
                     <small>Get in touch, ask your questions to us!</small>
                 </h2>
             </div><!-- /.pull-right -->
             <div class="pull-right hidden-xs">
                 <div class="bread">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Contact</li>
+                        <li>
+                            <a href="#">
+                                @lang('header.home')
+                            </a>
+                        </li>
+                        <li class="active"> @lang('header.contact')</li>
                     </ol>
                 </div><!-- end bread -->
             </div><!-- /.pull-right -->
@@ -70,22 +75,6 @@
                                     @endif
                                 @endforeach
 
-                                {{--<li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"--}}
-                                {{--href="#"><i class="fa fa-facebook"></i></a></li>--}}
-                                {{--<li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"--}}
-                                {{--href="#"><i class="fa fa-google-plus"></i></a></li>--}}
-                                {{--<li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"--}}
-                                {{--href="#"><i class="fa fa-twitter"></i></a></li>--}}
-                                {{--<li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"--}}
-                                {{--href="#"><i class="fa fa-linkedin"></i></a></li>--}}
-                                {{--<li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"--}}
-                                {{--href="#"><i class="fa fa-pinterest"></i></a></li>--}}
-                                {{--<li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i--}}
-                                {{--class="fa fa-skype"></i></a></li>--}}
-                                {{--<li class="vimeo"><a data-tooltip="tooltip" data-placement="top" title="Vimeo" href="#"><i--}}
-                                {{--class="fa fa-vimeo"></i></a></li>--}}
-                                {{--<li class="youtube"><a data-tooltip="tooltip" data-placement="top" title="Youtube"--}}
-                                {{--href="#"><i class="fa fa-youtube"></i></a></li>--}}
                             </ul>
                         </div><!-- end social icons -->
                     </div><!-- end widget -->
@@ -98,16 +87,16 @@
                         <form id="contactform" class="row" action="{{route('send_email')}}" name="contactform"
                               method="post">
                             <div class="col-md-12">
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                <input type="text" name="name" id="name" class="form-control" placeholder="@lang('contacts.name')">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="@lang('contacts.email')"
                                        required>
-                                <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone">
+                                <input type="text" name="phone" id="phone" class="form-control" placeholder="@lang('contacts.phone')">
                                 <input type="text" name="subject" id="subject" class="form-control"
-                                       placeholder="Subject">
+                                       placeholder="@lang('contacts.subject')">
                                 <textarea class="form-control" name="text" id="comments" rows="6"
-                                          placeholder="Message Below" required></textarea>
+                                          placeholder="@lang('contacts.message')" required></textarea>
                                 {{csrf_field()}}
-                                <button type="submit" value="SEND" id="submit" class="btn btn-primary"> Send Form
+                                <button type="submit" value="SEND" id="submit" class="btn btn-primary"> @lang('contacts.send')
                                 </button>
                             </div>
                         </form>

@@ -16,12 +16,12 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="{{Request::url() == route('home') ?'active':''}}">
-                            <a href="{{route('home')}}">Home </a>
+                            <a href="{{route('home')}}"> @lang('header.home') </a>
                         </li>
-                        <li><a href="{{route('about')}}">About</a></li>
+                        <li><a href="{{route('about')}}">@lang('header.about')</a></li>
                         <li class="dropdown yamm-fw">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">Shop <span
+                               aria-haspopup="true" aria-expanded="false"> @lang('header.shop') <span
                                         class="fa fa-angle-down"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -70,7 +70,7 @@
                             </ul>
                         </li>
                         {{--<li><a href="blog.html">Blog</a></li>--}}
-                        <li><a href="{{route('contactus')}}">Contact</a></li>
+                        <li><a href="{{route('contactus')}}">@lang('header.contact')</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right searchandbag">
 

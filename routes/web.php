@@ -111,7 +111,7 @@ Route::group(
             Route::post('change_about_text', 'Admin\AdminController@change_about_text')->name('change_about_text');
             Route::post('add_question', 'Admin\AdminController@add_question')->name('add_question');
             Route::post('edit_questions/{id}', 'Admin\AdminController@edit_questions')->name('edit_questions');
-
+            Route::post('deleteSlideImg/{id}', 'Admin\AdminController@deleteSlideImg')->name('deleteSlideImg');
 
             //=========  CATEGORY  ======= //
 

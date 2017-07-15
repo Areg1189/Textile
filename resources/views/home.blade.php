@@ -93,7 +93,9 @@
         <section class="section">
             <div class="container">
                 <div class="section-title text-center clearfix">
-                    <h4>Top Categories</h4>
+                    <h4>
+                        @lang('index.top_categories')
+                    </h4>
                     <p>Listed below our top categories, campaings, promotions and offers for you!</p>
                     <hr>
                 </div><!-- end title -->
@@ -123,7 +125,9 @@
     <section class="section lb nopadbot">
         <div class="container-fluid">
             <div class="section-title text-center clearfix">
-                <h4>Our Products</h4>
+                <h4>
+                    @lang('index.our_products')
+                </h4>
                 <p>Listed below our awesome products with a stylish portfolio section!</p>
                 <hr>
             </div><!-- end title -->
@@ -134,7 +138,7 @@
                         <ul class="list-inline">
                             <li>
                                 <a class="button button--aylen btn" href="#" data-filter="*">
-                                    All
+                                    @lang('index.all')
                                 </a>
                             </li>
 
@@ -227,7 +231,9 @@
     <section class="section">
         <div class="container">
             <div class="section-title text-center clearfix">
-                <h4>Shopping</h4>
+                <h4>
+                    @lang('index.shopping')
+                </h4>
                 <p>We showcase all our premium quality home decoration materials and furniture's!</p>
                 <hr>
             </div><!-- end title -->
@@ -286,7 +292,9 @@
     <section class="section">
         <div class="container">
             <div class="section-title text-center clearfix">
-                <h4>Newstellers</h4>
+                <h4>
+                    @lang('index.newstellers')
+                </h4>
                 <p>Donec vitae sapien ut libero venenatis faucibus.</p>
                 <hr>
             </div><!-- end title -->
@@ -347,7 +355,9 @@
     <section class="section">
         <div class="container">
             <div class="section-title text-center clearfix">
-                <h4>We love our suppliers</h4>
+                <h4>
+                    @lang('index.we_love_our_suppliers')
+                </h4>
                 <p>Special thanks for all our suppliers to build awesome community!</p>
                 <hr>
             </div><!-- end title -->

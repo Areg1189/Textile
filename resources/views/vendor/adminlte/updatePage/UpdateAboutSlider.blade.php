@@ -30,7 +30,12 @@
                                                 data-target="image{{$img}}"
                                                 data-prod="{{$image->id}}"
                                                 data-key="image"
-                                                data-href_delete="{{route('deleteProduct')}}">
+                                                data-href_delete="{{route('deleteSlideImg',['id'=>$image->id])}}">
+
+                                                <input type="text" class="form-control col-sm-4" name="text_hy[]" value="{{$image->translate('hy')->text . $img}}">
+                                                <input type="text" class="form-control col-sm-4" name="text_en[]" value="{{$image->translate('en')->text . $img}}">
+                                                <input type="text" class="form-control col-sm-4" name="text_ru[]" value="{{$image->translate('ru')->text . $img}}">
+
                                                 <img src="{{asset('upload/about_slider/'.$image->image)}}"
                                                      style="width:100%;"/>
                                                 <span class="delete_update_image iconDelete"

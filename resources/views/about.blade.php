@@ -1,9 +1,21 @@
 @extends('layouts.app')
 
+@section('head')
+    @parent
+    <!-- REVOLUTION STYLE SHEETS -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
+    <!-- REVOLUTION LAYERS STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
+    <!-- REVOLUTION NAVIGATION STYLES -->
+    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
+
+@endsection
+
 @section('content')
 
     <section class="section paralbackground page-banner hidden-xs"
-             style="background-image:url('{{asset('/images/covers/'.$cover->image)}}');" data-img-width="2000" data-img-height="400"
+             style="background-image:url('{{asset('/images/covers/'.$cover->image)}}');" data-img-width="2000"
+             data-img-height="400"
              data-diff="100">
     </section>
     <!-- end section -->
@@ -11,15 +23,23 @@
     <div class="page-title">
         <div class="container clearfix">
             <div class="title-area pull-left">
-                <h2>About us
+                <h2>
+                    @lang('about.about_us')
+
                     <small>Welcome to the HomeStyle shop!</small>
                 </h2>
             </div><!-- /.pull-right -->
             <div class="pull-right hidden-xs">
                 <div class="bread">
                     <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">About</li>
+                        <li>
+                            <a href="#">
+                                @lang('header.home')
+                            </a>
+                        </li>
+                        <li class="active">
+                            @lang('header.about')
+                        </li>
                     </ol>
                 </div><!-- end bread -->
             </div><!-- /.pull-right -->
@@ -30,94 +50,41 @@
         <div class="container">
             <!-- START REVOLUTION SLIDER 5.0 auto mode -->
             <div id="rev_slider" class="rev_slider" data-version="5.0">
+                <!-- SLIDE  -->
                 <ul>
-                    <!-- SLIDE  -->
-                    <li data-transition="fade">
-                        <!-- MAIN IMAGE -->
-                        <img src="upload/about_slider_01.jpg" alt="" width="1250" height="600">
-                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-3"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-responsive_offset="on"
-                             style="z-index: 7;"><img src="upload/sports_sublinebg.png" alt="" width="500" height="45"
-                                                      data-ww="['500px','500px','500px','420px']" data-hh="45px"
-                                                      data-no-retina>
-                        </div>
-
-                        <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-4"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
-                             data-fontsize="['30','30','30','25']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-splitin="chars"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                             data-elementdelay="0.05"
-                             style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">WELCOME TO
-                            HOMESTYLE
-                        </div>
-                    </li>
-
-                    <!-- SLIDE  -->
-                    <li data-transition="fade">
-                        <!-- MAIN IMAGE -->
-                        <img src="upload/about_slider_02.jpg" alt="" width="1250" height="600">
-                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-31"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-responsive_offset="on"
-                             style="z-index: 7;"><img src="upload/sports_sublinebg.png" alt="" width="500" height="45"
-                                                      data-ww="['500px','500px','500px','420px']" data-hh="45px"
-                                                      data-no-retina>
-                        </div>
-
-                        <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-43"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
-                             data-fontsize="['30','30','30','25']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-splitin="chars"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                             data-elementdelay="0.05"
-                             style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">WE BUILD
-                            AWESOMENESS
-                        </div>
-                    </li>
+                    @foreach($about_slider as $slide)
+                        <li data-transition="fade">
+                            <!-- MAIN IMAGE -->
+                            <img src="{{asset('upload/about_slider/'.$slide->image)}}" width="1250" height="600">
+                            <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-1"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
+                                 data-width="none" data-height="none"
+                                 data-whitespace="nowrap" data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="550" data-responsive_offset="on"
+                                 style="z-index: 200000000;">
+                            </div>
+                            <div class="tp-caption Sports-Subline tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-1"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
+                                 data-fontsize="['30','30','30','25']"
+                                 data-width="none" data-height="none"
+                                 data-whitespace="nowrap" data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="550" data-splitin="chars"
+                                 data-splitout="none" data-responsive_offset="on"
+                                 data-elementdelay="0.05"
+                                 style="z-index: 99988888; white-space: nowrap; font-size: 30px; line-height: 30px;">{{$slide->text}}
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div><!-- END REVOLUTION SLIDER -->
         </div><!-- end container -->
@@ -191,12 +158,14 @@
 
     @if($show->hide == 0)
         <section class="section">
-        <div class="container">
-            <div class="section-title text-center clearfix">
-                <h4>Meet the Team</h4>
-                <p>Donec vitae sapien ut libero venenatis faucibus.</p>
-                <hr>
-            </div><!-- end title -->
+            <div class="container">
+                <div class="section-title text-center clearfix">
+                    <h4>
+                        @lang('about.our_team')
+                    </h4>
+                    <p>Donec vitae sapien ut libero venenatis faucibus.</p>
+                    <hr>
+                </div><!-- end title -->
 
 
                 <div class="row module-wrapper text-center">
@@ -206,13 +175,14 @@
                     @foreach($employees as $employee)
 
                         <div class="col-md-3 col-sm-3 team-member"
-                            >
+                        >
                             <div class="row">
 
                             </div>
                             <div class="about-widget">
                                 <div class="post-media">
-                                    <img src="{{asset('images/employee/'.$employee->image)}}" alt="" class="img-responsive">
+                                    <img src="{{asset('images/employee/'.$employee->image)}}" alt=""
+                                         class="img-responsive">
                                 </div>
                                 <div class="social-icons">
                                     <ul class="list-inline">
@@ -237,7 +207,8 @@
                                             <li class="twitter"><a data-tooltip="tooltip" data-placement="top"
                                                                    target="_blank"
                                                                    title="Twitter"
-                                                                   href="{{$employee->link}}"><i class="fa fa-twitter"></i></a>
+                                                                   href="{{$employee->link}}"><i
+                                                            class="fa fa-twitter"></i></a>
                                             </li>
                                         @endif
 
@@ -258,14 +229,16 @@
                                         @endif
 
                                         @if($employee->employee_social->skype != "")
-                                            <li class="skype"><a data-tooltip="tooltip" data-placement="top" target="_blank"
+                                            <li class="skype"><a data-tooltip="tooltip" data-placement="top"
+                                                                 target="_blank"
                                                                  title="Skype"
                                                                  href="{{$employee->link}}"><i class="fa fa-skype"></i></a>
                                             </li>
                                         @endif
 
                                         @if($employee->employee_social->vimeo != "")
-                                            <li class="vimeo"><a data-tooltip="tooltip" data-placement="top" target="_blank"
+                                            <li class="vimeo"><a data-tooltip="tooltip" data-placement="top"
+                                                                 target="_blank"
                                                                  title="vimeo"
                                                                  href="{{$employee->link}}"><i class="fa fa-vimeo"></i></a>
                                             </li>
@@ -274,7 +247,8 @@
                                         @if($employee->employee_social->youtube != "")
                                             <li class="youtube"><a data-tooltip="tooltip" data-placement="top"
                                                                    target="_blank" title="youtube"
-                                                                   href="{{$employee->link}}"><i class="fa fa-youtube"></i></a>
+                                                                   href="{{$employee->link}}"><i
+                                                            class="fa fa-youtube"></i></a>
                                             </li>
                                         @endif
 
@@ -299,10 +273,51 @@
                     @endforeach
 
 
-
                 </div><!-- row -->
 
-        </div><!-- end container -->
-    </section><!-- end section -->
+            </div><!-- end container -->
+        </section><!-- end section -->
     @endif
+@endsection
+
+
+@section('script')
+    @parent
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.tools.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('revolution/js/jquery.themepunch.revolution.min.js')}}"></script>
+    <!-- SLIDER REVOLUTION 5.0 EXTENSIONS -->
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.actions.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.carousel.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.kenburn.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.layeranimation.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.migration.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.navigation.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.parallax.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.slideanims.min.js')}}"></script>
+    <script type="text/javascript"
+            src="{{asset('revolution/js/extensions/revolution.extension.video.min.js')}}"></script>
+    <script>
+        var revapi;
+        jQuery(document).ready(function () {
+            revapi = jQuery("#rev_slider").revolution({
+                sliderType: "standard",
+                sliderLayout: "auto",
+                delay: 9000,
+                navigation: {
+                    arrows: {enable: true}
+                },
+                gridwidth: 1230,
+                gridheight: 720
+            });
+        });
+        /*ready*/
+    </script>
 @endsection

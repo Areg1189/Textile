@@ -42,6 +42,10 @@
                     <span>Site</span></a>
             </li>
 
+            <li class="{{Request::segment(2) == 'about' ? 'active' : ''}}"><a href="{{route('aboutus')}}"><i
+                            class="fa fa-info" aria-hidden="true"></i>
+                    <span>About Us</span></a></li>
+
             <li class="{{Request::url() == route('getUsers') ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span></a></li>
@@ -56,14 +60,14 @@
                         ? 'active' : '' }}"
             >
                 <a href="#">
-                    <i class='fa fa-book'></i>
+                    <i class='fa fa-list'></i>
                     <span>Category</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
                         <a href="{{route('adminCategories')}}">
-                            <i class='fa fa-book'></i>
+                            <i class='fa fa-list'></i>
                             All Categories
                         </a>
                     </li>
@@ -105,11 +109,6 @@
             <li class="{{Request::segment(2) == 'filters' ? 'active' : ''}}"><a href="{{route('getFilter')}}">
                     <i class="fa fa-filter" aria-hidden="true"></i>
                     <span>Filters</span></a></li>
-
-
-            <li class="{{Request::segment(2) == 'about' ? 'active' : ''}}"><a href="{{route('aboutus')}}"><i
-                            class="fa fa-users" aria-hidden="true"></i>
-                    <span>About Us Page</span></a></li>
 
             <li class="{{Request::segment(2) == 'icons' ? 'active' : ''}}"><a href="{{route('icons')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>

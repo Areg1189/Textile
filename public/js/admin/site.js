@@ -154,9 +154,9 @@ $(function () {
                 return function (event) {
                     $('[data-xname="' + this_file + '"]').prepend('' +
                         '<div class="col-sm-4">' +
-                        '<input type="text" name="text_hy[]" required>' +
-                        '<input type="text" name="text_en[]" required>' +
-                        '<input type="text" name="text_ru[]" required>' +
+                        '<input type="text" class="form-control col-sm-4" name="text_hy[]" placeholder="Text AM" required>' +
+                        '<input type="text" class="form-control col-sm-4" name="text_en[]" placeholder="Text RU" required>' +
+                        '<input type="text" class="form-control col-sm-4" name="text_ru[]" placeholder="Text EN" required>' +
                         '<div class=" demo"   data-id="' + file.lastModified + '">' +
                         '</div>' +
                         '</div>' +
@@ -206,15 +206,7 @@ $(function () {
         }// end for;
     }
 });
-// $(".productMulty").validate({
-//     rules: {
-//         img: {
-//             required: true,
-//             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
-//         }
-//     },
-//
-// });
+
 $(document).on('submit', '.productMulty', function (form) {
     f = $(this);
     $(basic).each(function (index) {
@@ -231,4 +223,72 @@ $(document).on('submit', '.productMulty', function (form) {
         });
     });
 
-})
+});
+
+/* delete slider image */
+
+
+$(document).on('click', '.iconDelete', function () {
+    parent = $(this).data('status');
+    url = $('[data-target="' + parent + '"]').data('href_delete');
+    prod = $('[data-target="' + parent + '"]').data('prod');
+    key = $('[data-target="' + parent + '"]').data('key');
+    data = {prod: prod, key: key, _token: token};
+});
+
+
+
+$(document).on('click', '.delete_update_image', function () {
+    $('.modal_delete_image').remove();
+    $(this).parent().append(
+        '<div class="modal_delete_image">' +
+        '<div class="box box-danger">' +
+        '<div class="box-body">' +
+        '<div class="row">' +
+        '<div class="col-sm-12">' +
+        '<p>Do you really want to delete</p>' +
+        '</div>' +
+        '<div class="btn-group">' +
+        '<button type="button" class="btn btn-danger modalDelete dellImage">delete</button>' +
+        '<button type="button" class="btn btn-default closeDell">Close</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>'
+    )
+});
+
+
+$(document).on('click', '.closeDell', function (e) {
+    $('.modal_delete_image').remove();
+});
+
+$(document).on('click', '.dellImage', function (e) {
+    e.stopPropagation();
+});
+
+
+$(document).on('click', '.modalDelete', function () {
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: data,
+        success: function (data) {
+            if (data == 1) {
+                $('[data-target="' + parent + '"]').fadeOut(500, function () {
+                    $(this).remove();
+                })
+            } else {
+                $(".msj-success").html(data);
+                $(".msj-success").fadeIn();
+                setTimeout(function () {
+                    $(".msj-success").fadeOut();
+                    $(".msj-success").html('<ul></ul>');
+                }, 5000);
+            }
+        }
+    })
+});
+
+/*  end of delete slider image  */
