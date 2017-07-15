@@ -121,3 +121,114 @@ $(document).on('click', '.update_employee', (function (e) {
         })
     })
 )
+
+
+$(function () {
+
+    $(document).on('click', '.image', function (e) {
+        $('[data-xname="' + $(this).data('name') + '"]').html('');
+
+    });
+
+    basic = [];
+    $(document).on('change', '.image', function (e) {
+        basic = [];
+        this_file = $(this).data('name');
+        var files = e.target.files;
+        for (i = 0; i <= files.length; i++) {
+            // when i == files.length reorder and break
+            if (i == files.length) {
+
+                // need timeout to reorder beacuse prepend is not done
+                setTimeout(function () {
+                    reorderImages();
+                }, 100);
+                break;
+            }
+
+            var file = files[i];
+            var reader = new FileReader();
+            // $('.sort').html('');
+            reader.onload = (function (file) {
+
+                return function (event) {
+                    $('[data-xname="' + this_file + '"]').prepend('' +
+                        '<div class="col-sm-4">' +
+                        '<input type="text" name="text_hy[]" required>' +
+                        '<input type="text" name="text_en[]" required>' +
+                        '<input type="text" name="text_ru[]" required>' +
+                        '<div class=" demo"   data-id="' + file.lastModified + '">' +
+                        '</div>' +
+                        '</div>' +
+                        '');
+                    $('.demo').each(function (i) {
+                        if ($(this).data('crop') != 1) {
+
+                            basic.push($(this).croppie({
+
+                                url: event.target.result,
+                                viewport: {
+                                    width: 250,
+                                    height: 162.5
+                                },
+                                boundary: {
+                                    width: 300,
+                                    height: 200
+                                }
+                            }));
+                        }
+                        $(this).data('crop', 1);
+
+                    });
+                    $(".cr-slider").remove();
+                };
+            })(file);
+            reader.readAsDataURL(file);
+        }// end for;
+    });
+
+
+    $('.sort, #sortable').disableSelection();
+    $('.sort, #sortable').on('sortbeforestop', function (event) {
+        reorderImages();
+    });
+    function reorderImages() {
+        var images = $('.sort');
+        var i = 0, nrOrder = 0;
+        for (i; i < images.length; i++) {
+            var image = $(images[i]);
+            if (image.hasClass('ui-state-default') && !image.hasClass('ui-sortable-placeholder')) {
+                image.attr('data-order', nrOrder);
+                var orderNumberBox = image.find('.order-number');
+                orderNumberBox.html(nrOrder + 1);
+                nrOrder++;
+            }// end if;
+        }// end for;
+    }
+});
+// $(".productMulty").validate({
+//     rules: {
+//         img: {
+//             required: true,
+//             accept: "jpeg,JPEG,png,PNG,jpg,JPG,gif,svg"
+//         }
+//     },
+//
+// });
+$(document).on('submit', '.productMulty', function (form) {
+    f = $(this);
+    $(basic).each(function (index) {
+        basic[index].croppie('result', {
+            type: 'canvas',
+            size: {
+                width: prodImageW,
+                height: prodImageH
+            },
+        }).then(function (resp) {
+            f.find('.imageContainer').append('' +
+                '<input type="hidden" name="image[]" value="' + resp + '"/>' +
+                '');
+        });
+    });
+
+})

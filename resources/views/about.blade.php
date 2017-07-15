@@ -3,7 +3,7 @@
 @section('content')
 
     <section class="section paralbackground page-banner hidden-xs"
-             style="background-image:url('upload/page_banner_about.jpg');" data-img-width="2000" data-img-height="400"
+             style="background-image:url('{{asset('/images/covers/'.$cover->image)}}');" data-img-width="2000" data-img-height="400"
              data-diff="100">
     </section>
     <!-- end section -->
@@ -129,9 +129,11 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                     <div class="section-title text-left clearfix">
-                        <h4>About Us</h4>
+                        <h4>
+                            {{$about_text->translate(session('locale'))->header}}
+                        </h4>
                         <p>
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                            {!! $about_text->translate(session('locale'))->description !!}
                         </p>
                     </div>
                 </div>
@@ -152,116 +154,43 @@
                     <div class="content-widget">
                         <div class="accordion-widget">
                             <div class="accordion-toggle-2">
-                                <div class="panel-group" id="accordion3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseFour">
-                                                    Why HomeStyle ? <i class="indicator fa fa-plus"></i>
-                                                </a>
+                                <div class="panel-group " id="accordion3">
+                                    @foreach($about_faq as $faq)
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <div class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse"
+                                                       data-parent="#accordion3" href="#collapseFour_{{$faq->id}}">
+                                                        {{$faq->header}}
+                                                        <i class="indicator fa fa-plus"></i>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                            <div id="collapseFour_{{$faq->id}}" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <p>
+                                                        {{$faq->description}}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div id="collapseFour" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                                    nisi ut aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseFive">
-                                                    What IS HomeStyle ? <i class="indicator fa fa-minus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div id="collapseFive" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. ctetur adipisicing elit, sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseSix">
-                                                    What is HomeStyle Features ? <i class="indicator fa fa-plus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div id="collapseSix" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                                    nisi ut aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    @endforeach
                                 </div>
                             </div><!-- accordion -->
                         </div><!-- end accordion-widget -->
                     </div><!-- end content-widget -->
                 </div><!-- end col -->
 
-                {{--<div class="col-md-12 col-sm-12">--}}
-                {{--<div class="section-title text-left clearfix">--}}
-                {{--<h4>In The Press</h4>--}}
-                {{--<p>Donec vitae sapien ut libero venenatis faucibus.</p>--}}
-                {{--<hr>--}}
-                {{--</div><!-- end title -->--}}
-
-                {{--<div class="related-posts">--}}
-                {{--<div class="entry">--}}
-                {{--<p><a href="single.html" title=""> Best Furniture Company in India</a></p>--}}
-                {{--<small>Forbess</small>--}}
-                {{--</div><!-- end entry -->--}}
-
-                {{--<div class="entry">--}}
-                {{--<p><a href="single.html" title="">Who Did $100.000 per Months from Handcratfs</a></p>--}}
-                {{--<small>Smashing Magazine</small>--}}
-                {{--</div><!-- end entry -->--}}
-
-                {{--<div class="entry">--}}
-                {{--<p><a href="single.html" title="">HomeStyle Make Awesome Materials for Decorations</a></p>--}}
-                {{--<small>Furniture News</small>--}}
-                {{--</div><!-- end entry -->--}}
-
-                {{--<div class="entry">--}}
-                {{--<p><a href="single.html" title="">Thanks HomeStyle Making Awesomeness!.</a></p>--}}
-                {{--<small>Braking News</small>--}}
-                {{--</div><!-- end entry -->--}}
-
-                {{--<div class="entry">--}}
-                {{--<p><a href="single.html" title="">Looking For Best Furnitures? Check HomeStyle INC.</a></p>--}}
-                {{--<small>NY Times</small>--}}
-                {{--</div><!-- end entry -->--}}
-                {{--</div><!-- end related -->--}}
-                {{--</div><!-- end col -->--}}
             </div><!-- end row -->
         </div><!-- end container -->
     </section><!-- end section -->
 
 
-    <section class="section">
+    @if($show->hide == 0)
+        <section class="section">
         <div class="container">
             <div class="section-title text-center clearfix">
                 <h4>Meet the Team</h4>
@@ -271,132 +200,109 @@
 
 
                 <div class="row module-wrapper text-center">
-                    <div class="col-md-3 col-sm-3 team-member">
-                        <div class="about-widget">
-                            <div class="post-media">
-                                <img src="upload/team_01.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="social-icons">
-                                <ul class="list-inline">
-                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                            href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                           href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                    class="fa fa-skype"></i></a></li>
-                                </ul>
-                            </div><!-- end social icons -->
 
-                            <div class="about-desc">
-                                <h4>John MARTIN</h4>
-                                <small>CEO / Founder</small>
-                                <p>My name is John. I create handcraft web design and graphic sources for beginners like
-                                    me.</p>
+
+                    @php($i = 0)
+                    @foreach($employees as $employee)
+
+                        <div class="col-md-3 col-sm-3 team-member"
+                            >
+                            <div class="row">
+
+                            </div>
+                            <div class="about-widget">
+                                <div class="post-media">
+                                    <img src="{{asset('images/employee/'.$employee->image)}}" alt="" class="img-responsive">
+                                </div>
+                                <div class="social-icons">
+                                    <ul class="list-inline">
+
+                                        @if($employee->employee_social->facebook != "")
+                                            <li class="facebook"><a data-tooltip="tooltip" data-placement="top"
+                                                                    title="Facebook" target="_blank"
+                                                                    href="{{$employee->link}}"><i
+                                                            class="fa fa-facebook"></i></a></li>
+                                        @endif
+
+                                        @if($employee->employee_social->google != "")
+                                            <li class="google"><a data-tooltip="tooltip" data-placement="top"
+                                                                  target="_blank"
+                                                                  title="Google Plus" href="{{$employee->link}}"><i
+                                                            class="fa fa-google-plus"></i></a>
+                                            </li>
+                                        @endif
+
+
+                                        @if($employee->employee_social->twitter != "")
+                                            <li class="twitter"><a data-tooltip="tooltip" data-placement="top"
+                                                                   target="_blank"
+                                                                   title="Twitter"
+                                                                   href="{{$employee->link}}"><i class="fa fa-twitter"></i></a>
+                                            </li>
+                                        @endif
+
+                                        @if($employee->employee_social->linkedin != "")
+                                            <li class="linkedin"><a data-tooltip="tooltip" data-placement="top"
+                                                                    target="_blank"
+                                                                    title="Linkedin"
+                                                                    href="{{$employee->link}}"><i
+                                                            class="fa fa-linkedin"></i></a></li>
+                                        @endif
+
+                                        @if($employee->employee_social->pinterest != "")
+                                            <li class="pinterest"><a data-tooltip="tooltip" data-placement="top"
+                                                                     target="_blank"
+                                                                     title="Pinterest" href="{{$employee->link}}"><i
+                                                            class="fa fa-pinterest"></i></a>
+                                            </li>
+                                        @endif
+
+                                        @if($employee->employee_social->skype != "")
+                                            <li class="skype"><a data-tooltip="tooltip" data-placement="top" target="_blank"
+                                                                 title="Skype"
+                                                                 href="{{$employee->link}}"><i class="fa fa-skype"></i></a>
+                                            </li>
+                                        @endif
+
+                                        @if($employee->employee_social->vimeo != "")
+                                            <li class="vimeo"><a data-tooltip="tooltip" data-placement="top" target="_blank"
+                                                                 title="vimeo"
+                                                                 href="{{$employee->link}}"><i class="fa fa-vimeo"></i></a>
+                                            </li>
+                                        @endif
+
+                                        @if($employee->employee_social->youtube != "")
+                                            <li class="youtube"><a data-tooltip="tooltip" data-placement="top"
+                                                                   target="_blank" title="youtube"
+                                                                   href="{{$employee->link}}"><i class="fa fa-youtube"></i></a>
+                                            </li>
+                                        @endif
+
+                                        @if($employee->employee_social->instagram != "")
+                                            <li class="instagram"><a data-tooltip="tooltip" data-placement="top"
+                                                                     target="_blank" title="instagram"
+                                                                     href="{{$employee->link}}"><i
+                                                            class="fa fa-instagram"></i></a></li>
+                                        @endif
+
+                                    </ul>
+                                </div><!-- end social icons -->
+
+                                <div class="about-desc">
+                                    <h4>{{$employee->name}}</h4>
+                                    <small>{{$employee->position}}</small>
+                                    <p>{{$employee->text}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div><!-- end team_member -->
+                        @php($i++)
+                    @endforeach
 
-                    <div class="col-md-3 col-sm-3 team-member">
-                        <div class="about-widget">
-                            <div class="post-media">
-                                <img src="upload/team_02.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="social-icons">
-                                <ul class="list-inline">
-                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                            href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                           href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                    class="fa fa-skype"></i></a></li>
-                                </ul>
-                            </div><!-- end social icons -->
 
-                            <div class="about-desc">
-                                <h4>Amanda BOBSON</h4>
-                                <small>Senior Designer</small>
-                                <p>My name is Amanda. I create handcraft web design and graphic sources for beginners like
-                                    me.</p>
-                            </div>
-                        </div>
-                    </div><!-- end team_member -->
 
-                    <div class="col-md-3 col-sm-3 team-member">
-                        <div class="about-widget">
-                            <div class="post-media">
-                                <img src="upload/team_03.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="social-icons">
-                                <ul class="list-inline">
-                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                            href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                           href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                    class="fa fa-skype"></i></a></li>
-                                </ul>
-                            </div><!-- end social icons -->
-
-                            <div class="about-desc">
-                                <h4>Adam DOE</h4>
-                                <small>Junior Designer</small>
-                                <p>My name is Adam. I create handcraft web design and graphic sources for beginners like
-                                    me.</p>
-                            </div>
-                        </div>
-                    </div><!-- end team_member -->
-
-                    <div class="col-md-3 col-sm-3 team-member">
-                        <div class="about-widget">
-                            <div class="post-media">
-                                <img src="upload/team_04.png" alt="" class="img-responsive">
-                            </div>
-                            <div class="social-icons">
-                                <ul class="list-inline">
-                                    <li class="facebook"><a data-tooltip="tooltip" data-placement="top" title="Facebook"
-                                                            href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li class="google"><a data-tooltip="tooltip" data-placement="top" title="Google Plus"
-                                                          href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li class="twitter"><a data-tooltip="tooltip" data-placement="top" title="Twitter"
-                                                           href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li class="linkedin"><a data-tooltip="tooltip" data-placement="top" title="Linkedin"
-                                                            href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li class="pinterest"><a data-tooltip="tooltip" data-placement="top" title="Pinterest"
-                                                             href="#"><i class="fa fa-pinterest"></i></a></li>
-                                    <li class="skype"><a data-tooltip="tooltip" data-placement="top" title="Skype" href="#"><i
-                                                    class="fa fa-skype"></i></a></li>
-                                </ul>
-                            </div><!-- end social icons -->
-
-                            <div class="about-desc">
-                                <h4>John BRITTO</h4>
-                                <small>Junior Designer</small>
-                                <p>My name is John. I create handcraft web design and graphic sources for beginners like
-                                    me.</p>
-                            </div>
-                        </div>
-                    </div><!-- end team_member -->
                 </div><!-- row -->
 
         </div><!-- end container -->
     </section><!-- end section -->
-
+    @endif
 @endsection

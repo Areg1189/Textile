@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAboutSldsTable extends Migration
+class CreateAboutTextsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAboutSldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('about_slds', function (Blueprint $table) {
+        Schema::create('about_texts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image')->nullable();
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAboutSldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('about_slds');
+        Schema::dropIfExists('about_texts');
     }
 }

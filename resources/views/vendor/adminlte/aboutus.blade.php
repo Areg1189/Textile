@@ -10,8 +10,22 @@
 
 
     <section class="section paralbackground page-banner hidden-xs"
-             style="background-image:url('upload/page_banner_about.jpg');" data-img-width="2000" data-img-height="400"
-             data-diff="100">
+             style="background-image:url('{{asset('/images/covers/'.$cover->image)}}');"
+             data-img-width="2000"
+             data-img-height="400"
+             data-diff="100"
+             data-target="about_cover"
+             data-prod="{{$cover->id}}"
+             data-href_update="{{route('change_cover')}}">
+
+        <button class="btn btn-info pull-right iconUpdate"
+                title="Edite Cover"
+                data-toggle="modal"
+                data-target="#modalUpdate"
+                data-status="about_cover"
+        >
+            <i class="fa fa-edit"></i> Edit
+        </button>
     </section>
     <!-- end section -->
 
@@ -35,107 +49,75 @@
 
     </div><!-- end page-title -->
 
-    <div class="col-sm-offset-1">
-        {{--<button class="btn btn-info btn-edit iconUpdate" title="Edite Image end Text"--}}
-        {{--data-status="home_image"--}}
-        {{--data-toggle="modal"--}}
-        {{--data-target="#modalUpdate">--}}
-        {{--<i class="fa fa-edit"></i> Edit--}}
-        {{--</button>--}}
-    </div>
 
-    <section class="section lb">
+    <section class="section lb"
+             data-target="about_slide"
+             data-prod="{{$slide}}"
+             data-href_update="{{route('change_slider')}}"
+    >
+        <button class="btn btn-info pull-right iconUpdate"
+                title="Edite Cover"
+                data-toggle="modal"
+                data-target="#modalUpdate"
+                data-status="about_slide">
+            <i class="fa fa-edit"></i> Edit
+        </button>
+
         <div class="container">
+
+
             <!-- START REVOLUTION SLIDER 5.0 auto mode -->
             <div id="rev_slider" class="rev_slider" data-version="5.0">
+                <!-- SLIDE  -->
                 <ul>
-                    <!-- SLIDE  -->
-                    <li data-transition="fade">
-                        <!-- MAIN IMAGE -->
-                        <img src="upload/about_slider_01.jpg" alt="" width="1250" height="600">
-                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-3"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-responsive_offset="on"
-                             style="z-index: 7;"><img src="upload/sports_sublinebg.png" alt="" width="500" height="45"
-                                                      data-ww="['500px','500px','500px','420px']" data-hh="45px"
-                                                      data-no-retina>
-                        </div>
 
-                        <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-4"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
-                             data-fontsize="['30','30','30','25']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-splitin="chars"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                             data-elementdelay="0.05"
-                             style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">WELCOME TO
-                            HOMESTYLE
-                        </div>
-                    </li>
+                    @foreach($about_slider as $slide)
 
-                    <!-- SLIDE  -->
-                    <li data-transition="fade">
-                        <!-- MAIN IMAGE -->
-                        <img src="upload/about_slider_02.jpg" alt="" width="1250" height="600">
-                        <div class="tp-caption   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-31"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-responsive_offset="on"
-                             style="z-index: 7;"><img src="upload/sports_sublinebg.png" alt="" width="500" height="45"
-                                                      data-ww="['500px','500px','500px','420px']" data-hh="45px"
-                                                      data-no-retina>
-                        </div>
+                        <li data-transition="fade">
+                            <!-- MAIN IMAGE -->
+                            <img src="{{asset('upload/about_slider/'.$slide->image)}}" alt="" width="1250" height="600">
+                            <div class="tp-caption tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-1"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['55','55','55','40']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="550"
+                                 data-responsive_offset="on"
+                                 style="z-index: 2000000;">
+                                <img src="{{asset('upload/about_slider/'.$slide->image)}}" alt="" width="500"
+                                     height="45"
+                                     data-ww="['500px','500px','500px','420px']" data-hh="45px"
+                                     data-no-retina>
+                            </div>
 
-                        <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
-                             id="slide-214-layer-43"
-                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                             data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
-                             data-fontsize="['30','30','30','25']"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
-                             data-transform_out="y:[100%];s:1000;s:1000;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="550"
-                             data-splitin="chars"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                             data-elementdelay="0.05"
-                             style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">WE BUILD
-                            AWESOMENESS
-                        </div>
-                    </li>
+                            <div class="tp-caption Sports-Subline   tp-resizeme rs-parallaxlevel-0"
+                                 id="slide-214-layer-1"
+                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                 data-y="['middle','middle','middle','middle']" data-voffset="['71','71','51','41']"
+                                 data-fontsize="['30','30','30','25']"
+                                 data-width="none"
+                                 data-height="none"
+                                 data-whitespace="nowrap"
+                                 data-transform_idle="o:1;"
+                                 data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.8;sY:0.8;skX:0;skY:0;opacity:0;s:1500;e:Power4.easeOut;"
+                                 data-transform_out="y:[100%];s:1000;s:1000;"
+                                 data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
+                                 data-start="550"
+                                 data-splitin="chars"
+                                 data-splitout="none"
+                                 data-responsive_offset="on"
+                                 data-elementdelay="0.05"
+                                 style="z-index: 8; white-space: nowrap; font-size: 30px; line-height: 30px;">{{$slide->text}}
+                            </div>
+                        </li>
+
+                    @endforeach
                 </ul>
             </div><!-- END REVOLUTION SLIDER -->
         </div><!-- end container -->
@@ -144,18 +126,22 @@
 
     <section class="section">
         <div class="container">
-            <div class="row">
+            <div class="row"
+                 data-target="about_text"
+                 data-prod="{{$about_text->id}}"
+                 data-href_update="{{route('change_about_text')}}">
+
+                <button class="btn btn-info iconUpdate  pull-right" title="Edit Text"
+                        data-toggle="modal" data-target="#modalUpdate"
+                        data-status="about_text">
+                    <i class="fa fa-edit"></i> Edit
+                </button>
                 <div class="col-md-12 col-sm-12">
+
                     <div class="section-title text-left clearfix">
-                        <h4>About Us</h4>
+                        <h4>{{$about_text->header}}</h4>
                         <p>
-                            It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                            more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                            here', making it look like readable English. Many desktop publishing packages and web page
-                            editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
-                            uncover many web sites still in their infancy. Various versions have evolved over the years,
-                            sometimes by accident, sometimes on purpose (injected humour and the like).
+                            {!! $about_text->description !!}
                         </p>
                     </div>
                 </div>
@@ -163,7 +149,18 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section"
+             data-target="questions_text"
+             {{--data-prod="{{$questions}}"--}}
+             data-href_update="{{route('add_question')}}"
+    >
+        <button class="btn btn-info iconUpdate  pull-right" title="Edit"
+                data-toggle="modal" data-target="#modalUpdate"
+                data-status="questions_text">
+            <i class="fa fa-edit"></i> Add Questions
+        </button>
+
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12">
@@ -176,70 +173,52 @@
                     <div class="content-widget">
                         <div class="accordion-widget">
                             <div class="accordion-toggle-2">
+
                                 <div class="panel-group" id="accordion3">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseFour">
-                                                    Why HomeStyle ? <i class="indicator fa fa-plus"></i>
-                                                </a>
+                                    <div class="row">
+
+                                        @foreach($about_faq as $faq)
+                                            <div class="col-md-11 col-sm-1"
+                                                 data-target="edit_questions"
+                                                 data-prod="{{$faq->id}}"
+                                                 data-href_update="{{route('edit_questions',['id' => $faq->id])}}">
+
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <div class="panel-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse"
+                                                               data-parent="#accordion3" href="#collapseFour_{{$faq->id}}">
+                                                                {{$faq->header}} <i class="indicator fa fa-plus"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div id="collapseFour_{{$faq->id}}" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <p>
+                                                                {{$faq->description}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div id="collapseFour" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                                    nisi ut aliquip ex ea commodo consequat.</p>
+                                            <div class="col-md-1 col-sm-1"
+
+                                            >
+
+                                                <button class="btn btn-info iconUpdate  pull-right" title="Edit"
+                                                        data-toggle="modal" data-target="#modalUpdate"
+                                                        data-status="edit_questions">
+                                                    <i class="fa fa-edit"></i> Edit Questions
+                                                </button>
+
                                             </div>
-                                        </div>
+                                            @endforeach
+
+
+
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseFive">
-                                                    What IS HomeStyle ? <i class="indicator fa fa-minus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div id="collapseFive" class="panel-collapse collapse in">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. ctetur adipisicing elit, sed do eiusmod tempor incididunt
-                                                    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                                    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                    consequat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a class="accordion-toggle" data-toggle="collapse"
-                                                   data-parent="#accordion3" href="#collapseSix">
-                                                    What is HomeStyle Features ? <i class="indicator fa fa-plus"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div id="collapseSix" class="panel-collapse collapse">
-                                            <div class="panel-body">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-                                                    lorem quam, adipiscing condimentum tristique vel, eleifend sed
-                                                    turpis. Pellentesque cursus arcu id magna euismod in elementum purus
-                                                    molestie. Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                                    nisi ut aliquip ex ea commodo consequat.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div><!-- accordion -->
                         </div><!-- end accordion-widget -->
@@ -251,7 +230,18 @@
     </section><!-- end section -->
 
 
-    <section class="section">
+    <section class="section"
+             data-target="hide_block"
+             data-prod="{{$show->id}}"
+             data-href_update="{{route('hideBlock')}}">
+
+        <button class="btn btn-info iconUpdate  pull-right" title="Edit Text"
+                data-toggle="modal" data-target="#modalUpdate"
+                data-status="hide_block">
+            <i class="fa fa-edit"></i> Close Section
+        </button>
+
+
         <div class="container">
             <div class="section-title text-center clearfix">
                 <h4>Meet the Team</h4>
@@ -272,9 +262,9 @@
                 @foreach($employees as $employee)
 
                     <div class="col-md-3 col-sm-3 team-member"
-                    data-prod="{{$employee->id}}"
-                    data-href_update="{{route('editEmployee', ['id' => $employee->id])}}"
-                    data-target="prod_{{$i}}">
+                         data-prod="{{$employee->id}}"
+                         data-href_update="{{route('editEmployee', ['id' => $employee->id])}}"
+                         data-target="prod_{{$i}}">
                         <div class="row">
 
 
@@ -380,6 +370,8 @@
             </div><!-- row -->
 
         </div><!-- end container -->
+
+
     </section><!-- end section -->
 
 
@@ -396,6 +388,7 @@
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('js/croppie.min.js')}}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
     <script>
         $uploadCrop = $(".upload-demo2").croppie({
             enableExif: true,
@@ -413,6 +406,7 @@
         h = 500;
     </script>
     <script type="text/javascript" src="{{asset('js/admin/site.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/admin/jquery-ui.js')}}"></script>
 
     <script>
 

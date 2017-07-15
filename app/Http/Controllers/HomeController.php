@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\About_text;
+use App\Models\About_cover;
+use App\Models\About_faq;
+use App\Models\Employee_block;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\HomeImage;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Employee;
 
 class HomeController extends Controller
 {
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $homeImage = HomeImage::where('code', 'home-image')->first();
@@ -33,7 +33,19 @@ class HomeController extends Controller
 
 
     public function about(){
-        return view('about');
+        $employees = Employee::get();
+        $about_text = About_text::first();
+        $cover = About_cover::first();
+        $show = Employee_block::first();
+        $about_faq = About_faq::get();
+
+        return view('about',[
+            'employees' => $employees,
+            'about_text' => $about_text,
+            'cover' => $cover,
+            'show' => $show,
+            'about_faq' => $about_faq
+        ]);
     }
 
 

@@ -170,6 +170,8 @@
     <script type="text/javascript"
             src="{{asset('js/jquery.leanModal.min.js')}}"></script>
     <script type="text/javascript"
+            src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+    <script type="text/javascript"
             src="{{asset('js/main.js')}}"></script>
 
     <script type="text/javascript">

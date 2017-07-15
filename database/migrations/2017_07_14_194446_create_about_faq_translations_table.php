@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAboutSldTranslationsTable extends Migration
+class CreateAboutFaqTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateAboutSldTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('about_sld_translations', function (Blueprint $table) {
+        Schema::create('about_faq_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('about_sld_id')->unsigned();
-            $table->string('text')->nullable();
+            $table->integer('about_faq_id')->unsigned();
+            $table->string('header');
+            $table->string('description');
             $table->string('locale')->index();
-            $table->unique(['about_sld_id','locale']);
-            $table->foreign('about_sld_id')->references('id')->on('about_slds')->onDelete('cascade');
+            $table->unique(['about_faq_id','locale']);
+            $table->foreign('about_faq_id')->references('id')->on('about_faqs')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateAboutSldTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('about_sld_translations');
+        Schema::dropIfExists('about_faq_translations');
     }
 }

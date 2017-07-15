@@ -4,18 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class About_sld extends Model
+class About_faq extends Model
 {
     protected $fillable = [
-        'image', 'code',
+        'header', 'description', 'code',
     ];
 
     use \Dimsav\Translatable\Translatable;
 
 
-    public $translationModel = 'App\Models\About_sld_translation';
+    public $translationModel = 'App\Models\About_faq_translation';
 
     public $translatedAttributes = [
-        'text',
+        'header', 'description'
     ];
 }

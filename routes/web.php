@@ -98,6 +98,14 @@ Route::group(
 
             Route::post('addEmployee', 'Admin\AdminController@addEmployee')->name('addEmployee');
             Route::post('editEmployee/{id}', 'Admin\AdminController@editEmployee')->name('editEmployee');
+            Route::post('hideBlock', 'Admin\AdminController@hideBlock')->name('hideBlock');
+
+            //=========  ABOUT US  ======= //
+            Route::post('change_cover', 'Admin\AdminController@change_cover')->name('change_cover');
+            Route::post('change_slider', 'Admin\AdminController@change_slider')->name('change_slider');
+            Route::post('change_about_text', 'Admin\AdminController@change_about_text')->name('change_about_text');
+            Route::post('add_question', 'Admin\AdminController@add_question')->name('add_question');
+            Route::post('edit_questions/{id}', 'Admin\AdminController@edit_questions')->name('edit_questions');
 
 
             //=========  CATEGORY  ======= //

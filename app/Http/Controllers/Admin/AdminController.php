@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\About_faq;
+use App\Models\About_sld;
+use App\Models\About_text;
 use App\Models\Employee_site;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +20,7 @@ use App\Models\SubCategory;
 use App\Models\Social_icons;
 use App\Models\Employee;
 use App\Models\Employee_block;
+use App\Models\About_cover;
 
 
 class AdminController extends Controller
@@ -150,14 +154,280 @@ class AdminController extends Controller
         ]);
     }
 
+    public function change_cover(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+            $cover = About_cover::first();
+            return View::make('vendor.adminlte.updatePage.updateAboutCover', [
+                'cover' => $cover,
+            ]);
+        } else {
+            $image = About_cover::first();
+            if ($request->image) {
+                $data = $_POST['image'];
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+
+                $data = base64_decode($data);
+                $imageName = time() . '.jpg';
+                file_put_contents('images/covers/' . $imageName, $data);
+                if (file_exists(public_path() . '/images/covers/' . $image->image)) {
+                    File::delete(public_path() . '/images/covers/' . $image->image);
+                }
+            } else {
+                $imageName = $image->image;
+
+            }
+
+            $image->image = $imageName;
+            $image->save();
+
+            return back();
+        }
+    }
+
+
+    public function change_about_text(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+            $product = About_text::first();
+            return View::make('vendor.adminlte.updatePage.updateAboutText', [
+                'product' => $product,
+            ]);
+        } else {
+
+            $product = About_text::first();
+
+//            $product = About_text::create([
+//                'code' => "skjdcnkjsdnc".time(),
+//                'hy' => [
+//                    'header' => $request->hy_name,
+//                    'description' => $request->hy_description1,
+//                ],
+//                'en' => [
+//                    'header' => $request->en_name,
+//                    'description' => $request->en_description1,
+//                ],
+//                'ru' => [
+//                    'header' => $request->ru_name,
+//                    'description' => $request->ru_description1,
+//                ]
+//            ]);
+
+            $product->code = time();
+            $product->translate('hy')->header = $request->hy_name;
+            $product->translate('en')->header = $request->en_name;
+            $product->translate('ru')->header = $request->ru_name;
+            $product->translate('hy')->description = $request->hy_description1;
+            $product->translate('en')->description = $request->en_description1;
+            $product->translate('ru')->description = $request->ru_description1;
+
+            $product->save();
+
+            return back();
+        }
+    }
+
+
+    public function editEmployee(Request $request)
+    {
+
+        if ($request->key && $request->key == 'one') {
+            $product = Employee::where('id', $request->prod)->first();
+            return View::make('vendor.adminlte.updatePage.updateEmployee', [
+                'product' => $product,
+            ]);
+        } else {
+            $image = Employee::where('id', $request->id)->first();
+            if ($request->image) {
+                $data = $_POST['image'];
+                list($type, $data) = explode(';', $data);
+                list(, $data) = explode(',', $data);
+
+                $data = base64_decode($data);
+                $imageName = time() . '.jpg';
+                file_put_contents('images/employee/' . $imageName, $data);
+                if (file_exists(public_path() . '/images/employee/' . $image->image)) {
+                    File::delete(public_path() . '/images/employee/' . $image->image);
+                }
+            } else {
+                $imageName = $image->image;
+            }
+
+            $image->image = $imageName;
+
+            $image->translate('hy')->name = $request->hy_name;
+            $image->translate('en')->name = $request->en_name;
+            $image->translate('ru')->name = $request->ru_name;
+            $image->translate('hy')->position = $request->hy_position;
+            $image->translate('en')->position = $request->en_position;
+            $image->translate('ru')->position = $request->ru_position;
+            $image->translate('hy')->text = $request->hy_text;
+            $image->translate('en')->text = $request->en_text;
+            $image->translate('ru')->text = $request->ru_text;
+
+            Employee_site::where('employee_id', $request->id)->update([
+                'facebook' => $request->facebook,
+                'google' => $request->google,
+                'twitter' => $request->twitter,
+                'linkedin' => $request->linkedin,
+                'pinterest' => $request->pinterest,
+                'skype' => $request->skype,
+                'vimeo' => $request->vimeo,
+                'youtube' => $request->youtube,
+                'instagram' => $request->instagram,
+            ]);
+
+            $image->save();
+            return back();
+        }
+
+    }
+
+
+    public function change_slider(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+            $product = About_sld::get();
+            return View::make('vendor.adminlte.updatePage.updateAboutSlider', [
+                'product' => $product,
+            ]);
+        } else {
+
+
+            if ($request->image[0]) {
+                $img = 0;
+                foreach ($request->image as $image) {
+
+                    $data = $image;
+                    list($type, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
+
+                    $data = base64_decode($data);
+                    $imageName = $img . time() . '.jpg';
+                    file_put_contents('upload/about_slider/' . $imageName, $data);
+
+                    About_sld::create([
+                        'image' => $imageName,
+                        'code' => time() . $request->text_en[$img],
+                        'hy' => [
+                            'text' => $request->text_hy[$img],
+                        ],
+                        'en' => [
+                            'text' => $request->text_en[$img],
+                        ],
+                        'ru' => [
+                            'text' => $request->text_ru[$img],
+                        ]
+                    ]);
+                    $img++;
+                }
+
+            };
+
+
+            return back();
+        }
+
+
+    }
+
+    public function add_question(Request $request)
+    {
+//        $validator = Validator::make($request->all(), [
+//            'hy_name' => 'required|string',
+//            'en_name' => 'required|string',
+//            'ru_name' => 'required|string',
+//        ]);
+//        if ($validator->fails()) {
+//            return back()->with('error', 'add')->withErrors($validator->errors())->withInput();
+//        }
+        if ($request->key && $request->key == 'one') {
+            return View::make('vendor.adminlte.modal.modalAddQuestion', [
+            ]);
+        } else {
+
+            About_faq::create([
+                'code' => time() . "code",
+                'hy' => [
+                    'header' => $request->hy_name,
+                    'description' => $request->hy_description1
+                ],
+                'en' => [
+                    'header' => $request->en_name,
+                    'description' => $request->en_description1
+                ],
+                'ru' => [
+                    'header' => $request->ru_name,
+                    'description' => $request->ru_description1
+                ],
+
+            ]);
+
+            return back();
+        }
+
+    }
+
+
+    public function edit_questions(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+
+            $product = About_faq::where('id', $request->prod)->first();
+//            dd($product);
+            return View::make('vendor.adminlte.updatePage.updateAboutQuestions', [
+                'product' => $product,
+            ]);
+        } else {
+            $faq = About_faq::where('id', $request->prod)->first();
+            $faq->translate('hy')->header = $request->hy_name;
+            $faq->translate('en')->header = $request->en_name;
+            $faq->translate('ru')->header = $request->ru_name;
+            $faq->translate('hy')->description = $request->hy_description1;
+            $faq->translate('en')->description = $request->en_description1;
+            $faq->translate('ru')->description = $request->ru_description1;
+
+            $faq->save();
+            return back();
+        }
+    }
 
     public function aboutus()
     {
-        $show = Employee_block::get(); //for hide block
+        $show = Employee_block::first();
         $employees = Employee::get();
-        return view('vendor.adminlte.aboutus',[
+        $cover = About_cover::first();
+        $slide = About_sld::get();
+        $about_text = About_text::first();
+        $about_slider = About_sld::get();
+        $about_faq = About_faq::get();
+
+        return view('vendor.adminlte.aboutus', [
             'employees' => $employees,
+            'cover' => $cover,
+            'slide' => $slide,
+            'about_text' => $about_text,
+            'show' => $show,
+            'about_slider' => $about_slider,
+            'about_faq' => $about_faq
         ]);
+    }
+
+    public function hideBlock(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+            $product = Employee_block::first();
+            return View::make('vendor.adminlte.updatePage.updateHideEmployees', [
+                'product' => $product,
+            ]);
+        } else {
+            Employee_block::first()->update([
+                'hide' => $request->radio,
+            ]);
+
+            return back();
+        }
     }
 
     public function icons()
@@ -179,7 +449,6 @@ class AdminController extends Controller
         }
         return back();
     }
-
 
     public function addEmployee(Request $request)
     {
@@ -239,63 +508,6 @@ class AdminController extends Controller
         return back();
 
     }
-
-
-
-    public function editEmployee(Request $request){
-
-        if ($request->key && $request->key == 'one') {
-            $product = Employee::where('id', $request->prod)->first();
-            return View::make('vendor.adminlte.updatePage.updateEmployee', [
-                'product' => $product,
-            ]);
-        } else{
-            $image = Employee::where('id', $request->id)->first();
-            if ($request->image) {
-                $data = $_POST['image'];
-                list($type, $data) = explode(';', $data);
-                list(, $data) = explode(',', $data);
-
-                $data = base64_decode($data);
-                $imageName = time() . '.jpg';
-                file_put_contents('images/employee/' . $imageName, $data);
-                if (file_exists(public_path() . '/images/employee/' . $image->image)) {
-                    File::delete(public_path() . '/images/employee/' . $image->image);
-                }
-            } else {
-                $imageName = $image->image;
-            }
-
-            $image->image = $imageName;
-
-            $image->translate('hy')->name = $request->hy_name;
-            $image->translate('en')->name = $request->en_name;
-            $image->translate('ru')->name = $request->ru_name;
-            $image->translate('hy')->position = $request->hy_position;
-            $image->translate('en')->position = $request->en_position;
-            $image->translate('ru')->position = $request->ru_position;
-            $image->translate('hy')->text = $request->hy_text;
-            $image->translate('en')->text = $request->en_text;
-            $image->translate('ru')->text = $request->ru_text;
-
-            Employee_site::where('employee_id', $request->id)->update([
-                'facebook' => $request->facebook,
-                'google' => $request->google,
-                'twitter' => $request->twitter,
-                'linkedin' => $request->linkedin,
-                'pinterest' => $request->pinterest,
-                'skype' => $request->skype,
-                'vimeo' => $request->vimeo,
-                'youtube' => $request->youtube,
-                'instagram' => $request->instagram,
-            ]);
-
-            $image->save();
-            return back();
-        }
-
-    }
-
 
 
     public function updateHomeImage(Request $request)

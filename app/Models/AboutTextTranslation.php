@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class About_sld_translation extends Model
+class AboutTextTranslation extends Model
 {
     public $timestamps = false;
 
     protected $fillable = [
-        'text',
+        'header', 'description',
     ];
 }
