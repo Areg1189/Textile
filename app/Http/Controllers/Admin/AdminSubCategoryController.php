@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\File;
 use App\Models\CatFilter;
 use App\Models\FilterCategory;
+use App\Models\FilterSub;
+use App\Models\FilterValue;
+use App\Models\ProFilter;
 
 class AdminSubCategoryController extends Controller
 {
@@ -59,7 +62,7 @@ class AdminSubCategoryController extends Controller
             list(, $data) = explode(',', $data);
 
             $data = base64_decode($data);
-            $imageNamegeneral = '1'.time() . '.jpg';
+            $imageNamegeneral = '1' . time() . '.jpg';
             file_put_contents('images/subCategory/' . $imageNamegeneral, $data);
         }
 
@@ -81,14 +84,71 @@ class AdminSubCategoryController extends Controller
         ]);
 
 
-        if (isset($request->subFilter[0])) {
-            foreach ($request->subFilter as $sub) {
-                CatFilter::create([
+        if ($request->hy_name_filter) {
+            $fl = 1;
+            foreach ($request->hy_name_filter as $key => $val) {
+                $res = FilterCategory::create([
+                    'code' => $fl . time() . $request->en_name_filter[$key],
                     'cat_id' => $newCat->id,
-                    'sub_id' => $sub,
+                    'hy' => [
+                        'name' => $val,
+                    ],
+                    'en' => [
+                        'name' => $request->en_name_filter[$key],
+                    ],
+                    'ru' => [
+                        'name' => $request->ru_name_filter[$key],
+                    ]
                 ]);
+                $i = 0;
+                if ($request->hy_name_sub[$key]) {
+
+                    foreach ($request->hy_name_sub[$key] as $subKey => $subVal) {
+
+                        $sub = FilterSub::create([
+                            'code' => time() . $request->en_name_sub[$key][$subKey] . $res->id,
+                            'filter_id' => $res->id,
+                            'hy' => [
+                                'name' => $subVal,
+                            ],
+                            'en' => [
+                                'name' => $request->en_name_sub[$key][$subKey],
+                            ],
+                            'ru' => [
+                                'name' => $request->ru_name_sub[$key][$subKey],
+                            ]
+                        ]);
+
+                        if (isset($request->hy_sub[$key][$subKey])) {
+                            $j = 0;
+                            foreach ($request->hy_sub[$key][$subKey] as $valKey => $valVal) {
+                                FilterValue::create([
+                                    'code' => time() . $request->en_sub[$key][$subKey][$valKey] . $sub->id,
+                                    'parent_id' => $sub->id,
+                                    'hy' => [
+                                        'name' => $valVal,
+                                    ],
+                                    'en' => [
+                                        'name' => $request->en_sub[$key][$subKey][$valKey],
+                                    ],
+                                    'ru' => [
+                                        'name' => $request->ru_sub[$key][$subKey][$valKey],
+                                    ]
+                                ]);
+                                $j++;
+                            }
+                        }
+                        $i++;
+
+                    }
+
+                }
+                $fl++;
+
             }
+
         }
+
 
         if ($newCat) {
             return back()->with('newCat', $newCat->id);
@@ -101,8 +161,9 @@ class AdminSubCategoryController extends Controller
         $this->validate($request, [
             'prod' => 'required',
         ]);
-        $filters = FilterCategory::get();
+
         $cat = SubCategory::where('link', $request->prod)->firstOrFail();
+        $filters = FilterCategory::where('cat_id', $cat->id)->get();
 
         if ($request->key && $request->key == 'one') {
             return View::make('vendor.adminlte.updatePage.updateSubCat', [
@@ -132,7 +193,7 @@ class AdminSubCategoryController extends Controller
             list(, $data) = explode(',', $data);
 
             $data = base64_decode($data);
-            $imageNamegeneral = '1'.time() . '.jpg';
+            $imageNamegeneral = '1' . time() . '.jpg';
             file_put_contents('images/subCategory/' . $imageNamegeneral, $data);
             if (file_exists(public_path() . '/images/subCategory/' . $cat->general_image)) {
                 File::delete(public_path() . '/images/subCategory/' . $cat->general_image);

@@ -365,90 +365,6 @@ $(document).on('submit', ".formImage", function (form) {
 // });
 
 
-// =================================== FILTER =========================================//
-var number = 0;
-$(document).on('click', '.add_sub_filter', function () {
-    $('.sub_filter_content').fadeIn();
-    $('.sub_filter_content').append('' +
-        '<div  data-name="number' + number + '" data-status="delete' + number + '">' +
-        '<div class="row" >' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_name_sub[]" class="form-control" placeholder="Հայերեն" required>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>English</label>' +
-        '<input type="text" name="en_name_sub[]" class="form-control" placeholder="English" required>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>Русский</label>' +
-        '<input type="text" name="ru_name_sub[]" class="form-control" placeholder="Русский" required>' +
-        '</div>' +
-        '</div>' +
-        '<button data-target="number' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
-        '<i class="fa fa-plus"></i>' +
-        '</button>' +
-        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
-        '<i class="fa fa-times" aria-hidden="true"></i>' +
-        '</button>' +
-        '</div>' +
-        '</div>' +
-        '');
-    number++
-});
-var dell = 0;
-$(document).on('click', '.add_filter_value', function () {
-    var data = $(this).data('target');
-    $('[data-name="' + data + '"]').append('' +
-        '<div class="row" data-status="delete' + number + '" data-dell="delete' + number + dell + '">' +
-        '<div class="col-xs-1">' +
-        '</div>' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="Հայերեն" required>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>English</label>' +
-        '<input type="text" name="en_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="English" required>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-xs-3">' +
-        '<div class="form-group text-center">' +
-        '<label>Русский</label>' +
-        '<input type="text" name="ru_sub[' + parseInt(number - 1) + '][]" class="form-control" placeholder="Русский" required>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-xs-2">' +
-        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' + number + dell + '" title="Delete">' +
-        '<i class="fa fa-times" aria-hidden="true"></i>' +
-        '</button>' +
-        '</div>' +
-
-        '</div>' +
-        '');
-    dell++;
-});
-
-$(document).on('click', '.delete_filter', function () {
-    var data = $(this).data('target');
-    $('[data-status="' + data + '"]').fadeOut().remove();
-});
-
-
-$(document).on('click', '.delete_filter_find', function () {
-    var data = $(this).data('dell_button');
-    $('[data-dell="' + data + '"]').fadeOut().remove();
-});
-
-
 //=================================  COLOR  ===========================//
 var color = 2;
 $(document).on('click', ".add_color", function () {
@@ -511,8 +427,8 @@ $(document).on('change', '.filter_checkbox', function () {
     }
 });
 $(document).on('keyup', '.filter_price', function () {
-    if ($(this).val()){
-        $('.firstPrice').prop('required',false);
+    if ($(this).val()) {
+        $('.firstPrice').prop('required', false);
     }
 });
 
@@ -546,5 +462,151 @@ $(document).on('click', '.dellImage', function (e) {
 });
 
 
+// =================================== FILTER =========================================//
+
+var filter = 0;
+
+$(document).on('click', '.add_filter', function () {
+
+    $('.filter_container').prepend('' +
+        '<div class="panel panel-danger" data-filter="' + filter + '">' +
+        '<div class=" panel-heading text-center">' +
+        'Filter '+ parseInt(filter + 1) +
+        '<button data-target_parent_filter="' + filter + '" type="button" class="btn btn-danger delete_parent_filter pull-right" title="Delete">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</button>' +
+        '</div>' +
+        '<div class="panel-body">' +
+        '<div class="row">' +
+        '<div class="col-xs-4">' +
+        '<div class="form-group text-center">' +
+        '<label>Հայերեն</label>' +
+        '<input type="text" name="hy_name_filter['+filter+']" class="form-control"' +
+        'placeholder="Հայերեն" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-4">' +
+        '<div class="form-group text-center">' +
+        '<label>English</label>' +
+        '<input type="text" name="en_name_filter['+filter+']" class="form-control"' +
+        'placeholder="English" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-4">' +
+        '<div class="form-group text-center">' +
+        '<label>Русский</label>' +
+        '<input type="text" name="ru_name_filter['+filter+']" class="form-control"' +
+        ' placeholder="Русский" required>' +
+        ' </div>' +
+        '</div>' +
+        '</div>' +
+        '<div class="row">' +
+        '<h3 class="text-center">' +
+        'Add Sub Filter' +
+        '<button type="button" class="btn btn-info add_sub_filter" data-sub_filter="' + filter + '"' +
+        'title="Add Sub Filter">' +
+        '<i class="fa fa-plus"></i>' +
+        '</button>' +
+        '</h3>' +
+        '</div>' +
+        '<div class="sub_filter_content">' +
+        '</div>' +
+        '</div>' +
+        '</div>');
+
+    filter++;
+
+
+});
+var number = 0;
+
+$(document).on('click', '.add_sub_filter', function () {
+    sub_filter = $(this).data('sub_filter');
+    var parent = $('[data-filter="' + sub_filter + '"]');
+
+
+    parent.find('.sub_filter_content').append('' +
+        '<div  data-name="number' + number + '" data-status="delete' + number + '">' +
+        '<div class="row" >' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Հայերեն</label>' +
+        '<input type="text" name="hy_name_sub[' + sub_filter + '][]" class="form-control" placeholder="Հայերեն" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>English</label>' +
+        '<input type="text" name="en_name_sub[' + sub_filter + '][]" class="form-control" placeholder="English" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Русский</label>' +
+        '<input type="text" name="ru_name_sub[' + sub_filter + '][]" class="form-control" placeholder="Русский" required>' +
+        '</div>' +
+        '</div>' +
+        '<button data-target="number' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
+        '<i class="fa fa-plus"></i>' +
+        '</button>' +
+        '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</button>' +
+        '</div>' +
+        '</div>' +
+        '');
+    number++
+});
+
+var dell = 0;
+$(document).on('click', '.add_filter_value', function () {
+    var data = $(this).data('target');
+    $('[data-name="' + data + '"]').append('' +
+        '<div class="row" data-status="delete' + parseInt(number - 1) + '" data-dell="delete' + parseInt(number - 1) + dell + '">' +
+        '<div class="col-xs-1">' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Հայերեն</label>' +
+        '<input type="text" name="hy_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="Հայերեն" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>English</label>' +
+        '<input type="text" name="en_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="English" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-3">' +
+        '<div class="form-group text-center">' +
+        '<label>Русский</label>' +
+        '<input type="text" name="ru_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="Русский" required>' +
+        '</div>' +
+        '</div>' +
+        '<div class="col-xs-2">' +
+        '<button data-target="delete' + parseInt(number - 1) + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' + parseInt(number - 1) + dell + '" title="Delete">' +
+        '<i class="fa fa-times" aria-hidden="true"></i>' +
+        '</button>' +
+        '</div>' +
+
+        '</div>' +
+        '');
+    dell++;
+});
+
+$(document).on('click', '.delete_filter', function () {
+    var data = $(this).data('target');
+    $('[data-status="' + data + '"]').fadeOut().remove();
+});
+
+
+$(document).on('click', '.delete_filter_find', function () {
+    var data = $(this).data('dell_button');
+    $('[data-dell="' + data + '"]').fadeOut().remove();
+});
+$(document).on('click', '.delete_parent_filter', function () {
+   var deleteFilter = $(this).data('target_parent_filter');
+    $('[data-filter="'+deleteFilter+'"]').fadeOut().remove();
+});
 
 

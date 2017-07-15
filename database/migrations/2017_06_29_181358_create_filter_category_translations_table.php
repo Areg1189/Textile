@@ -18,6 +18,7 @@ class CreateFilterCategoryTranslationsTable extends Migration
             $table->integer('filter_category_id')->unsigned();
             $table->string('name');
             $table->string('locale')->index();
+            $table->integer('cat_id')->usignet();
             $table->unique(['filter_category_id','locale']);
             $table->foreign('filter_category_id')->references('id')->on('filter_categories')->onDelete('cascade');
             $table->timestamps();

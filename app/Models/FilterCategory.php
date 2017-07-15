@@ -14,7 +14,7 @@ class FilterCategory extends Model
     ];
 
     protected $fillable = [
-        'code',
+        'code','cat_id',
     ];
 
     public function subs(){
