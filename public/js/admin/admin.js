@@ -57,6 +57,9 @@ $(document).on('click', '.iconUpdate', function () {
         }
     });
 });
+
+
+
 //=============================  DELETE ========================//
 
 $(document).on('click', '.iconDelete', function () {
@@ -102,7 +105,22 @@ $(document).on('click', '.spanClose', function () {
     $('.info_modal').fadeOut().find('image_section').html('');
 });
 
+$(document).on('click', '.btn_delete', function () {
+   $('.myModal').css('display','block');
+});
 
+$(document).on('click', '.myModal',  function (event) {
+
+    if (event == $('.myModal-content')) {
+        $('.myModal').css('display','none');
+    }
+});
+$(document).on('click', '.btn_my_modal',  function () {
+
+
+        $('.myModal').css('display','none');
+
+});
 //  ==================== INPUT FILE =======================//
 
 $(function () {
@@ -526,7 +544,7 @@ $(document).on('click', '.add_sub_filter', function () {
 
 
     parent.find('.sub_filter_content').append('' +
-        '<div  data-name="number' + number + '" data-status="delete' + number + '">' +
+        '<div  data-name="' + number + '" data-status="delete' + number + '">' +
         '<div class="row" >' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
@@ -546,7 +564,7 @@ $(document).on('click', '.add_sub_filter', function () {
         '<input type="text" name="ru_name_sub[' + sub_filter + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
-        '<button data-target="number' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
+        '<button data-target="' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
         '<i class="fa fa-plus"></i>' +
         '</button>' +
         '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
@@ -562,29 +580,29 @@ var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
     var data = $(this).data('target');
     $('[data-name="' + data + '"]').append('' +
-        '<div class="row" data-status="delete' + parseInt(number - 1) + '" data-dell="delete' + parseInt(number - 1) + dell + '">' +
+        '<div class="row" data-status="delete' + data+ '" data-dell="delete' + data + dell + '">' +
         '<div class="col-xs-1">' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="Հայերեն" required>' +
+        '<input type="text" name="hy_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="Հայերեն" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>English</label>' +
-        '<input type="text" name="en_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="English" required>' +
+        '<input type="text" name="en_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="English" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Русский</label>' +
-        '<input type="text" name="ru_sub[' + sub_filter + '][' + parseInt(number - 1) + '][]" class="form-control" placeholder="Русский" required>' +
+        '<input type="text" name="ru_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-2">' +
-        '<button data-target="delete' + parseInt(number - 1) + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' + parseInt(number - 1) + dell + '" title="Delete">' +
+        '<button data-target="delete' + parseInt(number - 1) + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' +data + dell + '" title="Delete">' +
         '<i class="fa fa-times" aria-hidden="true"></i>' +
         '</button>' +
         '</div>' +

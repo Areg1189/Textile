@@ -37,7 +37,7 @@
                 data-href_update="{{route('updateProduct')}}" data-prod="{{$product->link}}"
                 data-href_delete="{{route('deleteProduct')}}">
                 <td>
-                    <div class="col-sm-12">
+                    <div class="col-sm-4">
                         <img src="{{asset('images/products/'.$product->images->sortBy('id')->first()['image_name'])}}"
                              class="img-rounded"
                              alt="{{$product->translate('en')->name}}"

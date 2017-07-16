@@ -107,3 +107,19 @@
 .icons_form{
     margin-top: 30px;
 }
+.myModal-content {
+    position: fixed; /* Stay in place */
+    background-color: #fefefe;
+    margin: auto;
+    top: 40%;
+    left: 45%;
+    padding: 20px;
+    border: 1px solid #888;
+}
+.myModal {
+    display: none; /* Hidden by default */
+    z-index: 99999999 !important; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+
+}

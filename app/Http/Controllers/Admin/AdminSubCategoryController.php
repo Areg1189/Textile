@@ -41,6 +41,21 @@ class AdminSubCategoryController extends Controller
         $cat = Category::where('link', $request->cat)->firstOrFail();
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
+
+        while (true) {
+
+            $a['link'] = $link;
+            $validator = Validator::make($a, [
+                'link' => 'required|unique:sub_categories'
+            ]);
+            if ($validator->fails()) {
+                $link = $link . rand(0, 99);
+            } else {
+                break;
+            }
+        }
+
+
         $imageName = null;
         $imageNamegeneral = null;
 
@@ -68,10 +83,10 @@ class AdminSubCategoryController extends Controller
 
         $newCat = SubCategory::create([
             'code' => time() . $request->en_name,
-            'link' => $link,
             'image_name' => $imageName,
             'general_image' => $imageNamegeneral,
             'category_id' => $cat->id,
+            'link' => $link,
             'hy' => [
                 'name' => $request->hy_name,
             ],
@@ -163,7 +178,7 @@ class AdminSubCategoryController extends Controller
         ]);
 
         $cat = SubCategory::where('link', $request->prod)->firstOrFail();
-        $filters = FilterCategory::where('cat_id', $cat->id)->get();
+        $filters = FilterCategory::where('cat_id', $cat->id)->orderBy('id')->get();
 
         if ($request->key && $request->key == 'one') {
             return View::make('vendor.adminlte.updatePage.updateSubCat', [
@@ -210,9 +225,6 @@ class AdminSubCategoryController extends Controller
             return back()->withErrors($validator->errors());
         }
 
-        $link = mb_strtolower($request->en_name);
-        $link = str_replace(' ', '-', $link);
-        $cat->link = $link;
         $cat->image_name = $imageName;
         $cat->general_image = $imageNamegeneral;
         $cat->translate('hy')->name = $request->hy_name;
@@ -220,13 +232,99 @@ class AdminSubCategoryController extends Controller
         $cat->translate('ru')->name = $request->ru_name;
         $cat->save();
 
-        if (isset($request->subFilter[0])) {
-            foreach ($request->subFilter as $sub) {
-                CatFilter::create([
-                    'cat_id' => $cat->id,
-                    'sub_id' => $sub,
-                ]);
+
+        if ($request->hy_name_filter_old && $filters->first()) {
+            foreach ($filters->sortBy('id') as $key => $val) {
+                $val->translate('hy')->name = $request->hy_name_filter_old[$key];
+                $val->translate('en')->name = $request->en_name_filter_old[$key];
+                $val->translate('ru')->name = $request->ru_name_filter_old[$key];
+                $val->save();
+
+                if ($request->hy_name_sub_old[$key] && $val->subs[$key]) {
+                    foreach ($val->subs->sortBy('id') as $subKey => $subVal) {
+
+                        $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$subKey];
+                        $subVal->translate('en')->name = $request->en_name_sub_old[$key][$subKey];
+                        $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$subKey];
+                        $subVal->save();
+                        if (isset($request->hy_sub_old[$key][$subKey]) ) {
+                            foreach ($subVal->values->sortBy('id') as $valKey => $valVal) {
+
+                                $valVal->translate('hy')->name = $request->hy_sub_old[$key][$subKey][$valKey];
+                                $valVal->translate('en')->name = $request->en_sub_old[$key][$subKey][$valKey];
+                                $valVal->translate('ru')->name = $request->ru_sub_old[$key][$subKey][$valKey];
+                                $valVal->save();
+
+                            }
+                        }
+                    }
+                }
             }
+        }
+
+        if ($request->hy_name_filter) {
+            $fl = 1;
+            foreach ($request->hy_name_filter as $key => $val) {
+                $res = FilterCategory::create([
+                    'code' => $fl . time() . $request->en_name_filter[$key],
+                    'cat_id' => $cat->id,
+                    'hy' => [
+                        'name' => $val,
+                    ],
+                    'en' => [
+                        'name' => $request->en_name_filter[$key],
+                    ],
+                    'ru' => [
+                        'name' => $request->ru_name_filter[$key],
+                    ]
+                ]);
+                $i = 0;
+                if ($request->hy_name_sub[$key]) {
+
+                    foreach ($request->hy_name_sub[$key] as $subKey => $subVal) {
+
+                        $sub = FilterSub::create([
+                            'code' => time() . $request->en_name_sub[$key][$subKey] . $res->id,
+                            'filter_id' => $res->id,
+                            'hy' => [
+                                'name' => $subVal,
+                            ],
+                            'en' => [
+                                'name' => $request->en_name_sub[$key][$subKey],
+                            ],
+                            'ru' => [
+                                'name' => $request->ru_name_sub[$key][$subKey],
+                            ]
+                        ]);
+
+                        if (isset($request->hy_sub[$key][$subKey])) {
+                            $j = 0;
+                            foreach ($request->hy_sub[$key][$subKey] as $valKey => $valVal) {
+                                FilterValue::create([
+                                    'code' => time() . $request->en_sub[$key][$subKey][$valKey] . $sub->id,
+                                    'parent_id' => $sub->id,
+                                    'hy' => [
+                                        'name' => $valVal,
+                                    ],
+                                    'en' => [
+                                        'name' => $request->en_sub[$key][$subKey][$valKey],
+                                    ],
+                                    'ru' => [
+                                        'name' => $request->ru_sub[$key][$subKey][$valKey],
+                                    ]
+                                ]);
+                                $j++;
+                            }
+                        }
+                        $i++;
+
+                    }
+
+                }
+                $fl++;
+
+            }
+
         }
         if ($cat) {
             return back()->with([

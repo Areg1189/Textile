@@ -300,7 +300,7 @@ class AdminController extends Controller
                     $imageName = $img . time() . '.jpg';
                     file_put_contents('upload/about_slider/' . $imageName, $data);
 
-                    foreach()
+
                     About_sld::create([
                         'image' => $imageName,
                         'code' => time() . $request->text_en[$img],
