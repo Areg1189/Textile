@@ -26,37 +26,53 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-comment-o" aria-hidden="true"></i>
                         <span class="label label-success">
-                            {{ count(Auth::user()->messagesSeen->where('status_admin' , 0))?
-                            count(Auth::user()->messagesSeen->where('status_admin' , 0)) : ''}}
+                            {{ count($newComments->where('published' , 0))?
+                            count($newComments->where('published' , 0)) : ''}}
                         </span>
                     </a>
-                    @if(count(Auth::user()->messagesSeen->where('status_admin' , 0)))
+                    @if(count($newComments->where('published' , 0)))
                         <ul class="dropdown-menu">
                             <li class="header">
-                                You have {{count(Auth::user()->messagesSeen->where('status_admin' , 0))}} messages
+                                You have {{ count($newComments->where('published' , 0))}} comments
                             </li>
-                            @foreach(Auth::user()->messagesSeen->where('status_admin' , 0) as $msg)
+                            @foreach($newComments
+                            ->where('published' , 0)
+                            ->sortByDesc('id')
+                            ->take(3) as $comment)
                                 <li>
                                     <!-- inner menu: contains the comment -->
                                     <ul class="menu">
                                         <li><!-- start message -->
-                                            <a href="{{route('sendMessage', ['id' => $msg->user->href])}}">
+                                            <a href="   {{route('getComment', ['id' => $comment->id])}}">
                                                 <div class="pull-left">
-                                                    <!-- User Image -->
+                                                    <img
+                                                            src="{{asset('images/products/'.$comment
+                                                            ->product
+                                                            ->images
+                                                            ->sortBy('id')
+                                                            ->first()['image_name'])}}"
+                                                            class="{{$comment
+                                                            ->product
+                                                            ->translate('en')
+                                                            ->name}}"
+                                                            alt=""
+                                                            width="100%">
                                                 </div>
-                                                <!-- comment title and timestamp -->
+
                                                 <h4>
-                                                    {{$msg->user->name.' '.$msg->user->last_name}}
-                                                    <small><i class="fa fa-clock-o"></i>{{$msg->created_at}}</small>
+                                                    Product {{$comment->product->translate(session('locale'))->name}}
+
                                                 </h4>
                                                 <!-- The comment -->
-                                                <p>{{str_limit($msg->text, 30)}}</p>
+
+                                                <p>{{str_limit($comment->text, 30)}}</p>
+                                                <small><i class="fa fa-clock-o"></i>{{$comment->created_at}}</small>
                                             </a>
                                         </li><!-- end message -->
                                     </ul><!-- /.menu -->
                                 </li>
                             @endforeach
-                            <li class="footer"><a href="#">c</a></li>
+                            <li class="footer"><a href="{{route('getComment', ['id' => 'all'])}}">See All</a></li>
                         </ul>
                     @endif
                 </li><!-- /.comment-menu -->

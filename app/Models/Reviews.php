@@ -10,4 +10,12 @@ class Reviews extends Model
         'user_id', 'product_id', 'text', 'published',
     ];
 
+    public function product(){
+        return $this->belongsTo('App\models\Product', 'product_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
 }

@@ -68,7 +68,7 @@ class ProductController extends Controller
         if ($review){
             return response()->json(['success' => __('product.message_successful')]);
         }
-
-
     }
+
+
 }

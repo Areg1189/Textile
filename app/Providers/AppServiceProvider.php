@@ -28,13 +28,14 @@ class AppServiceProvider extends ServiceProvider
         $social_icons = Social_icons::get();
 //        $subscriber_count = Subscriber::where('new', 0)->count();
         $subscribers_count = Subscriber::get();
-        $newComments = Reviews::count();
+        $newComments = Reviews::get();
 
         View::share([
             'categories'  => $categories,
             'social_icons' => $social_icons,
 //            'subscriber_count' => $subscriber_count,
             'subscriber_count' => $subscribers_count,
+            'newComments' => $newComments,
         ]);
 
     }

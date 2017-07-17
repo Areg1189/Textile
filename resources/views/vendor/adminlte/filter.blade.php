@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <table class="table text-center" id="table">
+            <table class="table text-hover" id="table">
                 <thead>
                 <tr>
                     <th>Հայերեն</th>

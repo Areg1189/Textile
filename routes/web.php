@@ -163,6 +163,11 @@ Route::group(
             Route::post('updateHomeImage', 'Admin\AdminController@updateHomeImage')->name('updateHomeImage');
             Route::post('block', 'Admin\AdminController@blockUser')->name('blockUser');
             Route::post('getMessageAdmin', 'Admin\AdminController@getMessageAdmin')->name('getMessageAdmin');
+
+            //========= COMMENT  ======= //
+
+            Route::get('comment/{id}', 'Admin\AdminProductController@comment')->name('getComment');
+
         });
 
     });

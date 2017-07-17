@@ -14,6 +14,7 @@ use App\Models\FilterCategory;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Color;
 use App\Models\Image;
+use App\Models\Reviews;
 
 class AdminProductController extends Controller
 {
@@ -271,5 +272,19 @@ class AdminProductController extends Controller
         $cat->delete();
         return 1;
 
+    }
+
+    public function comment(Request $request){
+        if (!$request->id){
+            return abort(404);
+        }else{
+            if ($request->id == 'all'){
+//               Reviews::where('published', 0)->update(['published' => 1]);
+                $comments = Reviews::where('published', 0)->get();
+                return view('vendor.adminlte.comments', [
+                    'comments' => $comments
+                ]);
+            }
+        }
     }
 }
