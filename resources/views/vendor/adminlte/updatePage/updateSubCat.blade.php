@@ -120,10 +120,9 @@
                                         <div class="panel-body">
 
 
-                                            <div class="panel panel-danger"
-                                                 data-filter="{{$i}}">
-                                                <div class=" panel-heading text-center">
-                                                    Filter '+ parseInt(filter + 1) +
+
+                                                <div class="col-sm-12">
+
                                                     <button type="button"
                                                             class="btn btn-danger btn_delete iconDelete pull-right"
                                                             data-status="filter_{{$i}}"
@@ -131,7 +130,7 @@
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
-                                                <div class="panel-body">
+
                                                     <div class="row">
                                                         <div class="col-xs-4">
                                                             <div class="form-group text-center">
@@ -292,8 +291,7 @@
                                                             @php($j++)
                                                         @endforeach
                                                     </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

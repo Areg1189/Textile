@@ -1,15 +1,5 @@
 @extends('layouts.app')
 
-@section('head')
-    @parent
-    <!-- REVOLUTION STYLE SHEETS -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
-    <!-- REVOLUTION LAYERS STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
-    <!-- REVOLUTION NAVIGATION STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
-
-@endsection
 
 @section('content')
 

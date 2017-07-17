@@ -10,4 +10,5 @@ return [
     'register_reviews' => 'Please register if you want to leave a comment',
     'feedback' => 'Оставить отзыв',
     'comment' => 'Комментарий',
+    'message_successful' => 'Admin@ khastati ktesneq <a href="#0" class="again_comment"> krkin grel</a>',
 ];

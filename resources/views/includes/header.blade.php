@@ -27,7 +27,7 @@
                                 <li>
                                     <div class="yamm-content container">
                                         <div class="row">
-                                            @foreach($categories as $category)
+                                            @foreach($categories->sortByDesc('id') as $category)
                                                 <div class="col-md-3">
                                                     <div class="widget">
                                                         <div class="widget-title">
@@ -36,7 +36,7 @@
                                                         </div><!-- end widget-title -->
 
                                                         <ul class="dropdown-mega">
-                                                            @foreach($category->subCategories as $subCategory)
+                                                            @foreach($category->subCategories->sortByDesc('id') as $subCategory)
                                                                 <li>
                                                                     <a href="{{route('getCategory', [
                                                                     'cat' => $subCategory->link])}}">

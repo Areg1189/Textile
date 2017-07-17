@@ -2,12 +2,6 @@
 
 @section('head')
     @parent
-    <!-- REVOLUTION STYLE SHEETS -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
-    <!-- REVOLUTION LAYERS STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
-    <!-- REVOLUTION NAVIGATION STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
