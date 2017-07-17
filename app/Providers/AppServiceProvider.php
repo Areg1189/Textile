@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Social_icons;
 use App\Models\Subscriber;
 use phpDocumentor\Reflection\Types\Null_;
+use App\Models\Reviews;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -25,14 +26,15 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         $categories = Category::get();
         $social_icons = Social_icons::get();
-        $subscriber_count = Subscriber::where('new', 0)->count();
-        $subscribers_count = Subscriber::count();
+//        $subscriber_count = Subscriber::where('new', 0)->count();
+        $subscribers_count = Subscriber::get();
+        $newComments = Reviews::count();
 
         View::share([
             'categories'  => $categories,
             'social_icons' => $social_icons,
-            'subscriber_count' => $subscriber_count,
-            'subscribers_count' => $subscribers_count,
+//            'subscriber_count' => $subscriber_count,
+            'subscriber_count' => $subscribers_count,
         ]);
 
     }

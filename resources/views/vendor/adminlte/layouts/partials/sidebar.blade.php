@@ -56,10 +56,10 @@
             <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Subscribers</span>
-                    @if($subscriber_count != 0)
-                        <span class="label label-danger">New {{$subscriber_count}}</span>
+                    @if(count($subscriber_count->where('new', 0 ))!= 0)
+                        <span class="label label-danger">New {{count($subscriber_count->where('new', 0 ))}}</span>
                     @endif
-                    <span class="label label-success">All {{$subscribers_count}}</span>
+                    <span class="label label-success">All {{count($subscriber_count)}}</span>
                 </a></li>
 
             <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
