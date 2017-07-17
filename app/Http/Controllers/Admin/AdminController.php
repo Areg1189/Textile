@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
-
     public function index()
     {
 //        Category::create([
@@ -131,14 +130,16 @@ class AdminController extends Controller
         return view('vendor.adminlte.users', ['users' => $users]);
     }
 
-
     public function getSubscribers()
     {
+        Subscriber::where('new', 0)->update([
+            'new' => 1
+        ]);
+
         $subscribers = Subscriber::orderBy('id', 'desc')->get();
 
         return view('vendor.adminlte.subscribers', ['subscribers' => $subscribers]);
     }
-
 
     public function subscribersEmail(Request $request)
     {
@@ -148,7 +149,6 @@ class AdminController extends Controller
 
              $subject = $request->name;
             try {
-
 
                 Mail::send('emails.emailSubscribes', [
                     'text' => $request->description,
@@ -161,13 +161,11 @@ class AdminController extends Controller
 
                 return response()->json(["success" => "Your Email Was Successfully Sent"]);
 
-
             } catch (\Exception $e) {
                 return response()->json(["error" => "Your Email Was Not Sent"]);
             }
         }
     }
-
 
     public function messageUser(Request $request)
     {
@@ -344,13 +342,13 @@ class AdminController extends Controller
                         'image' => $imageName,
                         'code' => time() . $request->text_en[$img],
                         'hy' => [
-                            'text' => $request->text_hy,
+                            'text' => $request->text_hy[$img],
                         ],
                         'en' => [
-                            'text' => $request->text_en,
+                            'text' => $request->text_en[$img],
                         ],
                         'ru' => [
-                            'text' => $request->text_ru,
+                            'text' => $request->text_ru[$img],
                         ]
                     ]);
                     $img++;
@@ -361,9 +359,7 @@ class AdminController extends Controller
             return back();
         }
 
-
     }
-
 
     public function deleteSlideImg(Request $request)
     {

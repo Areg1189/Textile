@@ -48,11 +48,19 @@
 
             <li class="{{Request::url() == route('getUsers') ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
-                    <span>Users</span></a></li>
+                    <span>Users</span>
+                    <span class="label label-danger">New 2</span>
+                    <span class="label label-success">All 5</span>
+                </a></li>
 
             <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
-                    <span>Subscribers</span></a></li>
+                    <span>Subscribers</span>
+                    @if($subscriber_count != 0)
+                        <span class="label label-danger">New {{$subscriber_count}}</span>
+                    @endif
+                    <span class="label label-success">All {{$subscribers_count}}</span>
+                </a></li>
 
             <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
                             class='fa fa-envelope-o'></i>
