@@ -10,11 +10,8 @@
 
             <div class="box-body">
 
-                {{--@php(dd($product))--}}
-
                 <form action="{{route('hideBlock')}}" class="formImage" method="post">
                     {{csrf_field()}}
-
 
                     <div class="radio">
                         <label>
@@ -28,7 +25,6 @@
                             Show
                         </label>
                     </div>
-
 
                     <div class="row">
                         <div class="col-sm-12">

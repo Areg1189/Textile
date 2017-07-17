@@ -59,7 +59,6 @@ $(document).on('click', '.iconUpdate', function () {
 });
 
 
-
 //=============================  DELETE ========================//
 
 $(document).on('click', '.iconDelete', function () {
@@ -106,19 +105,19 @@ $(document).on('click', '.spanClose', function () {
 });
 
 $(document).on('click', '.btn_delete', function () {
-   $('.myModal').css('display','block');
+    $('.myModal').css('display', 'block');
 });
 
-$(document).on('click', '.myModal',  function (event) {
+$(document).on('click', '.myModal', function (event) {
 
     if (event == $('.myModal-content')) {
-        $('.myModal').css('display','none');
+        $('.myModal').css('display', 'none');
     }
 });
-$(document).on('click', '.btn_my_modal',  function () {
+$(document).on('click', '.btn_my_modal', function () {
 
 
-        $('.myModal').css('display','none');
+    $('.myModal').css('display', 'none');
 
 });
 //  ==================== INPUT FILE =======================//
@@ -489,7 +488,7 @@ $(document).on('click', '.add_filter', function () {
     $('.filter_container').prepend('' +
         '<div class="panel panel-danger" data-filter="' + filter + '">' +
         '<div class=" panel-heading text-center">' +
-        'Filter '+ parseInt(filter + 1) +
+        'Filter ' + parseInt(filter + 1) +
         '<button data-target_parent_filter="' + filter + '" type="button" class="btn btn-danger delete_parent_filter pull-right" title="Delete">' +
         '<i class="fa fa-times" aria-hidden="true"></i>' +
         '</button>' +
@@ -499,21 +498,21 @@ $(document).on('click', '.add_filter', function () {
         '<div class="col-xs-4">' +
         '<div class="form-group text-center">' +
         '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_name_filter['+filter+']" class="form-control"' +
+        '<input type="text" name="hy_name_filter[' + filter + ']" class="form-control"' +
         'placeholder="Հայերեն" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-4">' +
         '<div class="form-group text-center">' +
         '<label>English</label>' +
-        '<input type="text" name="en_name_filter['+filter+']" class="form-control"' +
+        '<input type="text" name="en_name_filter[' + filter + ']" class="form-control"' +
         'placeholder="English" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-4">' +
         '<div class="form-group text-center">' +
         '<label>Русский</label>' +
-        '<input type="text" name="ru_name_filter['+filter+']" class="form-control"' +
+        '<input type="text" name="ru_name_filter[' + filter + ']" class="form-control"' +
         ' placeholder="Русский" required>' +
         ' </div>' +
         '</div>' +
@@ -580,7 +579,7 @@ var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
     var data = $(this).data('target');
     $('[data-name="' + data + '"]').append('' +
-        '<div class="row" data-status="delete' + data+ '" data-dell="delete' + data + dell + '">' +
+        '<div class="row" data-status="delete' + data + '" data-dell="delete' + data + dell + '">' +
         '<div class="col-xs-1">' +
         '</div>' +
         '<div class="col-xs-3">' +
@@ -602,7 +601,7 @@ $(document).on('click', '.add_filter_value', function () {
         '</div>' +
         '</div>' +
         '<div class="col-xs-2">' +
-        '<button data-target="delete' + parseInt(number - 1) + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' +data + dell + '" title="Delete">' +
+        '<button data-target="delete' + parseInt(number - 1) + '" type="button" class="btn btn-danger delete_filter_find" data-dell_button="delete' + data + dell + '" title="Delete">' +
         '<i class="fa fa-times" aria-hidden="true"></i>' +
         '</button>' +
         '</div>' +
@@ -623,8 +622,56 @@ $(document).on('click', '.delete_filter_find', function () {
     $('[data-dell="' + data + '"]').fadeOut().remove();
 });
 $(document).on('click', '.delete_parent_filter', function () {
-   var deleteFilter = $(this).data('target_parent_filter');
-    $('[data-filter="'+deleteFilter+'"]').fadeOut().remove();
+    var deleteFilter = $(this).data('target_parent_filter');
+    $('[data-filter="' + deleteFilter + '"]').fadeOut().remove();
 });
 
 
+/* *********** SUBSCRIBE **************** */
+$('#selectAll').click(function (e) {
+    var table = $(e.target).closest('table');
+    $('td input:checkbox', table).prop('checked', this.checked);
+});
+
+
+$("#btn_").on('click', function () {
+    emails = [];
+
+    $(".checkbox").each(function () {
+        if ($(this).is(':checked')) {
+            emails.push($(this).data('email'));
+        }
+    });
+
+
+});
+
+$(document).on('submit', '.form_subscribers', function (e) {
+    e.preventDefault();
+    var name = $('.form_subscribers').find('[name="name"]').val();
+    var description = $('.form_subscribers').find('[name="description"]').val();
+    $.ajax({
+        url: $('.form_subscribers').attr('action'),
+        type: 'post',
+        data: {emails: emails, name: name, description: description, _token: token},
+        success: function (e) {
+            var klass_alert = 'success';
+            var alert_content = false;
+            if (e['success']) {
+                klass_alert = 'success';
+                var alert_content = e['success'];
+            }else {
+                klass_alert = 'danger';
+                var alert_content = e[0];
+            }
+            $('#sendSubscribers').modal('hide');
+            $(".content").prepend('' +
+                '<div class="alert alert-'+klass_alert+' alert-dismissable fade in">' +
+                '<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
+                '<strong>'+alert_content+'</strong>' +
+                '</div>');
+
+
+        }
+    })
+});
