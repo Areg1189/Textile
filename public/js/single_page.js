@@ -10,9 +10,16 @@ $(".comment_form").validate({
             type: $(".comment_form").attr('method'),
             data: $(".comment_form").serialize(),
             success: function (data) {
+                if (data['success']) {
+                    $('.comment_form').css('display','none').find('[name="comment"]').val('');
+                    $('.contact_form_container').append('' +
+                        '<div class="row comment_success">' +
+                        '<div class="col-sm-12 text-center">' +
+                        data['success'] +
+                        '</div>' +
+                        '</div>' +
+                        '');
 
-                if (data[1]) {
-                    alert(1);
                 } else {
                     window.location.href = 'not-found';
                 }
@@ -22,6 +29,10 @@ $(".comment_form").validate({
             }
         });
     }
+});
+$(document).on('click', '.again_comment', function () {
+    $('.comment_success').remove();
+    $('.comment_form').fadeIn();
 });
 
 (function ($) {

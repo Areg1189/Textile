@@ -106,119 +106,33 @@
                                                 <div class="col-md-12">
                                                     <div class="panel">
                                                         <div class="panel-body comments">
-                                                            <ul class="media-list">
-                                                                <li class="media">
-                                                                    <div class="comment">
-                                                                        <a href="#" class="pull-left">
-                                                                            <img src="upload/avatar_01.jpg" alt=""
-                                                                                 class="img-circle">
-                                                                        </a>
-                                                                        <div class="media-body">
-                                                                            <strong class="text-success">Jane
-                                                                                Doe</strong>
-                                                                            <span class="text-muted">
-                                                                                        <small class="text-muted">6 days ago</small></span>
-                                                                            <p>
-                                                                                Lorem ipsum dolor sit amet, consectetur
-                                                                                adipiscing elit. Lorem ipsum dolor sit
-                                                                                amet, <a href="#">#some link </a>.
-                                                                            </p>
-                                                                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
-                                                                        </div>
-                                                                        <div class="clearfix"></div>
-                                                                    </div>
-                                                                    <ul class="media-list">
-                                                                        <li class="media">
-                                                                            <div class="comment">
-                                                                                <a href="#" class="pull-left">
-                                                                                    <img src="upload/avatar_02.png"
-                                                                                         alt="" class="img-circle">
-                                                                                </a>
-                                                                                <div class="media-body">
-                                                                                    <strong class="text-success">MrAwesome</strong>
-                                                                                    <span class="text-muted">
-                                                                                                <small class="text-muted">2 days ago</small></span>
-                                                                                    <p>
-                                                                                        Lorem ipsum dolor sit amet,
-                                                                                        consectetur adipiscing elit.
-                                                                                        Lorem ipsum dolor sit amet.
-                                                                                    </p>
-                                                                                    <a href="#"
-                                                                                       class="btn btn-primary btn-sm">Reply</a>
-                                                                                </div>
-                                                                                <div class="clearfix"></div>
+                                                            <ul class="media">
+                                                                @foreach($product
+                                                                ->reviews
+                                                                ->sortByDesc('id')
+                                                                ->where('published', 1) as $reviews)
+                                                                    <li class="media">
+                                                                        <div class="comment">
+                                                                            <div class="media-body">
+                                                                                <strong class="text-success">
+                                                                                    {{Auth::user()->name. ' '. Auth::user()->last_name}}
+                                                                                </strong>
+                                                                                <span class="text-muted">
+                                                                                        <small class="text-muted">
+                                                                                           {{$product->created_at}}
+                                                                                        </small>
+                                                                                </span>
+                                                                                <p>
+                                                                                    {{$reviews->text}}
+                                                                                </p>
                                                                             </div>
-                                                                        </li>
-                                                                        <li class="media">
-                                                                            <div class="comment">
-                                                                                <a href="#" class="pull-left">
-                                                                                    <img src="upload/avatar_03.png"
-                                                                                         alt="" class="img-circle">
-                                                                                </a>
-                                                                                <div class="media-body">
-                                                                                    <strong class="text-success">Miss
-                                                                                        Lucia</strong>
-                                                                                    <span class="text-muted">
-                                                                                                <small class="text-muted">15 minutes ago</small></span>
-                                                                                    <p>
-                                                                                        Lorem ipsum dolor sit amet,
-                                                                                        consectetur adipiscing elit.
-                                                                                        Lorem ipsum dolor sit amet.
-                                                                                    </p>
-                                                                                    <a href="#"
-                                                                                       class="btn btn-primary btn-sm">Reply</a>
-                                                                                </div>
-                                                                                <div class="clearfix"></div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                                <li class="media">
-                                                                    <div class="comment">
-                                                                        <a href="#" class="pull-left">
-                                                                            <img src="upload/avatar_04.png" alt=""
-                                                                                 class="img-circle">
-                                                                        </a>
-                                                                        <div class="media-body">
-                                                                            <strong class="text-success">Jana
-                                                                                Cova</strong>
-                                                                            <span class="text-muted">
-                                                                                        <small class="text-muted">12 days ago</small></span>
-                                                                            <p>
-                                                                                Lorem ipsum dolor sit amet, consectetur
-                                                                                adipiscing elit. Lorem ipsum dolor sit
-                                                                                amet.
-                                                                            </p>
-                                                                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
                                                                         </div>
-                                                                        <div class="clearfix"></div>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="media">
-                                                                    <div class="comment">
-                                                                        <a href="#" class="pull-left">
-                                                                            <img src="upload/avatar_04.png" alt=""
-                                                                                 class="img-circle">
-                                                                        </a>
-                                                                        <div class="media-body">
-                                                                            <strong class="text-success">Johnatan
-                                                                                Smarty</strong>
-                                                                            <span class="text-muted">
-                                                                                        <small class="text-muted">1 month ago</small></span>
-                                                                            <p>
-                                                                                Lorem ipsum dolor sit amet, consectetur
-                                                                                adipiscing elit. Lorem ipsum dolor sit
-                                                                                amet. Lorem ipsum dolor sit amet.
-                                                                            </p>
-                                                                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
-                                                                        </div>
-                                                                        <div class="clearfix"></div>
-                                                                    </div>
-                                                                </li>
+                                                                    </li>
+                                                                @endforeach
+
                                                             </ul>
                                                         </div>
                                                     </div>
-
                                                 </div><!-- end postpager -->
                                                 <div class="contact_form blog-desc">
                                                     @if(!Auth::guest())
@@ -228,7 +142,7 @@
                                                             <hr>
                                                         </div>
 
-                                                        <div class="contact_form">
+                                                        <div class="contact_form_container">
                                                             <form class="row comment_form"
                                                                   action="{{route('getComment', ['prod' => $product->link])}}"
                                                                   method="POST">
@@ -324,7 +238,7 @@
                                     </div>
                                 @endforeach
                             @else
-                                @foreach($subCat->products as $product)
+                                @foreach($subCat->products->where('id', '!=', $product->id) as $product)
                                     <div class="col-md-4 col-sm-6 col-xs-12">
                                         <div class="shop-item text-center">
                                             <div class="shop-thumbnail">

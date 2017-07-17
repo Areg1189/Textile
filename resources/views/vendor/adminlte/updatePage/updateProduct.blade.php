@@ -26,7 +26,7 @@
                         </div>
                         <div class="row">
                             <div class="panel panel-danger">
-                                <div class="panel panel-body">
+                                <div class=" panel-body">
                                     <div class="col-xs-4">
                                         <div class="form-group text-center">
                                             <label>Հայերեն *</label>
@@ -171,13 +171,15 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>New</label>
-                                                <input type="checkbox" name="new" value="new" {{$product->slider_new ? 'checked' : ''}}>
+                                                <input type="checkbox" name="new"
+                                                       value="new" {{$product->slider_new ? 'checked' : ''}}>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Sale</label>
-                                                <input type="checkbox" name="saleSlider" value="sale" {{$product->slider_sale ? 'checked' : ''}}>
+                                                <input type="checkbox" name="saleSlider"
+                                                       value="sale" {{$product->slider_sale ? 'checked' : ''}}>
                                             </div>
                                         </div>
                                     </div>
@@ -222,125 +224,243 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             @php($i = 0)
-                            @foreach($filters as $filter)
-                                @foreach($filter->subs as $s)
-                                    @if($sub->filters->where('sub_id',$s->id)->first())
-                                        <div class="col-sm-4">
-                                            <div class="panel panel-danger">
-                                                <div class="text-center">
-                                                    <h4 class="red">
-                                                        {{$filter->translate(session('locale'))->name}}
-                                                    </h4>
-                                                </div>
-                                                <div class="panel-body">
-                                                    @foreach($sub->filters as $catFilter)
-                                                        @if($catFilter->subs->filter->id == $filter->id)
-                                                            @if(count($catFilter->subs->values) > 0)
-                                                                <hr>
-                                                                <div>
-                                                                    <label class="green">
-                                                                        {{$catFilter
-                                                                        ->subs
-                                                                        ->translate(session('locale'))
-                                                                        ->name}}
-                                                                    </label>
-                                                                </div>
-                                                                <div class="panel-body">
-                                                                    @foreach($catFilter->subs->values  as $value)
-                                                                        @php
-                                                                            $res = $product
-                                                                            ->filters->where('filter_value', $value->code)
-                                                                            ->first();
-                                                                        @endphp
-                                                                        <div class="col-sm-11 col-sm-offset-1">
-                                                                            <div class="form-group">
-                                                                                <input type="checkbox"
-                                                                                       class="filter_checkbox"
-                                                                                       name="filter_checkbox[]"
-                                                                                       value="{{$value->code}}"
-                                                                                       data-target="filterUpdate_{{$i}}"
-                                                                                        {{ isset($res->filter_value)? 'checked' : ''}}>
+                            @foreach($filters->sortBy('id') as $filter)
+                                <div class="col-sm-4">
+                                    <div class="panel panel-danger">
+                                        <div class=" panel-heading">
+                                            <div class="text-center">
+                                                <h4 class="red">
+                                                    {{$filter->translate(session('locale'))->name}}
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body text-center">
+                                            @foreach($filter->subs->sortBy('id') as  $subs)
+                                                @if(count($subs->values) > 0)
+                                                    <div class="panel panel-danger">
+                                                        <div class="panel-body text-center">
+                                                            <div>
+                                                                <h3 class="green">{{$subs->translate(session('locale'))->name}}</h3>
+                                                            </div>
 
-                                                                                {{
-                                                                                $value
-                                                                                ->translate(session('locale'))
-                                                                                ->name}}
-                                                                                <div class="">
-                                                                                    <div class="col-sm-6">
-                                                                                        <input type="number"
-                                                                                               class="form-control filter_price"
-                                                                                               name="price[]"
-                                                                                               placeholder="Price"
-                                                                                               data-status="filterUpdate_{{$i}}"
-                                                                                               {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                               value="{{isset($res->filter_value) ? $res->price : null}}">
-                                                                                    </div>
-                                                                                    <div class="col-sm-6">
-                                                                                        <input type="number"
-                                                                                               class="form-control"
-                                                                                               name="sale[]"
-                                                                                               placeholder="Sale"
-                                                                                               data-status_sale="filterUpdate_{{$i}}"
-                                                                                               {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                               value="{{isset($res->filter_value) ? $res->sale : null}}">
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        @php($i++)
-                                                                    @endforeach
-                                                                </div>
-                                                            @else
+                                                            @foreach($subs->values  as $value)
                                                                 @php
                                                                     $res = $product
-                                                                    ->filters
-                                                                    ->where('filter_value', $catFilter->subs->code)
+                                                                    ->filters->where('filter_value', $value->code)
                                                                     ->first();
                                                                 @endphp
-                                                                <div class="form-group ">
-                                                                    <hr>
-                                                                    <input type="checkbox"
-                                                                           class="filter_checkbox"
-                                                                           name="filter_checkbox[]"
-                                                                           value="{{$catFilter->subs->code}}"
-                                                                           data-target="filterUpdate_{{$i}}"
-                                                                            {{isset($res->filter_value) ? 'checked' : ''}}>
-                                                                    {{$catFilter->subs->translate(session('locale'))->name}}
-                                                                    <div class="">
-                                                                        <div class="col-sm-6">
-                                                                            <input type="number"
-                                                                                   class="form-control filter_price"
-                                                                                   name="price[]"
-                                                                                   placeholder="Price"
-                                                                                   data-status="filterUpdate_{{$i}}"
-                                                                                   {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                   value="{{isset($res->filter_value) ? $res->price : null}}">
-                                                                        </div>
-                                                                        <div class="col-sm-6">
-                                                                            <input type="number"
-                                                                                   class="form-control"
-                                                                                   name="sale[]"
-                                                                                   placeholder="Sale"
-                                                                                   data-status_sale="filterUpdate_{{$i}}"
-                                                                                   {{isset($res->filter_value) ? '' : 'disabled'}}
-                                                                                   value="{{isset($res->filter_value) ? $res->sale : null}}">
+                                                                <div class="col-sm-11 col-sm-offset-1">
+                                                                    <div class="form-group">
+                                                                        <h3>
+                                                                            <input type="checkbox"
+                                                                                   class="filter_checkbox"
+                                                                                   name="filter_checkbox[]"
+                                                                                   value="{{$value->code}}"
+                                                                                   data-target="filter_{{$i}}"
+                                                                                    {{$res?'checked':''}}>
+                                                                            {{$value->translate(session('locale'))->name}}
+                                                                        </h3>
+
+                                                                        <div class="">
+                                                                            <div class="col-sm-6">
+                                                                                <input type="number"
+                                                                                       class="form-control filter_price"
+                                                                                       name="price[]"
+                                                                                       placeholder="Price *"
+                                                                                       data-status="filter_{{$i}}"
+                                                                                       value="{{$res?$res->price:'='}}"
+                                                                                        {{$res?'':'disabled'}} >
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                <input type="number"
+                                                                                       class="form-control"
+                                                                                       name="sale[]"
+                                                                                       placeholder="Sale"
+                                                                                       data-status_sale="filter_{{$i}}"
+                                                                                       value="{{$res?$res->sale:'='}}"
+                                                                                        {{$res?'':'disabled'}}>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            @endif
-                                                        @endif
-                                                        @php($i++)
-                                                    @endforeach
-                                                </div>
-                                            </div>
+                                                                @php($i++)
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+
+                                                @else
+                                                    @php
+                                                        $res = $product
+                                                        ->filters->where('filter_value', $subs->code)
+                                                        ->first();
+                                                    @endphp
+                                                    <div class="form-group ">
+
+                                                        <h3>
+                                                            <input type="checkbox"
+                                                                   class="filter_checkbox"
+                                                                   name="filter_checkbox[]"
+                                                                   value="{{$subs->code}}"
+                                                                   data-target="filter_{{$i}}"
+                                                                    {{$res?'checked':''}}>
+                                                            {{$subs->translate(session('locale'))->name}}</h3>
+                                                        <div class="">
+                                                            <div class="col-sm-6">
+                                                                <input type="number"
+                                                                       class="form-control filter_price"
+                                                                       name="price[]"
+                                                                       placeholder="Price"
+                                                                       data-status="filter_{{$i}}"
+                                                                       value="{{$res?$res->price:'='}}"
+                                                                        {{$res?'':'disabled'}}>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <input type="number"
+                                                                       class="form-control"
+                                                                       name="sale[]"
+                                                                       placeholder="Sale"
+                                                                       data-status_sale="filter_{{$i}}"
+                                                                       value="{{$res?$res->sale:'='}}"
+                                                                        {{$res?'':'disabled'}}>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                @endif
+                                                @php($i++)
+                                                <br/>
+                                                <hr/>
+                                            @endforeach
                                         </div>
-                                        @break
-                                    @endif
-                                @endforeach
+                                    </div>
+                                </div>
                             @endforeach
+
                         </div>
+
+
+                        {{--<div class="row">--}}
+                        {{--@php($i = 0)--}}
+                        {{--@foreach($filters as $filter)--}}
+                        {{--@foreach($filter->subs as $s)--}}
+                        {{--@if($sub->filters->where('sub_id',$s->id)->first())--}}
+                        {{--<div class="col-sm-4">--}}
+                        {{--<div class="panel panel-danger">--}}
+                        {{--<div class="text-center">--}}
+                        {{--<h4 class="red">--}}
+                        {{--{{$filter->translate(session('locale'))->name}}--}}
+                        {{--</h4>--}}
+                        {{--</div>--}}
+                        {{--<div class="panel-body">--}}
+                        {{--@foreach($sub->filters as $catFilter)--}}
+                        {{--@if($catFilter->subs->filter->id == $filter->id)--}}
+                        {{--@if(count($catFilter->subs->values) > 0)--}}
+                        {{--<hr>--}}
+                        {{--<div>--}}
+                        {{--<label class="green">--}}
+                        {{--{{$catFilter--}}
+                        {{--->subs--}}
+                        {{--->translate(session('locale'))--}}
+                        {{--->name}}--}}
+                        {{--</label>--}}
+                        {{--</div>--}}
+                        {{--<div class="panel-body">--}}
+                        {{--@foreach($catFilter->subs->values  as $value)--}}
+                        {{--@php--}}
+                        {{--$res = $product--}}
+                        {{--->filters->where('filter_value', $value->code)--}}
+                        {{--->first();--}}
+                        {{--@endphp--}}
+                        {{--<div class="col-sm-11 col-sm-offset-1">--}}
+                        {{--<div class="form-group">--}}
+                        {{--<input type="checkbox"--}}
+                        {{--class="filter_checkbox"--}}
+                        {{--name="filter_checkbox[]"--}}
+                        {{--value="{{$value->code}}"--}}
+                        {{--data-target="filterUpdate_{{$i}}"--}}
+                        {{--{{ isset($res->filter_value)? 'checked' : ''}}>--}}
+
+                        {{--{{--}}
+                        {{--$value--}}
+                        {{--->translate(session('locale'))--}}
+                        {{--->name}}--}}
+                        {{--<div class="">--}}
+                        {{--<div class="col-sm-6">--}}
+                        {{--<input type="number"--}}
+                        {{--class="form-control filter_price"--}}
+                        {{--name="price[]"--}}
+                        {{--placeholder="Price"--}}
+                        {{--data-status="filterUpdate_{{$i}}"--}}
+                        {{--{{isset($res->filter_value) ? '' : 'disabled'}}--}}
+                        {{--value="{{isset($res->filter_value) ? $res->price : null}}">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-sm-6">--}}
+                        {{--<input type="number"--}}
+                        {{--class="form-control"--}}
+                        {{--name="sale[]"--}}
+                        {{--placeholder="Sale"--}}
+                        {{--data-status_sale="filterUpdate_{{$i}}"--}}
+                        {{--{{isset($res->filter_value) ? '' : 'disabled'}}--}}
+                        {{--value="{{isset($res->filter_value) ? $res->sale : null}}">--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@php($i++)--}}
+                        {{--@endforeach--}}
+                        {{--</div>--}}
+                        {{--@else--}}
+                        {{--@php--}}
+                        {{--$res = $product--}}
+                        {{--->filters--}}
+                        {{--->where('filter_value', $catFilter->subs->code)--}}
+                        {{--->first();--}}
+                        {{--@endphp--}}
+                        {{--<div class="form-group ">--}}
+                        {{--<hr>--}}
+                        {{--<input type="checkbox"--}}
+                        {{--class="filter_checkbox"--}}
+                        {{--name="filter_checkbox[]"--}}
+                        {{--value="{{$catFilter->subs->code}}"--}}
+                        {{--data-target="filterUpdate_{{$i}}"--}}
+                        {{--{{isset($res->filter_value) ? 'checked' : ''}}>--}}
+                        {{--{{$catFilter->subs->translate(session('locale'))->name}}--}}
+                        {{--<div class="">--}}
+                        {{--<div class="col-sm-6">--}}
+                        {{--<input type="number"--}}
+                        {{--class="form-control filter_price"--}}
+                        {{--name="price[]"--}}
+                        {{--placeholder="Price"--}}
+                        {{--data-status="filterUpdate_{{$i}}"--}}
+                        {{--{{isset($res->filter_value) ? '' : 'disabled'}}--}}
+                        {{--value="{{isset($res->filter_value) ? $res->price : null}}">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-sm-6">--}}
+                        {{--<input type="number"--}}
+                        {{--class="form-control"--}}
+                        {{--name="sale[]"--}}
+                        {{--placeholder="Sale"--}}
+                        {{--data-status_sale="filterUpdate_{{$i}}"--}}
+                        {{--{{isset($res->filter_value) ? '' : 'disabled'}}--}}
+                        {{--value="{{isset($res->filter_value) ? $res->sale : null}}">--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@endif--}}
+                        {{--@endif--}}
+                        {{--@php($i++)--}}
+                        {{--@endforeach--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@break--}}
+                        {{--@endif--}}
+                        {{--@endforeach--}}
+                        {{--@endforeach--}}
+                        {{--</div>--}}
 
 
                         {{--=======================================  Desctiption  =======================================--}}

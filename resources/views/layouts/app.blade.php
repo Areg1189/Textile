@@ -30,12 +30,12 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{{asset('images/apple-touch-icon-144x144.png')}}">
         <link rel="apple-touch-icon" sizes="152x152" href="{{asset('images/apple-touch-icon-152x152.png')}}">
 
-        {{--<!-- REVOLUTION STYLE SHEETS -->--}}
-        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">--}}
-        {{--<!-- REVOLUTION LAYERS STYLES -->--}}
-        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">--}}
-        {{--<!-- REVOLUTION NAVIGATION STYLES -->--}}
-        {{--<link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">--}}
+        <!-- REVOLUTION STYLE SHEETS -->
+        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/settings.css')}}">
+        <!-- REVOLUTION LAYERS STYLES -->
+        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/layers.css')}}">
+        <!-- REVOLUTION NAVIGATION STYLES -->
+        <link rel="stylesheet" type="text/css" href="{{asset('revolution/css/navigation.css')}}">
 
         <!-- BOOTSTRAP STYLES -->
         <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}">

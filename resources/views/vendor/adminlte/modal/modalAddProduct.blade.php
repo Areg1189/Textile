@@ -216,60 +216,78 @@
                                 @foreach($filters->sortBy('id') as $filter)
                                     <div class="col-sm-4">
                                         <div class="panel panel-danger">
-                                            <div class="text-center">
-                                                <h4 class="red">
-                                                    {{$filter->translate(session('locale'))->name}}
-                                                </h4>
+                                            <div class=" panel-heading">
+                                                <div class="text-center">
+                                                    <h4 class="red">
+                                                        {{$filter->translate(session('locale'))->name}}
+                                                    </h4>
+                                                </div>
                                             </div>
-                                            <div class="panel-body">
+                                            <div class="panel-body text-center">
                                                 @foreach($filter->subs->sortBy('id') as  $subs)
                                                     @if(count($subs->values) > 0)
-                                                        <hr>
-                                                        <div>
-                                                            <label class="green">{{$subs->translate(session('locale'))->name}}</label>
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            @foreach($subs->values  as $value)
-                                                                <div class="col-sm-11 col-sm-offset-1">
-                                                                    <div class="form-group">
-                                                                        <input type="checkbox"
-                                                                               class="filter_checkbox"
-                                                                               name="filter_checkbox[]"
-                                                                               value="{{$value->code}}"
-                                                                               data-target="filter_{{$i}}">
-                                                                        {{$value->translate(session('locale'))->name}}
-                                                                        <div class="">
-                                                                            <div class="col-sm-6">
-                                                                                <input type="number"
-                                                                                       class="form-control filter_price"
-                                                                                       name="price[]"
-                                                                                       placeholder="Price *"
-                                                                                       data-status="filter_{{$i}}"
-                                                                                       disabled>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <input type="number"
-                                                                                       class="form-control"
-                                                                                       name="sale[]"
-                                                                                       placeholder="Sale"
-                                                                                       data-status_sale="filter_{{$i}}"
-                                                                                       disabled>
+                                                        <div class="panel panel-danger">
+                                                            <div class="panel-body text-center">
+                                                                <div>
+                                                                    <h3 class="green">{{$subs->translate(session('locale'))->name}}</h3>
+                                                                </div>
+
+                                                                @foreach($subs->values  as $value)
+                                                                    @php
+                                                                        $res = $product
+                                                                        ->filters->where('filter_value', $value->code)
+                                                                        ->first();
+                                                                    @endphp
+                                                                    <div class="col-sm-11 col-sm-offset-1">
+                                                                        <div class="form-group">
+                                                                            <h3>
+                                                                                <input type="checkbox"
+                                                                                       class="filter_checkbox"
+                                                                                       name="filter_checkbox[]"
+                                                                                       data-target="filter_{{$i}}">
+                                                                                {{$value->translate(session('locale'))->name}}
+                                                                            </h3>
+
+                                                                            <div class="">
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control filter_price"
+                                                                                           name="price[]"
+                                                                                           placeholder="Price *"
+                                                                                           data-status="filter_{{$i}}"
+                                                                                           disabled>
+                                                                                </div>
+                                                                                <div class="col-sm-6">
+                                                                                    <input type="number"
+                                                                                           class="form-control"
+                                                                                           name="sale[]"
+                                                                                           placeholder="Sale"
+                                                                                           data-status_sale="filter_{{$i}}"
+                                                                                           disabled>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                @php($i++)
-                                                            @endforeach
+                                                                    @php($i++)
+                                                                @endforeach
+                                                            </div>
                                                         </div>
+
                                                     @else
+                                                        @php
+                                                            $res = $product
+                                                            ->filters->where('filter_value', $subs->code)
+                                                            ->first();
+                                                        @endphp
                                                         <div class="form-group ">
-                                                            <hr>
-                                                            <input type="checkbox"
-                                                                   class="filter_checkbox"
-                                                                   name="filter_checkbox[]"
-                                                                   value="{{$subs->code}}"
-                                                                   data-target="filter_{{$i}}">
-                                                            {{$subs->translate(session('locale'))->name}}
+
+                                                            <h3>
+                                                                <input type="checkbox"
+                                                                       class="filter_checkbox"
+                                                                       name="filter_checkbox[]"
+                                                                       value="{{$subs->code}}"
+                                                                       data-target="filter_{{$i}}">
+                                                                {{$subs->translate(session('locale'))->name}}</h3>
                                                             <div class="">
                                                                 <div class="col-sm-6">
                                                                     <input type="number"
@@ -292,147 +310,151 @@
 
                                                     @endif
                                                     @php($i++)
+                                                    <br/>
+                                                    <hr/>
                                                 @endforeach
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-
-                                        {{--@foreach($filter->subs as $s)--}}
-                                        {{--@if($sub->filters->where('sub_id',$s->id)->first())--}}
-                                        {{--<div class="col-sm-4">--}}
-                                        {{--<div class="panel panel-danger">--}}
-                                        {{--<div class="text-center">--}}
-                                        {{--<h4 class="red">--}}
-                                        {{--{{$filter->translate(session('locale'))->name}}--}}
-                                        {{--</h4>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="panel-body">--}}
-                                        {{--@foreach($sub->filters as $catFilter)--}}
-                                        {{--@if($catFilter->subs->filter->id == $filter->id)--}}
-                                        {{--@if(count($catFilter->subs->values) > 0)--}}
-                                        {{--<hr>--}}
-                                        {{--<div>--}}
-                                        {{--<label class="green">{{$catFilter->subs->translate(session('locale'))->name}}</label>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="panel-body">--}}
-                                        {{--@foreach($catFilter->subs->values  as $value)--}}
-                                        {{--<div class="col-sm-11 col-sm-offset-1">--}}
-                                        {{--<div class="form-group">--}}
-                                        {{--<input type="checkbox"--}}
-                                        {{--class="filter_checkbox"--}}
-                                        {{--name="filter_checkbox[]"--}}
-                                        {{--value="{{$value->code}}"--}}
-                                        {{--data-target="filter_{{$i}}">--}}
-                                        {{--{{$value->translate(session('locale'))->name}}--}}
-                                        {{--<div class="">--}}
-                                        {{--<div class="col-sm-6">--}}
-                                        {{--<input type="number"--}}
-                                        {{--class="form-control filter_price"--}}
-                                        {{--name="price[]"--}}
-                                        {{--placeholder="Price *"--}}
-                                        {{--data-status="filter_{{$i}}"--}}
-                                        {{--disabled>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-6">--}}
-                                        {{--<input type="number"--}}
-                                        {{--class="form-control"--}}
-                                        {{--name="sale[]"--}}
-                                        {{--placeholder="Sale"--}}
-                                        {{--data-status_sale="filter_{{$i}}"--}}
-                                        {{--disabled>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--@php($i++)--}}
-                                        {{--@endforeach--}}
-                                        {{--</div>--}}
-                                        {{--@endif--}}
-                                        {{--<div class="form-group ">--}}
-                                        {{--<hr>--}}
-                                        {{--<input type="checkbox"--}}
-                                        {{--class="filter_checkbox"--}}
-                                        {{--name="filter_checkbox[]"--}}
-                                        {{--value="{{$catFilter->subs->code}}"--}}
-                                        {{--data-target="filter_{{$i}}">--}}
-                                        {{--{{$catFilter->subs->translate(session('locale'))->name}}--}}
-                                        {{--<div class="">--}}
-                                        {{--<div class="col-sm-6">--}}
-                                        {{--<input type="number"--}}
-                                        {{--class="form-control filter_price"--}}
-                                        {{--name="price[]"--}}
-                                        {{--placeholder="Price"--}}
-                                        {{--data-status="filter_{{$i}}"--}}
-                                        {{--disabled>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-sm-6">--}}
-                                        {{--<input type="number"--}}
-                                        {{--class="form-control"--}}
-                                        {{--name="sale[]"--}}
-                                        {{--placeholder="Sale"--}}
-                                        {{--data-status_sale="filter_{{$i}}"--}}
-                                        {{--disabled>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--@endif--}}
-                                        {{--@php($i++)--}}
-                                        {{--@endforeach--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--@break--}}
-                                        {{--@endif--}}
-                                        {{--@endforeach--}}
-                                        {{--@endforeach--}}
-                                    </div>
-
-
-                                    {{--=======================================  Desctiption  =======================================--}}
-
-                                    <div class="row">
-                                        <div class="col-md-12 text-center">
-                                            <h3>Description</h3>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group text-center">
-                                                <label for="hy_description">Նկարագրություն</label>
-                                                <textarea name="hy_description" rows="10" cols="80"></textarea>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group text-center">
-                                                <label for="en_description">Description</label>
-                                                <textarea name="en_description" rows="10" cols="80"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="form-group text-center">
-                                                <label for="ru_description">Описание</label>
-                                                <textarea name="ru_description" rows="10" cols="80"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">
-                                                Close
-                                            </button>
-                                        </div>
-                                    </div>
+                            </div>
 
-                                    <div class="imageContainer">
+                            {{--@foreach($filter->subs as $s)--}}
+                            {{--@if($sub->filters->where('sub_id',$s->id)->first())--}}
+                            {{--<div class="col-sm-4">--}}
+                            {{--<div class="panel panel-danger">--}}
+                            {{--<div class="text-center">--}}
+                            {{--<h4 class="red">--}}
+                            {{--{{$filter->translate(session('locale'))->name}}--}}
+                            {{--</h4>--}}
+                            {{--</div>--}}
+                            {{--<div class="panel-body">--}}
+                            {{--@foreach($sub->filters as $catFilter)--}}
+                            {{--@if($catFilter->subs->filter->id == $filter->id)--}}
+                            {{--@if(count($catFilter->subs->values) > 0)--}}
+                            {{--<hr>--}}
+                            {{--<div>--}}
+                            {{--<label class="green">{{$catFilter->subs->translate(session('locale'))->name}}</label>--}}
+                            {{--</div>--}}
+                            {{--<div class="panel-body">--}}
+                            {{--@foreach($catFilter->subs->values  as $value)--}}
+                            {{--<div class="col-sm-11 col-sm-offset-1">--}}
+                            {{--<div class="form-group">--}}
+                            {{--<input type="checkbox"--}}
+                            {{--class="filter_checkbox"--}}
+                            {{--name="filter_checkbox[]"--}}
+                            {{--value="{{$value->code}}"--}}
+                            {{--data-target="filter_{{$i}}">--}}
+                            {{--{{$value->translate(session('locale'))->name}}--}}
+                            {{--<div class="">--}}
+                            {{--<div class="col-sm-6">--}}
+                            {{--<input type="number"--}}
+                            {{--class="form-control filter_price"--}}
+                            {{--name="price[]"--}}
+                            {{--placeholder="Price *"--}}
+                            {{--data-status="filter_{{$i}}"--}}
+                            {{--disabled>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-sm-6">--}}
+                            {{--<input type="number"--}}
+                            {{--class="form-control"--}}
+                            {{--name="sale[]"--}}
+                            {{--placeholder="Sale"--}}
+                            {{--data-status_sale="filter_{{$i}}"--}}
+                            {{--disabled>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--@php($i++)--}}
+                            {{--@endforeach--}}
+                            {{--</div>--}}
+                            {{--@endif--}}
+                            {{--<div class="form-group ">--}}
+                            {{--<hr>--}}
+                            {{--<input type="checkbox"--}}
+                            {{--class="filter_checkbox"--}}
+                            {{--name="filter_checkbox[]"--}}
+                            {{--value="{{$catFilter->subs->code}}"--}}
+                            {{--data-target="filter_{{$i}}">--}}
+                            {{--{{$catFilter->subs->translate(session('locale'))->name}}--}}
+                            {{--<div class="">--}}
+                            {{--<div class="col-sm-6">--}}
+                            {{--<input type="number"--}}
+                            {{--class="form-control filter_price"--}}
+                            {{--name="price[]"--}}
+                            {{--placeholder="Price"--}}
+                            {{--data-status="filter_{{$i}}"--}}
+                            {{--disabled>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-sm-6">--}}
+                            {{--<input type="number"--}}
+                            {{--class="form-control"--}}
+                            {{--name="sale[]"--}}
+                            {{--placeholder="Sale"--}}
+                            {{--data-status_sale="filter_{{$i}}"--}}
+                            {{--disabled>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--@endif--}}
+                            {{--@php($i++)--}}
+                            {{--@endforeach--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--@break--}}
+                            {{--@endif--}}
+                            {{--@endforeach--}}
+                            {{--@endforeach--}}
 
+
+
+                            {{--=======================================  Desctiption  =======================================--}}
+
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <h3>Description</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="hy_description">Նկարագրություն</label>
+                                        <textarea name="hy_description" rows="10" cols="80"></textarea>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="en_description">Description</label>
+                                        <textarea name="en_description" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group text-center">
+                                        <label for="ru_description">Описание</label>
+                                        <textarea name="ru_description" rows="10" cols="80"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="imageContainer">
+
+                            </div>
 
 
                         </form>

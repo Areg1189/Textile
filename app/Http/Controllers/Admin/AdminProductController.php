@@ -128,9 +128,10 @@ class AdminProductController extends Controller
         if (!$request->prod) {
             return abort(404);
         }
-        $filters = FilterCategory::get();
         $product = Product::where('link', $request->prod)->firstOrFail();
         $sub = SubCategory::where('id', $product->parent->id)->firstOrFail();
+        $filters = FilterCategory::where('cat_id', $sub->id)->get();
+
         if ($request->key && $request->key == 'one') {
             return View::make('vendor.adminlte.updatePage.updateProduct', [
                 'product' => $product,

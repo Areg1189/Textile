@@ -29,6 +29,9 @@ class Product extends Model
     public function parent(){
         return $this->belongsTo('App\Models\SubCategory', 'parent_id', 'id');
     }
+    public function reviews(){
+        return $this->hasMany('App\Models\Reviews', 'product_id', 'id');
+    }
 }
 
 
