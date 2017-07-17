@@ -49,8 +49,10 @@
             <li class="{{Request::url() == route('getUsers') ? 'active' : ''}}"><a href="{{route('getUsers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span>
-                    <span class="label label-danger">New 2</span>
-                    <span class="label label-success">All 5</span>
+                    @if(count($users_count->where('new', 0 ))!= 0)
+                        <span class="label label-danger">New {{count($users_count->where('new', 0 ))}}</span>
+                    @endif
+                    <span class="label label-success">All {{count($users_count)}}</span>
                 </a></li>
 
             <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i

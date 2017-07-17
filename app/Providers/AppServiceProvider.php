@@ -26,15 +26,17 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         $categories = Category::get();
         $social_icons = Social_icons::get();
-//        $subscriber_count = Subscriber::where('new', 0)->count();
         $subscribers_count = Subscriber::get();
         $newComments = Reviews::get();
+        $users_count = User::get();
+        $newComments = Reviews::count();
 
         View::share([
             'categories'  => $categories,
             'social_icons' => $social_icons,
-//            'subscriber_count' => $subscriber_count,
+
             'subscriber_count' => $subscribers_count,
+            'users_count' => $users_count
             'newComments' => $newComments,
         ]);
 

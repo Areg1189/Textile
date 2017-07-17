@@ -135,7 +135,6 @@ class AdminController extends Controller
         Subscriber::where('new', 0)->update([
             'new' => 1
         ]);
-
         $subscribers = Subscriber::orderBy('id', 'desc')->get();
 
         return view('vendor.adminlte.subscribers', ['subscribers' => $subscribers]);
