@@ -37,6 +37,8 @@ Route::group(
         Route::get('about', 'HomeController@about')->name('about');
         Route::get('contactus', 'HomeController@contactus')->name('contactus');
         Route::get('', 'HomeController@index')->name('home');
+        Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
+
 //        =================  Product  ================== //
         Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
         Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
@@ -77,6 +79,7 @@ Route::group(
             Route::post('changePassword', 'Users\UserController@changePassword')->name('changePassword');
 
             Route::post('deleteUser', 'Users\UserController@deleteUser')->name('deleteUser');
+
         });
 
         //        =================  ADMIN  ================== //
@@ -94,10 +97,13 @@ Route::group(
 
             Route::get('users', 'Admin\AdminController@getUsers')->name('getUsers');
 
-
             Route::post('messageUser', 'Admin\AdminController@messageUser')->name('messageUser');
             Route::post('change_icons', 'Admin\AdminController@change_icons')->name('change_icons');
 
+
+            //=========  SUBSCRIBERS  ======= //
+            Route::get('subscribers', 'Admin\AdminController@getSubscribers')->name('getSubscribers');
+            Route::post('subscribersEmail', 'Admin\AdminController@subscribersEmail')->name('subscribersEmail');
 
             //=========  EMPLOYEE  ======= //
 

@@ -14,6 +14,8 @@ use App\Models\HomeImage;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Subscriber;
 
 class HomeController extends Controller
 {
@@ -82,6 +84,29 @@ class HomeController extends Controller
         }
     }
 
+
+    public function subscribe(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->with('error', 'Please, enter valid email or name')->withErrors($validator->errors())->withInput();
+        }
+
+        $check = Subscriber::where('email', $request->email)->first();
+        if(!$check){
+            Subscriber::create([
+                'name' => $request->name,
+                'email' => $request->email
+            ]);
+            return back()->with('success', 'You have successfully subscribed!');
+        }
+
+        return back()->with('error', 'You are already subscribed!');
+    }
 
 
 

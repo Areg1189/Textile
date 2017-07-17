@@ -1,4 +1,3 @@
-
 <footer class="section footer">
     <div class="container">
         <div class="row">
@@ -104,10 +103,11 @@
 
                     <div class="newsletter-widget">
                         <p>Subscribe our newsletter for discount and coupon codes.</p>
-                        <form>
-                            <input type="text" class="form-control input-lg" placeholder="Your name"/>
-                            <input type="email" class="form-control input-lg" placeholder="Email"/>
-                            <button class="button button--aylen btn">Subscribe Now</button>
+                        <form method="post" action="{{route('subscribe')}}">
+                            {{csrf_field()}}
+                            <input type="text" name="name" class="form-control input-lg" placeholder="Your name" required/>
+                            <input type="email" name="email" class="form-control input-lg" placeholder="Email" required/>
+                            <button type="submit" class="button button--aylen btn">Subscribe Now</button>
                         </form>
                     </div><!-- end newsletter -->
 

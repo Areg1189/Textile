@@ -50,6 +50,10 @@
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span></a></li>
 
+            <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i
+                            class="fa fa-users" aria-hidden="true"></i>
+                    <span>Subscribers</span></a></li>
+
             <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
                             class='fa fa-envelope-o'></i>
                     <span>Messages</span></a></li>

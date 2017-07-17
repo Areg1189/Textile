@@ -6,6 +6,7 @@ use App\Models\About_faq;
 use App\Models\About_sld;
 use App\Models\About_text;
 use App\Models\Employee_site;
+use App\Models\Subscriber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,7 @@ use App\Models\Social_icons;
 use App\Models\Employee;
 use App\Models\Employee_block;
 use App\Models\About_cover;
+use Illuminate\Support\Facades\Mail;
 
 
 class AdminController extends Controller
@@ -128,6 +130,44 @@ class AdminController extends Controller
 
         return view('vendor.adminlte.users', ['users' => $users]);
     }
+
+
+    public function getSubscribers()
+    {
+        $subscribers = Subscriber::orderBy('id', 'desc')->get();
+
+        return view('vendor.adminlte.subscribers', ['subscribers' => $subscribers]);
+    }
+
+
+    public function subscribersEmail(Request $request)
+    {
+        if ($request->key && $request->key == 'one') {
+            return View::make('vendor.adminlte.modal.subscribersEmail');
+        } else {
+
+             $subject = $request->name;
+            try {
+
+
+                Mail::send('emails.emailSubscribes', [
+                    'text' => $request->description,
+
+                ], function ($message) use ($request, $subject) {
+                    foreach ($request->emails as $email) {
+                        $message->bcc($email)->subject($subject);
+                    }
+                });
+
+                return response()->json(["success" => "Your Email Was Successfully Sent"]);
+
+
+            } catch (\Exception $e) {
+                return response()->json(["error" => "Your Email Was Not Sent"]);
+            }
+        }
+    }
+
 
     public function messageUser(Request $request)
     {
@@ -299,7 +339,6 @@ class AdminController extends Controller
                     $data = base64_decode($data);
                     $imageName = $img . time() . '.jpg';
                     file_put_contents('upload/about_slider/' . $imageName, $data);
-
 
                     About_sld::create([
                         'image' => $imageName,
