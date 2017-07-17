@@ -233,11 +233,7 @@
                                                                 </div>
 
                                                                 @foreach($subs->values  as $value)
-                                                                    @php
-                                                                        $res = $product
-                                                                        ->filters->where('filter_value', $value->code)
-                                                                        ->first();
-                                                                    @endphp
+
                                                                     <div class="col-sm-11 col-sm-offset-1">
                                                                         <div class="form-group">
                                                                             <h3>
@@ -274,11 +270,6 @@
                                                         </div>
 
                                                     @else
-                                                        @php
-                                                            $res = $product
-                                                            ->filters->where('filter_value', $subs->code)
-                                                            ->first();
-                                                        @endphp
                                                         <div class="form-group ">
 
                                                             <h3>

@@ -12,6 +12,7 @@ use App\Models\Social_icons;
 use App\Models\Subscriber;
 use phpDocumentor\Reflection\Types\Null_;
 use App\Models\Reviews;
+use App\User;
 
 
 class AppServiceProvider extends ServiceProvider

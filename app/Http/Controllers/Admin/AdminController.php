@@ -125,6 +125,7 @@ class AdminController extends Controller
 
     public function getUsers()
     {
+        User::where('new', 0)->update(['new' => 1]);
         $users = User::where('status', 1)->orderBy('id', 'desc')->get();
 
         return view('vendor.adminlte.users', ['users' => $users]);

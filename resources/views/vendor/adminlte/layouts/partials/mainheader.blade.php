@@ -43,7 +43,7 @@
                                     <!-- inner menu: contains the comment -->
                                     <ul class="menu">
                                         <li><!-- start message -->
-                                            <a href="   {{route('getComment', ['id' => $comment->id])}}">
+                                            <a href="   {{route('adminGetComment', ['id' => $comment->id])}}">
                                                 <div class="pull-left">
                                                     <img
                                                             src="{{asset('images/products/'.$comment
@@ -72,7 +72,7 @@
                                     </ul><!-- /.menu -->
                                 </li>
                             @endforeach
-                            <li class="footer"><a href="{{route('getComment', ['id' => 'all'])}}">See All</a></li>
+                            <li class="footer"><a href="{{route('adminGetComment', ['id' => 'all'])}}">See All</a></li>
                         </ul>
                     @endif
                 </li><!-- /.comment-menu -->

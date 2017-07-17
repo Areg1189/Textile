@@ -2,47 +2,55 @@
 
 
 @section('main-content')
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">New Comments</h3>
-
-                <div class="box-tools">
-                    <div class="input-group input-group-sm">
-                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
+    <section class="content-header text-center">
+        <h1>
+            New Comments
+            <small> All</small>
+        </h1>
+    </section>
+    <div class="container-fluid spark-screen">
+        <div class="row">
+            <div class="col-sm-2">
+                <button class="btn btn-app" title="Add Filter" data-toggle="modal" data-target="#modalAddFilter">
+                    Add
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <table class="table table-hover">
-                    <tbody>
-                    <tr>
-                        <th>N</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>Product</th>
-                        <th>Comment</th>
-                    </tr>
-                    @foreach($comments->sortByDesc('id') as $key => $comment)
-                        <tr>
-                            <td>{{$key}}</td>
-                            <td>{{$comment->user->name . ' ' . $comment->user->last_name}}</td>
-                            <td>{{$comment->created_at}}</td>
-                            <td>{{$comment->product->translate(session('locale'))->name}}</td>
-                            <td>{{$comment->text}}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.box-body -->
         </div>
-        <!-- /.box -->
+        <div class="row">
+            <table class="table table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Comment Text</th>
+                </tr>
+                </thead>
+                <tbody>
+                @php($i = 0)
+                @foreach($comments->sortByDesc('id') as $comment)
+                    <tr>
+
+                        <td>{{$comment->user->name . ' ' . $comment->user->last_nam}}</td>
+                        <td>{{$comment->created_at}}</td>
+                        <td>{{$comment->product->translate(session('locale'))->name}}</td>
+                        <td>{{$comment->text}}</td>
+                        <td>
+                            <button class="btn  btn-danger iconDelete" data-toggle="modal" data-status="cat_{{$i}}"
+                                    data-target="#modalDelete">
+                                <i class="fa fa-trash"></i>
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    @php($i++)
+                @endforeach
+
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 @endsection
