@@ -596,11 +596,12 @@ class AdminController extends Controller
 
     }
 
-    public function comments(){
-        $comment = Reviews::get();
+    public function settings(){
 
-        return view('vendor.adminlte.commentsPage', [
-            'comment' => $comment
+        $admin = User::where('rol',1)->first();
+
+        return view('vendor.adminlte.settings', [
+            'admin' => $admin
         ]);
     }
 

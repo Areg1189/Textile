@@ -26,24 +26,23 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-comment-o" aria-hidden="true"></i>
                         <span class="label label-success">
-                            {{ count($newComments->where('published' , 0))?
-                            count($newComments->where('published' , 0)) : ''}}
+                            {{ count($newComments->where('new' , 0))?
+                            count($newComments->where('new' , 0)) : ''}}
                         </span>
                     </a>
-                    @if(count($newComments->where('published' , 0)))
+
+                    @if(count($newComments->where('new', 0)))
                         <ul class="dropdown-menu">
                             <li class="header">
-                                You have {{ count($newComments->where('published' , 0))}} comments
+                                You have {{ count($newComments->where('new' , 0))}} comments
                             </li>
-                            @foreach($newComments
-                            ->where('published' , 0)
-                            ->sortByDesc('id')
-                            ->take(3) as $comment)
+
+                            @foreach($newComments ->where('new' , 0)->sortByDesc('id')->take(3) as $comment)
                                 <li>
                                     <!-- inner menu: contains the comment -->
                                     <ul class="menu">
                                         <li><!-- start message -->
-                                            <a href="   {{route('adminGetComment', ['id' => $comment->id])}}">
+                                            <a href="{{route('adminGetComment', ['id' => $comment->product->id])}}">
                                                 <div class="pull-left">
                                                     <img
                                                             src="{{asset('images/products/'.$comment
@@ -60,8 +59,11 @@
                                                 </div>
 
                                                 <h4>
-                                                    Product {{$comment->product->translate(session('locale'))->name}}
 
+                                                    Product {{$comment->product->translate(session('locale'))->name}}
+                                                    @if($comment->new == 0)
+                                                        <span class="pull-right label label-success">New</span>
+                                                    @endif
                                                 </h4>
                                                 <!-- The comment -->
 
@@ -72,9 +74,11 @@
                                     </ul><!-- /.menu -->
                                 </li>
                             @endforeach
+
                             <li class="footer"><a href="{{route('adminGetComment', ['id' => 'all'])}}">See All</a></li>
                         </ul>
                     @endif
+
                 </li><!-- /.comment-menu -->
 
 
@@ -216,7 +220,7 @@
                         <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ url('/settings') }}"
+                                    <a href="{{route('settings')}}"
                                        class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
                                 </div>
                                 <div class="pull-right">

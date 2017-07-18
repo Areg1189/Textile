@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $categories = Category::get();
         $social_icons = Social_icons::get();
         $subscribers_count = Subscriber::get();
-        $newComments = Reviews::get();
+        $newComments = Reviews::orderBy('id','desc')->get();
         $users_count = User::get();
 
 

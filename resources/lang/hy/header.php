@@ -7,4 +7,5 @@ return [
     'profile' => 'Անձնական էջ',
     'sign_out' => 'Ելք',
     'subscribe' => 'Բաժանորդագրվել',
+    'search' => 'Որոնել..'
 ];

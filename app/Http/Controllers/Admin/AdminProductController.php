@@ -274,17 +274,58 @@ class AdminProductController extends Controller
 
     }
 
-    public function comment(Request $request){
-        if (!$request->id){
+    public function comment(Request $request)
+    {
+        if (!$request->id) {
             return abort(404);
-        }else{
-            if ($request->id == 'all'){
-//               Reviews::where('published', 0)->update(['published' => 1]);
+        } else {
+            if ($request->id == 'all') {
                 $comments = Reviews::where('published', 0)->get();
                 return view('vendor.adminlte.comments', [
-                    'comments' => $comments
+                    'comments' => $comments,
                 ]);
+            } else {
+
+                $all_comments = Reviews::where('new', '!=', 1)->where('product_id',$request->id)->update([
+                    'new' => 1
+                ]);
+
+
+                $comments = Reviews::where('product_id', $request->id)->get();
+                $product = Product::where('id',$request->id)->first();
+
+                return view('vendor.adminlte.commentsPage', [
+                    'comments' => $comments,
+                    'product' => $product
+
+                ]);
+
             }
         }
+    }
+
+    public function unpublish_comment(Request $request){
+        $validator = Validator::make($request->all(),[
+            'prod' => 'integer|numeric|min:1'
+        ]);
+        if ($validator->fails()){
+            return abort(404);
+        }
+
+        $comments = Reviews::where('id', $request->prod)->update(['published' => $request->public]);
+
+        if ($comments){
+            return 1;
+        }
+
+
+
+        return back();
+    }
+
+    public function deleteComment(Request $request){
+        $com = Reviews::where('id', $request->prod)->firstOrFail();
+        $com->delete();
+        return 1;
     }
 }

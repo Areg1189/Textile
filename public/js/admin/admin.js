@@ -67,7 +67,6 @@ $(document).on('click', '.iconDelete', function () {
     prod = $('[data-target="' + parent + '"]').data('prod');
     key = $('[data-target="' + parent + '"]').data('key');
     data = {prod: prod, key: key, _token: token};
-
 });
 
 $(document).on('click', '.modalDelete', function () {
@@ -633,7 +632,6 @@ $('#selectAll').click(function (e) {
     $('td input:checkbox', table).prop('checked', this.checked);
 });
 
-
 $("#btn_").on('click', function () {
     emails = [];
 
@@ -660,18 +658,55 @@ $(document).on('submit', '.form_subscribers', function (e) {
             if (e['success']) {
                 klass_alert = 'success';
                 var alert_content = e['success'];
-            }else {
+            } else {
                 klass_alert = 'danger';
                 var alert_content = e[0];
             }
             $('#sendSubscribers').modal('hide');
             $(".content").prepend('' +
-                '<div class="alert alert-'+klass_alert+' alert-dismissable fade in">' +
+                '<div class="alert alert-' + klass_alert + ' alert-dismissable fade in">' +
                 '<a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-                '<strong>'+alert_content+'</strong>' +
+                '<strong>' + alert_content + '</strong>' +
                 '</div>');
 
 
         }
     })
+});
+
+
+/* *********** COMMENTS **************** */
+$(document).on('click', '.unpublish_comment', function () {
+    btn = $(this);
+    btn.attr('disabled',true);
+    parent = $(this).data('status');
+    public = false;
+    if ($(this).val() == 1) {
+        public = 0
+    } else {
+        public = 1
+    }
+
+    url = $('[data-target="' + parent + '"]').data('href_edit');
+    prod = $('[data-target="' + parent + '"]').data('prod');
+    data = {prod: prod, public: public, _token: token};
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: data,
+        success: function (e) {
+            if (e == 1) {
+                if (public == 1) {
+                    btn.text('Unpublish');
+                    btn.val(1)
+                } else {
+                    btn.text('Publish');
+                    btn.val(0)
+                }
+                btn.attr('disabled',false);
+            }
+
+        }
+    });
 });

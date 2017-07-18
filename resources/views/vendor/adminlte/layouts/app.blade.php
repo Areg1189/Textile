@@ -88,6 +88,7 @@ desired effect
     <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script src="{{asset('js/admin/jquery-ui.js')}}"></script>
+    <script src="{{asset('js/admin/settings.js')}}"></script>
     <script src="{{asset('js/admin/admin.js')}}"></script>
 @show
 </html>

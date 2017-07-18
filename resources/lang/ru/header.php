@@ -7,4 +7,5 @@ return [
     'profile' => 'Профиль',
     'sign_out' => 'Быход',
     'subscribe' => 'Подписаться',
+    'search' => 'Поиск..'
 ];

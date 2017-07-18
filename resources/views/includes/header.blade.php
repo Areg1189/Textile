@@ -41,7 +41,8 @@
                                                                     <a href="{{route('getCategory', [
                                                                     'cat' => $subCategory->link])}}">
                                                                         {{$subCategory->translate(session('locale'))->name}}
-                                                                        <span> ({{count($subCategory->products)}})</span>
+                                                                        <span> ({{count($subCategory->products)}}
+                                                                            )</span>
                                                                     </a>
                                                                 </li>
                                                             @endforeach
@@ -114,7 +115,7 @@
                                     <div id="custom-search-input">
                                         <div class="input-group col-md-12">
                                             <input type="text" class="form-control input-lg"
-                                                   placeholder="Search here..."/>
+                                                   placeholder="@lang('header.search')"/>
                                             <span class="input-group-btn">
                                                         <button class="button button--aylen btn btn-lg" type="button">
                                                             <i class="fa fa-search"></i>

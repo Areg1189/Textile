@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
             $table->integer('product_id')->usignet();
             $table->text('text');
             $table->boolean('published')->default(0);
+            $table->boolean('new')->default(0);
             $table->timestamps();
         });
     }

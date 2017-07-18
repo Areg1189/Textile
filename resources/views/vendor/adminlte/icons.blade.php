@@ -18,7 +18,7 @@
         @foreach($icons->sortBy('id') as $icon)
             <div class="form-group">
                 <label class="col-sm-1">
-                    <a data-tooltip="tooltip" data-placement="top" href="#">
+                    <a class="pull-right" data-tooltip="tooltip" data-placement="top" href="#">
                         <i class="{{$icon->icon_code}}"></i>
                     </a>
                 </label>
@@ -32,8 +32,8 @@
 
         {{csrf_field()}}
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Submit</button>
+            <div class="col-sm-offset-7 col-sm-2">
+                <button type="submit" class="btn btn-info">Save</button>
             </div>
         </div>
     </form>

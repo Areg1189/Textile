@@ -9,7 +9,6 @@
 
 .info_block {
     background: #bd9b8c;
-
 }
 
 .spanClose {
@@ -107,6 +106,7 @@
 .icons_form{
     margin-top: 30px;
 }
+
 .myModal-content {
     position: fixed; /* Stay in place */
     background-color: #fefefe;
@@ -126,4 +126,8 @@
 
 #btn_{
     margin-bottom: 10px;
+}
+
+.mb_20{
+    margin-bottom: 20px;
 }

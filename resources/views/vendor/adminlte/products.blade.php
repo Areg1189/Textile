@@ -42,6 +42,10 @@
                              class="img-rounded"
                              alt="{{$product->translate('en')->name}}"
                              width="100%">
+                        <a href="{{route('adminGetComment',['id'=>$product->id])}}">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                        </a>
+
                     </div>
                 </td>
                 <td>

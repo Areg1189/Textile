@@ -50,18 +50,18 @@
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Users</span>
                     @if(count($users_count->where('new', 0 ))!= 0)
-                        <span class="label label-danger">New {{count($users_count->where('new', 0 ))}}</span>
+                        <span class="pull-right label label-danger">New {{count($users_count->where('new', 0 ))}}</span>
                     @endif
-                    <span class="label label-success">All {{count($users_count)}}</span>
+                    <span class="pull-right label label-success">All {{count($users_count)}}</span>
                 </a></li>
 
             <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Subscribers</span>
                     @if(count($subscriber_count->where('new', 0 ))!= 0)
-                        <span class="label label-danger">New {{count($subscriber_count->where('new', 0 ))}}</span>
+                        <span class="pull-right label label-danger">New {{count($subscriber_count->where('new', 0 ))}}</span>
                     @endif
-                    <span class="label label-success">All {{count($subscriber_count)}}</span>
+                    <span class="pull-right label label-success">All {{count($subscriber_count)}}</span>
                 </a></li>
 
             <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
@@ -128,9 +128,6 @@
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Social Icons</span></a></li>
 
-            <li class="{{Request::segment(2) == 'comments' ? 'active' : ''}}"><a href="{{route('comments')}}"><i
-                            class="fa fa-comment-o" aria-hidden="true"></i>
-                    <span>Comments</span></a></li>
 
         </ul><!-- /.sidebar-menu -->
     </section>
