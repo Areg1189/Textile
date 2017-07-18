@@ -128,6 +128,10 @@
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Social Icons</span></a></li>
 
+            <li class="{{Request::segment(2) == 'comments' ? 'active' : ''}}"><a href="{{route('comments')}}"><i
+                            class="fa fa-comment-o" aria-hidden="true"></i>
+                    <span>Comments</span></a></li>
+
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

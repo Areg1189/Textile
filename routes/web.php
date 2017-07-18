@@ -167,6 +167,7 @@ Route::group(
             //========= COMMENT  ======= //
 
             Route::get('comment/{id}', 'Admin\AdminProductController@comment')->name('adminGetComment');
+            Route::get('comments', 'Admin\AdminController@comments')->name('comments');
 
         });
 

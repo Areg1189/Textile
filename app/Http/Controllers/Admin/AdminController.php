@@ -6,6 +6,7 @@ use App\Models\About_faq;
 use App\Models\About_sld;
 use App\Models\About_text;
 use App\Models\Employee_site;
+use App\Models\Reviews;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -593,6 +594,14 @@ class AdminController extends Controller
 
         }
 
+    }
+
+    public function comments(){
+        $comment = Reviews::get();
+
+        return view('vendor.adminlte.commentsPage', [
+            'comment' => $comment
+        ]);
     }
 
 }
