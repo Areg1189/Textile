@@ -6,4 +6,5 @@ return [
     'contact' => 'Կապ',
     'profile' => 'Անձնական էջ',
     'sign_out' => 'Ելք',
+    'subscribe' => 'Բաժանորդագրվել',
 ];

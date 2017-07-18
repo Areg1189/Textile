@@ -6,4 +6,5 @@ return [
     'contact' => 'Contact',
     'profile' => 'Profile',
     'sign_out' => 'Sign Out',
+    'subscribe' => 'Subscribe Now',
 ];

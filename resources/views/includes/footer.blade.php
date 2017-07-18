@@ -105,9 +105,9 @@
                         <p>Subscribe our newsletter for discount and coupon codes.</p>
                         <form method="post" action="{{route('subscribe')}}">
                             {{csrf_field()}}
-                            <input type="text" name="name" class="form-control input-lg" placeholder="Your name" required/>
-                            <input type="email" name="email" class="form-control input-lg" placeholder="Email" required/>
-                            <button type="submit" class="button button--aylen btn">Subscribe Now</button>
+                            <input type="text" name="name" class="form-control input-lg" placeholder="@lang('contacts.name')" required/>
+                            <input type="email" name="email" class="form-control input-lg" placeholder="@lang('contacts.email')" required/>
+                            <button type="submit" class="button button--aylen btn">@lang('header.subscribe')</button>
                         </form>
                     </div><!-- end newsletter -->
 
