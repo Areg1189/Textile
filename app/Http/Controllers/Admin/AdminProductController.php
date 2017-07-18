@@ -58,6 +58,17 @@ class AdminProductController extends Controller
         }
         $link = mb_strtolower($request->en_name);
         $link = str_replace(' ', '-', $link);
+        while (true) {
+            $a['link'] = $link;
+            $validator = Validator::make($a, [
+                'link' => 'required|unique:products'
+            ]);
+            if ($validator->fails()) {
+                $link = $link . rand(0, 99);
+            } else {
+                break;
+            }
+        }
 
         $product = Product::create([
             'code' => time() . $request->en_name,
@@ -69,12 +80,16 @@ class AdminProductController extends Controller
             'slider_sale' => $request->saleSlider,
             'hy' => [
                 'name' => $request->hy_name,
+                'description' => $request->hy_description,
+
             ],
             'en' => [
                 'name' => $request->en_name,
+                'description' => $request->en_description,
             ],
             'ru' => [
                 'name' => $request->ru_name,
+                'description' => $request->ru_description,
             ]
         ]);
         if ($request->color[0]) {
@@ -106,14 +121,22 @@ class AdminProductController extends Controller
             }
 
         };
-
-        if ($request->filter_checkbox[0]) {
-            for ($i = 0; $i < count($request->filter_checkbox); $i++) {
-
+        if ($request->filter_checkbox) {
+            foreach ($request->filter_checkbox as $k => $v) {
                 ProFilter::create([
-                    'filter_value' => $request->filter_checkbox[$i],
-                    'price' => $request->price[$i],
-                    'sale' => $request->sale[$i],
+                    'filter_value' => $request->filter_checkbox[$k],
+                    'price' => $request->price[$k],
+                    'plusMinus' => $request->plusMinus[$k],
+                    'prod_id' => $product->id,
+                ]);
+            }
+        }
+        if ($request->filter_checkbox_value) {
+            foreach ($request->filter_checkbox as $k => $v) {
+                ProFilter::create([
+                    'filter_value' => $request->filter_checkbox_value[$k],
+                    'price' => $request->price_value[$k],
+                    'plusMinus' => $request->plusMinus_value[$k],
                     'prod_id' => $product->id,
                 ]);
             }
@@ -173,9 +196,6 @@ class AdminProductController extends Controller
         }
 
 
-        $link = mb_strtolower($request->en_name);
-        $link = str_replace(' ', '-', $link);
-        $product->link = $link;
         $product->sale = $request->firstSale;
         $product->price = $request->firstPrice;
         $product->slider_new = $request->new;
@@ -236,18 +256,29 @@ class AdminProductController extends Controller
 
         ProFilter::where('prod_id', $product->id)->delete();
 
-        if ($request->filter_checkbox[0]) {
 
-            for ($i = 0; $i < count($request->filter_checkbox); $i++) {
-
+        if ($request->filter_checkbox) {
+            foreach ($request->filter_checkbox as $k => $v) {
                 ProFilter::create([
-                    'filter_value' => $request->filter_checkbox[$i],
-                    'price' => $request->price[$i],
-                    'sale' => $request->sale[$i],
+                    'filter_value' => $request->filter_checkbox[$k],
+                    'price' => $request->price[$k],
+                    'plusMinus' => $request->plusMinus[$k],
                     'prod_id' => $product->id,
                 ]);
             }
         }
+        if ($request->filter_checkbox_value) {
+            foreach ($request->filter_checkbox as $k => $v) {
+                ProFilter::create([
+                    'filter_value' => $request->filter_checkbox_value[$k],
+                    'price' => $request->price_value[$k],
+                    'plusMinus' => $request->plusMinus_value[$k],
+                    'prod_id' => $product->id,
+                ]);
+            }
+        }
+
+
         if ($product) {
             return back()->with('newCat', $product->id);
         }
@@ -274,11 +305,12 @@ class AdminProductController extends Controller
 
     }
 
-    public function comment(Request $request){
-        if (!$request->id){
+    public function comment(Request $request)
+    {
+        if (!$request->id) {
             return abort(404);
-        }else{
-            if ($request->id == 'all'){
+        } else {
+            if ($request->id == 'all') {
 //               Reviews::where('published', 0)->update(['published' => 1]);
                 $comments = Reviews::where('published', 0)->get();
                 return view('vendor.adminlte.comments', [

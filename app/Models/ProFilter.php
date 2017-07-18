@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProFilter extends Model
 {
     protected $fillable = [
-        'filter_value', 'price', 'prod_id', 'sale',
+        'filter_value', 'price', 'prod_id', 'plusMinus',
     ];
 
 }

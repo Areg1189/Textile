@@ -211,8 +211,14 @@
                             </div>
 
 
+
+
+
+
+
                             <div class="row">
                                 @php($i = 0)
+                                @php($j = 0)
                                 @foreach($filters->sortBy('id') as $filter)
                                     <div class="col-sm-4">
                                         <div class="panel panel-danger">
@@ -225,7 +231,42 @@
                                             </div>
                                             <div class="panel-body text-center">
                                                 @foreach($filter->subs->sortBy('id') as  $subs)
-                                                    @if(count($subs->values) > 0)
+                                                    @if(count($subs->values) < 1)
+                                                        <div class="row">
+                                                            <p>
+                                                                <input type="checkbox"
+                                                                       class="filter_checkbox"
+                                                                       name="filter_checkbox[]"
+                                                                       value="{{$subs->code}}"
+                                                                       data-target="filter_{{$i}}">
+                                                                {{$subs->translate(session('locale'))->name}}</p>
+                                                            <div class="col-sm-12">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <select name="plusMinus[]"
+                                                                                class="form-control"
+                                                                                data-status_sale="filter_{{$i}}"
+                                                                                disabled>
+                                                                            <option value="+">+</option>
+                                                                            <option value="-">-</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group ">
+                                                                            <input type="number"
+                                                                                   class="form-control filter_price"
+                                                                                   name="price[]"
+                                                                                   placeholder="Price"
+                                                                                   data-status="filter_{{$i}}"
+                                                                                   disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+
+                                                    @else
                                                         <div class="panel panel-danger">
                                                             <div class="panel-body text-center">
                                                                 <div>
@@ -233,76 +274,46 @@
                                                                 </div>
 
                                                                 @foreach($subs->values  as $value)
+                                                                    <div class="row">
+                                                                        <div class="col-sm-11 col-sm-offset-1">
 
-                                                                    <div class="col-sm-11 col-sm-offset-1">
-                                                                        <div class="form-group">
-                                                                            <h3>
+                                                                            <p>
                                                                                 <input type="checkbox"
                                                                                        class="filter_checkbox"
-                                                                                       name="filter_checkbox[]"
-                                                                                       data-target="filter_{{$i}}">
+                                                                                       name="filter_checkbox_value[{{$j}}]"
+                                                                                       data-target="filter_{{$i.$j}}"
+                                                                                       value="{{$value->code}}">
                                                                                 {{$value->translate(session('locale'))->name}}
-                                                                            </h3>
+                                                                            </p>
 
-                                                                            <div class="">
+                                                                            <div class="row">
+                                                                                <div class="col-sm-6">
+                                                                                    <select name="plusMinus_value[{{$j}}]"
+                                                                                            class="form-control"
+                                                                                            data-status_sale="filter_{{$i.$j}}"
+                                                                                            disabled>
+                                                                                        <option value="+">+</option>
+                                                                                        <option value="-">-</option>
+                                                                                    </select>
+                                                                                </div>
                                                                                 <div class="col-sm-6">
                                                                                     <input type="number"
                                                                                            class="form-control filter_price"
-                                                                                           name="price[]"
+                                                                                           name="price_value[{{$j}}]"
                                                                                            placeholder="Price *"
-                                                                                           data-status="filter_{{$i}}"
-                                                                                           disabled>
-                                                                                </div>
-                                                                                <div class="col-sm-6">
-                                                                                    <input type="number"
-                                                                                           class="form-control"
-                                                                                           name="sale[]"
-                                                                                           placeholder="Sale"
-                                                                                           data-status_sale="filter_{{$i}}"
+                                                                                           data-status="filter_{{$i.$j}}"
                                                                                            disabled>
                                                                                 </div>
                                                                             </div>
+                                                                            <hr>
                                                                         </div>
                                                                     </div>
-                                                                    @php($i++)
+                                                                    @php($j++)
                                                                 @endforeach
                                                             </div>
                                                         </div>
-
-                                                    @else
-                                                        <div class="form-group ">
-
-                                                            <h3>
-                                                                <input type="checkbox"
-                                                                       class="filter_checkbox"
-                                                                       name="filter_checkbox[]"
-                                                                       value="{{$subs->code}}"
-                                                                       data-target="filter_{{$i}}">
-                                                                {{$subs->translate(session('locale'))->name}}</h3>
-                                                            <div class="">
-                                                                <div class="col-sm-6">
-                                                                    <input type="number"
-                                                                           class="form-control filter_price"
-                                                                           name="price[]"
-                                                                           placeholder="Price"
-                                                                           data-status="filter_{{$i}}"
-                                                                           disabled>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <input type="number"
-                                                                           class="form-control"
-                                                                           name="sale[]"
-                                                                           placeholder="Sale"
-                                                                           data-status_sale="filter_{{$i}}"
-                                                                           disabled>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                     @endif
                                                     @php($i++)
-                                                    <br/>
-                                                    <hr/>
                                                 @endforeach
                                             </div>
                                         </div>

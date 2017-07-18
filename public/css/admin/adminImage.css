@@ -109,26 +109,3 @@ input#images, input#imagesUp, input#img {display: none;}
 .radio .cr .cr-icon {
     margin-left: 0.04em;
 }
-
-.checkbox label input[type="checkbox"],
-.radio label input[type="radio"] {
-    display: none;
-}
-
-.checkbox label input[type="checkbox"] + .cr > .cr-icon,
-.radio label input[type="radio"] + .cr > .cr-icon {
-    transform: scale(3) rotateZ(-20deg);
-    opacity: 0;
-    transition: all .3s ease-in;
-}
-
-.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
-.radio label input[type="radio"]:checked + .cr > .cr-icon {
-    transform: scale(1) rotateZ(0deg);
-    opacity: 1;
-}
-
-.checkbox label input[type="checkbox"]:disabled + .cr,
-.radio label input[type="radio"]:disabled + .cr {
-    opacity: .5;
-}

@@ -78,8 +78,11 @@
 
 
                                 <div class="shopmeta">
-                                    <span><strong>Category:</strong> <a href="#">Furniture Supplies Foods</a></span>
-                                    <span><strong>Tags:</strong> <a href="#">Furniture</a>, <a href="#">Art</a></span>
+                                    <span><strong>@lang('product.category'):</strong>
+                                        <a href="{{route('getCategory', ['cat' => $product->parent->link])}}">
+                                            {{$product->parent->translate(session('locale'))->name}}
+                                        </a>
+                                    </span>
                                 </div><!-- end shopmeta -->
 
                             </div><!-- end desc -->
