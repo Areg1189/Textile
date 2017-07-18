@@ -252,5 +252,8 @@ a.btn_red {
     border-radius: 10px;
     padding: 10px;
     margin: 10px;
-
+}
+.filter-loader-container{
+    text-align: center;
+    display: none;
 }

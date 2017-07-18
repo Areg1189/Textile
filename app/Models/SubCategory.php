@@ -21,7 +21,7 @@ class SubCategory extends Model
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
     public function filters(){
-        return $this->hasMany('App\Models\CatFilter', 'cat_id', 'id');
+        return $this->hasMany('App\Models\FilterCategory', 'cat_id', 'id');
     }
 
     public function products(){

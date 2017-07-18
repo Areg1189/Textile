@@ -99,6 +99,57 @@
                 </div><!-- end content -->
 
                 <div id="sidebar" class="col-md-3 col-sm-12">
+
+                    <div class="widget clearfix">
+                        <div >
+                            <div class="filter-loader-container">
+                                <img src="{{asset('images/load.gif')}}" alt="" >
+                            </div>
+                        </div>
+                    @foreach($subCategory->filters as $filter)
+
+                            <div class="widget-title">
+                                <h4>
+                                    {{$filter->translate(session('locale'))->name}}
+                                </h4>
+                                <hr>
+                            </div>
+
+                            <div class="menu-widget">
+                                @foreach($filter->subs as $sub)
+                                    @if(count($sub->values) < 1)
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="products_filter" name="filter[]" value="{{$sub->code}}">
+                                                {{$sub->translate(session('locale'))->name}}
+                                            </label>
+                                        </div>
+                                    @else
+                                        @foreach($sub->values as $value)
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h4>
+                                                        {{$sub->translate(session('locale'))->name}}
+                                                    </h4>
+                                                </div>
+                                                <div class="col-sm-11 col-sm-offset-1">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  class="products_filter" name="filter[]" value="{{$value->code}}">
+                                                            {{$value->translate(session('locale'))->name}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            </div>
+                            <!-- end menu-widget -->
+
+                    @endforeach
+                    </div>
                     <div class="widget clearfix">
                         <div class="widget-title">
                             <h4>
@@ -126,30 +177,6 @@
                         <!-- end menu-widget -->
                     </div>
                     <!-- end widget -->
-
-                {{--<div class="widget clearfix">--}}
-                {{--<div class="about-widget">--}}
-                {{--<a href="shop-single.html" class='heart'>--}}
-                {{--<div class="post-media">--}}
-                {{--<img src="upload/shop_01.jpg" alt="" class="img-responsive">--}}
-                {{--</div>--}}
-
-
-                {{--<div class="about-desc">--}}
-                {{--<h4>--}}
-                {{--{{$product->translate(session('locale'))->name}}--}}
-                {{--</h4>--}}
-                {{--<del>100 000 AMD</del>--}}
-                {{--<small>80 000 AMD</small>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-
-                {{--</div>--}}
-                {{--<!-- end about-widget -->--}}
-                {{--</div>--}}
-                <!-- end widget -->
-
-
                     <div class="widget clearfix">
                         <div class="widget-title">
                             <h4>@lang('product.other_prod')</h4>
@@ -197,4 +224,13 @@
         </div><!-- end container -->
     </section><!-- end section -->
 
+
 @endsection
+
+@section('script')
+    @parent
+    <script type="text/javascript" src="{{asset('js/products.js')}}"></script>
+
+
+@endsection
+
