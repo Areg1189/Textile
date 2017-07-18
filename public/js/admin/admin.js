@@ -620,6 +620,7 @@ $(document).on('click', '.delete_filter_find', function () {
     var data = $(this).data('dell_button');
     $('[data-dell="' + data + '"]').fadeOut().remove();
 });
+
 $(document).on('click', '.delete_parent_filter', function () {
     var deleteFilter = $(this).data('target_parent_filter');
     $('[data-filter="' + deleteFilter + '"]').fadeOut().remove();

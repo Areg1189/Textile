@@ -11,4 +11,5 @@ return [
     'feedback' => 'Leave a Feedback',
     'comment' => 'Comment',
     'message_successful' => 'Admin@ khastati ktesneq <a href="#0" class="again_comment"> krkin grel</a>',
+    'category' => 'Category',
 ];

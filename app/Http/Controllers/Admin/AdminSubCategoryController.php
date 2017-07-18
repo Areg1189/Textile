@@ -50,6 +50,7 @@ class AdminSubCategoryController extends Controller
             ]);
             if ($validator->fails()) {
                 $link = $link . rand(0, 99);
+                break;
             } else {
                 break;
             }
@@ -80,6 +81,8 @@ class AdminSubCategoryController extends Controller
             $imageNamegeneral = '1' . time() . '.jpg';
             file_put_contents('images/subCategory/' . $imageNamegeneral, $data);
         }
+
+
 
         $newCat = SubCategory::create([
             'code' => time() . $request->en_name,
