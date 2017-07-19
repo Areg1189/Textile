@@ -51,10 +51,8 @@ Route::group(
 
         Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
-        //========= SEARCJ  ======= //
-        Route::get('search', 'HomeController@search')->name('search');
-
-
+        //========= SEARCH  ======= //
+        Route::post('search', 'HomeController@search')->name('search');
 
         Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
         Route::get('repeat_confirm', 'Auth\AdvancedReg@getRepeat')->name('getRepeat');
