@@ -73,11 +73,27 @@
                         {{--<li><a href="blog.html">Blog</a></li>--}}
                         <li><a href="{{route('contactus')}}">@lang('header.contact')</a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right searchandbag">
 
-                        <li class="hidden-sm hidden-xs"><a href="shop-.html" data-tooltip="tooltip"
-                                                           data-placement="bottom" title="FOLLOW"><i
-                                        class="fa fa-instagram"></i></a></li>
+                    <ul class="nav navbar-nav navbar-right searchandbag">
+                        <li class="dropdown hasmenu shopcartmenu">
+                            <a href="#" class="dropdown-toggle cart" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                <i class="fa fa-chain-broken"></i>
+                            </a>
+                            <ul class="dropdown-menu start-right" role="menu">
+                                @foreach($social_icons as $icons)
+                                    @if($icons->link)
+                                        <li class="facebook pad_3 pull-left">
+                                            <a target="_blank" href="{{$icons->link}}">
+                                                <i class="{{$icons->icon_code}}"></i>
+                                            </a>
+                                        </li>
+
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </li>
+
                         <li class="dropdown hasmenu shopcartmenu">
                             <a href="#" class="dropdown-toggle cart" data-toggle="dropdown" role="button"
                                aria-expanded="false"><span class="countbadge hidden-xs">2</span> <i

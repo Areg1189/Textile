@@ -254,10 +254,8 @@ a.btn_red {
     margin: 10px;
 }
 
-.search_text{
-    padding: 30px 0 !important;
-}
+.search_text{padding: 30px 0 !important;  }
 
-.heading_margin{
-    margin: 35px 0px;
-}
+.heading_margin{margin: 35px 0px;}
+
+.pad_3{padding: 3px !important;}
