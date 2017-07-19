@@ -36,7 +36,6 @@ class HomeController extends Controller
         ]);
     }
 
-
     public function about(){
         $employees = Employee::get();
         $about_text = About_text::first();
@@ -54,7 +53,6 @@ class HomeController extends Controller
             'about_slider' => $about_slider,
         ]);
     }
-
 
     public function contactus(){
         return view('contactus');
@@ -86,7 +84,6 @@ class HomeController extends Controller
         }
     }
 
-
     public function subscribe(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -109,7 +106,6 @@ class HomeController extends Controller
 
         return back()->with('error', 'You are already subscribed!');
     }
-
 
     public function search(Request $request){
 

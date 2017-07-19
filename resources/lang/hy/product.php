@@ -7,9 +7,10 @@ return [
     'related' => 'Նմանատիպ Ապրանքներ',
     'description' => 'Նկարագրություն',
     'reviews' => 'Կարծիքներ',
-    'register_reviews' => 'Please register if you want to leave a comment',
+    'register_reviews' => 'Մեկնաբանություն գրելու համար մուտք գործեք անձնական էջ կամ գրանցվեք',
     'feedback' => 'Թողնել կարծիք',
     'comment' => 'Մեկնաբանություն',
     'message_successful' => 'Admin@ khastati ktesneq <a href="#0" class="again_comment"> krkin grel</a>',
     'category' => 'Կատեգորիա',
+    'see_also' => 'Դիտել նաև..',
 ];

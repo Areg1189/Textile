@@ -37,10 +37,6 @@
                             <h4 class="heading_margin">See also..</h4>
                         </div>
 
-                        {{--<div class="row search_text">--}}
-                            {{----}}
-                        {{--</div>--}}
-
                         <div class="row">
                             @foreach($rnd as $product)
                                 <div class="col-md-4 col-sm-6 col-xs-12">
