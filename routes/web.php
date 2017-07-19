@@ -48,6 +48,9 @@ Route::group(
 
         Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
+        //========= SEARCJ  ======= //
+        Route::get('search', 'HomeController@search')->name('search');
+
 
 
         Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
@@ -92,9 +95,7 @@ Route::group(
             Route::get('aboutus', 'Admin\AdminController@aboutus')->name('aboutus');
             Route::get('icons', 'Admin\AdminController@icons')->name('icons');
             Route::get('users', 'Admin\AdminController@getUsers')->name('getUsers');
-
             Route::get('settings', 'Admin\AdminController@settings')->name('settings');
-
             Route::post('messageUser', 'Admin\AdminController@messageUser')->name('messageUser');
             Route::post('change_icons', 'Admin\AdminController@change_icons')->name('change_icons');
 
@@ -167,7 +168,6 @@ Route::group(
             Route::get('comment/{id}', 'Admin\AdminProductController@comment')->name('adminGetComment');
             Route::get('unpublish_comment', 'Admin\AdminProductController@unpublish_comment')->name('unpublish_comment');
             Route::post('deleteComment', 'Admin\AdminProductController@deleteComment')->name('deleteComment');
-
         });
 
     });

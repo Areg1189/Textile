@@ -109,7 +109,15 @@ class HomeController extends Controller
     }
 
 
+    public function search(Request $request){
 
+        $res = Product::where('name', 'LIKE', '%' . $request->search . '%')->get()->paginate(9);
 
+        dd($res);
+
+        return view('searchResult',[
+            'res' => $res
+        ]);
+    }
 
 }

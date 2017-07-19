@@ -311,9 +311,7 @@ class AdminProductController extends Controller
             return abort(404);
         } else {
             if ($request->id == 'all') {
-        } else {
-            if ($request->id == 'all') {
-//               Reviews::where('published', 0)->update(['published' => 1]);
+
                 $comments = Reviews::where('published', 0)->get();
                 return view('vendor.adminlte.comments', [
                     'comments' => $comments,

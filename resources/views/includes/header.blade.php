@@ -114,10 +114,15 @@
                                 <li>
                                     <div id="custom-search-input">
                                         <div class="input-group col-md-12">
-                                            <input type="text" class="form-control input-lg"
+                                            <input id="searchArea" type="text" class="form-control input-lg"
                                                    placeholder="@lang('header.search')"/>
-                                            <span class="input-group-btn">
-                                                        <button class="button button--aylen btn btn-lg" type="button">
+                                            <span class="input-group-btn" >
+                                                        <button
+                                                                class="button button--aylen btn btn-lg"
+                                                                id="searchButton"
+                                                                type="button"
+                                                                data-result_page="{{route('search')}}"
+                                                        >
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </span>
