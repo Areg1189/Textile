@@ -60,7 +60,7 @@
                         </div><!-- end col -->
                         <div class="col-md-7 col-sm-7 col-xs-12">
                             <div class="shop-desc bgw">
-                                <h3>Custom Single Shop Item </h3>
+                                <h3>{{$product->translate(session('locale'))->name}} </h3>
                                 <small>$441.00</small>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
@@ -69,10 +69,30 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <p>Lorem iam nonummy nibh euismod tincidunt ut laoreet dolore Lorem ipsum dolor sit amet
-                                    orem iam nonummy nibh euismod tincidunt ut laoreet dolore Lorem ipsum dolor sit amet
-                                    nibh euismod tincidunt ut laoreet dolore Lorem ipsum dolor sit amet orem iam nonummy
-                                    nibh euismod tincidunt ut laoreet dolore Lorem ipsum dolor sit amet..</p>
+                                @foreach($product->parent->filters->chunk(2) as $chunk)
+                                    <div class="row">
+                                        @foreach($chunk as $filter)
+                                            <div class="col-sm-6">
+                                                <div class="form-group text-center">
+                                                    <label>
+                                                        {{$filter->translate(session('locale'))->name}}
+                                                    </label>
+                                                    <select class="form-control">
+                                                        <option>
+                                                            @lang('product.choose')
+                                                            {{$filter->translate(session('locale'))->name}}
+                                                             *
+                                                        </option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+
 
                                 <a href="#" class="button button--aylen btn">Add to Cart</a>
 

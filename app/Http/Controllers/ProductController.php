@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Reviews;
+use Illuminate\Support\Facades\View;
 
 class ProductController extends Controller
 {
@@ -65,28 +67,40 @@ class ProductController extends Controller
             'text' => $request->comment,
             'published' => 0,
         ]);
-        if ($review){
+        if ($review) {
             return response()->json(['success' => __('product.message_successful')]);
         }
     }
 
-    public function pstFilterProduct(Request $request){
-//        $validator = Validator::make($request->all(), [
-//            'filter' => 'required',
-//            'cat' => 'required',
-//        ]);
-//        if ($validator->fails()){
-//            return abort(404);
-//        }
+    public function pstFilterProduct(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'cat' => 'required',
+        ]);
+        if ($validator->fails()){
+            return abort(404);
+        }
         $cat = SubCategory::where('code', $request->cat)->firstOrFail();
-        $products = Product::where('parent_id', $cat->id)->where(function ($query) use ($request){
-            $query->whereHas('filters',function ($query) use ($request){
-                $query->whereIn('filter_value', $request->filter);
-            });
-        })->get();
-       if ($products){
+        if ($request->filter[0]){
+            $products = Product::where('parent_id', $cat->id)->where(function ($query) use ($request) {
+                $query->whereHas('filters', function ($query) use ($request) {
+                    $query->whereIn('filter_value', $request->filter);
+                });
+            })->orderBy('id', 'desc')->paginate(9);
+        }else{
+            $products = Product::where('parent_id', $cat->id)->orderBy('id', 'desc')->paginate(9);
+        }
+        if ($products->first()) {
+            return View::make('includes.productList', [
+                'products' => $products,
+            ]);
+       }else{
+            $products = Product::where('parent_id', $cat->id)->inRandomOrder()->limit(3)->get();
+            return View::make('includes.notProduct', [
+                'products' => $products,
+            ]);
+        }
 
-       }
     }
 
 

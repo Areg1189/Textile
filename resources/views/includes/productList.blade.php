@@ -1,5 +1,4 @@
 <div class="shop-list">
-
     @foreach($products->chunk(3) as $chunk)
         <div class="row">
             @foreach($chunk as $product)
@@ -54,6 +53,8 @@
         </div>
     @endforeach
 
+
+
 </div><!-- end row -->
 
 <div class="row">
@@ -63,3 +64,6 @@
         </nav>
     </div>
 </div>
+
+
+

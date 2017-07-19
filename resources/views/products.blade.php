@@ -101,11 +101,6 @@
                 <div id="sidebar" class="col-md-3 col-sm-12">
 
                     <div class="widget clearfix">
-                        <div>
-                            <div class="filter-loader-container">
-                                <img src="{{asset('images/load.gif')}}" alt="">
-                            </div>
-                        </div>
                         @php($i = 0)
                         @foreach($subCategory->filters as $filter)
 

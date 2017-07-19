@@ -133,8 +133,6 @@ class HomeController extends Controller
                 'rnd' => $rnd,
             ]);
         }
-
-
     }
 
 }
