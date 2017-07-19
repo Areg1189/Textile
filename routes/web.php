@@ -43,6 +43,9 @@ Route::group(
         Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
         Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
 
+//        =================  Product Filter Search ==================  //
+        Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
+
         //        =================  Comment  ================== //
         Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 
