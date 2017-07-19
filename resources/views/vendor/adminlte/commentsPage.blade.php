@@ -16,7 +16,7 @@
                 >
             </div>
             <div class="col-sm-8">
-                {{$product->translate(session('locale'))->description}}
+                {!! $product->translate(session('locale'))->description !!}
             </div>
         </div>
         <div class="row">

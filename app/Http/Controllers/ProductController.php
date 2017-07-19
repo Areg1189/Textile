@@ -70,5 +70,24 @@ class ProductController extends Controller
         }
     }
 
+    public function pstFilterProduct(Request $request){
+//        $validator = Validator::make($request->all(), [
+//            'filter' => 'required',
+//            'cat' => 'required',
+//        ]);
+//        if ($validator->fails()){
+//            return abort(404);
+//        }
+        $cat = SubCategory::where('code', $request->cat)->firstOrFail();
+        $products = Product::where('parent_id', $cat->id)->where(function ($query) use ($request){
+            $query->whereHas('filters',function ($query) use ($request){
+                $query->whereIn('filter_value', $request->filter);
+            });
+        })->get();
+       if ($products){
+
+       }
+    }
+
 
 }

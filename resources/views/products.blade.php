@@ -101,14 +101,17 @@
                 <div id="sidebar" class="col-md-3 col-sm-12">
 
                     <div class="widget clearfix">
-                        <div >
+                        <div>
                             <div class="filter-loader-container">
-                                <img src="{{asset('images/load.gif')}}" alt="" >
+                                <img src="{{asset('images/load.gif')}}" alt="">
                             </div>
                         </div>
-                    @foreach($subCategory->filters as $filter)
+                        @php($i = 0)
+                        @foreach($subCategory->filters as $filter)
 
-                            <div class="widget-title">
+                            <div class="widget-title {{$i == 0 ? 'filter_href' : ''}}"
+                                 data-href="{{$i == 0 ? route('pstFilterProduct') : ''}}"
+                                 data-cat="{{$i == 0 ? $subCategory->code : ''}}">
                                 <h4>
                                     {{$filter->translate(session('locale'))->name}}
                                 </h4>
@@ -120,7 +123,10 @@
                                     @if(count($sub->values) < 1)
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" class="products_filter" name="filter[]" value="{{$sub->code}}">
+                                                <input type="checkbox"
+                                                       class="products_filter"
+                                                       name="filter[]"
+                                                       value="{{$sub->code}}">
                                                 {{$sub->translate(session('locale'))->name}}
                                             </label>
                                         </div>
@@ -135,7 +141,8 @@
                                                 <div class="col-sm-11 col-sm-offset-1">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox"  class="products_filter" name="filter[]" value="{{$value->code}}">
+                                                            <input type="checkbox" class="products_filter"
+                                                                   name="filter[]" value="{{$value->code}}">
                                                             {{$value->translate(session('locale'))->name}}
                                                         </label>
                                                     </div>
@@ -147,8 +154,8 @@
                                 @endforeach
                             </div>
                             <!-- end menu-widget -->
-
-                    @endforeach
+                            @php($i++)
+                        @endforeach
                     </div>
                     <div class="widget clearfix">
                         <div class="widget-title">
