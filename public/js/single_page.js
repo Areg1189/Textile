@@ -49,3 +49,33 @@ $(document).on('click', '.again_comment', function () {
         deeplinking: false
     });
 })($);
+
+
+$('.product_filter').change(function () {
+   var value = $(this).val();
+    url = $(this).data('href');
+    prod = $(this).data('prod');
+   filter = [];
+   if (value){
+       $('.product_filter').each(function (i) {
+          if ($(this).val()){
+              filter.push($(this).val());
+          }
+       });
+       $.ajax({
+           url:url,
+           type:'post',
+           data:{filter:filter, prod:prod, _token:token},
+           success:function (e) {
+               if (e['price']){
+                   $('.prod_price').text(e['price'])
+               }
+           }
+       })
+   }
+});
+$('.prod_color').click(function () {
+    $('.prod_color_active').removeClass('prod_color_active').addClass('prod_color');
+    $(this).removeClass('prod_color').addClass('prod_color_active');
+
+});

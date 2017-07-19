@@ -128,16 +128,18 @@ class AdminProductController extends Controller
                     'price' => $request->price[$k],
                     'plusMinus' => $request->plusMinus[$k],
                     'prod_id' => $product->id,
+                    'filter_id' => $request->filter_name,
                 ]);
             }
         }
         if ($request->filter_checkbox_value) {
-            foreach ($request->filter_checkbox as $k => $v) {
+            foreach ($request->filter_checkbox_value as $k => $v) {
                 ProFilter::create([
                     'filter_value' => $request->filter_checkbox_value[$k],
                     'price' => $request->price_value[$k],
                     'plusMinus' => $request->plusMinus_value[$k],
                     'prod_id' => $product->id,
+                    'filter_id' => $request->filter_name,
                 ]);
             }
         }
@@ -264,16 +266,18 @@ class AdminProductController extends Controller
                     'price' => $request->price[$k],
                     'plusMinus' => $request->plusMinus[$k],
                     'prod_id' => $product->id,
+                    'filter_id' => $request->filter_name,
                 ]);
             }
         }
         if ($request->filter_checkbox_value) {
-            foreach ($request->filter_checkbox as $k => $v) {
+            foreach ($request->filter_checkbox_value as $k => $v) {
                 ProFilter::create([
                     'filter_value' => $request->filter_checkbox_value[$k],
                     'price' => $request->price_value[$k],
                     'plusMinus' => $request->plusMinus_value[$k],
                     'prod_id' => $product->id,
+                    'filter_id' => $request->filter_name,
                 ]);
             }
         }

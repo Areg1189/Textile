@@ -54,6 +54,9 @@ Route::group(
         //========= SEARCH  ======= //
         Route::post('search', 'HomeController@search')->name('search');
 
+        //========= Price Ajax  ======= //
+        Route::post('price', 'ProductController@priceAjax')->name('priceAjax');
+
         Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
         Route::get('repeat_confirm', 'Auth\AdvancedReg@getRepeat')->name('getRepeat');
         Route::post('login', 'Auth\MyAuthController@login')->name('login');

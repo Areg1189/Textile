@@ -2,6 +2,7 @@
 
 @section('head')
     @parent
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('css/prettyPhoto.css')}}">
 @endsection
 @section('content')
@@ -61,7 +62,7 @@
                         <div class="col-md-7 col-sm-7 col-xs-12">
                             <div class="shop-desc bgw">
                                 <h3>{{$product->translate(session('locale'))->name}} </h3>
-                                <small>$441.00</small>
+                                <small><span class="prod_price">{{$product->price}}</span> AMD</small>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -69,31 +70,71 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+                                <small>Color</small>
+                                <div class="row">
+                                    @foreach($product->colors as $color)
+
+                                        <div class="col-sm-1">
+                                        <span style="color: {{$color->color}};">
+                                            <i class="fa fa-square fa-2x prod_color"></i></span>
+                                        </div>
+
+                                    @endforeach
+                                </div>
+
+
                                 @foreach($product->parent->filters->chunk(2) as $chunk)
                                     <div class="row">
                                         @foreach($chunk as $filter)
+                                            @php
+                                                $filter_id = $product->filters->where('filter_id' , $filter->id)->first();
+                                            if(!$filter_id){
+                                                continue;
+                                            }
+                                            @endphp
                                             <div class="col-sm-6">
                                                 <div class="form-group text-center">
-                                                    <label>
-                                                        {{$filter->translate(session('locale'))->name}}
-                                                    </label>
-                                                    <select class="form-control">
-                                                        <option>
-                                                            @lang('product.choose')
-                                                            {{$filter->translate(session('locale'))->name}}
-                                                             *
+                                                    <select class="selectpicker product_filter"
+                                                            data-prod="{{$product->code}}"
+                                                            data-href="{{route('priceAjax')}}">
+                                                        <option value="" class="text-center">
+                                                            @lang('product.choose') {{$filter->translate(session('locale'))->name}}
+                                                            *
                                                         </option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
+                                                        @foreach($filter->subs->sortBy('id') as  $subs)
+                                                            @if(count($subs->values) < 1)
+                                                                @php
+                                                                    $filter_id = $product->filters->where('filter_value' , $subs->code)->first();
+                                                                if(!$filter_id){
+                                                                    continue;
+                                                                }
+                                                                @endphp
+                                                                <option value="{{$subs->code}}">
+                                                                    {{$subs->translate(session('locale'))->name}}
+                                                                </option>
+                                                            @else
+                                                                <optgroup
+                                                                        label="{{$subs->translate(session('locale'))->name}}">
+                                                                    @foreach($subs->values  as $value)
+                                                                        @php
+                                                                            $filter_id = $product->filters->where('filter_value' , $value->code)->first();
+                                                                        if(!$filter_id){
+                                                                            continue;
+                                                                        }
+                                                                        @endphp
+                                                                        <option value="{{$value->code}}">
+                                                                            {{$value->translate(session('locale'))->name}}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            @endif
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
                                         @endforeach
                                     </div>
                                 @endforeach
-
-
                                 <a href="#" class="button button--aylen btn">Add to Cart</a>
 
 
@@ -142,7 +183,7 @@
                                                                                 </strong>
                                                                                 <span class="text-muted">
                                                                                         <small class="text-muted">
-                                                                                           {{$product->created_at}}
+                                                                                           {{$product->created_at->diffForHumans()}}
                                                                                         </small>
                                                                                 </span>
                                                                                 <p>
@@ -210,7 +251,6 @@
                             <p>We showcase all our premium quality home decoration materials and furniture's!</p>
                             <hr>
                         </div><!-- end title -->
-
                         <div class="row">
                             @if(count($subCat->products) >3)
                                 @foreach($subCat->products->where('id', '!=', $product->id)->random(3) as $product)
@@ -399,6 +439,8 @@
     @parent
     <script src="{{asset('js/jquery.prettyPhoto.js')}}"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script type="text/javascript"
             src="{{asset('js/single_page.js')}}"></script>
+
 @endsection

@@ -103,5 +103,35 @@ class ProductController extends Controller
 
     }
 
+    public function priceAjax(Request $request){
+        $validator = Validator::make($request->all(),[
+            'filter' => 'required',
+            'filter.*' => 'required',
+            'prod' => 'required',
+        ]);
+        if ($validator->fails()){
+            return abort(404);
+        }
+        $product = Product::where('code',$request->prod)->firstOrFail();
+        $price = $product->price;
+        $sale = $product->sale;
+        foreach ($request->filter as $filter){
+            $prodFilter = $product->filters->where('filter_value', $filter)->first();
+            if ($prodFilter->plusMinus == '+'){
+                $price = $price + $prodFilter->price;
+            }else{
+                $price = $price - $prodFilter->price;
+            }
+        }
+        if ($sale){
+            if ($sale < 100){
+                $sale1 = $price/100;
+                $sale  = $sale1 * $sale;
+                $price = $price - $sale;
+            }
+        }
+        return response()->json(['price' => $price]);
+    }
+
 
 }
