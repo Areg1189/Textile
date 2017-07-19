@@ -9,6 +9,7 @@ use App\Models\About_faq;
 use App\Models\About_sld;
 use App\Models\Employee_block;
 use App\Models\Product;
+use App\Models\ProductTranslations;
 use Illuminate\Http\Request;
 use App\Models\HomeImage;
 use App\Models\SubCategory;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Subscriber;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -111,13 +113,28 @@ class HomeController extends Controller
 
     public function search(Request $request){
 
-        $res = Product::where('name', 'LIKE', '%' . $request->search . '%')->get()->paginate(9);
-
-        dd($res);
-
-        return view('searchResult',[
-            'res' => $res
+        $validator = Validator::make($request->all(), [
+            'word' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            return back()->with('error', 'Please, enter search words')->withErrors($validator->errors())->withInput();
+        }
+
+        $products = Product::whereTranslationLike('name', '%'.$request->word.'%')->paginate(9);
+        $rnd = Product::all()->random(3);
+
+        if($request->key == "ajax"){
+              return View::make('includes.productList',['products'=>$products]);
+        }else{
+            return view('searchResult',[
+                'products' => $products,
+                'word' => $request->word,
+                'rnd' => $rnd,
+            ]);
+        }
+
+
     }
 
 }

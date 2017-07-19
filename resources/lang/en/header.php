@@ -7,5 +7,6 @@ return [
     'profile' => 'Profile',
     'sign_out' => 'Sign Out',
     'subscribe' => 'Subscribe Now',
-    'search' => 'Search here..'
+    'search' => 'Search here..',
+    'search_result' => 'Search Results'
 ];

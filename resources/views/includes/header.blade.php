@@ -112,22 +112,35 @@
                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-search"></i></a>
                             <ul class="dropdown-menu show-right">
                                 <li>
-                                    <div id="custom-search-input">
-                                        <div class="input-group col-md-12">
-                                            <input id="searchArea" type="text" class="form-control input-lg"
-                                                   placeholder="@lang('header.search')"/>
-                                            <span class="input-group-btn" >
-                                                        <button
-                                                                class="button button--aylen btn btn-lg"
-                                                                id="searchButton"
-                                                                type="button"
-                                                                data-result_page="{{route('search')}}"
-                                                        >
+
+                                    <form action="{{route('search')}}" method="post">
+
+                                        <div id="custom-search-input">
+                                            <div class="input-group col-md-12">
+                                                <input
+                                                        id="searchArea"
+                                                        type="text"
+                                                        name="word"
+                                                        class="form-control input-lg"
+                                                        placeholder="@lang('header.search')"
+                                                        value="{{isset($word) ? $word : ''}}"
+                                                        required
+                                                />
+                                                <span class="input-group-btn">
+                                                        {{csrf_field()}}
+                                                    <button
+                                                            class="button button--aylen btn btn-lg"
+                                                            id="searchButton"
+                                                            type="submit"
+                                                            data-result_page="{{route('search')}}"
+                                                    >
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
+
                                 </li>
                             </ul>
                         </li>
