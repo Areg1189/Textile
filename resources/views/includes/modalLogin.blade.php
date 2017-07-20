@@ -72,6 +72,8 @@
                 <input id="email" type="email" name="email" required>
                 <label for="address">@lang('auth.address')</label>
                 <input id="address" type="text" name="address" required>
+                <label for="address">@lang('auth.phone')</label>
+                <input id="phone" type="text" name="phone" required>
                 <label for="password">@lang('auth.password')</label>
                 <input id="password" type="password" name="password" required>
                 <label for="password-confirm">@lang('auth.confirm_password')</label>
