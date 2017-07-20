@@ -83,7 +83,6 @@ class AdminSubCategoryController extends Controller
         }
 
 
-
         $newCat = SubCategory::create([
             'code' => time() . $request->en_name,
             'image_name' => $imageName,
@@ -124,7 +123,7 @@ class AdminSubCategoryController extends Controller
                     foreach ($request->hy_name_sub[$key] as $subKey => $subVal) {
 
                         $sub = FilterSub::create([
-                            'code' => time() . $request->en_name_sub[$key][$subKey] . $res->id,
+                            'code' => $i . time() . $request->en_name_sub[$key][$subKey] . $res->id,
                             'filter_id' => $res->id,
                             'hy' => [
                                 'name' => $subVal,
@@ -157,11 +156,10 @@ class AdminSubCategoryController extends Controller
                             }
                         }
                         $i++;
-
                     }
-
+                    $fl++;
                 }
-                $fl++;
+
 
             }
 
@@ -250,7 +248,7 @@ class AdminSubCategoryController extends Controller
                         $subVal->translate('en')->name = $request->en_name_sub_old[$key][$subKey];
                         $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$subKey];
                         $subVal->save();
-                        if (isset($request->hy_sub_old[$key][$subKey]) ) {
+                        if (isset($request->hy_sub_old[$key][$subKey])) {
                             foreach ($subVal->values->sortBy('id') as $valKey => $valVal) {
 
                                 $valVal->translate('hy')->name = $request->hy_sub_old[$key][$subKey][$valKey];

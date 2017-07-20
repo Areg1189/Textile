@@ -46,6 +46,10 @@ Route::group(
 //        =================  Product Filter Search ==================  //
         Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
 
+
+        //        =================  Add To Cart ==================  //
+        Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
+
         //        =================  Comment  ================== //
         Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 

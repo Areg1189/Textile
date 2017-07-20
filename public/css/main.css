@@ -266,11 +266,22 @@ a.btn_red {
 }
 .prod_color, .prod_color_active{
     border: 1px solid #777;
-    cursor: pointer;
+    border-radius: 5px;
 }
 .prod_color_active{
     position: absolute;
     border: 2px solid #777;
     top: -10px;
+}
 
+.center{
+    width: 150px;
+    margin: 40px auto;
+}
+.quantity-left-minus, .quantity-right-plus {
+    width: 30%;
+    cursor: pointer;
+}
+#quantity{
+    width: 40%;
 }

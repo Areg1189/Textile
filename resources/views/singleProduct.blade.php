@@ -75,16 +75,41 @@
                                     @foreach($product->colors as $color)
 
                                         <div class="col-sm-1">
-                                        <span style="color: {{$color->color}};">
-                                            <i class="fa fa-square fa-2x prod_color"></i></span>
+                                            <button style="background: {{$color->color}};"
+                                                    class="prod_color btn-default"
+                                                    data-value="{{$color->color}}">
+                                                <i class="fa fa-square" style="color: {{$color->color}};"></i></button>
                                         </div>
 
                                     @endforeach
+
                                 </div>
+                                <small>Quantity</small>
+                                <div class="row">
+                                    <div class="col-sm-6 ">
+
+                                        <div class="input-group">
+                                                <span class="quantity-left-minus"
+                                                      data-type="minus" data-field="">
+                                                    <i class="fa fa-minus"></i>
+                                                </span>
+
+                                            <input type="text" id="quantity" name="quantity"
+                                                   value="1" min="1" max="100"
+                                                   class="text-center">
+
+                                            <span class="quantity-right-plus"
+                                                  data-type="plus" data-field="">
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                        </div>
 
 
+                                    </div>
+                                </div>
                                 @foreach($product->parent->filters->chunk(2) as $chunk)
                                     <div class="row">
+                                        @php($i = 1);
                                         @foreach($chunk as $filter)
                                             @php
                                                 $filter_id = $product->filters->where('filter_id' , $filter->id)->first();
@@ -97,7 +122,8 @@
                                                     <select class="selectpicker product_filter"
                                                             data-prod="{{$product->code}}"
                                                             data-href="{{route('priceAjax')}}">
-                                                        <option value="" class="text-center">
+                                                        <option value="" class="text-center change-disabled-parent"
+                                                                data-disabled="{{$i}}" disabled selected>
                                                             @lang('product.choose') {{$filter->translate(session('locale'))->name}}
                                                             *
                                                         </option>
@@ -109,7 +135,13 @@
                                                                     continue;
                                                                 }
                                                                 @endphp
-                                                                <option value="{{$subs->code}}">
+                                                                <option value="{{$subs->code}}"
+                                                                        class="change-disabled"
+                                                                        data-disabled_change="{{$i}}"
+                                                                        data-name="{{$subs
+                                                                        ->translate(session('locale'))
+                                                                        ->name}}"
+                                                                        data-fl="sub">
                                                                     {{$subs->translate(session('locale'))->name}}
                                                                 </option>
                                                             @else
@@ -122,20 +154,32 @@
                                                                             continue;
                                                                         }
                                                                         @endphp
-                                                                        <option value="{{$value->code}}">
+                                                                        <option value="{{$value->code}}"
+                                                                                class="change-disabled"
+                                                                                data-disabled_change="{{$i}}"
+                                                                                data-name="{{$value
+                                                                                ->translate(session('locale'))
+                                                                                ->name}}"
+                                                                                data-fl="val">
                                                                             {{$value->translate(session('locale'))->name}}
                                                                         </option>
                                                                     @endforeach
                                                                 </optgroup>
                                                             @endif
+
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
+                                            @php($i++)
                                         @endforeach
                                     </div>
                                 @endforeach
-                                <a href="#" class="button button--aylen btn">Add to Cart</a>
+                                <a href="{{route('add_to_cart')}}"
+                                   class="button button--aylen btn add_cart"
+                                   disabled>
+                                    @lang('product.add_cart')
+                                </a>
 
 
                                 <div class="shopmeta">
@@ -442,5 +486,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
     <script type="text/javascript"
             src="{{asset('js/single_page.js')}}"></script>
+    <script>
+        var product = "{{$product->code}}";
+    </script>
 
 @endsection
