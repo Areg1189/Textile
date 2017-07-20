@@ -10,6 +10,9 @@ return [
     'register_reviews' => 'Please register if you want to leave a comment',
     'feedback' => 'Թողնել կարծիք',
     'comment' => 'Մեկնաբանություն',
-    'message_successful' => 'Admin@ khastati ktesneq <a href="#0" class="again_comment"> krkin grel</a>',
+    'message_successful' => 'Ադմինի հաստատումից հետո կտեսնեք մեկնաբանությունը<a href="#0" class="again_comment"> գրել նորից</a>',
     'category' => 'Կատեգորիա',
+    'color' => 'Գույն',
+    'choose' => 'Ընտրել',
+    'checkout' => 'Վճարել',
 ];

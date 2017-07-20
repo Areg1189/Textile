@@ -175,6 +175,8 @@
             src="{{asset('js/main.js')}}"></script>
     <script type="text/javascript"
             src="{{asset('js/search.js')}}"></script>
+    <script type="text/javascript"
+            src="http://cdn.dev.skype.com/uri/skype-uri.js"></script>
 
     <script type="text/javascript">
         (function ($) {

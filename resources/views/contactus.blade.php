@@ -67,9 +67,15 @@
                                 @foreach($social_icons as $icons)
                                     @if($icons->link)
                                         <li class="facebook">
-                                            <a target="_blank" href="{{$icons->link}}">
-                                                <i class="{{$icons->icon_code}}"></i>
-                                            </a>
+                                            @if($icons->icon_code == "fa fa-skype")
+                                                <a href="skype:{{$icons->link}}?chat"> <i
+                                                            class="{{$icons->icon_code}}"></i></a>
+                                            @else
+                                                <a target="_blank"
+                                                   href="{{$icons->link}}">
+                                                    <i class="{{$icons->icon_code}}"></i>
+                                                </a>
+                                            @endif
                                         </li>
 
                                     @endif

@@ -40,7 +40,7 @@ class UserController extends Controller
             'first_name' => 'required|string|min:3|max:30',
             'last_name' => 'required|string|min:3|max:40',
             'address' => 'required|min:3',
-//            'phone' => 'required|min:9|max:20',
+            'phone' => 'required|min:9|max:20',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
@@ -50,7 +50,7 @@ class UserController extends Controller
             'name' => $request->first_name,
             'last_name' => $request->last_name,
             'address' => $request->address,
-//            'phone' => $request->phone,
+            'phone' => $request->phone,
         ]);
         if ($user) {
             return back()->with('success', __('user.updated'));

@@ -22,6 +22,7 @@ class AdvancedReg extends Controller
             'email' => 'required|max:40|email',
             'password' => 'required|confirmed|min:6',
             'address' => 'required',
+            'phone' => 'required|min:9'
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator->errors());
@@ -72,6 +73,7 @@ class AdvancedReg extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'address' => $request->address,
+                'phone' => $request->phone,
                 'password' => bcrypt($pass),
                 'href' => $href,
             ]);

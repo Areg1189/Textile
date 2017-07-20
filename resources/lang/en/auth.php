@@ -36,5 +36,6 @@ return [
     'register' => 'REGISTER',
     'login' => 'LOGIN',
     'back' => 'Back',
+    'phone' => 'Phone',
 
 ];
