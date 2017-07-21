@@ -1,7 +1,7 @@
 var filter = false;
 var quantitiy = $('#quantity').val();
 var color = false;
-var name = false;
+var a = false;
 var fl = false;
 
 
@@ -59,19 +59,18 @@ $(document).on('click', '.again_comment', function () {
 
 
 $('.product_filter').change(function () {
-    alert($(this).data('name'))
     var value = $(this).val();
     url = $(this).data('href');
     prod = $(this).data('prod');
     filter = [];
-    name = [];
+    a = [];
     fl = [];
     if (value) {
         $('.product_filter').each(function (i) {
             if ($(this).val()) {
-                // filter.push($(this).val());
-                // name.push($(this).data('name'));
-                // fl.push($(this).data('fl'));
+                filter.push($(this).val());
+                a.push($('option[value="' + $(this).val() + '"]').data('name'));
+                fl.push($('option[value="' + $(this).val() + '"]').data('fl'));
             }
         });
         $.ajax({
@@ -133,7 +132,7 @@ $(document).on('click', function () {
     if (quantitiy && color && product) {
         var flag = $('select.product_filter');
         if (filter && filter.length == flag.length
-            && name && name.length == flag.length
+            && a && a.length == flag.length
             && fl && fl.length == flag.length) {
 
             $('.add_cart').attr('disabled', false)
@@ -143,8 +142,8 @@ $(document).on('click', function () {
 });
 
 
-$(document).on('click', '.add_cart', function (a) {
-    a.preventDefault();
+$(document).on('click', '.add_cart', function (event) {
+    event.preventDefault();
     var url = $(this).attr('href');
     $.ajax({
         url: url,
@@ -154,19 +153,20 @@ $(document).on('click', '.add_cart', function (a) {
             color: color,
             prod: product,
             qty: quantitiy,
-            name: name,
+            name: a,
             fl: fl,
-            _token: token},
-        success: function (e) {
-            if (!e) {
-                // window.location.href = 'not-found';
-            } else {
-                alert(1);
-            }
+            _token: token
         },
-        error: function () {
-            // window.location.href = 'not-found';
-        }
+        // success: function (e) {
+        //     if (!e) {
+        //         // window.location.href = 'not-found';
+        //     } else {
+        //         alert(1);
+        //     }
+        // },
+        // error: function () {
+        //     // window.location.href = 'not-found';
+        // }
     });
 });
 

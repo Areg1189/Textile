@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Reviews;
 use Illuminate\Support\Facades\View;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ProductController extends Controller
 {
@@ -132,6 +131,8 @@ class ProductController extends Controller
                 $sale1 = $price / 100;
                 $sale = $sale1 * $sale;
                 $price = $price - $sale;
+            }else{
+                $price = $sale;
             }
         }
         return response()->json(['price' => $price]);
@@ -142,7 +143,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'color' => 'required|max:7',
             'prod' => 'required',
-            'gty' => 'required|integer|numeric|min:1',
+            'qty' => 'required|integer|numeric|min:1',
             'filter' => 'required',
             'filter.*' => 'required',
             'fl' => 'required',
@@ -158,9 +159,9 @@ class ProductController extends Controller
         $sale = $product->sale;
         foreach ($request->filter as $key => $filter) {
             if ($request->fl[$key] == 'sub'){
-                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFile();
+                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
             }elseif ($request->fl[$key] == 'val'){
-                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFile();
+                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
             }
             $prodFilter = $product->filters->where('filter_value', $filter)->first();
             if ($prodFilter->plusMinus == '+') {
@@ -178,16 +179,7 @@ class ProductController extends Controller
         }
         $color = $request->color;
 
-        Cart::add([
-            'id' => $product->id,
-            'name' => $product->translate(session('locale'))->name,
-            'qty' => $request->qty,
-            'price' => $price,
-            'options' => [
-                'color' => $color
-            ]
-        ]);
-        dd(Cart::content());
+
     }
 
 }

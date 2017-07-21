@@ -127,9 +127,7 @@
                                             </div>
                                             <div id="collapseFour_{{$faq->id}}" class="panel-collapse collapse">
                                                 <div class="panel-body">
-                                                    <p>
-                                                        {{$faq->description}}
-                                                    </p>
+                                                    {!! $faq->description !!}
                                                 </div>
                                             </div>
                                         </div>

@@ -15,7 +15,6 @@ return [
     'choose' => 'Choose',
     'see_also' => 'See also..',
     'color' => 'Color',
-    'choose' => 'Choose',
     'checkout' => 'Checkout',
 
 ];

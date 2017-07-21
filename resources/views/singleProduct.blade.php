@@ -78,7 +78,8 @@
                                             <button style="background: {{$color->color}};"
                                                     class="prod_color btn-default"
                                                     data-value="{{$color->color}}">
-                                                <i class="fa fa-square" style="color: {{$color->color}};"></i></button>
+                                                <i class="fa fa-square" style="color: {{$color->color}};"></i>
+                                            </button>
                                         </div>
 
                                     @endforeach
