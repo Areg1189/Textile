@@ -147,7 +147,7 @@
                                                           data-target="oldColor_{{$j}}">
                                                         <i class="fa fa-times" aria-hidden="true"></i>
                                                     </span>
-                                                    <input type="color" name="color[]">
+                                                    <input type="color" name="color[]" value="{{$color->color}}">
                                                 </div>
                                                 @php($j++)
                                             @endforeach

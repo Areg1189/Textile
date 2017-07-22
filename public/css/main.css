@@ -264,7 +264,7 @@ a.btn_red {
 .divider{
     display: none;
 }
-.prod_color, .prod_color_active{
+.prod_color, .prod_color_active, .cart-color{
     border: 1px solid #777;
     border-radius: 5px;
 }
@@ -284,4 +284,7 @@ a.btn_red {
 }
 #quantity{
     width: 40%;
+}
+.icon-dropdown {
+    min-width: 0px !important;
 }

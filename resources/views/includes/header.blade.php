@@ -6,7 +6,7 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                             aria-expanded="false" aria-controls="navbar">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
+                        <span class="  r"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
@@ -80,54 +80,31 @@
                                aria-expanded="false">
                                 <i class="fa fa-chain-broken"></i>
                             </a>
-                            <ul class="dropdown-menu start-right" role="menu">
-                                @foreach($social_icons as $icons)
-                                    @if($icons->link)
-                                        <li class="facebook pad_3 pull-left">
-                                            @if($icons->icon_code == "fa fa-skype")
-                                                <a href="skype:{{$icons->link}}?chat"> <i
-                                                            class="{{$icons->icon_code}}"></i></a>
-                                            @else
-                                                <a target="_blank"
-                                                   href="{{$icons->link}}">
-                                                    <i class="{{$icons->icon_code}}"></i>
-                                                </a>
-                                            @endif
-                                        </li>
 
-                                    @endif
-                                @endforeach
-                            </ul>
+                            @if($social_icons->where('link', '!=', null)->first())
+                                <ul class="dropdown-menu icon-dropdown start-right" role="menu">
+                                    @foreach($social_icons as $icons)
+                                        @if($icons->link)
+                                            <li class="facebook pad_3 pull-left">
+                                                @if($icons->icon_code == "fa fa-skype")
+                                                    <a href="skype:{{$icons->link}}?chat"> <i
+                                                                class="{{$icons->icon_code}}"></i></a>
+                                                @else
+                                                    <a target="_blank"
+                                                       href="{{$icons->link}}">
+                                                        <i class="{{$icons->icon_code}}"></i>
+                                                    </a>
+                                                @endif
+                                            </li>
+
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            @endif
                         </li>
 
-                        <li class="dropdown hasmenu shopcartmenu">
-                            <a href="#" class="dropdown-toggle cart" data-toggle="dropdown" role="button"
-                               aria-expanded="false"><span class="countbadge hidden-xs">2</span> <i
-                                        class="fa fa-shopping-bag"></i></a>
-                            <ul class="dropdown-menu start-right" role="menu">
-                                <li class="shopcart">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr class="row">
-                                            <td class="col-md-3"><img src="{{asset('upload/widget_01.jpg')}}" alt="">
-                                            </td>
-                                            <td class="col-md-7">
-                                                <h4><a href="single-shop.html">Unique Edition</a></h4>
-                                                <small> Price : $ 1000</small>
-                                                <small> Quanity : 1</small>
-                                            </td>
-                                            <td class="col-md-2"><a href="#" class="closeme"><i class="fa fa-close"></i></a>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="clearfix"></div>
-                                    <div class="text-center">
-                                        <h3>Cart Subtotal: $1000</h3>
-                                        <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
-                                    </div>
-                                </li>
-                            </ul>
+                        <li class="dropdown hasmenu shopcartmenu cart-container">
+                            @include('includes.newCartItem')
                         </li>
                         <li class="dropdown searchdropdown hasmenu hidden-sm">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -146,8 +123,7 @@
                                                         class="form-control input-lg"
                                                         placeholder="@lang('header.search')"
                                                         value="{{isset($word) ? $word : ''}}"
-                                                        required
-                                                />
+                                                        required/>
                                                 <span class="input-group-btn">
                                                         {{csrf_field()}}
                                                     <button

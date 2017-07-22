@@ -33,69 +33,73 @@ Route::group(
     function () {
 
         Auth::routes();
-        Route::get('home', 'HomeController@index')->name('home');
-        Route::get('about', 'HomeController@about')->name('about');
-        Route::get('contactus', 'HomeController@contactus')->name('contactus');
-        Route::get('', 'HomeController@index')->name('home');
-        Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
+        Route::group(['middleware' => 'cartCheck'], function () {
+            Route::get('home', 'HomeController@index')->name('home');
+            Route::get('about', 'HomeController@about')->name('about');
+            Route::get('contactus', 'HomeController@contactus')->name('contactus');
+            Route::get('', 'HomeController@index')->name('home');
+            Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 
 //        =================  Product  ================== //
-        Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
-        Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
+            Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
+            Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
 
 //        =================  Product Filter Search ==================  //
-        Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
+            Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
 
 
-        //        =================  Add To Cart ==================  //
-        Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
+            //        =================  Add To Cart ==================  //
+            Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
 
-        //        =================  Comment  ================== //
-        Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
+            //        =================  Cart Remove==================  //
+            Route::post('cart_remove', 'ProductController@cart_remove')->name('cart_remove');
 
-        Route::post('send_email', 'HomeController@send_email')->name('send_email');
+            //        =================  Comment  ================== //
+            Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 
-        //========= SEARCH  ======= //
-        Route::post('search', 'HomeController@search')->name('search');
+            Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
-        //========= Price Ajax  ======= //
-        Route::post('price', 'ProductController@priceAjax')->name('priceAjax');
+            //========= SEARCH  ======= //
+            Route::post('search', 'HomeController@search')->name('search');
 
-        Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
-        Route::get('repeat_confirm', 'Auth\AdvancedReg@getRepeat')->name('getRepeat');
-        Route::post('login', 'Auth\MyAuthController@login')->name('login');
-        Route::post('register', 'Auth\AdvancedReg@register')->name('register');
-        Route::post('repeat_confirm', 'Auth\AdvancedReg@postRepeat');
-        Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('passwordEmail');
+            //========= Price Ajax  ======= //
+            Route::post('price', 'ProductController@priceAjax')->name('priceAjax');
 
+            Route::get('register/confirm/{token}', 'Auth\AdvancedReg@confirm')->name('registerEmail');
+            Route::get('repeat_confirm', 'Auth\AdvancedReg@getRepeat')->name('getRepeat');
+            Route::post('login', 'Auth\MyAuthController@login')->name('login');
+            Route::post('register', 'Auth\AdvancedReg@register')->name('register');
+            Route::post('repeat_confirm', 'Auth\AdvancedReg@postRepeat');
+            Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('passwordEmail');
 
 
 //        =================  USER  ================== //
-        Route::group(['middleware' => 'user', 'prefix' => 'user/{id}'], function () {
+            Route::group(['middleware' => 'user', 'prefix' => 'user/{id}'], function () {
 
-            Route::get('', 'Users\UserController@index')->name('user');
+                Route::get('', 'Users\UserController@index')->name('user');
 
-            Route::get('settings', 'Users\UserController@getSettings')->name('userSettings');
+                Route::get('settings', 'Users\UserController@getSettings')->name('userSettings');
 
-            Route::get('purchases', 'Users\UserController@getPurchases')->name('userPurchases');
+                Route::get('purchases', 'Users\UserController@getPurchases')->name('userPurchases');
 
-            Route::get('message', 'Users\UserController@getSendAdmin')->name('userGetMessage');
+                Route::get('message', 'Users\UserController@getSendAdmin')->name('userGetMessage');
 
-            Route::post('getMessage', 'Users\UserController@getMessage')->name('getMessage');
+                Route::post('getMessage', 'Users\UserController@getMessage')->name('getMessage');
 
-            Route::post('postMessage', 'Users\UserController@postSendAdmin')->name('userPostMessage');
+                Route::post('postMessage', 'Users\UserController@postSendAdmin')->name('userPostMessage');
 
-            Route::post('editDennis', 'Users\UserController@editDennis')->name('editDennis');
+                Route::post('editDennis', 'Users\UserController@editDennis')->name('editDennis');
 
-            Route::post('changePassword', 'Users\UserController@changePassword')->name('changePassword');
+                Route::post('changePassword', 'Users\UserController@changePassword')->name('changePassword');
 
-            Route::post('deleteUser', 'Users\UserController@deleteUser')->name('deleteUser');
+                Route::post('deleteUser', 'Users\UserController@deleteUser')->name('deleteUser');
 
+            });
         });
 
         //        =================  ADMIN  ================== //
 
-        Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function (){
+        Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
             Route::get('', 'Admin\AdminController@index')->name('admin');
             Route::get('message/{id?}', 'Admin\AdminController@sendMessage')->name('sendMessage');
             Route::get('messages', 'Admin\AdminController@adminMessages')->name('adminMessages');
@@ -157,14 +161,12 @@ Route::group(
             Route::post('deleteFilter', 'Admin\AdminFilterController@delete')->name('deleteFilter');
 
 
-        //========= PRODUCT  ======= //
+            //========= PRODUCT  ======= //
 
             Route::get('{cat?}/product/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');
-
-
 
 
             Route::post('updateHomeImage', 'Admin\AdminController@updateHomeImage')->name('updateHomeImage');

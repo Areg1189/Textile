@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Reviews;
 use Illuminate\Support\Facades\View;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Cart\CartTable;
+use App\Models\Cart\CartFilter;
+
 
 class ProductController extends Controller
 {
@@ -20,6 +24,7 @@ class ProductController extends Controller
         if (!$request->cat) {
             return abort(404);
         }
+
 
         $subCategory = SubCategory::where('link', $request->cat)->firstOrFail();
         $category = $subCategory->category;
@@ -131,7 +136,7 @@ class ProductController extends Controller
                 $sale1 = $price / 100;
                 $sale = $sale1 * $sale;
                 $price = $price - $sale;
-            }else{
+            } else {
                 $price = $sale;
             }
         }
@@ -158,10 +163,12 @@ class ProductController extends Controller
         $price = $product->price;
         $sale = $product->sale;
         foreach ($request->filter as $key => $filter) {
-            if ($request->fl[$key] == 'sub'){
-                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
-            }elseif ($request->fl[$key] == 'val'){
-                FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
+            if ($request->fl[$key] == 'sub') {
+                $control = FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
+                $control->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
+            } elseif ($request->fl[$key] == 'val') {
+                $control = FilterValue::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
+                $control->parent->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
             }
             $prodFilter = $product->filters->where('filter_value', $filter)->first();
             if ($prodFilter->plusMinus == '+') {
@@ -179,7 +186,58 @@ class ProductController extends Controller
         }
         $color = $request->color;
 
+        $a = Cart::instance(Auth::user()->name . '-' . Auth::user()->id)->add([
+            'id' => $product->id,
+            'name' => $product->translate(session('locale'))->name,
+            'qty' => $request->qty,
+            'price' => $price,
+            'options' => [
+                'user_id' => Auth::user()->id,
+                'color' => $color,
+                'filter_name' => $request->filter_name,
+                'filter_value' => $request->name,
+                'image_name' => $product->images->sortBy('id')->first()['image_name'],
+            ]
+        ]);
+        $res = CartTable::create([
+            'product_id' => $product->id,
+            'user_id' => Auth::user()->id,
+            'row_id' => $a->rowId,
+            'qty' => $request->qty,
+            'color' => $color,
+            'product_name' => $product->translate(session('locale'))->name,
+            'price' => $price,
+            'image_name' => $product->images->sortBy('id')->first()['image_name'],
+        ]);
+        if ($res) {
+            if (isset($request->name)) {
+                foreach ($request->name as $key => $name) {
+                    CartFilter::create([
+                        'cart_id' => $res->id,
+                        'filter_name' => $request->filter_name[$key],
+                        'filter_value' => $request->name[$key],
+                    ]);
+                }
+            }
 
+        }
+//        Cart::destroy();
+        return View::make('includes.newCartItem');
+    }
+
+    public function cart_remove(Request $request)
+    {
+//        Cart::destroy();
+        Cart::remove($request->order);
+        $delete = CartTable::where('row_id', $request->order)->get();
+        if ($delete->count() > 0) {
+            foreach ($delete as $dll) {
+                CartFilter::where('cart_id', $dll->id)->delete();
+                $dll->delete();
+            }
+
+        }
+        return View::make('includes.newCartItem');
     }
 
 }

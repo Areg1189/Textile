@@ -16,5 +16,8 @@ return [
     'see_also' => 'See also..',
     'color' => 'Color',
     'checkout' => 'Checkout',
+    'subtotal' => 'Subtotal',
+    'price' => 'Price',
+    'quanity' => 'Quanity',
 
 ];

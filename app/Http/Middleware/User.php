@@ -17,6 +17,7 @@ class User
     public function handle($request, Closure $next)
     {
         if (!Auth::guest() && Auth::user()->status == 1){
+
             return $next($request);
         }else{
             return redirect('/');

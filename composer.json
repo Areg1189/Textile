@@ -7,10 +7,10 @@
     "require": {
         "php": ">=5.6.4",
         "acacha/admin-lte-template-laravel": "4.*",
-        "amsgames/laravel-shop": "0.2.*",
         "barryvdh/laravel-debugbar": "^2.4",
         "barryvdh/laravel-ide-helper": "^2.3",
         "dimsav/laravel-translatable": "^7.3",
+        "gloudemans/shoppingcart": "^2.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "mcamara/laravel-localization": "^1.2"

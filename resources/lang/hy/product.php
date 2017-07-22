@@ -15,4 +15,7 @@ return [
     'color' => 'Գույն',
     'choose' => 'Ընտրել',
     'checkout' => 'Վճարել',
+    'quanity' => 'Քանակ',
+    'subtotal' => 'Subtotal',
+    'price' => 'Գինը',
 ];

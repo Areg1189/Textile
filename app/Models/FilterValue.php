@@ -18,7 +18,7 @@ class FilterValue extends Model
     ];
 
     public function parent(){
-        return $this->belongsTo('App\Models\SubCategory', 'parent_id', 'id');
+        return $this->belongsTo('App\Models\FilterSub', 'parent_id', 'id');
     }
 //    public function catFilter(){
 //        return $this->hasMany('App\Models\CatFilter', 'val_id', 'id');

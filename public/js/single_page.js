@@ -1,8 +1,9 @@
-var filter = false;
-var quantitiy = $('#quantity').val();
+var filter = [];
+var filter_name = [];
+var quantity = $('#quantity').val();
 var color = false;
-var a = false;
-var fl = false;
+var a = [];
+var fl = [];
 
 
 $(".comment_form").validate({
@@ -62,11 +63,10 @@ $('.product_filter').change(function () {
     var value = $(this).val();
     url = $(this).data('href');
     prod = $(this).data('prod');
-    filter = [];
-    a = [];
-    fl = [];
+    filter_name.push($(this).data('filter'));
     if (value) {
         $('.product_filter').each(function (i) {
+
             if ($(this).val()) {
                 filter.push($(this).val());
                 a.push($('option[value="' + $(this).val() + '"]').data('name'));
@@ -79,7 +79,7 @@ $('.product_filter').change(function () {
             data: {filter: filter, prod: prod, _token: token},
             success: function (e) {
                 if (e['price']) {
-                    $('.prod_price').text(e['price'])
+                    $('.prod_price').text(e['price']);
                 }
             }
         })
@@ -104,7 +104,7 @@ $('.quantity-right-plus').click(function (e) {
     // If is not undefined
 
     $('#quantity').val(quantity + 1);
-
+    quantity = $('#quantity').val();
 
     // Increment
 
@@ -121,6 +121,7 @@ $('.quantity-left-minus').click(function (e) {
     // Increment
     if (quantity > 1) {
         $('#quantity').val(quantity - 1);
+        quantity = $('#quantity').val();
     }
 });
 
@@ -129,11 +130,12 @@ $(document).on('click', function () {
     if ($('#quantity').val() < 1) {
         $('#quantity').val(1)
     }
-    if (quantitiy && color && product) {
+    if (quantity && color && product) {
         var flag = $('select.product_filter');
-        if (filter && filter.length == flag.length
-            && a && a.length == flag.length
-            && fl && fl.length == flag.length) {
+        if (filter.length == flag.length
+            && a.length == flag.length
+            && fl.length == flag.length
+            && filter_name.length == flag.length) {
 
             $('.add_cart').attr('disabled', false)
         }
@@ -152,23 +154,49 @@ $(document).on('click', '.add_cart', function (event) {
             filter: filter,
             color: color,
             prod: product,
-            qty: quantitiy,
+            qty: quantity,
             name: a,
             fl: fl,
+            filter_name: filter_name,
             _token: token
         },
-        // success: function (e) {
-        //     if (!e) {
-        //         // window.location.href = 'not-found';
-        //     } else {
-        //         alert(1);
-        //     }
-        // },
-        // error: function () {
-        //     // window.location.href = 'not-found';
-        // }
+        success: function (e) {
+            if (!e) {
+                window.location.href = 'not-found';
+            } else {
+                $('.cart-container').html(e);
+                cartHeight();
+            }
+        },
+        error: function () {
+            window.location.href = 'not-found';
+        }
     });
 });
+$(document).on('click', '.cart-remove', function (event) {
+    event.preventDefault();
+    parent = $(this).data('status');
+    $.ajax({
+        url:$(this).attr('href'),
+        type:'post',
+        data:{order: $(this).data('order'), _token: token},
+        success: function (e) {
+            if (!e) {
+                window.location.href = 'not-found';
+            } else {
+                $('[data-target="'+parent+'"]').fadeOut(1000, function () {
+                    $('.cart-container').html(e);
+                    cartHeight();
+                });
+
+
+            }
+        },
+        error: function () {
+            window.location.href = 'not-found';
+        }
+    })
+})
 
 
 

@@ -174,6 +174,7 @@ class AdminSubCategoryController extends Controller
     public function update(Request $request)
     {
 
+
         $this->validate($request, [
             'prod' => 'required',
         ]);
@@ -188,6 +189,7 @@ class AdminSubCategoryController extends Controller
             ]);
         }
 
+//        dd($request->all());
         if ($request->image) {
             $data = $_POST['image'];
             list($type, $data) = explode(';', $data);
@@ -235,29 +237,33 @@ class AdminSubCategoryController extends Controller
 
 
         if ($request->hy_name_filter_old && $filters->first()) {
-            foreach ($filters->sortBy('id') as $key => $val) {
+
+            foreach ($filters->sortByDesc('id') as $key => $val) {
                 $val->translate('hy')->name = $request->hy_name_filter_old[$key];
                 $val->translate('en')->name = $request->en_name_filter_old[$key];
                 $val->translate('ru')->name = $request->ru_name_filter_old[$key];
                 $val->save();
 
                 if ($request->hy_name_sub_old[$key] && $val->subs[$key]) {
-                    foreach ($val->subs->sortBy('id') as $subKey => $subVal) {
+                    $i = $val->subs->count();
+                    foreach ($val->subs->sortByDesc('id') as $subKey => $subVal) {
 
-                        $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$subKey];
-                        $subVal->translate('en')->name = $request->en_name_sub_old[$key][$subKey];
-                        $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$subKey];
+                        $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$i-1];
+                        $subVal->translate('en')->name = $request->en_name_sub_old[$key][$i-1];
+                        $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$i-1];
                         $subVal->save();
-                        if (isset($request->hy_sub_old[$key][$subKey])) {
-                            foreach ($subVal->values->sortBy('id') as $valKey => $valVal) {
-
-                                $valVal->translate('hy')->name = $request->hy_sub_old[$key][$subKey][$valKey];
-                                $valVal->translate('en')->name = $request->en_sub_old[$key][$subKey][$valKey];
-                                $valVal->translate('ru')->name = $request->ru_sub_old[$key][$subKey][$valKey];
+                        if (isset($request->hy_sub_old[$key][$i-1])) {
+                            $j = $subVal->values->count();
+                            foreach ($subVal->values->sortByDesc('id') as $valKey => $valVal) {
+                                $valVal->translate('hy')->name = $request->hy_sub_old[$key][$i-1][$j-1];
+                                $valVal->translate('en')->name = $request->en_sub_old[$key][$i-1][$j-1];
+                                $valVal->translate('ru')->name = $request->ru_sub_old[$key][$i-1][$j-1];
                                 $valVal->save();
+                                $j--;
 
                             }
                         }
+                        $i--;
                     }
                 }
             }

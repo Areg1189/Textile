@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/prettyPhoto.css')}}">
 @endsection
 @section('content')
-
     <div class="page-title lb">
         <div class="container clearfix">
             <div class="title-area pull-left">
@@ -122,7 +121,8 @@
                                                 <div class="form-group text-center">
                                                     <select class="selectpicker product_filter"
                                                             data-prod="{{$product->code}}"
-                                                            data-href="{{route('priceAjax')}}">
+                                                            data-href="{{route('priceAjax')}}"
+                                                    data-filter="{{$filter->translate(session('locale'))->name}}">
                                                         <option value="" class="text-center change-disabled-parent"
                                                                 data-disabled="{{$i}}" disabled selected>
                                                             @lang('product.choose') {{$filter->translate(session('locale'))->name}}
@@ -131,6 +131,7 @@
                                                         @foreach($filter->subs->sortBy('id') as  $subs)
                                                             @if(count($subs->values) < 1)
                                                                 @php
+
                                                                     $filter_id = $product->filters->where('filter_value' , $subs->code)->first();
                                                                 if(!$filter_id){
                                                                     continue;
@@ -155,6 +156,7 @@
                                                                             continue;
                                                                         }
                                                                         @endphp
+
                                                                         <option value="{{$value->code}}"
                                                                                 class="change-disabled"
                                                                                 data-disabled_change="{{$i}}"

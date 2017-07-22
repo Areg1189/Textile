@@ -178,8 +178,7 @@ return [
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
-        Amsgames\LaravelShop\LaravelShopProvider::class,
-
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -242,7 +241,8 @@ return [
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
-        'Shop'      => Amsgames\LaravelShop\LaravelShopFacade::class,
+        'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
         /*
          * Acacha Llum Aliases...
          *

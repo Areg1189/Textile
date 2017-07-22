@@ -109,6 +109,7 @@ class AdvancedReg extends Controller
         $user->save();
         $model->delete();
         if (Auth::attempt(['email' => $user->email, 'password' => $pass, 'status' => '1'])) {
+            dd(1);
             return redirect('/')->with('success', $user->name . ' ' . __('auth.registerSuccessful'));
         } else {
             dd(1);

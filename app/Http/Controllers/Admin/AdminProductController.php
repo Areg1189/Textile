@@ -92,6 +92,7 @@ class AdminProductController extends Controller
                 'description' => $request->ru_description,
             ]
         ]);
+
         if ($request->color[0]) {
             foreach ($request->color as $color) {
                 Color::create([

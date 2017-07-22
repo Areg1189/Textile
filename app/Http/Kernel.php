@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'passwordEmail' => \App\Http\Middleware\PasswordEmail::class,
         'user' => \App\Http\Middleware\User::class,
         'admin' => \App\Http\Middleware\Admin::class,
+        'cartCheck' => \App\Http\Middleware\CartMiddleware::class,
     ];
 }

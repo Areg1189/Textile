@@ -15,4 +15,7 @@ return [
     'color' => 'Цвет',
     'choose' => 'Выбирать',
     'checkout' => 'Оплатить',
+    'quanity' => 'Количество',
+    'subtotal' => 'Subtotal',
+    'price' => 'Цена',
 ];

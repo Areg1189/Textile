@@ -5,16 +5,16 @@ $("#modal_trigger").leanModal({
     closeButton: ".modal_close"
 });
 
-$(function() {
+$(function () {
     // Calling Login Form
-    $("#login_form").click(function() {
+    $("#login_form").click(function () {
         $(".social_login").hide();
         $(".user_login").show();
         return false;
     });
 
     // Calling Register Form
-    $("#register_form").click(function() {
+    $("#register_form").click(function () {
         $(".social_login").hide();
         $(".user_register").show();
         $(".header_title").text('Register');
@@ -22,7 +22,7 @@ $(function() {
     });
 
     // Going back to Social Forms
-    $(".back_btn").click(function() {
+    $(".back_btn").click(function () {
         $(".user_login").hide();
         $(".user_register").hide();
         $(".social_login").show();
@@ -31,5 +31,23 @@ $(function() {
     });
 });
 $(".edit_dannie").click(function () {
-   $(".first_name_dennie, .last_name_dennie, .address_dennie, .phone_dennie, .save_dennie").attr('disabled',false);
+    $(".first_name_dennie, .last_name_dennie, .address_dennie, .phone_dennie, .save_dennie").attr('disabled', false);
 });
+
+$(document).ready(function () {
+    cartHeight();
+});
+
+
+function cartHeight() {
+    var h = parseInt($(window).height() / 1.8);
+    if ($('.cart-content').height() > h) {
+        $('.cart-content').css({
+            'overflow-y': 'scroll',
+            'max-height': parseInt(h) + 'px',
+        })
+
+
+    }
+}
+
