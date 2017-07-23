@@ -318,7 +318,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="filter_name" value="{{$filter->id}}">
+                                    <input type="hidden" name="filter_name[]" value="{{$filter->id}}">
                                 @endforeach
 
                             </div>

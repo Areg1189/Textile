@@ -14,7 +14,7 @@
                 <div class="box-body">
 
                     <form action="{{route('updateSubCategory')}}" method="POST" class="formImage"
-                          enctype="multipart/form-data">
+                          enctype="multipart/form-data" >
                         {{csrf_field()}}
 
                         <div class="row">
@@ -180,7 +180,7 @@
                                                     <div class="sub_filter_content">
 
                                                         @foreach($filter->subs->sortBy('id') as  $sub)
-                                                            <div data-name="{{$j}}"
+                                                            <div data-name="old_{{$j}}"
                                                                  data-target="delete_filter_sub{{$j}}"
                                                                  data-prod="{{$sub->id}}"
                                                                  data-href_delete="{{route('deleteFilter')}}"
@@ -222,6 +222,7 @@
                                                                     <button data-target="{{$j}}"
                                                                             type="button"
                                                                             class="btn btn-info add_filter_value"
+                                                                            data-prefix="old_"
                                                                             title="Add Child">
                                                                         <i class="fa fa-plus"></i>
                                                                     </button>
@@ -349,5 +350,5 @@
 
     sub_filter = "{{$i}}";
     filter = "{{$i}}";
-    number = "{{$j}}";
+    number = 0;
 </script>

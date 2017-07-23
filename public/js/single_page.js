@@ -64,10 +64,13 @@ $('.product_filter').change(function () {
     url = $(this).data('href');
     prod = $(this).data('prod');
     filter_name.push($(this).data('filter'));
+    fl = [];
+    a = [];
+    filter = [];
     if (value) {
         $('.product_filter').each(function (i) {
-
             if ($(this).val()) {
+                alert(1)
                 filter.push($(this).val());
                 a.push($('option[value="' + $(this).val() + '"]').data('name'));
                 fl.push($('option[value="' + $(this).val() + '"]').data('fl'));

@@ -236,7 +236,7 @@ class AdminSubCategoryController extends Controller
         $cat->save();
 
 
-        if ($request->hy_name_filter_old && $filters->first()) {
+        if (isset($request->hy_name_filter_old ) && $filters->first()) {
 
             foreach ($filters->sortByDesc('id') as $key => $val) {
                 $val->translate('hy')->name = $request->hy_name_filter_old[$key];
@@ -244,8 +244,9 @@ class AdminSubCategoryController extends Controller
                 $val->translate('ru')->name = $request->ru_name_filter_old[$key];
                 $val->save();
 
-                if ($request->hy_name_sub_old[$key] && $val->subs[$key]) {
+                if (isset($request->hy_name_sub_old[$key]) && $val->subs[$key]) {
                     $i = $val->subs->count();
+
                     foreach ($val->subs->sortByDesc('id') as $subKey => $subVal) {
 
                         $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$i-1];
@@ -269,7 +270,7 @@ class AdminSubCategoryController extends Controller
             }
         }
 
-        if ($request->hy_name_filter) {
+        if (isset($request->hy_name_filter)) {
             $fl = 1;
             foreach ($request->hy_name_filter as $key => $val) {
                 $res = FilterCategory::create([
@@ -286,7 +287,7 @@ class AdminSubCategoryController extends Controller
                     ]
                 ]);
                 $i = 0;
-                if ($request->hy_name_sub[$key]) {
+                if (isset($request->hy_name_sub[$key])) {
 
                     foreach ($request->hy_name_sub[$key] as $subKey => $subVal) {
 
@@ -294,7 +295,7 @@ class AdminSubCategoryController extends Controller
                             'code' => time() . $request->en_name_sub[$key][$subKey] . $res->id,
                             'filter_id' => $res->id,
                             'hy' => [
-                                'name' => $subVal,
+                                'name' => $request->hy_name_sub[$key][$subKey],
                             ],
                             'en' => [
                                 'name' => $request->en_name_sub[$key][$subKey],
@@ -311,7 +312,7 @@ class AdminSubCategoryController extends Controller
                                     'code' => time() . $request->en_sub[$key][$subKey][$valKey] . $sub->id,
                                     'parent_id' => $sub->id,
                                     'hy' => [
-                                        'name' => $valVal,
+                                        'name' => $request->hy_sub[$key][$subKey][$valKey],
                                     ],
                                     'en' => [
                                         'name' => $request->en_sub[$key][$subKey][$valKey],

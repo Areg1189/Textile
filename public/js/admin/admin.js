@@ -483,7 +483,6 @@ $(document).on('click', '.dellImage', function (e) {
 var filter = 0;
 
 $(document).on('click', '.add_filter', function () {
-
     $('.filter_container').prepend('' +
         '<div class="panel panel-danger" data-filter="' + filter + '">' +
         '<div class=" panel-heading text-center">' +
@@ -542,7 +541,7 @@ $(document).on('click', '.add_sub_filter', function () {
 
 
     parent.find('.sub_filter_content').append('' +
-        '<div  data-name="' + number + '" data-status="delete' + number + '">' +
+        '<div  data-name="new_' + number + '" data-status="delete' + number + '" >' +
         '<div class="row" >' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
@@ -562,7 +561,7 @@ $(document).on('click', '.add_sub_filter', function () {
         '<input type="text" name="ru_name_sub[' + sub_filter + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
-        '<button data-target="' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
+        '<button data-prefix="new_" data-target="' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
         '<i class="fa fa-plus"></i>' +
         '</button>' +
         '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
@@ -577,7 +576,9 @@ $(document).on('click', '.add_sub_filter', function () {
 var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
     var data = $(this).data('target');
-    $('[data-name="' + data + '"]').append('' +
+    var prefix = $(this).data('prefix');
+
+    $('[data-name="'+ prefix + data + '"]').append('' +
         '<div class="row" data-status="delete' + data + '" data-dell="delete' + data + dell + '">' +
         '<div class="col-xs-1">' +
         '</div>' +

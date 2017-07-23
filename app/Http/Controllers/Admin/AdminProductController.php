@@ -129,7 +129,7 @@ class AdminProductController extends Controller
                     'price' => $request->price[$k],
                     'plusMinus' => $request->plusMinus[$k],
                     'prod_id' => $product->id,
-                    'filter_id' => $request->filter_name,
+                    'filter_id' => $request->filter_name[$K],
                 ]);
             }
         }
@@ -140,7 +140,7 @@ class AdminProductController extends Controller
                     'price' => $request->price_value[$k],
                     'plusMinus' => $request->plusMinus_value[$k],
                     'prod_id' => $product->id,
-                    'filter_id' => $request->filter_name,
+                    'filter_id' => $request->filter_name[$k],
                 ]);
             }
         }
@@ -267,7 +267,7 @@ class AdminProductController extends Controller
                     'price' => $request->price[$k],
                     'plusMinus' => $request->plusMinus[$k],
                     'prod_id' => $product->id,
-                    'filter_id' => $request->filter_name,
+                    'filter_id' => $request->filter_name[$k],
                 ]);
             }
         }
@@ -278,7 +278,7 @@ class AdminProductController extends Controller
                     'price' => $request->price_value[$k],
                     'plusMinus' => $request->plusMinus_value[$k],
                     'prod_id' => $product->id,
-                    'filter_id' => $request->filter_name,
+                    'filter_id' => $request->filter_name[$k],
                 ]);
             }
         }
