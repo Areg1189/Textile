@@ -18,4 +18,5 @@ return [
     'quanity' => 'Քանակ',
     'subtotal' => 'Subtotal',
     'price' => 'Գինը',
+    'please_order' => 'Որպեսզի պատվերը կատարեք մմուտք գործեք ձեր հաշվ',
 ];

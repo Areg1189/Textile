@@ -40,6 +40,13 @@ Route::group(
             Route::get('', 'HomeController@index')->name('home');
             Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 
+
+
+            Route::get('login/{log}', 'Users\LoginController@redirectToProvider')->name('socialiteLogin');
+            Route::get('login/{log}/callback', 'Users\LoginController@handleProviderCallback');
+
+
+
 //        =================  Product  ================== //
             Route::get('category/{cat}', 'ProductController@index')->name('getCategory');
             Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
@@ -48,14 +55,6 @@ Route::group(
             Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
 
 
-            //        =================  Add To Cart ==================  //
-            Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
-
-            //        =================  Cart Remove==================  //
-            Route::post('cart_remove', 'ProductController@cart_remove')->name('cart_remove');
-
-            //        =================  Comment  ================== //
-            Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 
             Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
@@ -71,6 +70,17 @@ Route::group(
             Route::post('register', 'Auth\AdvancedReg@register')->name('register');
             Route::post('repeat_confirm', 'Auth\AdvancedReg@postRepeat');
             Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('passwordEmail');
+
+//        =================  Add To Cart ==================  //
+            Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
+
+            //        =================  Cart Remove==================  //
+            Route::post('cart_remove', 'ProductController@cart_remove')->name('cart_remove');
+
+            //        =================  Comment  ================== //
+            Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
+
+
 
 
 //        =================  USER  ================== //
@@ -163,7 +173,7 @@ Route::group(
 
             //========= PRODUCT  ======= //
 
-            Route::get('{cat?}/product/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
+            Route::get('category/{cat?}/product/{name?}', 'Admin\AdminProductController@index')->name('adminProduct');
             Route::post('{cat}/addProduct', 'Admin\AdminProductController@create')->name('addProduct');
             Route::post('updateProduct/{prod?}', 'Admin\AdminProductController@update')->name('updateProduct');
             Route::post('deleteProduct', 'Admin\AdminProductController@delete')->name('deleteProduct');

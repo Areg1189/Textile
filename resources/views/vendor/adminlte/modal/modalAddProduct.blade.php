@@ -280,7 +280,7 @@
                                                                             <p>
                                                                                 <input type="checkbox"
                                                                                        class="filter_checkbox"
-                                                                                       name="filter_checkbox_value[{{$j}}]"
+                                                                                       name="filter_checkbox_value[{{$i.$j}}]"
                                                                                        data-target="filter_{{$i.$j}}"
                                                                                        value="{{$value->code}}">
                                                                                 {{$value->translate(session('locale'))->name}}
@@ -288,7 +288,7 @@
 
                                                                             <div class="row">
                                                                                 <div class="col-sm-6">
-                                                                                    <select name="plusMinus_value[{{$j}}]"
+                                                                                    <select name="plusMinus_value[{{$i.$j}}]"
                                                                                             class="form-control"
                                                                                             data-status_sale="filter_{{$i.$j}}"
                                                                                             disabled>
@@ -299,7 +299,7 @@
                                                                                 <div class="col-sm-6">
                                                                                     <input type="number"
                                                                                            class="form-control filter_price"
-                                                                                           name="price_value[{{$j}}]"
+                                                                                           name="price_value[{{$i.$j}}]"
                                                                                            placeholder="Price *"
                                                                                            data-status="filter_{{$i.$j}}"
                                                                                            disabled>
@@ -308,17 +308,19 @@
                                                                             <hr>
                                                                         </div>
                                                                     </div>
+                                                                    <input type="hidden" name="filter_name[{{$i.$j}}]" value="{{$filter->id}}">
                                                                     @php($j++)
                                                                 @endforeach
                                                             </div>
                                                         </div>
                                                     @endif
+                                                        <input type="hidden" name="filter_name[{{$i}}]" value="{{$filter->id}}">
                                                     @php($i++)
                                                 @endforeach
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="filter_name[]" value="{{$filter->id}}">
+
                                 @endforeach
 
                             </div>

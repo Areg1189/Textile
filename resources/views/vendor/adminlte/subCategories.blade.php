@@ -38,13 +38,32 @@
                 data-href_delete="{{route('deleteSubCategory')}}">
                 <td>
                     <div class="col-sm-4">
+                        <a href="{{route('adminProduct', [
+                                       'cat' => $category->link,
+                                       'name' => $cat->link])}}">
                         <img src="{{asset('images/subCategory/'.$cat->image_name)}}" class="img-rounded"
                              alt="{{$cat->translate('en')->name}}" width="100%">
+                        </a>
                     </div>
                 </td>
-                <td>{{$cat->translate('hy')->name}}</td>
-                <td>{{$cat->translate('en')->name}}</td>
-                <td>{{$cat->translate('ru')->name}}</td>
+                <td><a href="{{route('adminProduct', [
+                                       'cat' => $category->link,
+                                       'name' => $cat->link])}}">
+                        {{$cat->translate('hy')->name}}
+                    </a>
+                </td>
+                <td><a href="{{route('adminProduct', [
+                                       'cat' => $category->link,
+                                       'name' => $cat->link])}}">
+                        {{$cat->translate('en')->name}}
+                    </a>
+                </td>
+                <td><a href="{{route('adminProduct', [
+                                       'cat' => $category->link,
+                                       'name' => $cat->link])}}">
+                        {{$cat->translate('ru')->name}}
+                    </a>
+                </td>
                 <td>
                     {{--@foreach($cat->filters as $filter)--}}
                     {{--<div><i class="fa fa-filter"></i> {{$filter->filter->name}}</div>--}}
@@ -74,22 +93,23 @@
         <!-- Modal content -->
         <div class="modal-content myModal-content">
 
-                <div class="box box-danger">
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="text-center">
-                                <div class="col-sm-12">
-                                    <p>Do you really want to delete</p>
-                                </div>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger modalDelete dellImage btn_my_modal">delete</button>
-                                    <button type="button" class="btn btn-default btn_my_modal">Close</button>
-                                </div>
+            <div class="box box-danger">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="text-center">
+                            <div class="col-sm-12">
+                                <p>Do you really want to delete</p>
                             </div>
-
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-danger modalDelete dellImage btn_my_modal">delete
+                                </button>
+                                <button type="button" class="btn btn-default btn_my_modal">Close</button>
+                            </div>
                         </div>
+
                     </div>
                 </div>
+            </div>
 
         </div>
     </div>

@@ -8,6 +8,8 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 use App\Models\FilterCategory;
+use App\Models\Cart\CartTable;
+use App\Models\Cart\CartFilter;
 
 class AdminCategoryController extends Controller
 {
@@ -100,7 +102,42 @@ class AdminCategoryController extends Controller
 
     public function delete(Request $request)
     {
-        $cat = Category::where('link', $request->prod)->firstOrFail();
+        $category = Category::where('link', $request->prod)->firstOrFail();
+        foreach ($category->subCategories as $cat){
+            foreach ($cat->products as $product) {
+
+// delete Images //
+                foreach ($product->images as $image) {
+                    if (file_exists(public_path() . '/images/products/' . $image->image_name)) {
+                        File::delete(public_path() . '/images/products/' . $image->image_name);
+
+                    }
+                }
+                Image::where('product_id', $product->id)->delete();
+                Color::where('product_id', $product->id)->delete();
+                ProFilter::where('prod_id', $product->id)->delete();
+                Reviews::where('product_id', $product->id)->delete();
+                $carts = CartTable::where('product_id', $product->id)->get();
+                foreach ($carts as $cart){
+                    CartFilter::where('cart_id', $cart->id)->delete();
+                    $cart->delete();
+                }
+                $product->deleteTranslations();
+                $product->delete();
+            }
+
+            if (file_exists(public_path() . '/images/subCategory/' . $cat->image_name)) {
+                File::delete(public_path() . '/images/subCategory/' . $cat->image_name);
+            }
+            if (file_exists(public_path() . '/images/subCategory/' . $cat->general_image)) {
+                File::delete(public_path() . '/images/subCategory/' . $cat->general_image);
+            }
+
+
+//        $cat->roles()->detach();
+            $cat->deleteTranslations();
+            $cat->delete();
+        }
 //        $cat->roles()->detach();
         $cat->deleteTranslations();
         $cat->delete();

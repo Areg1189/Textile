@@ -1,11 +1,16 @@
 <a href="#" class="dropdown-toggle cart" data-toggle="dropdown" role="button"
    aria-expanded="false"><span class="countbadge hidden-xs">
-                                    {{Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->content()->count()}}
+        @if(Auth::guest())
+            0
+        @else
+            {{Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->content()->count()}}
+        @endif
                                 </span> <i
             class="fa fa-shopping-bag"></i></a>
-<ul class="dropdown-menu start-right" role="menu">
-    <li class="shopcart ">
-        @if(!Auth::guest() && Cart::instance(Auth::user()->name.'-'.Auth::user()->id))
+@if(!Auth::guest() && Cart::instance(Auth::user()->name.'-'.Auth::user()->id))
+    <ul class="dropdown-menu start-right" role="menu">
+        <li class="shopcart ">
+
             <div class="cart-content">
                 @php($i =0)
                 @foreach(Cart::content() as $item)
@@ -32,14 +37,15 @@
                                                                        style="color: {{$item->options->color}};"></i>
                                                                 </span>
                                 </small>
-
-                                @foreach($item->options->filter_name as $key => $filter_name)
-                                    <small>{{$filter_name}} : {{$item->options->filter_value[$key]}}</small>
-                                @endforeach
-
+                                @if($item->options->filter_name[0])
+                                    @foreach($item->options->filter_name as $key => $filter_name)
+                                        <small>{{$filter_name}} : {{$item->options->filter_value[$key]}}</small>
+                                    @endforeach
+                                @endif
                             </td>
                             <td class="col-md-2">
-                                <a href="{{route('cart_remove')}}" data-order="{{$item->rowId}}" data-status="dll_{{$i}}" class="closeme cart-remove"><i
+                                <a href="{{route('cart_remove')}}" data-order="{{$item->rowId}}"
+                                   data-status="dll_{{$i}}" class="closeme cart-remove"><i
                                             class="fa fa-close"></i>
                                 </a>
                             </td>
@@ -60,6 +66,7 @@
                        class="btn btn-primary">@lang('product.checkout')</a>
                 @endif
             </div>
-        @endif
-    </li>
-</ul>
+
+        </li>
+    </ul>
+@endif

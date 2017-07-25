@@ -19,5 +19,7 @@ return [
     'subtotal' => 'Subtotal',
     'price' => 'Price',
     'quanity' => 'Quanity',
+    'please_order' => 'To make an order go to your account',
+
 
 ];

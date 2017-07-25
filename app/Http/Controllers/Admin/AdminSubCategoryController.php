@@ -14,6 +14,8 @@ use App\Models\FilterCategory;
 use App\Models\FilterSub;
 use App\Models\FilterValue;
 use App\Models\ProFilter;
+use App\Models\Cart\CartTable;
+use App\Models\Cart\CartFilter;
 
 class AdminSubCategoryController extends Controller
 {
@@ -236,7 +238,7 @@ class AdminSubCategoryController extends Controller
         $cat->save();
 
 
-        if (isset($request->hy_name_filter_old ) && $filters->first()) {
+        if (isset($request->hy_name_filter_old) && $filters->first()) {
 
             foreach ($filters->sortByDesc('id') as $key => $val) {
                 $val->translate('hy')->name = $request->hy_name_filter_old[$key];
@@ -249,23 +251,89 @@ class AdminSubCategoryController extends Controller
 
                     foreach ($val->subs->sortByDesc('id') as $subKey => $subVal) {
 
-                        $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$i-1];
-                        $subVal->translate('en')->name = $request->en_name_sub_old[$key][$i-1];
-                        $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$i-1];
+                        $subVal->translate('hy')->name = $request->hy_name_sub_old[$key][$i - 1];
+                        $subVal->translate('en')->name = $request->en_name_sub_old[$key][$i - 1];
+                        $subVal->translate('ru')->name = $request->ru_name_sub_old[$key][$i - 1];
                         $subVal->save();
-                        if (isset($request->hy_sub_old[$key][$i-1])) {
+                        if (isset($request->hy_sub_old[$key][$i - 1])) {
                             $j = $subVal->values->count();
                             foreach ($subVal->values->sortByDesc('id') as $valKey => $valVal) {
-                                $valVal->translate('hy')->name = $request->hy_sub_old[$key][$i-1][$j-1];
-                                $valVal->translate('en')->name = $request->en_sub_old[$key][$i-1][$j-1];
-                                $valVal->translate('ru')->name = $request->ru_sub_old[$key][$i-1][$j-1];
+                                $valVal->translate('hy')->name = $request->hy_sub_old[$key][$i - 1][$j - 1];
+                                $valVal->translate('en')->name = $request->en_sub_old[$key][$i - 1][$j - 1];
+                                $valVal->translate('ru')->name = $request->ru_sub_old[$key][$i - 1][$j - 1];
                                 $valVal->save();
                                 $j--;
 
                             }
                         }
+                        if (isset($request->hy_sub[$key][$i - 1])) {
+                            $jNewI = 0;
+                            foreach ($request->hy_sub[$key][$i - 1] as $valKeyNew => $valValNew) {
+
+                                FilterValue::create([
+                                    'code' => $jNewI . time() . $request->en_sub[$key][$i - 1][$valKeyNew] . $subVal->id,
+                                    'parent_id' => $subVal->id,
+                                    'hy' => [
+                                        'name' => $request->hy_sub[$key][$i - 1][$valKeyNew],
+                                    ],
+                                    'en' => [
+                                        'name' => $request->en_sub[$key][$i - 1][$valKeyNew],
+                                    ],
+                                    'ru' => [
+                                        'name' => $request->ru_sub[$key][$i - 1][$valKeyNew],
+                                    ]
+                                ]);
+                                $jNewI++;
+                            }
+                        }
+
                         $i--;
+
                     }
+
+
+                }
+
+                if (isset($request->hy_name_sub[$key])) {
+                    $iNew = 0;
+                    foreach ($request->hy_name_sub[$key] as $subKeyNew => $subValNew) {
+                        $sub = FilterSub::create([
+                            'code' => time() . $iNew . $request->en_name_sub[$key][$subKeyNew] . $subVal->id,
+                            'filter_id' => $val->id,
+                            'hy' => [
+                                'name' => $request->hy_name_sub[$key][$subKeyNew],
+                            ],
+                            'en' => [
+                                'name' => $request->en_name_sub[$key][$subKeyNew],
+                            ],
+                            'ru' => [
+                                'name' => $request->ru_name_sub[$key][$subKeyNew],
+                            ]
+                        ]);
+
+                        if (isset($request->hy_sub[$key][$subKeyNew])) {
+                            $jNew = 0;
+                            foreach ($request->hy_sub[$key][$subKeyNew] as $valKeyNew => $valValNew) {
+                                FilterValue::create([
+                                    'code' => $jNew . time() . $request->en_sub[$key][$subKeyNew][$valKeyNew] . $sub->id,
+                                    'parent_id' => $sub->id,
+                                    'hy' => [
+                                        'name' => $request->hy_sub[$key][$subKeyNew][$valKeyNew],
+                                    ],
+                                    'en' => [
+                                        'name' => $request->en_sub[$key][$subKeyNew][$valKeyNew],
+                                    ],
+                                    'ru' => [
+                                        'name' => $request->ru_sub[$key][$subKeyNew][$valKeyNew],
+                                    ]
+                                ]);
+                                $jNew++;
+                            }
+                        }
+
+                        $iNew++;
+                    }
+
                 }
             }
         }
@@ -292,7 +360,7 @@ class AdminSubCategoryController extends Controller
                     foreach ($request->hy_name_sub[$key] as $subKey => $subVal) {
 
                         $sub = FilterSub::create([
-                            'code' => time() . $request->en_name_sub[$key][$subKey] . $res->id,
+                            'code' => $i.time() . $request->en_name_sub[$key][$subKey] . $res->id,
                             'filter_id' => $res->id,
                             'hy' => [
                                 'name' => $request->hy_name_sub[$key][$subKey],
@@ -309,7 +377,7 @@ class AdminSubCategoryController extends Controller
                             $j = 0;
                             foreach ($request->hy_sub[$key][$subKey] as $valKey => $valVal) {
                                 FilterValue::create([
-                                    'code' => time() . $request->en_sub[$key][$subKey][$valKey] . $sub->id,
+                                    'code' => $j.time() . $request->en_sub[$key][$subKey][$valKey] . $sub->id,
                                     'parent_id' => $sub->id,
                                     'hy' => [
                                         'name' => $request->hy_sub[$key][$subKey][$valKey],
@@ -347,8 +415,38 @@ class AdminSubCategoryController extends Controller
     {
 
         $cat = SubCategory::where('link', $request->prod)->firstOrFail();
+        foreach ($cat->products as $product) {
+
+// delete Images //
+            foreach ($product->images as $image) {
+                if (file_exists(public_path() . '/images/products/' . $image->image_name)) {
+                    File::delete(public_path() . '/images/products/' . $image->image_name);
+
+                }
+            }
+            Image::where('product_id', $product->id)->delete();
+            Color::where('product_id', $product->id)->delete();
+            ProFilter::where('prod_id', $product->id)->delete();
+            Reviews::where('product_id', $product->id)->delete();
+            $carts = CartTable::where('product_id', $product->id)->get();
+            foreach ($carts as $cart){
+                CartFilter::where('cart_id', $cart->id)->delete();
+                $cart->delete();
+            }
+            $product->deleteTranslations();
+            $product->delete();
+        }
+
+        if (file_exists(public_path() . '/images/subCategory/' . $cat->image_name)) {
+            File::delete(public_path() . '/images/subCategory/' . $cat->image_name);
+        }
+        if (file_exists(public_path() . '/images/subCategory/' . $cat->general_image)) {
+            File::delete(public_path() . '/images/subCategory/' . $cat->general_image);
+        }
+
+
 //        $cat->roles()->detach();
-//        $cat->deleteTranslations();
+        $cat->deleteTranslations();
         $cat->delete();
         return 1;
 

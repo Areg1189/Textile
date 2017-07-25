@@ -412,9 +412,7 @@ $(document).on('change', '.filter_checkbox', function () {
         $('[data-status_sale="' + data + '"]').attr({
             'disabled': false
         });
-        // $('[name="firstPrice"]').prop({
-        //     'required': false
-        // })
+
     } else {
         var flag = false;
         $('.filter_checkbox').each(function () {
@@ -561,7 +559,7 @@ $(document).on('click', '.add_sub_filter', function () {
         '<input type="text" name="ru_name_sub[' + sub_filter + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
-        '<button data-prefix="new_" data-target="' + number + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
+        '<button data-prefix="new_" data-target="' + number + '" data-val="' + sub_filter + '" type="button" class="btn btn-info add_filter_value" title="Add Child">' +
         '<i class="fa fa-plus"></i>' +
         '</button>' +
         '<button data-target="delete' + number + '" type="button" class="btn btn-danger delete_filter" title="Delete">' +
@@ -577,27 +575,29 @@ var dell = 0;
 $(document).on('click', '.add_filter_value', function () {
     var data = $(this).data('target');
     var prefix = $(this).data('prefix');
+    var val = $(this).data('val');
 
-    $('[data-name="'+ prefix + data + '"]').append('' +
+
+    $('[data-name="' + prefix + data + '"]').append('' +
         '<div class="row" data-status="delete' + data + '" data-dell="delete' + data + dell + '">' +
         '<div class="col-xs-1">' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Հայերեն</label>' +
-        '<input type="text" name="hy_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="Հայերեն" required>' +
+        '<input type="text" name="hy_sub[' + val + '][' + data + '][]" class="form-control" placeholder="Հայերեն" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>English</label>' +
-        '<input type="text" name="en_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="English" required>' +
+        '<input type="text" name="en_sub[' + val + '][' + data + '][]" class="form-control" placeholder="English" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-3">' +
         '<div class="form-group text-center">' +
         '<label>Русский</label>' +
-        '<input type="text" name="ru_sub[' + sub_filter + '][' + data + '][]" class="form-control" placeholder="Русский" required>' +
+        '<input type="text" name="ru_sub[' + val + '][' + data + '][]" class="form-control" placeholder="Русский" required>' +
         '</div>' +
         '</div>' +
         '<div class="col-xs-2">' +
@@ -680,7 +680,7 @@ $(document).on('submit', '.form_subscribers', function (e) {
 /* *********** COMMENTS **************** */
 $(document).on('click', '.unpublish_comment', function () {
     btn = $(this);
-    btn.attr('disabled',true);
+    btn.attr('disabled', true);
     parent = $(this).data('status');
     public = false;
     if ($(this).val() == 1) {
@@ -706,7 +706,7 @@ $(document).on('click', '.unpublish_comment', function () {
                     btn.text('Publish');
                     btn.val(0)
                 }
-                btn.attr('disabled',false);
+                btn.attr('disabled', false);
             }
 
         }

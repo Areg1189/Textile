@@ -42,6 +42,11 @@ return [
     |
     */
     #llum_services
+    'facebook' => [
+        'client_id' => '452114811824919',
+        'client_secret' => '15dd925c66dbeb31e875daaca30bc4fa',
+        'redirect' => 'http://textile.dev/login/facebook/callback',
+    ],
 
 
 ];

@@ -19,6 +19,7 @@ class CartMiddleware
 
     public function handle($request, Closure $next)
     {
+
         if (!Auth::guest() && Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->count() < 1){
             $orders = CartTable::where('user_id', Auth::user()->id)->get();
             foreach ($orders as $order){
@@ -39,9 +40,8 @@ class CartMiddleware
                 $order->save();
             }
 
-        }else {
         }
-//        Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->content();
         return $next($request);
+
     }
 }

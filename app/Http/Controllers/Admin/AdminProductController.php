@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Color;
 use App\Models\Image;
 use App\Models\Reviews;
+use App\Models\Cart\CartTable;
+use App\Models\Cart\CartFilter;
 
 class AdminProductController extends Controller
 {
@@ -122,17 +124,18 @@ class AdminProductController extends Controller
             }
 
         };
+
         if ($request->filter_checkbox) {
-            foreach ($request->filter_checkbox as $k => $v) {
-                ProFilter::create([
-                    'filter_value' => $request->filter_checkbox[$k],
-                    'price' => $request->price[$k],
-                    'plusMinus' => $request->plusMinus[$k],
-                    'prod_id' => $product->id,
-                    'filter_id' => $request->filter_name[$K],
-                ]);
-            }
+        foreach ($request->filter_checkbox as $k => $v) {
+            ProFilter::create([
+                'filter_value' => $request->filter_checkbox[$k],
+                'price' => $request->price[$k],
+                'plusMinus' => $request->plusMinus[$k],
+                'prod_id' => $product->id,
+                'filter_id' => $request->filter_name[$k],
+            ]);
         }
+    }
         if ($request->filter_checkbox_value) {
             foreach ($request->filter_checkbox_value as $k => $v) {
                 ProFilter::create([
@@ -301,11 +304,28 @@ class AdminProductController extends Controller
 
             }
         }
+        $product = Product::where('link', $request->prod)->firstOrFail();
 
-        $cat = SubCategory::where('link', $request->prod)->firstOrFail();
-//        $cat->roles()->detach();
-//        $cat->deleteTranslations();
-        $cat->delete();
+// delete Images //
+        foreach ($product->images as $image) {
+            if (file_exists(public_path() . '/images/products/' . $image->image_name)) {
+                $delete = File::delete(public_path() . '/images/products/' . $image->image_name);
+                if (!$delete) {
+                    return abort(404);
+                }
+            }
+        }
+        Image::where('product_id', $product->id)->delete();
+        Color::where('product_id', $product->id)->delete();
+        ProFilter::where('prod_id', $product->id)->delete();
+        Reviews::where('product_id', $product->id)->delete();
+        $carts = CartTable::where('product_id', $product->id)->get();
+        foreach ($carts as $cart){
+            CartFilter::where('cart_id', $cart->id)->delete();
+            $cart->delete();
+        }
+        $product->deleteTranslations();
+        $product->delete();
         return 1;
 
     }
@@ -323,13 +343,13 @@ class AdminProductController extends Controller
                 ]);
             } else {
 
-                $all_comments = Reviews::where('new', '!=', 1)->where('product_id',$request->id)->update([
+                $all_comments = Reviews::where('new', '!=', 1)->where('product_id', $request->id)->update([
                     'new' => 1
                 ]);
 
 
                 $comments = Reviews::where('product_id', $request->id)->get();
-                $product = Product::where('id',$request->id)->first();
+                $product = Product::where('id', $request->id)->first();
 
                 return view('vendor.adminlte.commentsPage', [
                     'comments' => $comments,
@@ -341,26 +361,27 @@ class AdminProductController extends Controller
         }
     }
 
-    public function unpublish_comment(Request $request){
-        $validator = Validator::make($request->all(),[
+    public function unpublish_comment(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
             'prod' => 'integer|numeric|min:1'
         ]);
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return abort(404);
         }
 
         $comments = Reviews::where('id', $request->prod)->update(['published' => $request->public]);
 
-        if ($comments){
+        if ($comments) {
             return 1;
         }
-
 
 
         return back();
     }
 
-    public function deleteComment(Request $request){
+    public function deleteComment(Request $request)
+    {
         $com = Reviews::where('id', $request->prod)->firstOrFail();
         $com->delete();
         return 1;

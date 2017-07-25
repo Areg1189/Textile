@@ -71,40 +71,41 @@
                         {{Request::url() == route('adminCategories')
                         || Request::url()  == route('adminCategory')
                         || Request::url() == route('adminProduct')
-                        ? 'active' : '' }}"
-            >
+                        ||Request::segment(2) || Request::segment(3) == 'category'
+                        ? 'active' : '' }}">
                 <a href="#">
                     <i class='fa fa-list'></i>
                     <span>Category</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li class="{{Request::url() == route('adminCategories')
+                                ? 'active' : ''}}">
                         <a href="{{route('adminCategories')}}">
                             <i class='fa fa-list'></i>
                             All Categories
                         </a>
                     </li>
                     @foreach($categories->sortBydesc('id') as $category)
-                        <li class="treeview
-                                {{Request::segment(3) == $category->link
-                                || Request::segment(4) == $category->link
-                                ? 'active' : ''}}">
+                        <li class="treeview {{Request::segment(3) || Request::segment(4) == $category->link
+                        ? 'active' : ''}}">
                             <a href="#0">
                                 {{$category->translate(session('locale'))->name}}
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 <li class="treeview
-                                    {{Request::segment(3) == $category->link
-                                    || Request::segment(4) == $category->link ?
-                                    'active' : ''}}">
+                                    {{Request::url() == route('adminCategory', ['name' => $category->link])
+                                    ? 'active' : ''}}">
                                     <a href="{{route('adminCategory', ['name' => $category->link])}}">
                                         All Sub Categories
                                     </a>
                                 </li>
                                 @foreach($category->subCategories->sortBydesc('id') as $subCategory)
-                                    <li>
+                                    <li class="{{Request::url() == route('adminProduct', [
+                                       'cat' => $category->link,
+                                       'name' => $subCategory->link
+                                       ])? 'active' : ''}}">
                                         <a href="{{route('adminProduct', [
                                        'cat' => $category->link,
                                        'name' => $subCategory->link

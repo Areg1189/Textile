@@ -18,4 +18,6 @@ return [
     'quanity' => 'Количество',
     'subtotal' => 'Subtotal',
     'price' => 'Цена',
+    'please_order' => 'чтобы сделать заказ зайдите на ваш  аккаунт',
+
 ];

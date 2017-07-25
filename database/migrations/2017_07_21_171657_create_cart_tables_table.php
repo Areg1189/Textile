@@ -22,7 +22,7 @@ class CreateCartTablesTable extends Migration
             $table->string('product_name');
             $table->string('image_name');
             $table->integer('qty')->usignet();
-            $table->integer('price')->usignet();
+            $table->string('price');
             $table->timestamps();
         });
     }

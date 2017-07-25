@@ -26,7 +26,6 @@
             <th>Image</th>
             <th>Name</th>
             <th>Colors</th>
-            <th>filter Price</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -62,23 +61,17 @@
                     </div>
                 </td>
                 <td>
-                    @foreach($product->colors->sortBy('id')->chunk(3) as $chunk)
-                        <div class="col-sm-12">
-                            <ul class="fc-color-picker">
-                                @foreach($chunk as $color)
-                                    <li><span style="color: {{$color->color}}"><i class="fa fa-square"></i></span></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
-                </td>
-                <td>
-                    @foreach($product->filters as $filter)
-                        <div class="col-sm-12">
-                            <b>{{$filter->filter_value}}</b> : <b>{{$filter->price}} AMD</b>
-                        </div>
 
-                    @endforeach
+                    <div class="row">
+                        @foreach($product->colors->sortBy('id') as $color)
+                            <div class="col-sm-3"><span style="color: {{$color->color}}"><i class="fa fa-square fa-2x"></i></span></div>
+                        @endforeach
+                    </div>
+
+
+
+
+
                 </td>
                 <td>
                     <div class="btn-group">

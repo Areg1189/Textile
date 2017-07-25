@@ -122,7 +122,7 @@
                                                     <select class="selectpicker product_filter"
                                                             data-prod="{{$product->code}}"
                                                             data-href="{{route('priceAjax')}}"
-                                                    data-filter="{{$filter->translate(session('locale'))->name}}">
+                                                            data-filter="{{$filter->translate(session('locale'))->name}}">
                                                         <option value="" class="text-center change-disabled-parent"
                                                                 data-disabled="{{$i}}" disabled selected>
                                                             @lang('product.choose') {{$filter->translate(session('locale'))->name}}
@@ -178,11 +178,22 @@
                                         @endforeach
                                     </div>
                                 @endforeach
-                                <a href="{{route('add_to_cart')}}"
-                                   class="button button--aylen btn add_cart"
-                                   disabled>
-                                    @lang('product.add_cart')
-                                </a>
+                                @if(!Auth::guest())
+                                    <a href="{{route('add_to_cart')}}"
+                                       class="button button--aylen btn add_cart"
+                                       disabled>
+                                        @lang('product.add_cart')
+                                    </a>
+                                @else
+                                    <p>
+                                        @lang('product.please_order')
+                                        <a data-tooltip="tooltip" data-placement="bottom"
+                                                                         class="modal_trigger"
+                                                                         href="#modal">
+                                            @lang('auth.login')
+                                        </a>
+                                    </p>
+                                @endif
 
 
                                 <div class="shopmeta">
@@ -269,14 +280,23 @@
                                                                     </textarea>
                                                                 </div>
                                                                 <div class="col-md-12 col-sm-12">
-                                                                    <input type="submit" value="Send Comment"
+                                                                    <input type="submit"
+                                                                           value="@lang('product.feedback')"
                                                                            class="btn btn-primary"/>
                                                                 </div>
                                                             </form>
                                                         </div><!-- end commentform -->
                                                     @else
                                                         <div class="widget-title">
-                                                            <h4>@lang('product.register_reviews')</h4>
+                                                            <h4>
+                                                                @lang('product.register_reviews')
+
+                                                                <a data-tooltip="tooltip" data-placement="bottom"
+                                                                   class="modal_trigger"
+                                                                   href="#modal">
+                                                                    @lang('auth.login')
+                                                                </a>
+                                                            </h4>
                                                             <hr>
                                                         </div>
                                                     @endif
@@ -300,16 +320,16 @@
                         </div><!-- end title -->
                         <div class="row">
                             @if(count($subCat->products) >3)
-                                @foreach($subCat->products->where('id', '!=', $product->id)->random(3) as $product)
+                                @foreach($subCat->products->where('id', '!=', $product->id)->random(3) as $prod)
                                     <div class="col-md-4 col-sm-6 col-xs-12">
                                         <div class="shop-item text-center">
                                             <div class="shop-thumbnail">
                                                 <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}" class="link_img">
                                                     <img class="img-responsive"
-                                                         src="{{asset('images/products/'.$product
+                                                         src="{{asset('images/products/'.$prod
                                                          ->images
                                                          ->sortBy('id')
                                                          ->first()['image_name'])}}"/>
@@ -320,13 +340,13 @@
                                                 <h3>
                                                     <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}">
-                                                        {{$product->translate(session('locale'))->name}}
+                                                        {{$prod->translate(session('locale'))->name}}
                                                     </a>
                                                 </h3>
                                                 <div>
-                                                    @include('includes.pricing',['prod' => $product])
+                                                    @include('includes.pricing',['prod' => $prod])
                                                 </div>
 
                                             </div>
@@ -336,7 +356,7 @@
                                                     <li>
                                                         <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}" class='heart'>
                                                             <i class="fa fa-shopping-bag"></i>
                                                             @lang('product.add_cart')
@@ -348,13 +368,13 @@
                                     </div>
                                 @endforeach
                             @else
-                                @foreach($subCat->products->where('id', '!=', $product->id) as $product)
+                                @foreach($subCat->products->where('id', '!=', $product->id) as $prod)
                                     <div class="col-md-4 col-sm-6 col-xs-12">
                                         <div class="shop-item text-center">
                                             <div class="shop-thumbnail">
                                                 <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}" class="link_img">
                                                     <img class="img-responsive"
                                                          src="{{asset('images/products/'.$product
@@ -368,13 +388,13 @@
                                                 <h3>
                                                     <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}">
-                                                        {{$product->translate(session('locale'))->name}}
+                                                        {{$prod->translate(session('locale'))->name}}
                                                     </a>
                                                 </h3>
                                                 <div>
-                                                    @include('includes.pricing',['prod' => $product])
+                                                    @include('includes.pricing',['prod' => $prod])
                                                 </div>
 
                                             </div>
@@ -384,7 +404,7 @@
                                                     <li>
                                                         <a href="{{route('getProduct',[
                                                 'cat' => $subCat->link,
-                                                'prod' => $product->link
+                                                'prod' => $prod->link
                                                 ])}}" class='heart'>
                                                             <i class="fa fa-shopping-bag"></i>
                                                             @lang('product.add_cart')
@@ -441,29 +461,29 @@
                             <ul class="related">
 
                                 <!-- Releted products-->
-                                @foreach($other_products as $product)
+                                @foreach($other_products as $prod)
                                     <li>
                                         <div>
                                             <a href="{{route('getProduct',[
-                                                'cat' => $product->parent->link,
-                                                'prod' => $product->link
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
                                                 ])}}" class="link_img">
                                                 <img src="{{asset(
                                                          "images/products/".$product->images->sortBy('id')->first()['image_name'])}}"
                                                      alt="">
                                             </a>
                                             <a href="{{route('getProduct',[
-                                                'cat' => $product->parent->link,
-                                                'prod' => $product->link
+                                                'cat' => $prod->parent->link,
+                                                'prod' => $prod->link
                                                 ])}}" class="link_img link_text ">
-                                                {{--@if($product)--}}
+                                                {{--@if($prod)--}}
                                                 <div class="related_name">
                                                         <span>
-                                                            {{$product->translate(session('locale'))->name}}
+                                                            {{$prod->translate(session('locale'))->name}}
                                                         </span>
                                                 </div>
                                                 <div class="related_price">
-                                                    @include('includes.pricing',['prod' => $product])
+                                                    @include('includes.pricing',['prod' => $prod])
                                                 </div>
                                             </a>
                                         </div>

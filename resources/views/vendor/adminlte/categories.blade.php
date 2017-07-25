@@ -37,9 +37,21 @@
                     <tr class="{{$category->id == session('newCat') ? 'active':''}}" data-target="cat_{{$i}}"
                         data-href_update="{{route('updateCategory')}}" data-prod="{{$category->link}}"
                         data-href_delete="{{route('deleteCategory')}}">
-                        <td>{{$category->translate('hy')->name}}</td>
-                        <td>{{$category->translate('en')->name}}</td>
-                        <td>{{$category->translate('ru')->name}}</td>
+                        <td>
+                            <a href="{{route('adminCategory', ['name' => $category->link])}}">
+                                {{$category->translate('hy')->name}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{route('adminCategory', ['name' => $category->link])}}">
+                            {{$category->translate('en')->name}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{route('adminCategory', ['name' => $category->link])}}">
+                            {{$category->translate('ru')->name}}
+                            </a>
+                        </td>
                         <td>
                             <button class="btn  btn-primary iconUpdate" data-toggle="modal" data-status="cat_{{$i}}"
                                     data-target="#modalUpdate">

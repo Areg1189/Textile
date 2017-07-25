@@ -1,16 +1,13 @@
-@extends('adminlte::layouts.auth')
+@extends('layouts.app')
 
-@section('htmlheader_title')
-    Password recovery
-@endsection
 
 @section('content')
 
     <body class="login-page">
     <div id="app">
 
-        <div class="login-box">
-            <div class="login-logo">
+        <div class="login-box text-center">
+            <div class="login-logo ">
                 <a href="{{ url('/home') }}"><b>{{config('app.name')}}</b></a>
             </div><!-- /.login-logo -->
 
@@ -30,33 +27,40 @@
                     </ul>
                 </div>
             @endif
-            <div class="login-box-body">
-                <p class="login-box-msg">@lang('passwords.resetPassword')</p>
-                <form action="{{ route('password.email') }}" method="post">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="Email" name="email"
-                               value="{{ old('email') }}" autofocus/>
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="login-box-body">
+                            <p class="login-box-msg">@lang('passwords.resetPassword')</p>
+                            <form action="{{ route('password.email') }}" method="post">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group has-feedback">
+                                    <input type="email" class="form-control" placeholder="Email" name="email"
+                                           value="{{ old('email') }}" autofocus/>
+                                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                    </div><!-- /.col -->
+                                    <div class="col-xs-8">
+                                        <button type="submit"
+                                                class="btn btn-primary btn-block btn-flat">{{ trans('passwords.sendpassword') }}</button>
+                                    </div><!-- /.col -->
+                                    <div class="col-xs-2">
+                                    </div><!-- /.col -->
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-2">
-                        </div><!-- /.col -->
-                        <div class="col-xs-8">
-                            <button type="submit"
-                                    class="btn btn-primary btn-block btn-flat">{{ trans('passwords.sendpassword') }}</button>
-                        </div><!-- /.col -->
-                        <div class="col-xs-2">
-                        </div><!-- /.col -->
-                    </div>
-                </form>
+                </div>
             </div>
+
+
         </div>
     </div>
 
-
-    {{--@include('adminlte::layouts.partials.scripts_auth')--}}
 
     </body>
 

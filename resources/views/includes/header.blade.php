@@ -130,8 +130,7 @@
                                                             class="button button--aylen btn btn-lg"
                                                             id="searchButton"
                                                             type="submit"
-                                                            data-result_page="{{route('search')}}"
-                                                    >
+                                                            data-result_page="{{route('search')}}">
                                                             <i class="fa fa-search"></i>
                                                         </button>
                                                     </span>
@@ -146,7 +145,7 @@
                         @if (Auth::guest())
                             <li class="hidden-sm hidden-xs">
                                 <a data-tooltip="tooltip" data-placement="bottom" title="@lang('auth.login')"
-                                   id="modal_trigger"
+                                   class="modal_trigger"
                                    href="#modal">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </a>

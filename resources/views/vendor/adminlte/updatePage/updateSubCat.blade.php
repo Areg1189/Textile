@@ -14,7 +14,7 @@
                 <div class="box-body">
 
                     <form action="{{route('updateSubCategory')}}" method="POST" class="formImage"
-                          enctype="multipart/form-data" >
+                          enctype="multipart/form-data">
                         {{csrf_field()}}
 
                         <div class="row">
@@ -105,6 +105,7 @@
                         @endphp
                         @foreach($filters->sortBy('id') as $filter)
                             <div class="panel-group accordion" data-target="filter_{{$i}}"
+                                 data-filter="{{$i}}"
                                  data-prod="{{$filter->id}}"
                                  data-href_delete="{{route('deleteFilter')}}"
                                  data-key="filter">
@@ -120,178 +121,178 @@
                                         <div class="panel-body">
 
 
+                                            <div class="col-sm-12">
 
-                                                <div class="col-sm-12">
+                                                <button type="button"
+                                                        class="btn btn-danger btn_delete iconDelete pull-right"
+                                                        data-status="filter_{{$i}}"
+                                                        title="Delete">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
 
-                                                    <button type="button"
-                                                            class="btn btn-danger btn_delete iconDelete pull-right"
-                                                            data-status="filter_{{$i}}"
-                                                            title="Delete">
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
-
-                                                    <div class="row">
-                                                        <div class="col-xs-4">
-                                                            <div class="form-group text-center">
-                                                                <label>Հայերեն</label>
-                                                                <input type="text"
-                                                                       name="hy_name_filter_old[{{$i}}]"
-                                                                       class="form-control"
-                                                                       placeholder="Հայերեն"
-                                                                       value="{{$filter->translate('hy')->name}}"
-                                                                       required>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="col-xs-4">
-                                                            <div class="form-group text-center">
-                                                                <label>English</label>
-                                                                <input type="text"
-                                                                       name="en_name_filter_old[{{$i}}]"
-                                                                       class="form-control"
-                                                                       placeholder="English"
-                                                                       value="{{$filter->translate('en')->name}}"
-                                                                       required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-4">
-                                                            <div class="form-group text-center">
-                                                                <label>Русский</label>
-                                                                <input type="text"
-                                                                       name="ru_name_filter_old[{{$i}}]"
-                                                                       class="form-control"
-                                                                       placeholder="Русский"
-                                                                       value="{{$filter->translate('ru')->name}}"
-                                                                       required>
-                                                            </div>
-                                                        </div>
+                                            <div class="row">
+                                                <div class="col-xs-4">
+                                                    <div class="form-group text-center">
+                                                        <label>Հայերեն</label>
+                                                        <input type="text"
+                                                               name="hy_name_filter_old[{{$i}}]"
+                                                               class="form-control"
+                                                               placeholder="Հայերեն"
+                                                               value="{{$filter->translate('hy')->name}}"
+                                                               required>
                                                     </div>
-                                                    <div class="row">
-                                                        <h3 class="text-center">
-                                                            Add Sub Filter
-                                                            <button type="button" class="btn btn-info add_sub_filter"
-                                                                    data-sub_filter="{{$i}}"
-                                                                    title="Add Sub Filter">
+
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="form-group text-center">
+                                                        <label>English</label>
+                                                        <input type="text"
+                                                               name="en_name_filter_old[{{$i}}]"
+                                                               class="form-control"
+                                                               placeholder="English"
+                                                               value="{{$filter->translate('en')->name}}"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="form-group text-center">
+                                                        <label>Русский</label>
+                                                        <input type="text"
+                                                               name="ru_name_filter_old[{{$i}}]"
+                                                               class="form-control"
+                                                               placeholder="Русский"
+                                                               value="{{$filter->translate('ru')->name}}"
+                                                               required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h3 class="text-center">
+                                                    Add Sub Filter
+                                                    <button type="button" class="btn btn-info add_sub_filter"
+                                                            data-sub_filter="{{$i}}"
+                                                            title="Add Sub Filter">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </h3>
+                                            </div>
+                                            <div class="sub_filter_content">
+
+                                                @foreach($filter->subs->sortBy('id') as  $sub)
+                                                    <div data-name="old_{{$j}}"
+                                                         data-target="delete_filter_sub{{$j}}"
+                                                         data-prod="{{$sub->id}}"
+                                                         data-href_delete="{{route('deleteFilter')}}"
+                                                         data-key="sub">
+                                                        <div class="row">
+                                                            <div class="col-xs-3">
+                                                                <div class="form-group text-center">
+                                                                    <label>Հայերեն</label>
+                                                                    <input type="text"
+                                                                           name="hy_name_sub_old[{{$i}}][]"
+                                                                           class="form-control"
+                                                                           placeholder="Հայերեն"
+                                                                           value="{{$sub->translate('hy')->name}}"
+                                                                           required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-3">
+                                                                <div class="form-group text-center">
+                                                                    <label>English</label>
+                                                                    <input type="text"
+                                                                           name="en_name_sub_old[{{$i}}][]"
+                                                                           class="form-control"
+                                                                           placeholder="English"
+                                                                           value="{{$sub->translate('en')->name}}"
+                                                                           required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-3">
+                                                                <div class="form-group text-center">
+                                                                    <label>Русский</label>
+                                                                    <input type="text"
+                                                                           name="ru_name_sub_old[{{$i}}][]"
+                                                                           class="form-control"
+                                                                           placeholder="Русский"
+                                                                           value="{{$sub->translate('ru')->name}}"
+                                                                           required>
+                                                                </div>
+                                                            </div>
+                                                            <button data-target="{{$j}}"
+                                                                    type="button"
+                                                                    class="btn btn-info add_filter_value"
+                                                                    data-prefix="old_"
+                                                                    title="Add Child"
+                                                                    data-val="{{$i}}">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="sub_filter_content">
+                                                            <button data-status="delete_filter_sub{{$j}}"
+                                                                    type="button"
+                                                                    class="btn btn-danger btn_delete iconDelete"
+                                                                    title="Delete">
+                                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                                            </button>
+                                                        </div>
 
-                                                        @foreach($filter->subs->sortBy('id') as  $sub)
-                                                            <div data-name="old_{{$j}}"
-                                                                 data-target="delete_filter_sub{{$j}}"
-                                                                 data-prod="{{$sub->id}}"
+                                                        @php($f = 0)
+                                                        @foreach($sub->values->sortBy('id') as $value)
+                                                            <div class="row"
+                                                                 data-target="delete_filter_value{{$f}}"
+                                                                 data-prod="{{$value->id}}"
                                                                  data-href_delete="{{route('deleteFilter')}}"
-                                                                 data-key="sub">
-                                                                <div class="row">
-                                                                    <div class="col-xs-3">
-                                                                        <div class="form-group text-center">
-                                                                            <label>Հայերեն</label>
-                                                                            <input type="text"
-                                                                                   name="hy_name_sub_old[{{$i}}][]"
-                                                                                   class="form-control"
-                                                                                   placeholder="Հայերեն"
-                                                                                   value="{{$sub->translate('hy')->name}}"
-                                                                                   required>
-                                                                        </div>
+                                                                 data-key="value">
+                                                                <div class="col-xs-1">
+                                                                </div>
+                                                                <div class="col-xs-3">
+                                                                    <div class="form-group text-center">
+                                                                        <label>Հայերեն</label>
+                                                                        <input type="text"
+                                                                               name="hy_sub_old[{{$i}}][{{$j}}][]"
+                                                                               class="form-control"
+                                                                               placeholder="Հայերեն"
+                                                                               value="{{$value->translate('hy')->name}}"
+                                                                               required>
                                                                     </div>
-                                                                    <div class="col-xs-3">
-                                                                        <div class="form-group text-center">
-                                                                            <label>English</label>
-                                                                            <input type="text"
-                                                                                   name="en_name_sub_old[{{$i}}][]"
-                                                                                   class="form-control"
-                                                                                   placeholder="English"
-                                                                                   value="{{$sub->translate('en')->name}}"
-                                                                                   required>
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-xs-3">
+                                                                    <div class="form-group text-center">
+                                                                        <label>English</label>
+                                                                        <input type="text"
+                                                                               name="en_sub_old[{{$i}}][{{$j}}][]"
+                                                                               class="form-control"
+                                                                               placeholder="English"
+                                                                               value="{{$value->translate('en')->name}}"
+                                                                               required>
                                                                     </div>
-                                                                    <div class="col-xs-3">
-                                                                        <div class="form-group text-center">
-                                                                            <label>Русский</label>
-                                                                            <input type="text"
-                                                                                   name="ru_name_sub_old[{{$i}}][]"
-                                                                                   class="form-control"
-                                                                                   placeholder="Русский"
-                                                                                   value="{{$sub->translate('ru')->name}}"
-                                                                                   required>
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-xs-3">
+                                                                    <div class="form-group text-center">
+                                                                        <label>Русский</label>
+                                                                        <input type="text"
+                                                                               name="ru_sub_old[{{$i}}][{{$j}}][]"
+                                                                               class="form-control"
+                                                                               placeholder="Русский"
+                                                                               value="{{$value->translate('ru')->name}}"
+                                                                               required>
                                                                     </div>
-                                                                    <button data-target="{{$j}}"
-                                                                            type="button"
-                                                                            class="btn btn-info add_filter_value"
-                                                                            data-prefix="old_"
-                                                                            title="Add Child">
-                                                                        <i class="fa fa-plus"></i>
-                                                                    </button>
-                                                                    <button data-status="delete_filter_sub{{$j}}"
-                                                                            type="button"
+                                                                </div>
+                                                                <div class="col-xs-2">
+                                                                    <button type="button"
                                                                             class="btn btn-danger btn_delete iconDelete"
+                                                                            data-status="delete_filter_value{{$f}}"
                                                                             title="Delete">
-                                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                                        <i class="fa fa-times"
+                                                                           aria-hidden="true"></i>
                                                                     </button>
                                                                 </div>
-
-                                                                @php($f = 0)
-                                                                @foreach($sub->values->sortBy('id') as $value)
-                                                                    <div class="row"
-                                                                         data-target="delete_filter_value{{$f}}"
-                                                                         data-prod="{{$value->id}}"
-                                                                         data-href_delete="{{route('deleteFilter')}}"
-                                                                         data-key="value">
-                                                                        <div class="col-xs-1">
-                                                                        </div>
-                                                                        <div class="col-xs-3">
-                                                                            <div class="form-group text-center">
-                                                                                <label>Հայերեն</label>
-                                                                                <input type="text"
-                                                                                       name="hy_sub_old[{{$i}}][{{$j}}][]"
-                                                                                       class="form-control"
-                                                                                       placeholder="Հայերեն"
-                                                                                       value="{{$value->translate('hy')->name}}"
-                                                                                       required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xs-3">
-                                                                            <div class="form-group text-center">
-                                                                                <label>English</label>
-                                                                                <input type="text"
-                                                                                       name="en_sub_old[{{$i}}][{{$j}}][]"
-                                                                                       class="form-control"
-                                                                                       placeholder="English"
-                                                                                       value="{{$value->translate('en')->name}}"
-                                                                                       required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xs-3">
-                                                                            <div class="form-group text-center">
-                                                                                <label>Русский</label>
-                                                                                <input type="text"
-                                                                                       name="ru_sub_old[{{$i}}][{{$j}}][]"
-                                                                                       class="form-control"
-                                                                                       placeholder="Русский"
-                                                                                       value="{{$value->translate('ru')->name}}"
-                                                                                       required>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-xs-2">
-                                                                            <button type="button"
-                                                                                    class="btn btn-danger btn_delete iconDelete"
-                                                                                    data-status="delete_filter_value{{$f}}"
-                                                                                    title="Delete">
-                                                                                <i class="fa fa-times"
-                                                                                   aria-hidden="true"></i>
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                    @php($f++)
-                                                                @endforeach
                                                             </div>
-                                                            @php($j++)
+                                                            @php($f++)
                                                         @endforeach
                                                     </div>
+                                                    @php($j++)
+                                                @endforeach
+                                            </div>
 
                                         </div>
                                     </div>

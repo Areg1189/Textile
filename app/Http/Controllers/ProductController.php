@@ -145,15 +145,16 @@ class ProductController extends Controller
 
     public function add_to_cart(Request $request)
     {
+
+        if (Auth::guest()){
+            return abort(404);
+        }
         $validator = Validator::make($request->all(), [
-            'color' => 'required|max:7',
+            'color' => 'max:7',
             'prod' => 'required',
             'qty' => 'required|integer|numeric|min:1',
-            'filter' => 'required',
             'filter.*' => 'required',
-            'fl' => 'required',
             'fl.*' => 'required',
-            'name' => 'required',
             'name.*' => 'required',
         ]);
         if ($validator->fails()) {
@@ -162,21 +163,24 @@ class ProductController extends Controller
         $product = Product::where('code', $request->prod)->firstOrFail();
         $price = $product->price;
         $sale = $product->sale;
-        foreach ($request->filter as $key => $filter) {
-            if ($request->fl[$key] == 'sub') {
-                $control = FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
-                $control->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
-            } elseif ($request->fl[$key] == 'val') {
-                $control = FilterValue::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
-                $control->parent->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
-            }
-            $prodFilter = $product->filters->where('filter_value', $filter)->first();
-            if ($prodFilter->plusMinus == '+') {
-                $price = $price + $prodFilter->price;
-            } else {
-                $price = $price - $prodFilter->price;
+        if ($request->filter){
+            foreach ($request->filter as $key => $filter) {
+                if ($request->fl[$key] == 'sub') {
+                    $control = FilterSub::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
+                    $control->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
+                } elseif ($request->fl[$key] == 'val') {
+                    $control = FilterValue::where('code', $filter)->whereTranslationLike('name', $request->name[$key])->firstOrFail();
+                    $control->parent->filter->whereTranslationLike('name', $request->filter_name[$key])->firstOrFail();
+                }
+                $prodFilter = $product->filters->where('filter_value', $filter)->first();
+                if ($prodFilter->plusMinus == '+') {
+                    $price = $price + $prodFilter->price;
+                } else {
+                    $price = $price - $prodFilter->price;
+                }
             }
         }
+
         if ($sale) {
             if ($sale < 100) {
                 $sale1 = $price / 100;
@@ -185,7 +189,6 @@ class ProductController extends Controller
             }
         }
         $color = $request->color;
-
         $a = Cart::instance(Auth::user()->name . '-' . Auth::user()->id)->add([
             'id' => $product->id,
             'name' => $product->translate(session('locale'))->name,

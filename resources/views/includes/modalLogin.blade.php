@@ -8,7 +8,12 @@
         <!-- Social Login -->
         <div class="social_login">
             <div class="">
-                <a href="#" class="social_box fb">
+
+
+
+
+
+                <a href="{{route('socialiteLogin', ['log' => 'facebook'])}}" class="social_box fb">
                     <span class="icon"><i class="fa fa-facebook"></i></span>
                     <span class="icon_title">@lang('auth.contactFacebook')</span>
 
@@ -35,14 +40,14 @@
             <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
                 <label for="email">@lang('auth.email')</label>
-                <input id="email" type="email" name="email"  required autofocus>
+                <input id="email" type="email" name="email" required autofocus>
 
                 <label for="password">@lang('auth.password')</label>
                 <input id="password" type="password" name="password" required>
 
 
                 <label>
-                    <input type="checkbox" name="remember" >
+                    <input type="checkbox" name="remember">
                     @lang('auth.remember')
                 </label>
 
