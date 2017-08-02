@@ -45,7 +45,12 @@ return [
     'facebook' => [
         'client_id' => '452114811824919',
         'client_secret' => '15dd925c66dbeb31e875daaca30bc4fa',
-        'redirect' => 'http://textile.dev/login/facebook/callback',
+        'redirect' => 'http://textil.yourbusinessit.am/login/facebook/callback',
+    ],
+    'google' => [
+        'client_id' => '236450857333-9dl6lqp1cnndln7avrrt4fuije5go9tq.apps.googleusercontent.com',
+        'client_secret' => '0rIJs398nqed3pqFLlQzF2ne',
+        'redirect' => 'http://textil.yourbusinessit.am/login/google/callback',
     ],
 
 

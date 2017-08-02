@@ -44,12 +44,12 @@
     $uploadCrop = $(".upload-demo1").croppie({
         enableExif: true,
         viewport: {
-            width: 500,
-            height: 400
+            width: 1000,
+            height: 200
         },
         boundary: {
-            width: 500,
-            height: 400
+            width: 1200,
+            height: 300
         }
     });
 

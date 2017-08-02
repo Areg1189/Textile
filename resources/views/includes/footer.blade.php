@@ -10,11 +10,12 @@
 
                     <div class="link-widget">
                         <ul class="check">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Get In Touch</a></li>
-                            <li><a href="#">Refund & Exchange</a></li>
-                            <li><a href="#">Support</a></li>
+                            <li><a href="{{route('home')}}">@lang('header.home')</a></li>
+                            <li><a href="{{route('about')}}">@lang('header.about')</a></li>
+                            <li><a href="{{route('contactus')}}">@lang('header.contact')</a></li>
+                            <li><a href="{{route('terms')}}">@lang('terms.terms')</a></li>
+                            <li><a href="{{route('delivery')}}">@lang('delivery.delivery')</a></li>
+                            <li><a href="{{route('refund')}}">@lang('refund.refund')</a></li>
                         </ul>
                     </div><!-- end link -->
                 </div><!-- end widget -->
@@ -38,56 +39,20 @@
             <div class="col-md-6 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>All Categories</h4>
+                        <h4>@lang('index.all_categories')</h4>
                         <hr>
                     </div>
 
                     <div class="link-widget">
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
-                                <ul class="check">
-                                    <li><a href="#">Hand tools</a></li>
-                                    <li><a href="#">Construction market</a></li>
-                                    <li><a href="#">Chandelier</a></li>
-                                    <li><a href="#">Garden Furniture</a></li>
-                                    <li><a href="#">Coffee table</a></li>
-                                    <li><a href="#">TV unit</a></li>
-                                    <li><a href="#">Cloakroom</a></li>
-                                    <li><a href="#">Single Seat</a></li>
-                                    <li><a href="#">Office Chairs</a></li>
-                                    <li><a href="#">Coffee Table</a></li>
-                                    <li><a href="#">Bookshelf</a></li>
-                                </ul>
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-12">
-                                <ul class="check">
-                                    <li><a href="#">Drill</a></li>
-                                    <li><a href="#">Pique Sets</a></li>
-                                    <li><a href="#">Sleep set</a></li>
-                                    <li><a href="#">Hardware</a></li>
-                                    <li><a href="#">Air conditioning</a></li>
-                                    <li><a href="#">Jalousie</a></li>
-                                    <li><a href="#">Sled</a></li>
-                                    <li><a href="#">Anchor Machine</a></li>
-                                    <li><a href="#">The Lawn Mower</a></li>
-                                    <li><a href="#">Submersible Pump</a></li>
-                                    <li><a href="#">Wall paper</a></li>
-                                </ul>
-                            </div><!-- end col -->
-
-                            <div class="col-md-4 col-sm-12">
-                                <ul class="check">
-                                    <li><a href="#">Coat Stand</a></li>
-                                    <li><a href="#">Shoe cabinet</a></li>
-                                    <li><a href="#">Bathroom Cabinet</a></li>
-                                    <li><a href="#">Study desk</a></li>
-                                    <li><a href="#">Home textiles</a></li>
-                                    <li><a href="#">Wardrobe</a></li>
-                                    <li><a href="#">Young room</a></li>
-                                    <li><a href="#">Canvas</a></li>
-                                    <li><a href="#">Bed</a></li>
-                                </ul>
+                                @foreach($subCats->chunk(11) as $chunk)
+                                    <ul class="check">
+                                        @foreach($chunk as $subCat)
+                                        <li><a href="{{route('getCategory', ['cat' => $subCat->link])}}">{{$subCat->translate(session('locale'))->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
                             </div><!-- end col -->
                         </div><!-- end row -->
                     </div><!-- end link -->
@@ -97,7 +62,7 @@
             <div class="col-md-3 col-sm-12">
                 <div class="widget clearfix">
                     <div class="widget-title">
-                        <h4>Email Newsletter</h4>
+                        <h4>@lang('index.email_newsletter')</h4>
                         <hr>
                     </div>
 
@@ -105,8 +70,10 @@
                         <p>Subscribe our newsletter for discount and coupon codes.</p>
                         <form method="post" action="{{route('subscribe')}}">
                             {{csrf_field()}}
-                            <input type="text" name="name" class="form-control input-lg" placeholder="@lang('contacts.name')" required/>
-                            <input type="email" name="email" class="form-control input-lg" placeholder="@lang('contacts.email')" required/>
+                            <input type="text" name="name" class="form-control input-lg"
+                                   placeholder="@lang('contacts.name')" required/>
+                            <input type="email" name="email" class="form-control input-lg"
+                                   placeholder="@lang('contacts.email')" required/>
                             <button type="submit" class="button button--aylen btn">@lang('header.subscribe')</button>
                         </form>
                     </div><!-- end newsletter -->
@@ -117,11 +84,11 @@
                     <div class="row stat-wrapper">
                         <div class="stats col-md-6">
                             <h5>Products</h5>
-                            <p>122.500</p>
+                            <p>{{$product_count}}</p>
                         </div><!-- end stats -->
                         <div class="stats col-md-6">
                             <h5>Customers</h5>
-                            <p>78.200</p>
+                            <p>{{$users_count->count()}}</p>
                         </div><!-- end stats -->
                     </div><!-- end row -->
                 </div><!-- end widget -->

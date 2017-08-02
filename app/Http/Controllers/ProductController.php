@@ -243,4 +243,17 @@ class ProductController extends Controller
         return View::make('includes.newCartItem');
     }
 
+
+    public function sales(){
+        $products = Product::where('sale', '>', 0)->paginate(12);
+        return view('sales',[
+            'products' => $products
+        ]);
+    }
+
+
+    public function check_out(Request $request){
+
+    }
+
 }

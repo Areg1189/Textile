@@ -23,24 +23,36 @@
                 <thead>
                 <tr>
                     <th>Select All
-                        <input id="selectAll" type="checkbox" >
+                        <input id="selectAll" type="checkbox">
                     </th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Subscribed at</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-
+                @php($i =0)
                 @foreach($subscribers as $subscriber)
-                    <tr>
+                    <tr data-target="subscriber_{{$i}}"
+                        data-prod="{{$subscriber->id}}"
+                        data-href_delete="{{route('deleteSubscriber')}}">
                         <td>
                             <input type="checkbox" class="checkbox" name="check[]" data-email="{{$subscriber->email}}">
                         </td>
                         <td>{{$subscriber->name}}</td>
                         <td>{{$subscriber->email}}</td>
                         <td>{{$subscriber->created_at}}</td>
+                        <td>
+                            <button class="btn  btn-danger iconDelete" data-toggle="modal"
+                                    data-status="subscriber_{{$i}}"
+                                    data-target="#modalDelete">
+                                <i class="fa fa-trash"></i>
+                                Delete
+                            </button>
+                        </td>
                     </tr>
+                    @php($i++)
                 @endforeach
 
                 </tbody>
@@ -48,6 +60,6 @@
         </div>
     </div>
 
-
-@include('vendor.adminlte.modal.sendSubscribers')
+    @include('vendor.adminlte.modal.modalDelete')
+    @include('vendor.adminlte.modal.sendSubscribers')
 @endsection

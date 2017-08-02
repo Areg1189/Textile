@@ -88,31 +88,7 @@
 
         </tbody>
     </table>
-    <div id="myModal" class="modal myModal">
-
-        <!-- Modal content -->
-        <div class="modal-content myModal-content">
-
-            <div class="box box-danger">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="text-center">
-                            <div class="col-sm-12">
-                                <p>Do you really want to delete</p>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-danger modalDelete dellImage btn_my_modal">delete
-                                </button>
-                                <button type="button" class="btn btn-default btn_my_modal">Close</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('vendor.adminlte.modal.modalDelete')
     @include('vendor.adminlte.modal.modalAddSubCategory')
 @endsection
 @section('script')

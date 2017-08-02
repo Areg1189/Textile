@@ -26,6 +26,10 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->boolean('block')->default(1);
             $table->boolean('new')->default(0);
+            $table->string('driver_link')->nullable();
+            $table->string('fb_google')->nullable();
+            $table->string('driver_token')->nullable();
+            $table->string('driver_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

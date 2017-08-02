@@ -145,7 +145,9 @@
                             <label class="col-md-4 control-label" for="address">@lang('user.old password')</label>
                             <div class="col-md-5">
                                 <input name="oldPassword" type="password"
-                                       placeholder="@lang('user.old password')" class="form-control" required>
+                                       placeholder="@lang('user.old password')" class="form-control"
+                                       value="{{Auth::user()->fb_google ? Auth::user()->driver_token : ''}}"
+                                       required>
                                 @if ($errors->has('oldPassword'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('oldPassword') }}</strong>

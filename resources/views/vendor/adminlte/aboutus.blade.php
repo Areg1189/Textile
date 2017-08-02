@@ -5,6 +5,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.1/croppie.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{asset('css/admin/admin.css')}}">
+    <style type="text/css">
+        .modal {
+           z-index: 9999999;
+        }
+    </style>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 @endsection
 
@@ -23,8 +28,7 @@
                 title="Edite Cover"
                 data-toggle="modal"
                 data-target="#modalUpdate"
-                data-status="about_cover"
-        >
+                data-status="about_cover">
             <i class="fa fa-edit"></i> Edit
         </button>
     </section>
@@ -240,16 +244,24 @@
                     <div class="col-md-3 col-sm-3 team-member"
                          data-prod="{{$employee->id}}"
                          data-href_update="{{route('editEmployee', ['id' => $employee->id])}}"
+                         data-href_delete="{{route('deleteEmployee')}}"
                          data-target="prod_{{$i}}">
                         <div class="row">
 
 
                             <button class="btn btn-info pull-right iconUpdate"
-                                    title="Edite Employee"
+                                    title="Edit Employee"
                                     data-toggle="modal"
                                     data-target="#modalUpdate"
                                     data-status="prod_{{$i}}">
                                 <i class="fa fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-danger pull-left iconDelete"
+                                    title="Delete Employee"
+                                    data-toggle="modal"
+                                    data-target="#modalDelete"
+                                    data-status="prod_{{$i}}">
+                                <i class="fa fa-trash"></i> Delete
                             </button>
 
 
@@ -350,7 +362,7 @@
 
     </section><!-- end section -->
 
-
+  @include('vendor.adminlte.modal.modalDelete')
     @include('vendor.adminlte.modal.modalUpdate')
     @include('vendor.adminlte.modal.modalAddEmployee')
 @endsection

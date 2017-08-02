@@ -51,3 +51,28 @@ function cartHeight() {
     }
 }
 
+$(document).on('click', '.cart-remove', function (event) {
+    event.preventDefault();
+    parent = $(this).data('status');
+    $.ajax({
+        url:$(this).attr('href'),
+        type:'post',
+        data:{order: $(this).data('order'), _token: token},
+        success: function (e) {
+            if (!e) {
+                window.location.href = 'not-found';
+            } else {
+                $('[data-target="'+parent+'"]').fadeOut(1000, function () {
+                    $('.cart-container').html(e);
+                    cartHeight();
+                });
+
+
+            }
+        },
+        error: function () {
+            window.location.href = 'not-found';
+        }
+    })
+});
+

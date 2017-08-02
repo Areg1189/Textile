@@ -70,6 +70,7 @@ class UserController extends Controller
         if (Hash::check(md5($request->oldPassword), Auth::user()->getAuthPassword())) {
             $user = User::find(Auth::user()->id);
             $user->password = Hash::make(md5($request->password));
+            $user->fb_google = null;
             $user->save();
             return back()->with([
                 'success' => __('user.updated'),
@@ -148,6 +149,23 @@ class UserController extends Controller
         return  View::make('user.messageTemplate',[
             'message' => $message
         ]);
+    }
 
+    public function enterEmail(Request $request){
+        if (!Auth::guest() && !Auth::user()->email){
+            return view('enterEmail');
+        }else{
+            abort(404);
+        }
+    }
+
+    public function postEnterEmail(Request $request){
+        $this->validate($request,[
+            'email' => 'required|email|unique:users'
+        ]);
+        $update = User::where('id', Auth::user()->id)->update(['email' => $request->email]);
+        if ($update){
+            return redirect('/');
+        }
     }
 }

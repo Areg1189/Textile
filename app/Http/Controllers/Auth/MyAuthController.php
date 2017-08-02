@@ -16,7 +16,7 @@ class MyAuthController extends Controller
             'password' => 'required|min:6',
         ]);
         $pass = md5($request->password);
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $pass, 'status' => '1'], $request->has('remember'))) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $pass, 'status' => '1', 'block' => 1], $request->has('remember'))) {
             if(Auth::user()->rol == 1){
                 return redirect(route('admin'));
             }

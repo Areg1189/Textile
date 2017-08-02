@@ -23,6 +23,7 @@ class CreateCartTablesTable extends Migration
             $table->string('image_name');
             $table->integer('qty')->usignet();
             $table->string('price');
+            $table->boolean('fulfilled')->default(0);
             $table->timestamps();
         });
     }

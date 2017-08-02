@@ -13,12 +13,9 @@
                 <div class="pull-left info">
                     <p>{{ Auth::user()->name }}</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i>
-                        {{ trans('adminlte_lang::message.online') }}
-                    </a>
                 </div>
             </div>
-        @endif
+    @endif
 
     <!-- search form (Optional) -->
     {{--<form action="#" method="get" class="sidebar-form">--}}
@@ -34,12 +31,15 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="{{!Request::url() == route('admin')? 'active' : '' }}"><a href="{{ route('admin') }}"><i
+            <li><a href="{{ route('home') }}"><i
                             class='fa fa-home'></i>
                     <span>Home</span></a></li>
+            <li class="{{!Request::url() == route('admin')? 'active' : '' }}"><a href="{{ route('admin') }}"><i
+                            class='fa fa-home'></i>
+                    <span>Admin Home</span></a></li>
             <li><a href="{{ route('site') }}">
                     <i class='fa fa-home'></i>
-                    <span>Site</span></a>
+                    <span>Edit Home Page</span></a>
             </li>
 
             <li class="{{Request::segment(2) == 'about' ? 'active' : ''}}"><a href="{{route('aboutus')}}"><i
@@ -55,7 +55,8 @@
                     <span class="pull-right label label-success">All {{count($users_count)}}</span>
                 </a></li>
 
-            <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a href="{{route('getSubscribers')}}"><i
+            <li class="{{Request::url() == route('getSubscribers') ? 'active' : ''}}"><a
+                        href="{{route('getSubscribers')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>
                     <span>Subscribers</span>
                     @if(count($subscriber_count->where('new', 0 ))!= 0)
@@ -64,7 +65,8 @@
                     <span class="pull-right label label-success">All {{count($subscriber_count)}}</span>
                 </a></li>
 
-            <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a href="{{route('adminMessages')}}"><i
+            <li class="{{Request::url() == route('adminMessages') ? 'active' : ''}}"><a
+                        href="{{route('adminMessages')}}"><i
                             class='fa fa-envelope-o'></i>
                     <span>Messages</span></a></li>
             <li class="treeview
@@ -121,9 +123,9 @@
                 </ul>
             </li>
 
-            <li class="{{Request::segment(2) == 'filters' ? 'active' : ''}}"><a href="{{route('getFilter')}}">
-                    <i class="fa fa-filter" aria-hidden="true"></i>
-                    <span>Filters</span></a></li>
+            {{--<li class="{{Request::segment(2) == 'filters' ? 'active' : ''}}"><a href="{{route('getFilter')}}">--}}
+            {{--<i class="fa fa-filter" aria-hidden="true"></i>--}}
+            {{--<span>Filters</span></a></li>--}}
 
             <li class="{{Request::segment(2) == 'icons' ? 'active' : ''}}"><a href="{{route('icons')}}"><i
                             class="fa fa-users" aria-hidden="true"></i>

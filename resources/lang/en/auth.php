@@ -37,5 +37,6 @@ return [
     'login' => 'LOGIN',
     'back' => 'Back',
     'phone' => 'Phone',
+    'please_enter' => 'To continue please enter your email',
 
 ];

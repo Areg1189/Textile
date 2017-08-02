@@ -37,7 +37,8 @@
                                                                        style="color: {{$item->options->color}};"></i>
                                                                 </span>
                                 </small>
-                                @if($item->options->filter_name[0])
+
+                                @if($item->options->filter_name)
                                     @foreach($item->options->filter_name as $key => $filter_name)
                                         <small>{{$filter_name}} : {{$item->options->filter_value[$key]}}</small>
                                     @endforeach
@@ -62,8 +63,14 @@
                 <h3>@lang('product.subtotal')
                     : {{Cart::total()}}</h3>
                 @if(Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->count() >0)
-                    <a href="shop-checkout.html"
-                       class="btn btn-primary">@lang('product.checkout')</a>
+                    <form action="{{route('check_out')}}" method="post">
+                        {{csrf_field()}}
+                        <button type="submit"
+                                class="btn btn-primary">
+                            @lang('product.checkout')
+                        </button>
+                    </form>
+
                 @endif
             </div>
 

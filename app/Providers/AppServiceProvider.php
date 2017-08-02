@@ -13,6 +13,8 @@ use App\Models\Subscriber;
 use phpDocumentor\Reflection\Types\Null_;
 use App\Models\Reviews;
 use App\User;
+use App\Models\Product;
+use App\Models\SubCategory;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         $subscribers_count = Subscriber::get();
         $newComments = Reviews::orderBy('id','desc')->get();
         $users_count = User::get();
+        $product_count = Product::count();
+        $subCats = SubCategory::get();
 
 
         View::share([
@@ -38,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
             'subscriber_count' => $subscribers_count,
             'users_count' => $users_count,
             'newComments' => $newComments,
+            'product_count' => $product_count,
+            'subCats' => $subCats,
         ]);
 
     }

@@ -19,7 +19,7 @@
 
                 </a>
 
-                <a href="#" class="social_box google">
+                <a href="{{route('socialiteLogin', ['log' => 'google'])}}" class="social_box google">
                     <span class="icon"><i class="fa fa-google-plus"></i></span>
                     <span class="icon_title">@lang('auth.contactGoogle')</span>
                 </a>

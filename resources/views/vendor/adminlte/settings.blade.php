@@ -20,7 +20,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-9 well admin-content" id="personal" style="{{!session('password') && !session('delete') ?'':'display: none;'}}">
+            <div class="col-md-9 well admin-content" id="personal"
+                 style="{{!session('password') && !session('delete') ?'':'display: none;'}}">
 
 
                 <form class="form-horizontal" action="{{route('editDennis', ['id' => $user->href])}}" method="post">
@@ -75,32 +76,17 @@
                         </div>
 
                         <!-- Text input-->
-                        <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label" for="address">Address</label>
-                            <div class="col-md-5">
-                                <input name="address" type="text"
-                                       placeholder="Address" class="form-control address_dennie"
-                                       value="{{$user->address}}" disabled required>
-                                @if ($errors->has('address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label" for="phone">Phone</label>
-                            <div class="col-md-5">
-                                <input name="phone" type="text"
-                                       placeholder="Phone" class="form-control input-md phone_dennie"
-                                       value="{{$user->phone}}" disabled required>
-                                @if ($errors->has('phone'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+
+
+                        <input name="address" type="hidden"
+                               placeholder="Address" class="form-control address_dennie"
+                               value="123456" disabled required>
+
+
+                        <input name="phone" type="hidden"
+                               placeholder="Phone" class="form-control input-md phone_dennie"
+                               value="1234567891" disabled required>
+
 
                     </fieldset>
                     <div class="col-sm-8 col-sm-offset-4">
@@ -111,7 +97,8 @@
 
 
             </div>
-            <div class="col-md-9 well admin-content" id="password" style="{{!session('password')?'display: none ;':'display: block;'}}">
+            <div class="col-md-9 well admin-content" id="password"
+                 style="{{!session('password')?'display: none ;':'display: block;'}}">
                 <form class="form-horizontal" action="{{route('changePassword', ['id' => $user->href])}}" method="post">
                     {{csrf_field()}}
                     <fieldset>

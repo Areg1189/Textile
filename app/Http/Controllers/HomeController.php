@@ -18,6 +18,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -129,6 +130,18 @@ class HomeController extends Controller
                 'rnd' => $rnd,
             ]);
         }
+    }
+
+    public function terms(){
+        return view('terms');
+    }
+
+    public function delivery(){
+        return view('delivery');
+    }
+
+    public function refund(){
+        return view('refund');
     }
 
 }

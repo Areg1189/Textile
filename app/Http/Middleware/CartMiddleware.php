@@ -12,18 +12,20 @@ class CartMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
 
     public function handle($request, Closure $next)
     {
-
-        if (!Auth::guest() && Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->count() < 1){
-            $orders = CartTable::where('user_id', Auth::user()->id)->get();
-            foreach ($orders as $order){
-                $a = Cart::instance(Auth::user()->name.'-'.Auth::user()->id)->add([
+        if (!Auth::guest() && Auth::user()->email == '') {
+            return redirect(route('enterEmail'));
+        }
+        if (!Auth::guest() && Cart::instance(Auth::user()->name . '-' . Auth::user()->id)->count() < 1) {
+            $orders = CartTable::where('user_id', Auth::user()->id)->where('fulfilled', 0)->get();
+            foreach ($orders as $order) {
+                $a = Cart::instance(Auth::user()->name . '-' . Auth::user()->id)->add([
                     'id' => $order->product_id,
                     'name' => $order->product_name,
                     'qty' => $order->qty,

@@ -61,7 +61,25 @@
                         <div class="col-md-7 col-sm-7 col-xs-12">
                             <div class="shop-desc bgw">
                                 <h3>{{$product->translate(session('locale'))->name}} </h3>
-                                <small><span class="prod_price">{{$product->price}}</span> AMD</small>
+                                <small>
+                                    <span class="prod_price">
+                                        @if($product->sale)
+                                            <del>{{$product->price}} AMD</del>
+                                            @if($product->sale < 100)
+                                                @php
+                                                    $sale = $product->price / 100;
+                                                    $sale = $sale * $product->sale;
+                                                    $sale = $product->price - $sale;
+                                                @endphp
+                                                {{$sale}}
+                                            @else
+                                                {{$product->sale}}
+                                            @endif
+                                        @else
+                                            {{$product->price}}
+                                        @endif
+                                    </span> AMD
+                                </small>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -109,7 +127,7 @@
                                 </div>
                                 @foreach($product->parent->filters->chunk(2) as $chunk)
                                     <div class="row">
-                                        @php($i = 1);
+                                        @php($i = 1)
                                         @foreach($chunk as $filter)
                                             @php
                                                 $filter_id = $product->filters->where('filter_id' , $filter->id)->first();
@@ -188,8 +206,8 @@
                                     <p>
                                         @lang('product.please_order')
                                         <a data-tooltip="tooltip" data-placement="bottom"
-                                                                         class="modal_trigger"
-                                                                         href="#modal">
+                                           class="modal_trigger"
+                                           href="#modal">
                                             @lang('auth.login')
                                         </a>
                                     </p>

@@ -33,18 +33,23 @@ Route::group(
     function () {
 
         Auth::routes();
+        Route::get('enter-email', 'Users\UserController@enterEmail')->name('enterEmail');
+        Route::post('enter-email', 'Users\UserController@postEnterEmail')->name('postEnterEmail');
         Route::group(['middleware' => 'cartCheck'], function () {
+
             Route::get('home', 'HomeController@index')->name('home');
             Route::get('about', 'HomeController@about')->name('about');
             Route::get('contactus', 'HomeController@contactus')->name('contactus');
             Route::get('', 'HomeController@index')->name('home');
+            Route::get('terms-conditions', 'HomeController@terms')->name('terms');
+            Route::get('delivery', 'HomeController@delivery')->name('delivery');
+            Route::get('refund-policy', 'HomeController@refund')->name('refund');
+            Route::get('sales', 'ProductController@sales')->name('sales');
             Route::post('subscribe', 'HomeController@subscribe')->name('subscribe');
 
 
-
-            Route::get('login/{log}', 'Users\LoginController@redirectToProvider')->name('socialiteLogin');
-            Route::get('login/{log}/callback', 'Users\LoginController@handleProviderCallback');
-
+            Route::get('login/{social}', 'Users\LoginController@redirectToProvider')->name('socialiteLogin');
+            Route::get('login/{social}/callback', 'Users\LoginController@handleProviderCallback');
 
 
 //        =================  Product  ================== //
@@ -52,9 +57,8 @@ Route::group(
             Route::get('category/{cat}/{prod}', 'ProductController@getProduct')->name('getProduct');
 
 //        =================  Product Filter Search ==================  //
+
             Route::post('filter', 'ProductController@pstFilterProduct')->name('pstFilterProduct');
-
-
 
             Route::post('send_email', 'HomeController@send_email')->name('send_email');
 
@@ -71,39 +75,46 @@ Route::group(
             Route::post('repeat_confirm', 'Auth\AdvancedReg@postRepeat');
             Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email')->middleware('passwordEmail');
 
-//        =================  Add To Cart ==================  //
-            Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
-
-            //        =================  Cart Remove==================  //
-            Route::post('cart_remove', 'ProductController@cart_remove')->name('cart_remove');
-
-            //        =================  Comment  ================== //
-            Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
-
 
 
 
 //        =================  USER  ================== //
-            Route::group(['middleware' => 'user', 'prefix' => 'user/{id}'], function () {
+            Route::group(['middleware' => 'user'], function () {
 
-                Route::get('', 'Users\UserController@index')->name('user');
+                //        =================  Add To Cart ==================  //
 
-                Route::get('settings', 'Users\UserController@getSettings')->name('userSettings');
+                Route::post('add_to_cart', 'ProductController@add_to_cart')->name('add_to_cart');
 
-                Route::get('purchases', 'Users\UserController@getPurchases')->name('userPurchases');
+                //        =================  Cart Remove==================  //
+                Route::post('cart_remove', 'ProductController@cart_remove')->name('cart_remove');
+                //        =================  Check out==================  //
+                Route::post('check_out', 'ProductController@check_out')->name('check_out');
 
-                Route::get('message', 'Users\UserController@getSendAdmin')->name('userGetMessage');
+                //        =================  Comment  ================== //
+                Route::post('comment/{prod}', 'ProductController@getComment')->name('getComment');
 
-                Route::post('getMessage', 'Users\UserController@getMessage')->name('getMessage');
 
-                Route::post('postMessage', 'Users\UserController@postSendAdmin')->name('userPostMessage');
+                Route::group(['prefix' => 'user/{id}'], function () {
 
-                Route::post('editDennis', 'Users\UserController@editDennis')->name('editDennis');
+                    Route::get('', 'Users\UserController@index')->name('user');
 
-                Route::post('changePassword', 'Users\UserController@changePassword')->name('changePassword');
+                    Route::get('settings', 'Users\UserController@getSettings')->name('userSettings');
 
-                Route::post('deleteUser', 'Users\UserController@deleteUser')->name('deleteUser');
+                    Route::get('purchases', 'Users\UserController@getPurchases')->name('userPurchases');
 
+                    Route::get('message', 'Users\UserController@getSendAdmin')->name('userGetMessage');
+
+                    Route::post('getMessage', 'Users\UserController@getMessage')->name('getMessage');
+
+                    Route::post('postMessage', 'Users\UserController@postSendAdmin')->name('userPostMessage');
+
+                    Route::post('editDennis', 'Users\UserController@editDennis')->name('editDennis');
+
+                    Route::post('changePassword', 'Users\UserController@changePassword')->name('changePassword');
+
+                    Route::post('deleteUser', 'Users\UserController@deleteUser')->name('deleteUser');
+
+                });
             });
         });
 
@@ -125,11 +136,13 @@ Route::group(
             //=========  SUBSCRIBERS  ======= //
             Route::get('subscribers', 'Admin\AdminController@getSubscribers')->name('getSubscribers');
             Route::post('subscribersEmail', 'Admin\AdminController@subscribersEmail')->name('subscribersEmail');
+            Route::post('deleteSubscriber', 'Admin\AdminController@deleteSubscriber')->name('deleteSubscriber');
 
             //=========  EMPLOYEE  ======= //
 
             Route::post('addEmployee', 'Admin\AdminController@addEmployee')->name('addEmployee');
             Route::post('editEmployee/{id}', 'Admin\AdminController@editEmployee')->name('editEmployee');
+            Route::post('editEmployeeDelete', 'Admin\AdminController@deleteEmployee')->name('deleteEmployee');
             Route::post('hideBlock', 'Admin\AdminController@hideBlock')->name('hideBlock');
 
             //=========  ABOUT US  ======= //

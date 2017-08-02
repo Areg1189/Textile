@@ -120,7 +120,7 @@ $(document).on('click', '.update_employee', (function (e) {
             }
         })
     })
-)
+);
 
 
 $(function () {
@@ -227,7 +227,6 @@ $(document).on('submit', '.productMulty', function (form) {
 
 /* delete slider image */
 
-
 $(document).on('click', '.iconDelete', function () {
     parent = $(this).data('status');
     url = $('[data-target="' + parent + '"]').data('href_delete');
@@ -235,8 +234,6 @@ $(document).on('click', '.iconDelete', function () {
     key = $('[data-target="' + parent + '"]').data('key');
     data = {prod: prod, key: key, _token: token};
 });
-
-
 
 $(document).on('click', '.delete_update_image', function () {
     $('.modal_delete_image').remove();
@@ -259,7 +256,6 @@ $(document).on('click', '.delete_update_image', function () {
     )
 });
 
-
 $(document).on('click', '.closeDell', function (e) {
     $('.modal_delete_image').remove();
 });
@@ -267,7 +263,6 @@ $(document).on('click', '.closeDell', function (e) {
 $(document).on('click', '.dellImage', function (e) {
     e.stopPropagation();
 });
-
 
 $(document).on('click', '.modalDelete', function () {
     $.ajax({

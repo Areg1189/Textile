@@ -3,7 +3,7 @@
 @section('main-content')
     <section class="content-header text-center mb_20">
         <h1>
-            {{$comments[0]->product->translate(session('locale'))->name}}
+            {{$product->translate(session('locale'))->name}}
         </h1>
     </section>
     <div class="container-fluid spark-screen">
@@ -32,41 +32,42 @@
                 </thead>
                 <tbody>
                 @php($i = 0)
-                @foreach($comments as $comment)
-                    <tr
-                            data-href_delete="{{route('deleteComment')}}"
-                            data-href_edit="{{route('unpublish_comment')}}"
-                            data-prod="{{$comment->id}}"
-                            data-target="prod_{{$i}}"
-                    >
-                        <td>{{$comment->user->name . ' ' . $comment->user->last_nam}}</td>
-                        <td>{{$comment->created_at}}</td>
-                        <td>{{$comment->product->translate(session('locale'))->name}}</td>
-                        <td>{{$comment->text}}</td>
-                        <td>
+                @if($comments->first())
+                    @foreach($comments as $comment)
+                        <tr
+                                data-href_delete="{{route('deleteComment')}}"
+                                data-href_edit="{{route('unpublish_comment')}}"
+                                data-prod="{{$comment->id}}"
+                                data-target="prod_{{$i}}"
+                        >
+                            <td>{{$comment->user->name . ' ' . $comment->user->last_nam}}</td>
+                            <td>{{$comment->created_at}}</td>
+                            <td>{{$comment->product->translate(session('locale'))->name}}</td>
+                            <td>{{$comment->text}}</td>
+                            <td>
 
-                            <button data-status="prod_{{$i}}" class="btn btn-warning unpublish_comment"
-                            value="{{$comment->published == 0?0:1}}">
-                                <i class="fa fa-globe"></i>
-                                @if($comment->published == 1)
-                                    Unpublish
-                                @else
-                                    Publish
-                                @endif
-                            </button >
+                                <button data-status="prod_{{$i}}" class="btn btn-warning unpublish_comment"
+                                        value="{{$comment->published == 0?0:1}}">
+                                    <i class="fa fa-globe"></i>
+                                    @if($comment->published == 1)
+                                        Unpublish
+                                    @else
+                                        Publish
+                                    @endif
+                                </button>
 
-                            <button class="btn btn-danger iconDelete"
-                                    data-toggle="modal"
-                                    data-status="prod_{{$i}}"
-                                    data-target="#modalDelete">
-                                <i class="fa fa-trash"></i> Delete
-                            </button>
+                                <button class="btn btn-danger iconDelete"
+                                        data-toggle="modal"
+                                        data-status="prod_{{$i}}"
+                                        data-target="#modalDelete">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
 
-                        </td>
-                    </tr>
-                    @php($i++)
-                @endforeach
-
+                            </td>
+                        </tr>
+                        @php($i++)
+                    @endforeach
+                @endif
 
                 </tbody>
             </table>

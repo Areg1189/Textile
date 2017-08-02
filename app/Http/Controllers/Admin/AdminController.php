@@ -135,6 +135,13 @@ class AdminController extends Controller
         return view('vendor.adminlte.users', ['users' => $users]);
     }
 
+    public function deleteSubscriber(Request $request){
+        if ($request->prod){
+            Subscriber::where('id', $request->prod)->delete();
+            return 1;
+        }
+    }
+
     public function getSubscribers()
     {
         Subscriber::where('new', 0)->update([
@@ -187,6 +194,7 @@ class AdminController extends Controller
         $homeImage = HomeImage::where('code', 'home-image')->first();
         $topCategories = SubCategory::where('top', '>', 0)->get();
         $subCategories = SubCategory::get();
+
         return view('vendor.adminlte.site', [
             'homeImage' => $homeImage,
             'topCategories' => $topCategories,
@@ -320,6 +328,16 @@ class AdminController extends Controller
             return back();
         }
 
+    }
+
+    public function deleteEmployee(Request $request){
+        $res = Employee::where('id', $request->prod)->firstOrFail();
+        if (file_exists(public_path() . '/images/employee/' . $res->image)) {
+            File::delete(public_path() . '/images/employee/' . $res->image);
+        }
+        $res->deleteTranslations();
+        $res->delete();
+        return 1;
     }
 
     public function change_slider(Request $request)
